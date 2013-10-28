@@ -21,7 +21,7 @@ class Point(models.Model):
     place_phone = models.CharField(max_length=64, blank=True)
     coordinates = models.CharField(max_length=64, blank=True)
     type = models.CharField(max_length=32, blank=True) # Should define the choices afterwards
-    collection = models.ForeignKey(Collection)
+    collection = models.ForeignKey(Collection, related_name='points')
 
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
@@ -29,7 +29,7 @@ class Point(models.Model):
 
 class Image(models.Model):
     url = models.URLField(blank=True)
-    point = models.ForeignKey(Point)
+    point = models.ForeignKey(Point, related_name='images')
 
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)

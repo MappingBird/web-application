@@ -4,6 +4,7 @@ Unipath==1.0
 argparse==1.2.1
 dj-database-url==0.2.2
 django-allauth==0.14.1
+djangorestframework==2.3.8
 oauthlib==0.6.0
 psycopg2==2.5.1
 python-openid==2.2.5

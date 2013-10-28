@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
 
     'south',
+    'rest_framework',
 
     'base',
     'bucketlist',
