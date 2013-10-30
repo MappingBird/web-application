@@ -1,10 +1,19 @@
 # Create your views here.
 from rest_framework import viewsets
+from rest_framework.authentication import SessionAuthentication
 
 from serializers import UserSerializer, CollectionSerializer, PointSerializer, ImageSerializer
 from base.models import User
 from bucketlist.models import Collection, Point, Image
+from permissions import IsOwner
 
+
+class APIViewSet(viewsets.ModelViewSet):
+    def list(self, request, *args, **kwargs):
+        response = super(APIViewSet, self).list(request, *args, **kwargs)
+        self.check_object_permissions(self.request, None)
+
+        return response
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -14,25 +23,34 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-class CollectionViewSet(viewsets.ModelViewSet):
+class CollectionViewSet(APIViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
 
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (IsOwner,)
 
-class PointViewSet(viewsets.ModelViewSet):
+
+class PointViewSet(APIViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
     queryset = Point.objects.all()
     serializer_class = PointSerializer
 
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (IsOwner,)
 
-class ImageViewSet(viewsets.ModelViewSet):
+
+class ImageViewSet(APIViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
+
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (IsOwner,)
