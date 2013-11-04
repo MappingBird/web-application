@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'base',
 
     # allauth
     'allauth',
@@ -123,7 +124,6 @@ INSTALLED_APPS = (
     'south',
     'rest_framework',
 
-    'base',
     'bucketlist',
 )
 
