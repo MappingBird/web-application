@@ -183,7 +183,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    PROJECT_DIR.child('static'),
+    PROJECT_DIR.ancestor(1).child('static'),
 )  
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
