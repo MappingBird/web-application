@@ -22,5 +22,16 @@ urlpatterns = patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 )
 
+urlpatterns += patterns('django.contrib.staticfiles.views',
+        url(r'', 'serve', {'path': '/index.html'}))
+urlpatterns += patterns('django.contrib.staticfiles.views',
+        url(r'app', 'serve', {'path': '/app.html'}))
+urlpatterns += patterns('django.contrib.staticfiles.views',
+        url(r'login', 'serve', {'path': '/login.html'}))
+urlpatterns += patterns('django.contrib.staticfiles.views',
+        url(r'signup', 'serve', {'path': '/signup.html'}))
+urlpatterns += patterns('django.contrib.staticfiles.views',
+        url(r'forget/password', 'serve', {'path': '/forget_password.html'}))
+
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
