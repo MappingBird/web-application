@@ -1,3 +1,3 @@
 pingismo
 ========
-This is a test for hipchat hooks.
+This is a test for hipchat hooks. Another test.
