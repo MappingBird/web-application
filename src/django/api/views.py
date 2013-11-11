@@ -1,8 +1,16 @@
 # Create your views here.
-from rest_framework import viewsets
+import json
+
+from django.middleware import csrf
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+
+from rest_framework import viewsets, status
 from rest_framework.authentication import SessionAuthentication
+from rest_framework.response import Response
 
 from serializers import UserSerializer, CollectionSerializer, PointSerializer, ImageSerializer
+from api.forms import UserCreationForm
 from base.models import User
 from bucketlist.models import Collection, Point, Image
 from permissions import IsOwner
@@ -22,6 +30,15 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    @csrf_exempt
+    def create(self, request):
+        form = UserCreationForm(request.DATA)
+
+        if form.is_valid():
+            user = form.save()
+            return Response(request.DATA, status=status.HTTP_201_CREATED)
+
+        return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CollectionViewSet(APIViewSet):
     """
@@ -54,3 +71,10 @@ class ImageViewSet(APIViewSet):
 
     authentication_classes = (SessionAuthentication,)
     permission_classes = (IsOwner,)
+
+def token(request):
+    out = {
+        'token': csrf.get_token(request),
+    }
+
+    return HttpResponse(json.dumps(out), content_type="application/json")
