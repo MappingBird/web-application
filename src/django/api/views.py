@@ -96,3 +96,11 @@ def token(request):
     }
 
     return HttpResponse(json.dumps(out), content_type="application/json")
+
+def current_user(request):
+    if request.user.is_authenticated():
+        serializer = UserSerializer(request.user)
+
+        return HttpResponse(json.dumps(serializer.data), content_type="application/json")
+
+    return HttpResponse(json.dumps({}), content_type="application/json")

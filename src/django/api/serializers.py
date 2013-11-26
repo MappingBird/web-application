@@ -7,7 +7,7 @@ from bucketlist.models import Collection, Point, Image
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('email', )
+        fields = ('id', 'email', )
 
 
 class ImageSerializer(serializers.HyperlinkedModelSerializer):
