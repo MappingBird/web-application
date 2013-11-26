@@ -2,11 +2,11 @@ var services = angular.module('SaveApp.services', ['ngResource']);
 
 services.factory('Presets', function(){
     return {
-        baseUrl: PINGISMO.baseUrl,
-        parseUrl: PINGISMO.baseUrl + 'scraper',
-        mapsUrl: PINGISMO.baseUrl + 'maps',
-        collectionUrl: PINGISMO.baseUrl + 'blapi/collection',
-        userUrl: PINGISMO.baseUrl + 'blapi/user',
+        baseUrl: '/',
+        parseUrl: '/scraper',
+        mapsUrl: '/maps',
+        collectionUrl: '/api/collection',
+        userUrl: '/api/users',
         savePanelVisible: true,
         mapZoom: 13
     };
@@ -79,13 +79,13 @@ services.factory('StateService', function() {
 
 services.factory('Collection', ['$resource', function($resource) {
 
-    return $resource('/blapi/collection/:id', { id: '@id' });
+    return $resource('/api/collections/:id', { id: '@id' });
 
 }]);
 
 services.factory('CollectionsByUserResource', ['$resource', function($resource) {
 
-    return $resource('/blapi/collections_by_user/:user_id', { user_id: '@user_id' });
+    return $resource('/api/users/:user_id/collections', { user_id: '@user_id' });
 
 }]);
 
@@ -103,7 +103,7 @@ services.factory('CollectionsByUserLoader', ['CollectionsByUserResource', '$stat
 
 services.factory('PointResource', ['$resource', function($resource) {
 
-    return $resource('/blapi/point/:id', { id: '@id' }, {
+    return $resource('/api/points/:id', { id: '@id' }, {
         update: {
             method: "POST",
             params: {
@@ -135,17 +135,23 @@ services.factory('PointLoader', ['PointResource', '$stateParams', 'StateService'
 
 services.factory('PointImage', ['$resource', function($resource) {
 
-    return $resource('/blapi/image/:id', { id: '@id' });
+    return $resource('/api/images/:id', { id: '@id' });
+
+}]);
+
+services.factory('CurrentUser', ['$resource', function($resource) {
+
+    return $resource('/api/user/current');
 
 }]);
 
 services.factory('UserResource', ['$resource', function($resource) {
 
-    var UserResource = $resource('/blapi/user/:id', { id: '@id' });
+    var UserResource = $resource('/api/users/:id', { id: '@id' });
 
     /*
     // doesn't work until angular 1.1.2 (not using it because it's not stable yet)
-    var userResource = $resource('/blapi/user/id/:id', { id: '@id' }, {
+    var userResource = $resource('/api/user/id/:id', { id: '@id' }, {
         'get_user': {
             method: 'GET' //,
 
