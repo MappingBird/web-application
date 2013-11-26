@@ -225,25 +225,28 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
 });
 
 SaveApp.run(function($http, $cookies) {
-    $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+    $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
 });
 
 
-SaveApp.controller('userController', function($scope, $cookies, $http, $resource, User, UserResource, Presets, BroadcastService) {
+SaveApp.controller('userController', function($scope, $cookies, $http, $resource, User, UserResource, Presets, BroadcastService, CurrentUser) {
 
     // if user cookie exists, load user data
-    if ($cookies.bkl_user) {
-        console.log('user logged in');
-        $scope.user = UserResource.get({id: $cookies.bkl_user}, function(data) {
-            console.log('user data');
-            console.log(data);
+    console.log('user logged in');
+    $scope.user = CurrentUser.get(function(data) {
+
+        console.log('user data');
+        console.log(data);
+
+        if(typeof data.id !== 'undefined'
+            && typeof data.email !== 'undefined') {
 
             User.data.isLoggedIn = true;
             $scope.isLoggedIn = true;
 
-            if (typeof data.email_address !== 'undefined') {
-                User.data.emailAddress = data.email_address;
-                if (!/@gu.pingismo.com/.test(data.email_address)) {
+            if (typeof data.email !== 'undefined') {
+                User.data.emailAddress = data.email;
+                if (!/@gu.pingismo.com/.test(data.email)) {
                     User.data.isRegisteredUser = true;
                 } else {
                     User.data.isRegisteredUser = false;
@@ -257,12 +260,15 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
                 data: { userId: data.id }
             });
 
-        });
+        } else {
 
-    } else {
-        console.log('user not logged in');
-        $scope.isLoggedIn = false;
-    }
+            console.log('user not logged in');
+            $scope.isLoggedIn = false;
+
+        }
+
+
+    });
 
 });
 
