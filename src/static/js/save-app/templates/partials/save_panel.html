@@ -1,0 +1,73 @@
+                <form class="form-search" ng-show="searchResultsLoaded">
+                    <input type="text" class="input-medium search-query" ng-model="searchQuery"><i class="icon-search"></i>
+                    <span class="help-block search-static">{{numResults}} places are found. Pick one you want to save.</span>
+                </form>
+
+                <!-- No search keyword tip -->
+                <div class="no-keyword tips-below" ng-show="noSearchQuery">
+                    <h2>You didn’t select any places.</h2>
+                    <p>Before clicking on “Remember This Place,” select name of address of a place on any websites.
+    You can also enter name or address above and press <b>Enter</b> to search.</p>
+                </div>
+                <!-- End of no search keyword tip -->
+
+                <!-- Searching for location -->
+                <div class="loading-wrapper" ng-show="searchResultsLoading">
+                    <img src="/img/loading-circle.png" class="loading-img" />
+                    <p>Searching...</p>
+                </div>
+                <!-- End of Searching for location -->
+
+                <!-- Search result -->
+                <div class="left-panel-container" ng-show="searchResultsLoaded" m-custom-scrollbar="{scrollInertia: 0}">
+                    <ul class="location-list">
+                        <li ng-repeat="place in places" on-repeat-done="places_loaded" ng-class="{active: $index==activeSearchResult}"><p>{{place.name}}<span>{{place.address}}</span></p>
+                            <a href="#" class="save-this-place" id="btnSaveThisPlace" ng-click="prepSaveActiveSearchResult($index)"><i class="icon-save"></i> Save this place</a>
+                            <a href="#" class="show-on-map" ng-click="setActiveSavePoint($index)"><i class="icon-show"></i> Show on map</a>
+                            <div class="clearfix">
+                        </li>
+                    </ul>
+                </div>
+                <!-- End of Search result -->
+
+                <!-- Save Contents -->
+                <div class="save-content" ng-class="{retracted: !searchResultSelected}">
+                    <a class="back" href="#" ng-click="cancelSaveActiveSearchResult()" ng-show="numResults > 1"><img src="/img/icon-back.png" /></a>
+                    <form class="form-save-content">
+                        <div class="primary-content" m-custom-scrollbar="{scrollInertia: 0}">
+                            <input type="text" ng-model="pageData.title" class="content-title" />
+                            <textarea rows="8">{{pageData.text}}</textarea>
+                            <div class="ref-context-img" thumb-alignment="{displayArray: 'pageImages', selectArray: 'selectedPageImages'}">
+                                <img ng-repeat="image in pageImages" data-src="{{image}}" />
+                            </div>
+                        </div>
+                        <div class="collection-wrapper">
+                            <div class="input-append" ng-show="collections.length == 0">
+                                <input type="text" ng-model="newCollectionName" placeholder="Create a map to save this place to, ex: Paris trip" class="fresh" />
+                                <button class="btn btn-default" type="button" ng-click="saveNewCollection($event)">Create</button>
+                            </div>
+                            <div class="btn-group pingismo-btn-group" ng-show="collections.length > 0">
+                                <a class="btn exist collections-selection" href="#" ng-click="showSelectCollection = true" ng-show="!showSelectCollection">{{activeCollectionName}} <span class="caret"></span></a>
+                                <ul class="collections-menu" ng-show="showSelectCollection">
+                                    <li ng-repeat="collection in collections"><a href="#" ng-click="selectCollection(collection.id, $event)">{{collection.name}}</a></li>
+                                    <li class="input-append">
+                                        <input type="text" class="span2" ng-model="newCollectionName" id="appendedInputButton" placeholder="Create a new map" />
+                                        <button class="btn" type="button" ng-click="saveNewCollection($event)">Create</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul class="types">
+                                <li ng-class="{active: activeSavePoint.type == 'scenicspot'}"><a href="#" class="types-scenicspot" ng-click="setPointType($event, 'scenicspot')"></a></li>
+                                <li ng-class="{active: activeSavePoint.type == 'hotel'}"><a href="#" class="types-hotel" ng-click="setPointType($event, 'hotel')"></a></li>
+                                <li ng-class="{active: activeSavePoint.type == 'mall'}"><a href="#" class="types-mall" ng-click="setPointType($event, 'mall')"></a></li>
+                                <li ng-class="{active: activeSavePoint.type == 'restaurant'}"><a href="#" class="types-restaurant" ng-click="setPointType($event, 'restaurant')"></a></li>
+                                <li ng-class="{active: activeSavePoint.type == 'bar'}"><a href="#" class="types-bar" ng-click="setPointType($event, 'bar')"></a></li>
+                                <li ng-class="{active: activeSavePoint.type == 'misc'}"><a href="#" class="types-misc" ng-click="setPointType($event, 'misc')"></a></li>
+                                <div class=" clearfix"></div>
+                            </ul>
+                            <hr/>
+                            <button class="btn btn-large btn-primary pingismo-btn" type="button" id="save-to-map" ng-click="savePoint($event)">Save to Map</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- End of save contents -->

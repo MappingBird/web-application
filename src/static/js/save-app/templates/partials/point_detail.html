@@ -1,0 +1,65 @@
+<div class="pin-content-wrapper" ng-show="showPointDetailPanel" ng-class="{ editable: pointEditMode}">
+                <a href="#" ng-click="closePoint()" class="pingismo-proceed"><img src="/img/icon-proceed.png" /></a>
+                <div class="pin-content">
+                    <div class="pin-details pull-left">
+                        <h4>{{activeViewPoint.title}}</h4>
+                        <input type="text" ng-model="activeViewPoint.title" class="content-title" />
+                        <a ng-href="{{activeViewPoint.url}}" class="ref-url">{{activeViewPoint.url}}</a>
+                        <p class="ref-context">{{activeViewPoint.text}}</p>
+                        <textarea rows="8">{{activeViewPoint.text}}</textarea>
+                        <div class="ref-context-img" thumb-alignment="{displayArray: 'activeViewPoint.images', selectArray: 'selectedPointImages'}">
+                            <img ng-repeat="image in activeViewPoint.images" data-src="{{image.url}}" />
+                        </div>
+                    </div>
+                    <div class="pin-cover">
+                        <div class="cover-img">
+                            <img ng-src="{{activeViewPoint.images[0].url}}" />
+                            <p>Drag picture here to change cover photo</p>
+                        </div>
+                        <ul>
+                            <li class="collection">{{activeCollectionName}}</li>
+                            <li class="btn-group pingismo-btn-group">
+                                <a class="btn exist" href="#">{{activeCollectionName}} <span class="caret"></span></a>
+                                <ul class="collections-menu">
+                                    <li ng-repeat="collection in collections"><a href="#" ng-click="setCollection(collection.id)">{{collection.name}}</a></li>
+                                    <li class="input-append">
+                                        <input type="text" class="span2" id="appendedInputButton" placeholder="Create a new collection" />
+                                        <button class="btn" type="button">Create</button>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Added: {{activeViewPoint.created}}</li>
+                            <li>
+                                <ul class="types">
+                                    <li ng-class="{active : activeViewPoint.type == 'scenicspot'}"><a href="#" class="types-scenicspot"></a></li>
+                                    <li ng-class="{active : activeViewPoint.type == 'hotel'}"><a href="#" class="types-hotel"></a></li>
+                                    <li ng-class="{active : activeViewPoint.type == 'mall'}"><a href="#" class="types-mall"></a></li>
+                                    <li ng-class="{active : activeViewPoint.type == 'restaurant'}"><a href="#" class="types-restaurant"></a></li>
+                                    <li ng-class="{active : activeViewPoint.type == 'bar'}"><a href="#" class="types-bar"></a></li>
+                                    <li ng-class="{active : activeViewPoint.type == 'misc'}"><a href="#" class="types-misc"></a></li>
+                                    <div class=" clearfix"></div>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="pin-content-footer fixed">
+                    <hr />
+                    <a href="#" ng-click="togglePointEditMode()" class="btn-default pingismo-btn" id="edit-pin-content-btn">Edit</a>
+                    <a href="#" ng-click="togglePointEditMode()" class="btn-highlight pingismo-btn" id="done-edit-pin-content-btn">Done</a>
+                    <a href="#" ng-click="deletePoint()" class="btn-default pingismo-btn pull-right" id="del-pin-content-btn">Delete This Place</a>
+                </div>
+            </div>
+
+            <!-- Delete a Pin -->
+            <div class="delete-pin-wrapper" ng-show="false">
+                <h4>Eiffel Tower tour recommendation</h4>
+                Do you really want to delete a place permanently? Once you delete it, it will be removed from your map forever.
+                <div class="pin-content-footer">
+                    <hr />
+                    <a href="#" class="btn-risk pingismo-btn" id="delete-pin-btn">Yes, Delete It.</a>
+                    <a href="#" class="btn-default pingismo-btn" id="cancel-delete-pin-btn">Cancel</a>
+                </div>
+            </div>
+            <!-- End of delete a Pin -->

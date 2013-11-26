@@ -1,0 +1,1043 @@
+@charset "utf-8";
+/* CSS Document */
+/* Animation --------------------------------------------------------------------------------- */
+@keyframes pingismo-pin-scenicspot-anim{
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-scenicspot-anim-1.png);}
+	20%{background-image: url(../img/pin-scenicspot-anim-2.png);}
+	30%{background-image: url(../img/pin-scenicspot-anim-3.png);}
+	40%{background-image: url(../img/pin-scenicspot-anim-4.png);}
+	50%{background-image: url(../img/pin-scenicspot-anim-5.png);}
+	60%{background-image: url(../img/pin-scenicspot-anim-6.png);}
+	70%{background-image: url(../img/pin-scenicspot-anim-7.png);}
+	80%{background-image: url(../img/pin-scenicspot-anim-8.png);}
+	90%{background-image: url(../img/pin-scenicspot-anim-9.png);}
+	100%{background-image: url(../img/pin-scenicspot-anim-10.png);}
+}
+@-webkit-keyframes pingismo-pin-scenicspot-anim{ /* Safari and Chrome */
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-scenicspot-anim-1.png);}
+	20%{background-image: url(../img/pin-scenicspot-anim-2.png);}
+	30%{background-image: url(../img/pin-scenicspot-anim-3.png);}
+	40%{background-image: url(../img/pin-scenicspot-anim-4.png);}
+	50%{background-image: url(../img/pin-scenicspot-anim-5.png);}
+	60%{background-image: url(../img/pin-scenicspot-anim-6.png);}
+	70%{background-image: url(../img/pin-scenicspot-anim-7.png);}
+	80%{background-image: url(../img/pin-scenicspot-anim-8.png);}
+	90%{background-image: url(../img/pin-scenicspot-anim-9.png);}
+	100%{background-image: url(../img/pin-scenicspot-anim-10.png);}
+}
+@keyframes pingismo-pin-bar-anim{
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-bar-anim-1.png);}
+	20%{background-image: url(../img/pin-bar-anim-2.png);}
+	30%{background-image: url(../img/pin-bar-anim-3.png);}
+	40%{background-image: url(../img/pin-bar-anim-4.png);}
+	50%{background-image: url(../img/pin-bar-anim-5.png);}
+	60%{background-image: url(../img/pin-bar-anim-6.png);}
+	70%{background-image: url(../img/pin-bar-anim-7.png);}
+	80%{background-image: url(../img/pin-bar-anim-8.png);}
+	90%{background-image: url(../img/pin-bar-anim-9.png);}
+	100%{background-image: url(../img/pin-bar-anim-10.png);}
+}
+@-webkit-keyframes pingismo-pin-bar-anim{ /* Safari and Chrome */
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-bar-anim-1.png);}
+	20%{background-image: url(../img/pin-bar-anim-2.png);}
+	30%{background-image: url(../img/pin-bar-anim-3.png);}
+	40%{background-image: url(../img/pin-bar-anim-4.png);}
+	50%{background-image: url(../img/pin-bar-anim-5.png);}
+	60%{background-image: url(../img/pin-bar-anim-6.png);}
+	70%{background-image: url(../img/pin-bar-anim-7.png);}
+	80%{background-image: url(../img/pin-bar-anim-8.png);}
+	90%{background-image: url(../img/pin-bar-anim-9.png);}
+	100%{background-image: url(../img/pin-bar-anim-10.png);}
+}
+@keyframes pingismo-pin-hotel-anim{
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-hotel-anim-1.png);}
+	20%{background-image: url(../img/pin-hotel-anim-2.png);}
+	30%{background-image: url(../img/pin-hotel-anim-3.png);}
+	40%{background-image: url(../img/pin-hotel-anim-4.png);}
+	50%{background-image: url(../img/pin-hotel-anim-5.png);}
+	60%{background-image: url(../img/pin-hotel-anim-6.png);}
+	70%{background-image: url(../img/pin-hotel-anim-7.png);}
+	80%{background-image: url(../img/pin-hotel-anim-8.png);}
+	90%{background-image: url(../img/pin-hotel-anim-9.png);}
+	100%{background-image: url(../img/pin-hotel-anim-10.png);}
+}
+@-webkit-keyframes pingismo-pin-hotel-anim{ /* Safari and Chrome */
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-hotel-anim-1.png);}
+	20%{background-image: url(../img/pin-hotel-anim-2.png);}
+	30%{background-image: url(../img/pin-hotel-anim-3.png);}
+	40%{background-image: url(../img/pin-hotel-anim-4.png);}
+	50%{background-image: url(../img/pin-hotel-anim-5.png);}
+	60%{background-image: url(../img/pin-hotel-anim-6.png);}
+	70%{background-image: url(../img/pin-hotel-anim-7.png);}
+	80%{background-image: url(../img/pin-hotel-anim-8.png);}
+	90%{background-image: url(../img/pin-hotel-anim-9.png);}
+	100%{background-image: url(../img/pin-hotel-anim-10.png);}
+}
+@keyframes pingismo-pin-mall-anim{
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-mall-anim-1.png);}
+	20%{background-image: url(../img/pin-mall-anim-2.png);}
+	30%{background-image: url(../img/pin-mall-anim-3.png);}
+	40%{background-image: url(../img/pin-mall-anim-4.png);}
+	50%{background-image: url(../img/pin-mall-anim-5.png);}
+	60%{background-image: url(../img/pin-mall-anim-6.png);}
+	70%{background-image: url(../img/pin-mall-anim-7.png);}
+	80%{background-image: url(../img/pin-mall-anim-8.png);}
+	90%{background-image: url(../img/pin-mall-anim-9.png);}
+	100%{background-image: url(../img/pin-mall-anim-10.png);}
+}
+@-webkit-keyframes pingismo-pin-mall-anim{ /* Safari and Chrome */
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-mall-anim-1.png);}
+	20%{background-image: url(../img/pin-mall-anim-2.png);}
+	30%{background-image: url(../img/pin-mall-anim-3.png);}
+	40%{background-image: url(../img/pin-mall-anim-4.png);}
+	50%{background-image: url(../img/pin-mall-anim-5.png);}
+	60%{background-image: url(../img/pin-mall-anim-6.png);}
+	70%{background-image: url(../img/pin-mall-anim-7.png);}
+	80%{background-image: url(../img/pin-mall-anim-8.png);}
+	90%{background-image: url(../img/pin-mall-anim-9.png);}
+	100%{background-image: url(../img/pin-mall-anim-10.png);}
+}
+@keyframes pingismo-pin-misc-anim{
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-misc-anim-1.png);}
+	20%{background-image: url(../img/pin-misc-anim-2.png);}
+	30%{background-image: url(../img/pin-misc-anim-3.png);}
+	40%{background-image: url(../img/pin-misc-anim-4.png);}
+	50%{background-image: url(../img/pin-misc-anim-5.png);}
+	60%{background-image: url(../img/pin-misc-anim-6.png);}
+	70%{background-image: url(../img/pin-misc-anim-7.png);}
+	80%{background-image: url(../img/pin-misc-anim-8.png);}
+	90%{background-image: url(../img/pin-misc-anim-9.png);}
+	100%{background-image: url(../img/pin-misc-anim-10.png);}
+}
+@-webkit-keyframes pingismo-pin-misc-anim{ /* Safari and Chrome */
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-misc-anim-1.png);}
+	20%{background-image: url(../img/pin-misc-anim-2.png);}
+	30%{background-image: url(../img/pin-misc-anim-3.png);}
+	40%{background-image: url(../img/pin-misc-anim-4.png);}
+	50%{background-image: url(../img/pin-misc-anim-5.png);}
+	60%{background-image: url(../img/pin-misc-anim-6.png);}
+	70%{background-image: url(../img/pin-misc-anim-7.png);}
+	80%{background-image: url(../img/pin-misc-anim-8.png);}
+	90%{background-image: url(../img/pin-misc-anim-9.png);}
+	100%{background-image: url(../img/pin-misc-anim-10.png);}
+}
+@keyframes pingismo-pin-restaurant-anim{
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-restaurant-anim-1.png);}
+	20%{background-image: url(../img/pin-restaurant-anim-2.png);}
+	30%{background-image: url(../img/pin-restaurant-anim-3.png);}
+	40%{background-image: url(../img/pin-restaurant-anim-4.png);}
+	50%{background-image: url(../img/pin-restaurant-anim-5.png);}
+	60%{background-image: url(../img/pin-restaurant-anim-6.png);}
+	70%{background-image: url(../img/pin-restaurant-anim-7.png);}
+	80%{background-image: url(../img/pin-restaurant-anim-8.png);}
+	90%{background-image: url(../img/pin-restaurant-anim-9.png);}
+	100%{background-image: url(../img/pin-restaurant-anim-10.png);}
+}
+@-webkit-keyframes pingismo-pin-restaurant-anim{ /* Safari and Chrome */
+	0%{background-image:  none;}
+	10%{background-image: url(../img/pin-restaurant-anim-1.png);}
+	20%{background-image: url(../img/pin-restaurant-anim-2.png);}
+	30%{background-image: url(../img/pin-restaurant-anim-3.png);}
+	40%{background-image: url(../img/pin-restaurant-anim-4.png);}
+	50%{background-image: url(../img/pin-restaurant-anim-5.png);}
+	60%{background-image: url(../img/pin-restaurant-anim-6.png);}
+	70%{background-image: url(../img/pin-restaurant-anim-7.png);}
+	80%{background-image: url(../img/pin-restaurant-anim-8.png);}
+	90%{background-image: url(../img/pin-restaurant-anim-9.png);}
+	100%{background-image: url(../img/pin-restaurant-anim-10.png);}
+}
+
+
+
+@keyframes pingismo-pinpopup-anim{
+	0%{opacity: 0;}
+	100%{opacity: 1;}
+}
+@-webkit-keyframes pingismo-pinpopup-anim{
+	0%{opacity: 0;}
+	100%{opacity: 1;}
+}
+
+/* Layout ------------------------------------------------------------------------------------ */
+section.map-section{
+	background-color: #2c2c2c;
+}
+/* Module ------------------------------------------------------------------------------------ */
+/* Map */
+#map {
+	height: 100%;
+	position: absolute;
+	top: 45px;
+	width: 100%;
+	box-shadow: -8px 0 15px rgba(0,0,0,0.6), 8px 0 15px rgba(0,0,0,0.6);
+	background: url(../img/white_wall.png) 0 0;
+}
+
+#map img {
+    max-width: none !important;
+}
+
+#map {
+	-moz-transition: left 0.3s ease, top 0.3s ease 0.3s, width 0.3s ease, height 0.3s ease 0.3s;
+	-webkit-transition: left 0.3s ease, top 0.3s ease 0.3s, width 0.3s ease, height 0.3s ease 0.3s;
+	transition: left 0.3s ease, top 0.3s ease 0.3s, width 0.3s ease, height 0.3s ease 0.3s;
+}
+
+#map.retracted {
+	left: 420px;
+	width: -moz-calc(100% - 420px);
+	width: -webkit-calc(100% - 420px);
+	width: calc(100% - 420px);
+}
+
+#map.semi-retracted {
+	height: -moz-calc(100% - 50px);
+	height: -webkit-calc(100% - 50px);
+	height: calc(100% - 50px);
+	left: 300px;
+	top: 95px;
+	width: -moz-calc(100% - 300px);
+	width: -webkit-calc(100% - 300px);
+	width: calc(100% - 300px);
+}
+
+#map.full {
+	left: 0;
+	width: 100%;
+	top: 95px;
+	height: -moz-calc(100% - 50px);
+	height: -webkit-calc(100% - 50px);
+	height: calc(100% - 50px);
+}
+
+#map.half {
+	height: -moz-calc(100% - px);
+	height: -webkit-calc(100% - 50px);
+	height: calc(100% - 50px);
+	left: 0;
+	top: 95px;
+	width: -moz-calc(100% - 655px);
+	width: -webkit-calc(100% - 655px);
+	width: calc(100% - 655px);
+}
+
+/* Save Panel */
+.save-panel{
+	padding: 60px 0 0;
+	width: 420px;
+	position: relative;
+}
+.save-panel .form-search{
+	margin: 0 20px;
+}
+.save-panel input.search-query{
+	background-color: #181818;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	border: none;
+	width: 315px;
+	color: #fff;
+
+	-webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.75);
+	-moz-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.75);
+	box-shadow: inset 1px 1px 2px rgba(0,0,0,0.75);
+}
+.save-panel .form-search i.icon-search{
+	width: 35px;
+	background-color: #181818;
+	padding: 7px 0;
+	margin-top: -2px;
+	background-position: -36px 6px;
+
+	-webkit-box-shadow: inset 0px 1px 2px rgba(0,0,0,0.75);
+	-moz-box-shadow: inset 0px 1px 2px rgba(0,0,0,0.75);
+	box-shadow: inset 0px 1px 2px rgba(0,0,0,0.75);
+}
+.save-panel .form-search .help-block{
+	color: #707070;
+	font-size: 12px;
+	margin: 3px 0 0 12px;
+	display: none;
+}
+
+/* Searching animation */
+.loading-wrapper{
+	width: 180px;
+	height: 180px;
+	margin: 0 auto;
+	position: relative;
+	color: #fff;
+	font-size: 15px;
+
+	display: none;
+}
+.loading-wrapper > p{
+	position: absolute;
+	top: 50%;
+	height: 20px;
+	width: 180px;
+	margin: -40px 0 0;
+	background: url(../img/searching-pin.png) center 0 no-repeat;
+	text-align: center;
+	padding-top: 60px;
+}
+
+/* No search keyword */
+.no-keyword{
+
+}
+/* Searching location result list */
+.save-panel .location-list{
+	margin: 15px 0 0;
+	padding: 0;
+	list-style: none;
+	width: 420px;
+}
+.save-panel .location-list>li{
+	margin: 0;
+	font-size: 15px;
+	color: #fff;
+	font-weight: bolder;
+	padding: 6px 32px 0 25px;
+}
+.save-panel .location-list>li.active,
+.save-panel .location-list>li:hover{
+	background: #01a9e7;
+}
+.save-panel .location-list>li>p{
+	width: 240px;
+	float: left;
+}
+.save-panel .location-list>li>p>span{
+	font-size: 12px;
+	font-weight: normal;
+	display: block;
+	color: #707070
+}
+.save-panel .location-list>li.active>p>span,
+.save-panel .location-list>li:hover>p>span{
+	color: #fff;
+}
+.save-panel .location-list>li>a{
+	display: block;
+	padding: 8px 12px;
+	float: left;
+	background: #1480a8;
+	display: none;
+	margin: 5px 0 0;
+	font-size: 12px;
+	color: #fff;
+	font-weight: normal;
+}
+a.save-this-place i.icon-save{
+	background: url(../img/icon-save.png) 0 0 no-repeat;
+	margin-right: 2px;
+}
+a.show-on-map i.icon-show{
+	background: url(../img/icon-show.png) 0 0 no-repeat;
+	margin-right: 2px;
+	height: 18px;
+	vertical-align: text-bottom;
+}
+.save-panel .location-list>li>a:hover{
+	text-decoration: none;
+	background-color: #33ccff;
+}
+.save-panel .location-list>li.active>a.save-this-place{
+	display: block;
+}
+.save-panel .location-list>li.active>a.show-on-map,
+.save-panel .location-list>li.active:hover>a.show-on-map,
+.save-panel .location-list>li>a.save-this-place{
+	display: none;
+}
+.save-panel .location-list>li:hover>a.show-on-map{
+	display: block;
+}
+
+/* Back & proceed button */
+.pingismo-back,
+.pingismo-proceed{
+	background: #01a9e7;
+	display: block;
+	position: absolute;
+	top: 15px;
+	left: 0px;
+	height: 27px;
+}
+.pingismo-proceed{
+	width: 20px;
+	top: 105px;
+	padding: 3px 0 0 15px;
+}
+.pingismo-back{
+	width: 25px;
+	padding: 3px 0 0 5px;
+}
+.pingismo-back > img,
+.pingismo-proceed > img{
+	border: 0;
+}
+
+/* Save Content */
+.save-content{
+	background-color: #fff;
+	position: absolute;
+	padding: 15px 40px 141px;
+	height: -moz-calc(100% - 123px);
+	height: -webkit-calc(100% - 123px);
+	height: calc(100% - 123px);
+	top: 94px;
+	left: 0;
+	width: 340px;
+	overflow: hidden;
+	-moz-transition: left 0.3s;
+	-webkit-transition: left 0.3s;
+	transition: left 0.3s;
+}
+.save-content.retracted{
+	left: 420px;
+}
+.save-content a.back{
+	background: #01a9e7;
+	display: block;
+	position: absolute;
+	top: 15px;
+	left: 0px;
+	width: 25px;
+	height: 27px;
+	padding: 3px 0 0 5px;
+}
+.save-content a.back > img{
+	border: 0;
+}
+.save-content select,
+.save-content textarea,
+.save-content input[type="text"],
+.pin-content-wrapper select,
+.pin-content-wrapper textarea,
+.pin-content-wrapper input[type="text"] {
+	border-radius: 0;
+	background-color: #F2F2F2;
+	width: 326px;
+}
+.save-content input.span2{
+	width: 258px;
+}
+.save-content input.content-title,
+.pin-content-wrapper input.content-title {
+	font-weight: bolder;
+}
+
+/* grid photos */
+.ref-context-img{
+	width: 360px;
+	margin-left: -2px;
+}
+
+.save-content .primary-content {
+	/*
+	height: -moz-calc(100% - 383px);
+	height: -webkit-calc(100% - 383px);
+	height: calc(100% - 383px);
+	*/
+	height: 394px; /* TODO: make this dynamic */;
+	overflow: auto;
+	width: 370px;
+}
+
+/* grid photos */
+.photo-obj{
+	display: none;
+}
+.photo{
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+}
+.picrow > a{
+	position: relative;
+}
+.is-selected .photo{
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.select-img,
+.pin-content .is-selected .select-img{
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.is-selected .select-img,
+.editable .pin-content .is-selected .select-img
+{
+	opacity: 1;
+	filter: alpha(opacity=100);
+	width: 46px;
+	height: 46px;
+	background: url(../img/select-img.png) center center no-repeat;
+	position: absolute;
+	cursor: pointer;
+	top: 0px;
+	left: 50%;
+	/* margin-left: -23px; */
+}
+
+/* save action buttons */
+.collection-wrapper{
+	background: #ddd;
+	width: 340px;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	padding: 15px 40px;
+}
+.collection-wrapper > input[type="text"]{
+	background-color: #fff;
+}
+/*
+.collections-selection {
+	margin-bottom: 10px;
+}
+
+.collections-menu {
+	margin-left: 0;
+	font-size: 1.0em;
+}
+*/
+.pingismo-btn-group.btn-group .exist{
+	width: 313px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-top-left-radius: 0px;
+	box-shadow: none;
+	border: 1px solid #ccc;
+	text-align: left;
+	margin-bottom: 10px;
+}
+.pingismo-btn-group.btn-group .exist .caret{
+	float: right;
+}
+.pingismo-btn-group.btn-group .collections-menu{
+	font-size: 14px;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	position: absolute;
+	bottom: 10px;
+}
+.pingismo-btn-group.btn-group .collections-menu .input-append{
+	margin: 0px;
+}
+.pingismo-btn-group.btn-group .collections-menu a{
+	padding: 5px 8px;
+	color: #333;
+	display: block;
+}
+.pingismo-btn-group.btn-group .collections-menu a:hover{
+	text-decoration: none;
+	background-color: #01a9e7;
+	color: #fff;
+}
+.pingismo-btn-group.btn-group .collections-menu input[type="text"]{
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	margin-bottom: 0px;
+	width: 258px;
+}
+
+.pingismo-btn-group.btn-group .collections-menu .error input[type="text"]{
+	border: 1px solid;
+}
+
+.pingismo-btn-group.btn-group .collections-menu .error input[type="text"]::-webkit-input-placeholder{
+	color: #b94a48;
+}
+
+.pingismo-btn-group.btn-group .collections-menu .error input[type="text"]::-moz-placeholder{
+	color: #b94a48;
+}
+
+.pingismo-btn-group.btn-group .collections-menu .error input[type="text"]:-ms-input-placeholder{
+	color: #b94a48;
+}
+
+.pingismo-btn-group.btn-group .collections-menu .input-append .btn{
+	border-radius: 0;
+	border-bottom: none;
+	border-left: 1px solid #ccc;
+	border-right: none;
+	margin: 0px;
+}
+ul.types{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+ul.types > li{
+	float: left;
+}
+.collection-wrapper hr{
+	margin: 10px 80px 10px 0;
+	border-top: 1px solid #ccc;
+	border-bottom: none;
+}
+.empty-block{
+	height: 30px;
+	margin-bottom: 10px;
+}
+
+/* type selection */
+.types-scenicspot,
+.types-hotel,
+.types-mall,
+.types-restaurant,
+.types-bar,
+.types-misc{
+	display: block;
+	width: 38px;
+	height: 45px;
+	margin: 0 5px;
+}
+.types-scenicspot{
+	background: url(../img/type-scenicspot.png) 0 0 no-repeat;
+}
+.types-hotel{
+	background: url(../img/type-hotel.png) 0 0 no-repeat;
+}
+.types-mall{
+	background: url(../img/type-mall.png) 0 0 no-repeat;
+}
+.types-restaurant{
+	background: url(../img/type-restaurant.png) 0 0 no-repeat;
+}
+.types-bar{
+	background: url(../img/type-bar.png) 0 0 no-repeat;
+}
+.types-misc{
+	background: url(../img/type-misc.png) 0 0 no-repeat;
+}
+.types-scenicspot:hover,
+.types-hotel:hover,
+.types-mall:hover,
+.types-restaurant:hover,
+.types-bar:hover,
+.types-misc:hover,
+.active .types-scenicspot,
+.active .types-hotel,
+.active .types-mall,
+.active .types-restaurant,
+.active .types-bar,
+.active .types-misc{
+ background-position: 0 -45px;
+}
+
+/* Pin */
+.pingismo-pin{
+	width: 44px;
+	height: 53px;
+	position: absolute;
+	z-index: 999;
+	/* margin: -50px 0 0 -155px; */
+	margin-left: -22px;
+}
+.pingismo-pin .pin-scenicspot,
+.pingismo-pin .pin-hotel,
+.pingismo-pin .pin-mall,
+.pingismo-pin .pin-restaurant,
+.pingismo-pin .pin-bar,
+.pingismo-pin .pin-misc{
+	display: block;
+	width: 44px;
+	height: 60px;
+}
+.pingismo-pin .pin-scenicspot{
+	background: url(../img/pin-scenicspot-anim-10.png) 0 0 no-repeat;
+}
+.pingismo-pin .pin-hotel{
+	background: url(../img/pin-hotel.png) 0 0 no-repeat;
+}
+.pingismo-pin .pin-mall{
+	background: url(../img/pin-mall.png) 0 0 no-repeat;
+}
+.pingismo-pin .pin-restaurant{
+	background: url(../img/pin-restaurant.png) 0 0 no-repeat;
+}
+.pingismo-pin .pin-bar{
+	background: url(../img/pin-bar.png) 0 0 no-repeat;
+}
+.pingismo-pin .pin-misc{
+	background: url(../img/pin-misc.png) 0 0 no-repeat;
+}
+.pingismo-pin .pin-popup{
+	width: 310px;
+	height: 100px;
+	background: url(../img/popup-background.png) 0 0 no-repeat;
+	position: relative;
+	margin-top: -131px;
+	margin-left: 22px;
+	color: #707070;
+	line-height: 16px;
+	overflow: hidden;
+	opacity: 0;
+}
+.pingismo-pin .pin-popup p{
+	width: 165px;
+	padding: 10px 15px 10px 30px;
+	float: left;
+}
+
+.pingismo-pin.message-overlay .pin-popup p{
+	width: 285px;
+	padding-left: 15px;
+}
+
+.pingismo-pin .pin-popup strong{
+	font-size: 18px;
+	font-weight: normal;
+	color: #fff;
+	display: block;
+	line-height: 1.2em;
+	margin-bottom: 5px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.pin-popup .pin-popup-img{
+	background-image: url();
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: block;
+	width: 100px;
+    height: 100px;
+    overflow: hidden;
+	float: right;
+}
+.pin-popup .pin-popup-img img {
+   max-width: none;
+   display: none;
+}
+.pin-popup .pin-popup-img i{
+	opacity: .6;
+	filter: alpha(opacity=60);
+	background: url(../img/expand_collapse_btn.png) 0 0 no-repeat;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 25px;
+	height: 25px;
+}
+.pin-popup .pin-popup-img:hover i{
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.pin-popup .pin-popup-img i.is-expanded{
+	background-position: 0 -25px;
+}
+.pingismo-pin .icon-check{
+	background: url(../img/icon-checked.png) 0 0 no-repeat;
+	width: 21px;
+	height: 21px;
+	margin: -20px -5px 0 0;
+	display: none;
+}
+
+/* Pin - animiation */
+.pingismo-pin .pin-bar.showme{
+	animation: pingismo-pin-bar-anim 0.6s both;
+	-webkit-animation: pingismo-pin-bar-anim 0.6s both;
+}
+.pingismo-pin .pin-hotel.showme{
+	animation: pingismo-pin-hotel-anim 0.6s both;
+	-webkit-animation: pingismo-pin-hotel-anim 0.6s both;
+}
+.pingismo-pin .pin-mall.showme{
+	animation: pingismo-pin-mall-anim 0.6s both;
+	-webkit-animation: pingismo-pin-mall-anim 0.6s both;
+}
+.pingismo-pin .pin-misc.showme{
+	animation: pingismo-pin-misc-anim 0.6s both;
+	-webkit-animation: pingismo-pin-misc-anim 0.6s both;
+}
+.pingismo-pin .pin-restaurant.showme{
+	animation: pingismo-pin-restaurant-anim 0.6s both;
+	-webkit-animation: pingismo-pin-restaurant-anim 0.6s both;
+}
+.pingismo-pin .pin-scenicspot.showme{
+	animation: pingismo-pin-scenicspot-anim 0.6s both;
+	-webkit-animation: pingismo-pin-scenicspot-anim 0.6s both;
+}
+.pingismo-pin .pin-popup.showme{
+	animation: pingismo-pinpopup-anim 0.5s ease-in 0.6s both;
+	-webkit-animation: pingismo-pinpopup-anim 0.5s ease-in 0.6s both;
+}
+
+/* alert */
+.map-alert{
+	position: absolute;
+	top: 0px;
+	left: 50%;
+	width: 600px;
+	margin-left: -300px;
+
+}
+
+.map-alert.visible {
+	top: 45px;
+	-moz-transition: top: 0.3s;
+	-webkit-transition: top: 0.3s;
+	transition: top: 0.3s;
+}
+
+/* collection list */
+.collection-list-wrapper{
+	padding: 55px 25px 0;
+}
+.collection-list-wrapper .collection-header{
+	position: relative;
+	margin-bottom: 15px;
+}
+.collection-header .collestion-name{
+	line-height: 20px;
+	display: inline-block;
+	color: #fff;
+	font-size: 20px;
+}
+.collection-header .collestion-name .icon-expand-collapse{
+	background: url(../img/collection_expand_collapse_btn.png) 0 0 no-repeat;
+	width: 20px;
+	height: 20px;
+	margin: 4px 0 0 0;
+	text-indent: 0px;
+}
+.collection-header .collestion-name:hover{
+	text-decoration: none;
+	color: #01a9e7;
+}
+.collection-header .collestion-name:hover .icon-expand-collapse{
+	background-position: 0 -20px;
+}
+.collection-header .collestion-name.active{
+	background-position: 0 -40px;
+}
+.collection-header .collestion-name.active:hover{
+	background-position: 0 -60px;
+}
+.collection-header span{
+	color: #707070;
+	font-size: 12px;
+	margin-left: 5px;
+}
+.collection-header .list-view,
+.collection-header .map-view{
+	font-size: 12px;
+	display: inline-block;
+	height: 14px;
+	padding-left: 18px;
+	color: #fff;
+	opacity: .3;
+	filter: alpha(opacity=30);
+	margin: 10px 0 0 15px;
+	line-height: 14px;
+}
+.collection-header .list-view{
+	background: url(../img/icon-list-view.png) 0 0 no-repeat;
+}
+.collection-header .map-view{
+	background: url(../img/icon-map-view.png) 0 0 no-repeat;
+}
+.collection-header .list-view:hover,
+.collection-header .map-view:hover,
+.collection-header .list-view.active,
+.collection-header .map-view.active{
+	opacity: 1;
+	filter: alpha(opacity=100);
+	text-decoration: none;
+}
+.collection-list-wrapper .nav{
+	width: 280px;
+}
+.collection-list-wrapper a{
+	line-height: 30px;
+	color: #707070;
+	font-size: 15px;
+}
+.collection-list-wrapper .nav>li>a:hover,
+.collection-list-wrapper .nav>li.active>a{
+	background-color: transparent;
+	color: #fff;
+}
+.collection-list-wrapper .nav-stacked>li>a.edit{
+	background: url(../img/icon-delete-collection.png) 0 6px no-repeat;
+	padding-left: 30px;
+}
+.collection-list-wrapper .nav-stacked>li>a.edit:hover{
+	color: #ff0000;
+}
+.collection-list-wrapper .nav .divider{
+	height: 1px;
+	margin: 9px 1px 15px;
+	overflow: hidden;
+	background-color: #181818;
+	border-bottom: 1px solid #373737;
+}
+.collection-list-wrapper .nav>li>a.btn-default{
+	margin-top: 5px;
+}
+.collection-list-wrapper .nav>li>a.btn-default:hover{
+	background-color: #01a9e7;
+}
+
+/* pin content */
+.pin-content-wrapper,
+.delete-pin-wrapper{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 655px;
+	overflow: hidden;
+	padding: 95px 0 30px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.pin-content-wrapper{
+	height: 100%;
+}
+.pin-content-wrapper .pin-content{
+	padding: 0 0 60px 55px;
+	color: #707070;
+}
+.pin-content-wrapper .pin-content .pin-details{
+	width: 380px;
+}
+.pin-content-wrapper h4,
+.delete-pin-wrapper h4{
+	color: #fff;
+}
+.pin-content-wrapper .pin-content .ref-url{
+	font-size: 12px;
+}
+.pin-content-wrapper .pin-cover{
+	width: 200px;
+	float: right;
+	margin-right: 20px;
+	padding-top: 10px;
+}
+.pin-content-wrapper .pin-cover>img{
+	width: 200px;
+}
+.pin-content-wrapper .pin-cover>ul{
+	margin: 10px 0px 0px;
+	list-style: none;
+}
+.pin-cover ul.types li{
+	padding-top: 5px;
+	display:none;
+}
+.pin-cover ul.types li.active{
+	display: block;
+}
+.pin-content-wrapper .pin-content-footer{
+	height: 60px;
+	width: 100%;
+	background-color: #2c2c2c;
+	padding: 0 20px 0 55px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.pin-content-wrapper .pin-content-footer.fixed{
+	position: absolute;
+	bottom: 30px;
+}
+.pin-content-wrapper hr,
+.delete-pin-wrapper hr{
+	margin: 0 0 10px -20px;
+	border-bottom: solid 1px #373737;
+	border-top: solid 1px #222;
+}
+
+#done-edit-pin-content-btn, #del-pin-content-btn,
+.pin-content-wrapper.editable #edit-pin-content-btn,
+.pin-content-wrapper select,
+.pin-content-wrapper textarea,
+.pin-content-wrapper input[type="text"],
+.pin-content-wrapper.editable .pin-details h4,
+.pin-content-wrapper.editable .pin-details p.ref-context,
+.pin-content-wrapper .cover-img p,
+.pin-content-wrapper .pingismo-btn-group.btn-group,
+.pin-content-wrapper.editable .pin-cover .collection{
+	display: none;
+}
+
+.pin-content-wrapper.editable #done-edit-pin-content-btn,
+.pin-content-wrapper.editable #del-pin-content-btn,
+.pin-content-wrapper.editable select,
+.pin-content-wrapper.editable textarea,
+.pin-content-wrapper.editable input[type="text"],
+.pin-content-wrapper.editable .pingismo-btn-group.btn-group,
+.pin-content-wrapper.editable .pingismo-btn-group.btn-group .exist,
+.pin-content-wrapper.editable .pin-cover ul.types li{
+	display: inline-block;
+}
+.pin-content-wrapper input.content-title{
+	margin-top: 10px;
+}
+.pin-content-wrapper.editable .cover-img{
+	opacity: .45;
+	filter: alpha(opacity=45);
+	border: dashed 3px #fff;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	position: relative;
+}
+.pin-content-wrapper.editable .cover-img p{
+	display: block;
+	position: absolute;
+	top: 50%;
+	text-align: center;
+	color: #fff;
+	margin: -20px 15px 0;
+}
+.pin-content-wrapper .pingismo-btn-group.btn-group .exist{
+	width: 174px;
+}
+
+.pin-content-wrapper .pingismo-btn-group.btn-group .collections-menu input[type="text"]{
+	width: auto;
+}
+
+/* confirm to delete pin */
+.delete-pin-wrapper{
+	padding: 95px 20px 30px 40px;
+	color: #707070;
+	-moz-transition: top 0.3s ease 0.3s, opacity 0.3s ease 0.3s;
+	-webkit-transition: top 0.3s ease 0.3s, opacity 0.3s ease 0.3s;
+	transition: top 0.3s ease 0.3s, opacity 0.3s ease 0.3s;
+	visibility: hidden;
+	opacity: 0;
+	top: 300px;
+}
+
+.delete-pin-wrapper.visible {
+	opacity: 1.0;
+	top: 0;
+	visibility: visible;
+}
+
+.delete-pin-wrapper hr{
+	margin-top: 10px;
+}
