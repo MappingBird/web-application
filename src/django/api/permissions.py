@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-from bucketlist.models import Collection, Point, Image
+from bucketlist.models import Collection, Point, Image, User
 
 class IsOwner(permissions.BasePermission):
     """
@@ -20,5 +20,8 @@ class IsOwner(permissions.BasePermission):
 
         if isinstance(obj, Image):
             return request.user == obj.point.collection.user
+
+        if isinstance(obj, User):
+            return request.user == obj
 
         return False
