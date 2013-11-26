@@ -12,4 +12,5 @@ router.register(r'images', views.ImageViewSet)
 
 urlpatterns = patterns('',
     url(r'^', include(router.urls)),
+    url(r'^token$', 'api.views.token', name='token'),
 )
