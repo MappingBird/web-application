@@ -3,34 +3,17 @@
   <head>
     <title>PinGismo - Remember places for later</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="/static/prototype_assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/static/prototype_assets/css/style.css" rel="stylesheet" media="screen">
     <link href="/static/prototype_assets/css/index.css" rel="stylesheet" media="screen">
     <link href="/static/prototype_assets/js/fancybox/jquery.fancybox.css" rel="stylesheet">
-  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   </head>
 
   <body>
   	<section class="intro">
     	<header>
         	<a href="/" class="logo"></a>
-            <div class="navbar pingismo-navbar" id="account-menu">
-                <ul class="nav">
-                    <li class="ver-divider"><span></span></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            billsmith
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu pingismo-dropdown-menu">
-                          <li><a href="#"><i class="icon-globe"></i> View map</a></li>
-                          <li><a href="#"><i class="icon-wrench"></i> Settings</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#"><i class="icon-off"></i> Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
             <div class="navbar pingismo-navbar pull-right">
                 <ul class="nav">
                     <li class="signup-button"><button id="signup-btn" class="btn btn-large btn-primary pingismo-btn" type="button">Sign up</button></li>
@@ -52,8 +35,8 @@
             </div>
             <div class="clearfix"></div>
             <div class="remember-btn">
-               	<a class="btn btn-giant btn-primary pingismo-btn" type="button" href="javascript:
-    (function(){var BASE='http://www.pingismo.com/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();" class="btn btn-giant btn-primary pingismo-btn">Remember This Place</a>
+               	<a class="btn btn-giant btn-primary pingismo-btn" id="main-remember-btn" href="javascript:
+    (function(){var BASE='http://www.pingismo.com/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
            	</div>
         </div>
         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="intro-bottom">
@@ -211,7 +194,7 @@ You can also click Ctrl+Shift+B (or Command+Shit+B on Mac) to show Bookmarks bar
             	<h1>Start creating your collections</h1>
                 <p>Drag button above to your bookmark bar to get started.</p>
                 <a class="btn btn-giant btn-primary pingismo-btn" type="button" href="javascript:
-    (function(){var BASE='http://www.pingismo.com/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();" class="btn btn-giant btn-primary pingismo-btn">Remember This Place</a>
+    (function(){var BASE='http://www.pingismo.com/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
             </div>
         </div>
         <footer>
@@ -301,6 +284,17 @@ You can also click Ctrl+Shift+B (or Command+Shit+B on Mac) to show Bookmarks bar
             $(".how-ie").show();
         }
 
+
+        // go to "How it works" after drag bookmarklet to the top
+        $('#main-remember-btn').on("mousedown.bookmarklet", function() {
+            $(window).on("mousemove.bookmarklet", function(e) {
+                console.log(e);
+                if (e.pageY < 1) {
+                    window.location.hash = "how-it-works";
+                    $(window).off("mousemove.bookmarklet");
+                }
+            });
+        });
 
 		//What it is
 		$(".what_btn").click(function(e){
