@@ -184,7 +184,7 @@ STATIC_URL = '/static/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     PROJECT_DIR.ancestor(1).child('static'),
-)  
+)
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -207,3 +207,6 @@ ACCOUNT_SIGNUP_FORM_CLASS = 'base.forms.SignupForm'
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+# Django REST Framework
+APPEND_SLASH = False
