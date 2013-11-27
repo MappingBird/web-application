@@ -1,4 +1,4 @@
-var services = angular.module('SignupApp.services', ['ngResource']);
+var services = angular.module('LoginApp.services', ['ngResource']);
 
 services.factory('Presets', function(){
     return {
@@ -63,6 +63,12 @@ services.factory('UserResourceLoader', ['UserResource', '$cookies', '$q', functi
             return false;
         }
     };
+}]);
+
+services.factory('UserLogin', ['$resource', function($resource) {
+
+    return $resource('/api/user/login');
+
 }]);
 
 services.factory('BroadcastService', function($rootScope) {
