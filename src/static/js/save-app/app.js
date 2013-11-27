@@ -205,7 +205,7 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
                         dummy2: ['$stateParams', 'MapPoints', function($stateParams, MapPoints) {
                             if (MapPoints.activeViewPoints && MapPoints.activeViewPoints.length > 0) {
                                 for (var x in MapPoints.activeViewPoints) {
-                                    if ($stateParams.point_id == x.id) {
+                                    if ($stateParams.point == x.id) {
                                         MapPoints.activeViewPoint = x;
                                         break;
                                     }
@@ -405,7 +405,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
 
 });
 
-SaveApp.controller('searchResultsController', function($scope, $dialog, $http, Presets, MapPoints, User, UserResource, Collection, Collections, PointResource, BroadcastService, PointImage) {
+SaveApp.controller('searchResultsController', function($scope, $dialog, $http, Presets, MapPoints, User, UserResource, Collection, Collections, PointResource, BroadcastService, PointImage, Scraper) {
 
     console.log('init searchResultsController');
 
@@ -537,6 +537,18 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
     $scope.getPageData = function() {
         console.log('getPageData');
         if ($scope.targetUrl) {
+
+            Scraper.get({ 'url': $scope.targetUrl }, function(data, headers) {
+                console.log('getPageData return');
+                console.log(data);
+                $scope.pageData = {
+                    title: data.title,
+                    text: data.text
+                };
+                $scope.pageImages = data.images;
+            });
+
+            /*
             $http({
                 url: Presets.parseUrl,
                 method: "POST",
@@ -554,6 +566,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
                 error(function(data, status, headers, config) {
                     // TODO: error with parser
                 });
+*/
         } else {
             console.log('no url');
             // TODO: show error?
@@ -801,7 +814,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
                 place_phone: $scope.activeSavePoint.phone,
                 gps_coords: $scope.activeSavePoint.coords,
                 type: $scope.activeSavePoint.type,
-                collection_id: $scope.saveCollectionId
+                collection: $scope.saveCollectionId
             };
 
             PointResource.save(pointData, function(data, headers){
@@ -816,7 +829,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
                     imageData = {
                         url: $scope.selectedPageImages[p],
                         thumb_path: '',
-                        point_id: pointId
+                        point: pointId
                     };
 
                     PointImage.save(imageData, function(data, headers) {
@@ -1253,7 +1266,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                         'view',
                         (function(point) {
                             return function() {
-                                $state.go('viewPoint', { pointId: point.id, collectionId: point.collection_id});
+                                $state.go('viewPoint', { pointId: point.id, collectionId: point.collection});
 
                                 /*
                                 $scope.activeViewPoint = point;
@@ -1477,7 +1490,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
             title: $scope.activeViewPoint.title,
             text: $scope.activeViewPoint.text,
             type: $scope.activeViewPoint.type,
-            collection_id: $scope.activeViewPoint.collection_id
+            collection: $scope.activeViewPoint.collection_id
         }, function(data, headers) {
             $scope.togglePointEditMode();
         });
