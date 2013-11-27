@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^user/current$', 'api.views.current_user', name='current_user'),
     url(r'^user/login$', 'api.views.login', name='login'),
     url(r'^user/logout$', 'api.views.logout', name='logout'),
+    url(r'^scraper$', 'api.scraper.scraper', name='scraper'),
 )
