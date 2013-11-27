@@ -3,7 +3,6 @@ var services = angular.module('SaveApp.services', ['ngResource']);
 services.factory('Presets', function(){
     return {
         baseUrl: '/',
-        parseUrl: '/scraper',
         mapsUrl: '/maps',
         collectionUrl: '/api/collection',
         userUrl: '/api/users',
@@ -76,6 +75,12 @@ services.factory('StateService', function() {
         }
     }
 });
+
+services.factory('Scraper', ['$resource', function($resource) {
+
+    return $resource('/api/scraper');
+
+}]);
 
 services.factory('Collection', ['$resource', function($resource) {
 
