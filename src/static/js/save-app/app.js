@@ -732,7 +732,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
             // if is logged in
             // use current user
             if (User.data.id !== 0) {
-                save({ name: $scope.newCollectionName, user_id: User.data.id });
+                save({ name: $scope.newCollectionName, user: User.data.id });
             } else {
             // if not logged in
             // generate a user
@@ -752,7 +752,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
                         User.data.id = data.id;
                     }
 
-                    save({ name: $scope.newCollectionName, user_id: data.id });
+                    save({ name: $scope.newCollectionName, user: data.id });
                 });
             }
 
@@ -812,7 +812,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
                 place_name: $scope.activeSavePoint.name,
                 place_address: $scope.activeSavePoint.address,
                 place_phone: $scope.activeSavePoint.phone,
-                gps_coords: $scope.activeSavePoint.coords,
+                coordinates: $scope.activeSavePoint.coords,
                 type: $scope.activeSavePoint.type,
                 collection: $scope.saveCollectionId
             };
@@ -1232,7 +1232,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             // get bounds
             bounds = new google.maps.LatLngBounds();
             while (len2--) {
-                split = $scope.activeViewPoints[len2].gps_coords.split(',');
+                split = $scope.activeViewPoints[len2].coordinates.split(',');
                 $scope.activeViewPoints[len2].lat = Number(split[0]);
                 $scope.activeViewPoints[len2].lng = Number(split[1]);
                 bounds.extend(new google.maps.LatLng($scope.activeViewPoints[len2].lat, $scope.activeViewPoints[len2].lng));
