@@ -4,9 +4,10 @@ import json
 from django.middleware import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.contrib.auth import login as django_login, logout as django_logout, authenticate
 
 from rest_framework import viewsets, status
-from rest_framework.decorators import link
+from rest_framework.decorators import link, api_view
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 
@@ -90,17 +91,45 @@ class ImageViewSet(APIViewSet):
     permission_classes = (IsOwner,)
 
 
+@api_view(['GET'])
 def token(request):
     out = {
         'token': csrf.get_token(request),
     }
 
-    return HttpResponse(json.dumps(out), content_type="application/json")
+    return Response(out)
 
+@api_view(['GET'])
 def current_user(request):
     if request.user.is_authenticated():
         serializer = UserSerializer(request.user)
 
-        return HttpResponse(json.dumps(serializer.data), content_type="application/json")
+        return Response(serializer.data)
 
-    return HttpResponse(json.dumps({}), content_type="application/json")
+    return Response({})
+
+@api_view(['POST'])
+def login(request):
+    email = request.DATA.get('email')
+    password = request.DATA.get('password')
+    print email, password
+    user = authenticate(email=email, password=password)
+    if user is not None:
+        serializer = UserSerializer(user)
+        data = {'user': serializer.data}
+
+        if user.is_active:
+            django_login(request, user)
+
+            return Response(data)
+        else:
+            data['error'] = 'not_active'
+            return Response(data)
+
+    return Response({'error': 'authentication_error'})
+
+@api_view(['GET'])
+def logout(request):
+    django_logout(request)
+
+    return Response({})

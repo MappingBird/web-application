@@ -14,4 +14,6 @@ urlpatterns = patterns('',
     url(r'^', include(router.urls)),
     url(r'^token$', 'api.views.token', name='token'),
     url(r'^user/current$', 'api.views.current_user', name='current_user'),
+    url(r'^user/login$', 'api.views.login', name='login'),
+    url(r'^user/logout$', 'api.views.logout', name='logout'),
 )
