@@ -52,7 +52,7 @@ section.main form input[type="text"]{
 	-moz-box-sizing: border-box;
 }
 form .error-message {
-	display: none;
+
 }
 form .help-inline{
 	padding: 0;

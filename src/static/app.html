@@ -63,7 +63,7 @@
 
                 <!-- Searching for location -->
                 <div class="loading-wrapper" ng-show="searchResultsLoading">
-                    <img src="/img/loading-circle.png" class="loading-img" />
+                    <img src="/static/img/loading-circle.png" class="loading-img" />
                     <p>Searching...</p>
                 </div>
                 <!-- End of Searching for location -->
@@ -82,7 +82,7 @@
 
                 <!-- Save Contents -->
                 <div class="save-content" ng-class="{retracted: !searchResultSelected}" m-custom-scrollbar-parent>
-                    <a class="back" href="#" ng-click="cancelSaveActiveSearchResult()" ng-show="numResults > 1"><img src="/img/icon-back.png" /></a>
+                    <a class="back" href="#" ng-click="cancelSaveActiveSearchResult()" ng-show="numResults > 1"><img src="/static/img/icon-back.png" /></a>
                     <form class="form-save-content" ng-submit="savePoint($event)">
                         <div class="primary-content" m-custom-scrollbar="{scrollInertia: 0}">
                             <input type="text" ng-model="pageData.title" class="content-title" />
@@ -146,7 +146,7 @@
             <!-- Content of Pin -->
             <div ng-controller="pointDetailController">
                 <div class="pin-content-wrapper" ng-show="showPointDetailPanel" ng-class="{ editable: pointEditMode}">
-                    <a href="#" ng-click="closePoint()" class="pingismo-proceed"><img src="/img/icon-proceed.png" /></a>
+                    <a href="#" ng-click="closePoint()" class="pingismo-proceed"><img src="/static/img/icon-proceed.png" /></a>
                     <div class="pin-content">
                         <div class="pin-details pull-left">
                             <h4>{{activeViewPoint.title}}</h4>
