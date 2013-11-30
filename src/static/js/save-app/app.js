@@ -229,10 +229,8 @@ SaveApp.run(function($http, $cookies) {
 });
 
 
-SaveApp.controller('userController', function($scope, $cookies, $http, $resource, User, UserResource, Presets, BroadcastService, CurrentUser) {
+SaveApp.controller('userController', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogout) {
 
-    // if user cookie exists, load user data
-    console.log('user logged in');
     $scope.user = CurrentUser.get(function(data) {
 
         console.log('user data');
@@ -240,6 +238,8 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
 
         if(typeof data.id !== 'undefined'
             && typeof data.email !== 'undefined') {
+
+            console.log('user logged in');
 
             User.data.isLoggedIn = true;
             $scope.isLoggedIn = true;
@@ -269,6 +269,17 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
 
 
     });
+
+    $scope.logout = function() {
+
+        UserLogout.get(function(data, headers) {
+
+            delete $cookies['sessionid'];
+            $window.location.href = "/static/index.html";
+
+        });
+
+    };
 
 });
 
