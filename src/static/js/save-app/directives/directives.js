@@ -14,6 +14,20 @@ directives.directive("onRepeatDone", [ '$compile', function($compile) {
     }
 }]);
 
+// left outer height
+directives.directive('leftOuterHeight', function() {
+    return {
+        restrict: 'A',
+        scope: false,
+        controller: function($scope, $element, $attrs, BroadcastService) {
+            // DIRTY HACK
+            var tolerance = 60; // pixels
+            var height = $($('body')[0]).height() - $($('header')[0]).height() - $($('footer')[0]).height() - tolerance;
+            $element.css('height', height + 'px');
+        }
+    };
+});
+
 // mCustomScrollbar parent
 directives.directive('mCustomScrollbarParent', function() {
     return {
@@ -21,7 +35,7 @@ directives.directive('mCustomScrollbarParent', function() {
         scope: false,
         controller: function($scope, $element, $attrs, BroadcastService) {
             // DIRTY HACK
-            var tolerance = 0; // pixels
+            var tolerance = 30; // pixels
             var height = $($('body')[0]).height() - $($('header')[0]).height() - $($('.collection-wrapper')[0]).height() - $($('footer')[0]).height() - tolerance;
             console.log('mCustomScrollbarParent height: ' + height);
             $element.css('height', height + 'px');
