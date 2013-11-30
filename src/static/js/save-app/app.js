@@ -359,9 +359,8 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.collectionsByUser = CollectionsByUserResource.get({user_id: User.data.id}, function(data) {
             console.log('reloadCollections');
             Collections.collections = data.collections;
-            if (typeof data.most_recent_modified_collection != 'undefined' &&
-                typeof data.most_recent_modified_collection.collection_id != 'undefined') {
-                Collections.mostRecentModifiedCollection = data.most_recent_modified_collection.collection_id;
+            if (typeof data.most_recent_modified_collection != 'undefined') {
+                Collections.mostRecentModifiedCollection = data.most_recent_modified_collection;
             };
             console.log(Collections);
             BroadcastService.prepForBroadcast({
