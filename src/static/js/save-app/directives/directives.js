@@ -20,11 +20,11 @@ directives.directive('mCustomScrollbarParent', function() {
         restrict: 'A',
         scope: false,
         controller: function($scope, $element, $attrs, BroadcastService) {
-            // SUPER DIRTY HACK
-            // 123px is the header, footer, search bar
-            // 188px is the padding for the collection-wrapper, other crap
-            var height = $('body').height() - $($('header')[0]).height() - $($('.collection-wrapper')[0]).height();
+            // DIRTY HACK
+            var tolerance = 0; // pixels
+            var height = $($('body')[0]).height() - $($('header')[0]).height() - $($('.collection-wrapper')[0]).height() - $($('footer')[0]).height() - tolerance;
             console.log('mCustomScrollbarParent height: ' + height);
+            $element.css('height', height + 'px');
             $element.find('[m-custom-scrollbar]').attr('parent-height', height);
         }
     };
