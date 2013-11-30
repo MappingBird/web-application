@@ -221,7 +221,10 @@ BucketListSmallOverlay.prototype.setImage = function(imageUrl) {
     console.log(imageUrl);
     // Have to add another attribute in order to get bImage to work
     // TODO: check why
-    this.tip_.css({'backgroundImage': 'url(' + imageUrl + ')'});
+    if (this.tip_ && imageUrl) {
+        this.tip_.css({'backgroundImage': 'url(' + imageUrl + ')'});
+    }
+
 };
 
 /**
