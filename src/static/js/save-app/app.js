@@ -818,7 +818,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
             pointData = {
                 title: $scope.pageData.title,
                 url: $scope.targetUrl,
-                text: $scope.pageData.text,
+                description: $scope.pageData.text,
                 place_name: $scope.activeSavePoint.name,
                 place_address: $scope.activeSavePoint.address,
                 place_phone: $scope.activeSavePoint.phone,
@@ -1498,7 +1498,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
         PointResource.update({
             id: $scope.activeViewPointId,
             title: $scope.activeViewPoint.title,
-            text: $scope.activeViewPoint.text,
+            description: $scope.activeViewPoint.text,
             type: $scope.activeViewPoint.type,
             collection: $scope.activeViewPoint.collection_id
         }, function(data, headers) {
