@@ -76,6 +76,12 @@ services.factory('StateService', function() {
     }
 });
 
+services.factory('UserLogout', ['$resource', function($resource) {
+
+    return $resource('/api/user/logout');
+
+}]);
+
 services.factory('Scraper', ['$resource', function($resource) {
 
     return $resource('/api/scraper');
