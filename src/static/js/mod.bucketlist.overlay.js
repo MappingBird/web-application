@@ -184,7 +184,8 @@ BucketListSmallOverlay.prototype.onAdd = function() {
         });
 
     // click event for pin
-        $(icon).on('click', function(){
+        $(icon).on('click', function(e){
+            e.preventDefault();
             $(popup).toggle();
         });
     }
