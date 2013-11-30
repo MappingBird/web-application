@@ -1179,7 +1179,13 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             type = $scope.activeSavePoint.type || 'scenicspot';
             myLatLng = new google.maps.LatLng(lat, lng);
             mapOptions.center = myLatLng;
-            map = new google.maps.Map($('#map')[0], mapOptions);
+            if (map) {
+                map.panTo(new google.maps.LatLng(lat, lng));
+                saveOverlay.setMap(null);
+                saveMarker.setMap(null);
+            } else {
+                map = new google.maps.Map($('#map')[0], mapOptions);
+            }
             bounds = map.getBounds();
             srcImage = $scope.activeSavePoint.image;
 
