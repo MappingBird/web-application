@@ -23,7 +23,8 @@ directives.directive('mCustomScrollbarParent', function() {
             // SUPER DIRTY HACK
             // 123px is the header, footer, search bar
             // 188px is the padding for the collection-wrapper, other crap
-            var height = $('body').height() - 123 - 188;
+            var height = $('body').height() - $($('header')[0]).height() - $($('.collection-wrapper')[0]).height();
+            console.log('mCustomScrollbarParent height: ' + height);
             $element.find('[m-custom-scrollbar]').attr('parent-height', height);
         }
     };
