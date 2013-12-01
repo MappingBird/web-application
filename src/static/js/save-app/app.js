@@ -1482,7 +1482,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
     $scope.selectPointCollection = function(new_id) {
         console.log('new collection id: ' + new_id);
-        $scope.activeViewPoint.collection_id = new_id;
+        $scope.activeViewPoint.collection = new_id;
     };
 
     $scope.togglePointEditMode = function() {
@@ -1504,9 +1504,9 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
         PointResource.update({
             id: $scope.activeViewPointId,
             title: $scope.activeViewPoint.title,
-            description: $scope.activeViewPoint.text,
+            description: $scope.activeViewPoint.description,
             type: $scope.activeViewPoint.type,
-            collection: $scope.activeViewPoint.collection_id
+            collection: $scope.activeViewPoint.collection
         }, function(data, headers) {
             $scope.togglePointEditMode();
         });
