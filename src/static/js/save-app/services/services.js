@@ -120,9 +120,9 @@ services.factory('PointResource', ['$resource', function($resource) {
             params: {
                 id: "@id",
                 title: "@title",
-                text: "@text",
+                description: "@description",
                 type: "@type",
-                collection_id: "@collection_id"
+                collection: "@collection"
             }
         }
     });

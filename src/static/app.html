@@ -152,8 +152,8 @@
                             <h4>{{activeViewPoint.title}}</h4>
                             <input type="text" ng-model="activeViewPoint.title" class="content-title" />
                             <a ng-href="{{activeViewPoint.url}}" class="ref-url" new-window>{{activeViewPoint.url}}</a>
-                            <p class="ref-context">{{activeViewPoint.text}}</p>
-                            <textarea rows="8" ng-model="activeViewPoint.text"></textarea>
+                            <p class="ref-context">{{activeViewPoint.description}}</p>
+                            <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
                             <div class="ref-context-img" thumb-alignment="{displayArray: 'activeViewPoint.images', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages'}">
                                 <img ng-repeat="image in activeViewPoint.images" data-src="{{image.url}}" data-id="{{image.id}}" />
                             </div>
