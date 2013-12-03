@@ -1399,6 +1399,10 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
             while (len--) {
                 if (x[len].id == activeViewPointId) {
                     $scope.activeViewPoint = x[len];
+                    BroadcastService.prepForBroadcast({
+                        type: 'pointLoaded',
+                        data: {}
+                    })
                     break;
                 }
             }

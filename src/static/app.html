@@ -154,7 +154,7 @@
                             <a ng-href="{{activeViewPoint.url}}" class="ref-url" new-window>{{activeViewPoint.url}}</a>
                             <p class="ref-context">{{activeViewPoint.description}}</p>
                             <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
-                            <div class="ref-context-img" thumb-alignment="{displayArray: 'activeViewPoint.images', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages'}">
+                            <div class="ref-context-img" thumb-alignment="{displayArray: 'activeViewPoint.images', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages'}" height-to-bottom m-custom-scrollbar="{scrollInertia: 0}">
                                 <img ng-repeat="image in activeViewPoint.images" data-src="{{image.url}}" data-id="{{image.id}}" />
                             </div>
                         </div>

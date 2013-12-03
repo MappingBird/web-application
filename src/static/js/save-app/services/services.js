@@ -116,7 +116,7 @@ services.factory('PointResource', ['$resource', function($resource) {
 
     return $resource('/api/points/:id', { id: '@id' }, {
         update: {
-            method: "POST",
+            method: "PUT",
             params: {
                 id: "@id",
                 title: "@title",
