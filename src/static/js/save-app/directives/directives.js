@@ -21,7 +21,7 @@ directives.directive('heightToBottom', function() {
         scope: false,
         controller: function($scope, $element, $attrs, BroadcastService) {
             // DIRTY HACK
-            var tolerance = 60, // pixels
+            var tolerance = 0, // pixels
                 outer_parent = $element.parent().parent().parent(),
                 offset,
                 padding,
@@ -32,16 +32,10 @@ directives.directive('heightToBottom', function() {
                 if (BroadcastService.message.type == 'pointLoaded') {
 
                     offset = $element.position();
-                    padding = parseInt(outer_parent.css('padding-top').replace('px', ''), 10);
+                    padding = parseInt($element.parent().parent().css('padding-bottom').replace('px', ''), 10);
                     footer = $(outer_parent.find('.pin-content-footer')[0]).height();
-                    height = outer_parent.height() - offset.top - footer - tolerance;
+                    height = outer_parent.height() - offset.top - padding - footer - tolerance;
 
-                    console.log('heightToBottom');
-                    console.log(outer_parent.height());
-                    console.log(offset);
-                    console.log(padding);
-                    console.log(footer);
-                    console.log(height);
                     $element.css('height', height + 'px');
                 }
             } );
