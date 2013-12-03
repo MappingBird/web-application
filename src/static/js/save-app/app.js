@@ -492,12 +492,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
 
     $scope.$watch('activeCollectionId', function(activeCollectionId){
         console.log('triggered watcher of activeCollectionId');
-        Collections.activeCollectionId = $scope.activeCollectionId;
+        Collections.activeCollectionId = activeCollectionId;
 
         // update activeCollectionName
         if ($scope.collections.length > 0) {
             for (var c in $scope.collections) {
-                console.log($scope.collections[c].id);
                 if ($scope.collections[c].id == activeCollectionId) {
                     $scope.activeCollectionName = $scope.collections[c].name;
                     break;
@@ -1057,16 +1056,14 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
 
     $scope.showCollections = function() {
         // toggle between map and collection viewing
+        console.log('showCollections');
         if ($scope.mapMode === true) {
             BroadcastService.prepForBroadcast({
                 type: 'viewingCollections',
                 data: {}
             });
         } else {
-            BroadcastService.prepForBroadcast({
-                type: 'viewingCollection',
-                data: {}
-            });
+            $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
         }
 
     }
@@ -1421,7 +1418,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
     $scope.$watch(function() { return MapPoints.activeViewPoint; }, function(activeViewPoint) {
         $scope.activeViewPoint = activeViewPoint;
-        $scope.activeCollectionId = activeViewPoint.collection_id;
+        $scope.activeCollectionId = activeViewPoint.collection;
     });
 
     $scope.$watch('activeViewPoint', function(activeViewPoint) {
