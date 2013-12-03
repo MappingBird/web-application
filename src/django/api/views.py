@@ -39,6 +39,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
         if form.is_valid():
             user = form.save()
+
+            send_mail([user.email], 'hello.html', {}, 'Welcome to Pingismo')
             return Response(request.DATA, status=status.HTTP_201_CREATED)
 
         return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
