@@ -206,7 +206,7 @@ ACCOUNT_SIGNUP_FORM_CLASS = 'base.forms.SignupForm'
 
 LOGIN_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 # Django REST Framework
 APPEND_SLASH = False
