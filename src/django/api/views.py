@@ -14,6 +14,7 @@ from rest_framework.response import Response
 from serializers import UserSerializer, CollectionSerializer, PointSerializer, ImageSerializer, CollectionByUserSerializer
 from api.forms import UserCreationForm
 from base.models import User
+from base.mail import send_mail
 from bucketlist.models import Collection, Point, Image
 from permissions import IsOwner
 
@@ -39,6 +40,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
         if form.is_valid():
             user = form.save()
+
+            send_mail([user.email], 'hello.html', {}, 'Welcome to Pingismo')
             return Response(request.DATA, status=status.HTTP_201_CREATED)
 
         return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
