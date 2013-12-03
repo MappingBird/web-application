@@ -123,6 +123,9 @@ services.factory('PointResource', ['$resource', function($resource) {
                 description: "@description",
                 type: "@type",
                 collection: "@collection"
+            },
+            headers: {
+                'Content-type': 'application/json'
             }
         }
     });
