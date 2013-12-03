@@ -14,6 +14,7 @@ from rest_framework.response import Response
 from serializers import UserSerializer, CollectionSerializer, PointSerializer, ImageSerializer, CollectionByUserSerializer
 from api.forms import UserCreationForm
 from base.models import User
+from base.mail import send_mail
 from bucketlist.models import Collection, Point, Image
 from permissions import IsOwner
 
