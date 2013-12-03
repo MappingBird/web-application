@@ -1369,7 +1369,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
     });
 
 
-    $("#map").height($("#map").height()-75);
+    $("#map").height($("#map").height()-125);
 
 });
 
