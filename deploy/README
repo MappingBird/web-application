@@ -1,0 +1,11 @@
+INSTALLATION
+============
+
+1. Edit pingismo.conf and make sure the path is correct on ``exec''.
+   (It should be the full path where start.sh resides, eg. /home/django/pingismo/deploy/web.sh)
+
+2. Edit web.sh and make the $VENV the correct path
+
+3. Execute the following instructions:
+   $ sudo cp pingismo.conf /etc/init
+   $ sudo ln -s /lib/init/upstart-job /etc/init.d/pingismo

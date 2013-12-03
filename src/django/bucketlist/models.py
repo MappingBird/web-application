@@ -14,7 +14,7 @@ class Collection(models.Model):
 
 class Point(models.Model):
     title = models.CharField(max_length=512, blank=True)
-    url = models.URLField(blank=True)
+    url = models.URLField(blank=True, max_length=4096)
     description = models.TextField(blank=True)
     place_name = models.CharField(max_length=512, blank=True)
     place_address = models.CharField(max_length=128, blank=True)
