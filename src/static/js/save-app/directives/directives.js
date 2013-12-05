@@ -28,6 +28,13 @@ directives.directive('heightToBottom', function() {
                 footer,
                 height;
 
+            // DIRTY DIRTY HACK
+            // but in the interest of time...
+            height = $('body').height() - 325;
+
+            $element.css('height', height + 'px');
+
+            /*
             $scope.$on('stateChange', function () {
                 if (BroadcastService.message.type == 'pointLoaded') {
 
@@ -39,6 +46,7 @@ directives.directive('heightToBottom', function() {
                     $element.css('height', height + 'px');
                 }
             } );
+            */
         }
     };
 });
