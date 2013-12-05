@@ -222,9 +222,9 @@ section.map-section{
 }
 
 #map.half {
-	height: -moz-calc(100% - 50px);
-	height: -webkit-calc(100% - 50px);
-	height: calc(100% - 50px);
+	height: -moz-calc(100% - 125px);
+	height: -webkit-calc(100% - 125px);
+	height: calc(100% - 125px);
 	left: 0;
 	top: 95px;
 	width: -moz-calc(100% - 655px);
