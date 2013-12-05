@@ -1563,6 +1563,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
     $scope.deletePoint = function() {
         PointResource.delete({ id: $scope.activeViewPoint.id }, function() {
             $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
+            $scope.pointEditMode = false;
             $scope.unselectPointForDelete();
         })
     };
