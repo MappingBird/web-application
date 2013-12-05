@@ -216,13 +216,13 @@ section.map-section{
 	left: 0;
 	width: 100%;
 	top: 95px;
-	height: -moz-calc(100% - 50px);
-	height: -webkit-calc(100% - 50px);
-	height: calc(100% - 50px);
+	height: -moz-calc(100% - 125px);
+	height: -webkit-calc(100% - 125px);
+	height: calc(100% - 125px);
 }
 
 #map.half {
-	height: -moz-calc(100% - px);
+	height: -moz-calc(100% - 50px);
 	height: -webkit-calc(100% - 50px);
 	height: calc(100% - 50px);
 	left: 0;

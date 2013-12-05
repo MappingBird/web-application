@@ -660,7 +660,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
         $scope.searchResultsLoading = true;
 
         var center = new google.maps.LatLng(25.035061,121.53986), // default coords
-            map = $('#map')[0],
+            map = map || $('#map')[0],
             geocoder = new google.maps.Geocoder(),
             gMap = new google.maps.Map(map, {
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -1129,6 +1129,9 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         ;
 
     $scope.$watch(function() { return MapPoints.activeSavePoint; }, function(activeSavePoint) {
+
+        console.log ('activeSavePoint change');
+        console.log ($scope.saveMode);
         $scope.activeSavePoint = activeSavePoint;
 
         if ($scope.saveMode) {
@@ -1178,8 +1181,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             mapOptions.center = myLatLng;
             if (map) {
                 map.panTo(new google.maps.LatLng(lat, lng));
-                saveOverlay.setMap(null);
-                saveMarker.setMap(null);
+                //saveOverlay.setMap(null);
+                //saveMarker.setMap(null);
             } else {
                 map = new google.maps.Map($('#map')[0], mapOptions);
             }
@@ -1366,7 +1369,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
     });
 
 
-    $("#map").height($("#map").height()-125);
+    //$("#map").height($("#map").height()-125);
 
 });
 

@@ -112,7 +112,7 @@ BucketListSmallOverlay.prototype.constructor = BucketListSmallOverlay;
 // https://developers.google.com/maps/documentation/javascript/overlays#CustomOverlays
 // Requires jQuery, Google Maps
 function BucketListSmallOverlay(bounds, zoom, image, map, latlng, type, name, address, phone, defaultState, overlayType, callback, point, markerArray) {
-    //console.log('BucketListSmallOverlay');
+    // console.log('BucketListSmallOverlay');
 
     // Now initialize all properties.
     this.bounds_ = map.boundsAt(zoom);
@@ -148,6 +148,8 @@ BucketListSmallOverlay.prototype.onAdd = function() {
     // Note: an overlay's receipt of onAdd() indicates that
     // the map's panes are now available for attaching
     // the overlay to the map via the DOM.
+
+    console.log('overlay onadd');
 
     var div = $('<div class="pingismo-pin" />'),
         icon = $('<a href="#" class="pin-' + this.type_ + '" title="' + this.placeName_ + '"></a>'),
