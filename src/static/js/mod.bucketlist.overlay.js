@@ -149,8 +149,6 @@ BucketListSmallOverlay.prototype.onAdd = function() {
     // the map's panes are now available for attaching
     // the overlay to the map via the DOM.
 
-    console.log('overlay onadd');
-
     var div = $('<div class="pingismo-pin" />'),
         icon = $('<a href="#" class="pin-' + this.type_ + '" title="' + this.placeName_ + '"></a>'),
         tip = $('<a href="#" class="pin-popup-img show-details-btn"></a>'),

@@ -419,6 +419,8 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
 
     console.log('init searchResultsController');
 
+    var map;
+
     $scope.presets = Presets;
     $scope.numResults = 0;
     $scope.searchQuery = ''; // decodeURIComponent(getParameterByName('search'))
@@ -557,25 +559,6 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
                 $scope.pageImages = data.images;
             });
 
-            /*
-            $http({
-                url: Presets.parseUrl,
-                method: "POST",
-                data: { 'url': $scope.targetUrl }
-                }).
-                success(function(data, status, headers, config) {
-                    console.log('getPageData return');
-                    console.log(data);
-                    $scope.pageData = {
-                        title: data.title,
-                        text: data.text
-                    };
-                    $scope.pageImages = data.images;
-                }).
-                error(function(data, status, headers, config) {
-                    // TODO: error with parser
-                });
-*/
         } else {
             console.log('no url');
             // TODO: show error?
@@ -656,18 +639,31 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
 
     $scope.fetchPlacesSearchResults = function (){
         console.log('fetchPlacesSearchResults');
-
+        console.log('fetchPlacesSearchResults map');
         $scope.searchResultsLoading = true;
+        console.log(map);
 
         var center = new google.maps.LatLng(25.035061,121.53986), // default coords
-            map = map || $('#map')[0],
             geocoder = new google.maps.Geocoder(),
-            gMap = new google.maps.Map(map, {
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
+            placesRequest;
+
+            // TODO: map needs to be moved to directive
+            // TODO: mapOptions is duplicated from mapController
+            map = map || new google.maps.Map($('#map')[0], {
+                zoom: Presets.mapZoom,
                 center: center,
-                zoom: $scope.presets.mapZoom
-            }),
-            placesRequest = new google.maps.places.PlacesService(gMap);
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                panControl: true,
+                streetViewControl: false,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.LARGE
+                },
+                scaleControl: false
+            });
+            placesRequest = new google.maps.places.PlacesService(map);
+
+        console.log(map);
 
         placesRequest.textSearch({ query: [$scope.searchQuery]}, placesSearchCallback);
 
@@ -1181,8 +1177,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             mapOptions.center = myLatLng;
             if (map) {
                 map.panTo(new google.maps.LatLng(lat, lng));
-                //saveOverlay.setMap(null);
-                //saveMarker.setMap(null);
+                saveOverlay.setMap(null);
+                saveMarker.setMap(null);
             } else {
                 map = new google.maps.Map($('#map')[0], mapOptions);
             }
@@ -1242,7 +1238,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
                 myLatLng = new google.maps.LatLng(firstPoint.lat, firstPoint.lng);
                 mapOptions.center = myLatLng;
-                map = new google.maps.Map($('#map')[0], mapOptions);
+                map = map || new google.maps.Map($('#map')[0], mapOptions);
                 bounds;
 
             // get bounds
@@ -1327,7 +1323,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         type = 'misc';
         myLatLng = new google.maps.LatLng(lat, lng);
         mapOptions.center = myLatLng;
-        map = new google.maps.Map($('#map')[0], mapOptions);
+        map = map || new google.maps.Map($('#map')[0], mapOptions);
         bounds = map.getBounds();
         srcImage = '';
         title = "Where were you searching for?";
@@ -1367,9 +1363,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
     $scope.$on('mapChange', function(){
         resetMapSize();
     });
-
-
-    //$("#map").height($("#map").height()-125);
 
 });
 
