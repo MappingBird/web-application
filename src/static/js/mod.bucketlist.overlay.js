@@ -112,7 +112,7 @@ BucketListSmallOverlay.prototype.constructor = BucketListSmallOverlay;
 // https://developers.google.com/maps/documentation/javascript/overlays#CustomOverlays
 // Requires jQuery, Google Maps
 function BucketListSmallOverlay(bounds, zoom, image, map, latlng, type, name, address, phone, defaultState, overlayType, callback, point, markerArray) {
-    //console.log('BucketListSmallOverlay');
+    // console.log('BucketListSmallOverlay');
 
     // Now initialize all properties.
     this.bounds_ = map.boundsAt(zoom);
