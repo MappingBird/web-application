@@ -213,6 +213,9 @@ section.map-section{
 }
 
 #map.full {
+	height: -moz-calc(100% - 75px);
+	height: -webkit-calc(100% - 75px);
+	height: calc(100% - 75px);
 	left: 0;
 	width: 100%;
 	top: 95px;
