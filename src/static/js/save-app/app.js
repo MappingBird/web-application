@@ -1414,6 +1414,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
     $scope.$watch(function() { return MapPoints.activeViewPoint; }, function(activeViewPoint) {
         $scope.activeViewPoint = activeViewPoint;
+        $scope.activeViewPoint.date_created = moment(activeViewPoint.create_time).fromNow();
         $scope.activeCollectionId = activeViewPoint.collection;
     });
 
