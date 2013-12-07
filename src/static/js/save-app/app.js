@@ -229,7 +229,7 @@ SaveApp.run(function($http, $cookies) {
 });
 
 
-SaveApp.controller('userController', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogout) {
+SaveApp.controller('userController', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout) {
 
     $scope.user = CurrentUser.get(function(data) {
 
@@ -241,17 +241,15 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
 
             console.log('user logged in');
 
-            User.data.isLoggedIn = true;
-            $scope.isLoggedIn = true;
+            User.data.emailAddress = data.email;
+            User.data.id = data.id;
 
-            if (typeof data.email !== 'undefined') {
-                User.data.emailAddress = data.email;
-                if (!/@gu.pingismo.com/.test(data.email)) {
-                    User.data.isRegisteredUser = true;
-                } else {
-                    User.data.isRegisteredUser = false;
-                }
-                User.data.id = data.id;
+            if (!/@gu.pingismo.com/.test(data.email)) {
+                User.data.isRegisteredUser = true;
+                User.data.isLoggedIn = true;
+                $scope.isLoggedIn = true;
+            } else {
+                User.data.isRegisteredUser = false;
             }
 
             // send event
@@ -263,7 +261,41 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
         } else {
 
             console.log('user not logged in');
+
+            // even though they are generated and can save points
+            // they are not technically logged in
             $scope.isLoggedIn = false;
+
+            var time = new Date().getTime(),
+                userCredentials = {
+                    email: getRandomInt(0,100) + time + '@gu.pingismo.com',
+                    password: 'pword' + getRandomInt(0,1000000000)
+                };
+
+            // generate user
+            UserResource.save(userCredentials, function(data, headers) {
+
+                // login this generated user
+                UserLogin.save(userCredentials, function(data, headers) {
+                    if (typeof data !== 'undefined'
+                        && typeof data.user !== 'undefined'
+                        && typeof data.user.email !== 'undefined'
+                        && typeof data.user.id !==  'undefined') {
+
+                        $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
+
+                        console.log(headers);
+                        BroadcastService.prepForBroadcast({
+                            type: 'userLoaded',
+                            data: { userId: data.id }
+                        });
+                    } else {
+                        // TODO: login error
+                        console.log('Login error with generated user');
+                    }
+                });
+
+            });
 
         }
 

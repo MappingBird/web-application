@@ -41,28 +41,27 @@ services.factory('StateService', function() {
 
 services.factory('UserResource', ['$resource', function($resource) {
 
-    var UserResource = $resource('/api/users/:id/', { id: '@id' });
+    var UserResource = $resource('/api/users/:id/', { id: '@id' }, {
+        update: {
+            method: "PUT",
+            params: {
+                email: "@email",
+                password: "@password"
+            },
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }
+    });
 
     return UserResource;
 
 }]);
 
-services.factory('UserResourceLoader', ['UserResource', '$cookies', '$q', function(UserResource, $cookies, $q) {
-    return function() {
-        if ($cookies.bkl_user) {
-            console.log('UserResourceLoader + cookie');
-            var delay = $q.defer();
-            UserResource.get({ 'id': $cookies.bkl_user }, function(user){
-                delay.resolve(user);
-            }, function() {
-                delay.reject('Unable to fetch user ' + $cookies.bkl_user)
-            });
-            return delay.promise;
-        } else {
-            console.log('UserResourceLoader + no cookie');
-            return false;
-        }
-    };
+services.factory('CurrentUser', ['$resource', function($resource) {
+
+    return $resource('/api/user/current');
+
 }]);
 
 services.factory('BroadcastService', function($rootScope) {
