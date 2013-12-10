@@ -41,3 +41,28 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class UserChangeForm(forms.Form):
+    email = forms.RegexField(label=_("Username"), max_length=255,
+        regex=r'^[\w.@+-]+$',
+        help_text=_("Required. 255 characters or fewer. Letters, digits and "
+                      "@/./+/-/_ only."),
+        error_messages={
+            'invalid': _("This value may contain only letters, numbers and "
+                         "@/./+/-/_ characters.")}, required=False)
+    password = forms.CharField(label=_("Password"),
+        widget=forms.PasswordInput, required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super(UserChangeForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        if self.cleaned_data.get('password'):
+            self.user.set_password(self.cleaned_data['password'])
+        if self.cleaned_data.get('email'):
+            self.user.email = self.cleaned_data.get('email')
+
+        if commit:
+            self.user.save()
+        return self.user
