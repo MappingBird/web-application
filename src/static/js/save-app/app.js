@@ -182,41 +182,6 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
 
 
             }]
-            /*
-            views: {
-                'collectionlist' : {
-                    templateUrl: 'js/save-app/templates/partials/collection_list.html',
-                    controller: 'collectionsController',
-
-                },
-                'pointdetail' : {
-                    templateUrl: 'js/save-app/templates/partials/point_detail.html',
-                    controller: 'pointDetailController',
-                    resolve: {
-                        // using this dummy service so that PointLoader can access stateParams before
-                        // the controller is rendered
-                        dummy: ['$stateParams', 'StateService', function($stateParams, StateService) {
-                            StateService.setParams($stateParams);
-                        }],
-                        activeViewPointObj: function(PointLoader) {
-                            return PointLoader();
-                        },
-                        // set the activeViewPoint
-                        dummy2: ['$stateParams', 'MapPoints', function($stateParams, MapPoints) {
-                            if (MapPoints.activeViewPoints && MapPoints.activeViewPoints.length > 0) {
-                                for (var x in MapPoints.activeViewPoints) {
-                                    if ($stateParams.point == x.id) {
-                                        MapPoints.activeViewPoint = x;
-                                        break;
-                                    }
-                                }
-                            }
-                        }]
-
-                    }
-                }
-            }
-            */
         });
 
     // fallback
@@ -1403,6 +1368,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
 SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage) {
 
+    $scope.pointImages = [];
     $scope.selectedPointImages = [];
     $scope.deselectedPointImages = [];
     $scope.pointEditMode = false;
@@ -1414,23 +1380,29 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
     function fillActiveViewPoint (activeViewPointId) {
 
-        /*
-        if (activeViewPointId != -1) {
-            console.log('load PointResource');
-            $scope.activeViewPointResource = PointResource.get({id: activeViewPointId});
-        }
-        */
-
         var x = MapPoints.activeViewPoints,
-            len = x.length;
+            len = x.length,
+            imglen = 0,
+            images = [];
+
         if (len > 0) {
             while (len--) {
                 if (x[len].id == activeViewPointId) {
                     $scope.activeViewPoint = x[len];
+
+                    imglen = x[len].images.length;
+
+                    while(imglen--) {
+                        images.unshift(x[len].images[imglen].url);
+                    }
+
+                    $scope.pointImages = images;
+
                     BroadcastService.prepForBroadcast({
                         type: 'pointLoaded',
                         data: {}
-                    })
+                    });
+
                     break;
                 }
             }
@@ -1484,8 +1456,6 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
     });
 
     $scope.$on('stateChange', function() {
-        console.log('mofo');
-        console.log(BroadcastService.message.data);
         switch (BroadcastService.message.type) {
             case 'pointSelected':
                 if (typeof BroadcastService.message.data.pointId !== 'undefined') {
@@ -1550,7 +1520,6 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
         var len2;
 
         for (var x in $scope.deselectedPointImages) {
-
 
             len2 = $scope.activeViewPoint.images.length;
 
