@@ -68,6 +68,7 @@ SignupApp.run(function($http, $cookies) {
  */
 SignupApp.controller('mainController', function($scope, $timeout, Presets, BroadcastService, User, UserResource, CurrentUser) {
 
+    $scope.id = '';
     $scope.email = '';
     $scope.password = '';
     $scope.errorEmailAlreadyRegistered = false;
@@ -90,6 +91,7 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
                     if(typeof data.id !== 'undefined'
                         && typeof data.email !== 'undefined') {
                         // user exists
+                        $scope.id = data.id;
 
                         // is registered "legit" user
                         // show error?
@@ -147,6 +149,7 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
         console.log('migrateGeneratedUser');
 
         var migratedUser = {
+            id: $scope.id,
             email: $scope.email,
             password: $scope.password
         };
