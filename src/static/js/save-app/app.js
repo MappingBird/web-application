@@ -299,8 +299,11 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
 
         }
 
-
     });
+
+    $scope.goToSignUpPage = function() {
+        $window.location.href = '/static/signup.html';
+    };
 
     $scope.logout = function() {
 

@@ -12,7 +12,7 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 
 from serializers import UserSerializer, CollectionSerializer, PointSerializer, ImageSerializer, CollectionByUserSerializer
-from api.forms import UserCreationForm
+from api.forms import UserCreationForm, UserChangeForm
 from base.models import User
 from base.mail import send_mail
 from bucketlist.models import Collection, Point, Image
@@ -60,6 +60,32 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response(data)
 
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', None)
+        self.object = self.get_object_or_none()
+
+        if self.object == None:
+            # Error
+            return Response('Cannot find the user with the corresponding id', status=status.HTTP_400_BAD_REQUEST)
+        elif self.object != request.user:
+            # Error
+            return Response('The logined in user does not match the PUT user id', status=status.HTTP_400_BAD_REQUEST)
+        else:
+            email = request.DATA.get('email')
+            if email and not self.object.email.endswith('@gu.pingismo.com') and email != self.object.email:
+                # Error
+                return Response('Trying to change email with a normal account', status=status.HTTP_400_BAD_REQUEST)
+
+            form = UserChangeForm(request.DATA, user=self.object)
+            if form.is_valid():
+                user = form.save()
+
+                serializer = self.get_serializer(user, data=request.DATA,
+                        files=request.FILES, partial=partial)
+
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CollectionViewSet(APIViewSet):
     """
