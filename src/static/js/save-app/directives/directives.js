@@ -171,8 +171,7 @@ directives.directive('thumbAlignment', function($compile){
         restrict: 'A',
         scope: true,
         replace: false,
-        transclude: true,
-        template: '<div class="photo-obj" ng-transclude></div><div id="picstest"></div><div class="picrow"></div>',
+        template: '<div class="photo-obj"></div><div id="picstest"></div>',
         link: function(scope, element, attrs){
 
             var config = scope.$eval(attrs.thumbAlignment),
@@ -382,11 +381,12 @@ directives.directive('thumbAlignment', function($compile){
             }
 
             function resetImages () {
-                //element.find('.photo-obj').empty();
-                //element.find('.picrow').remove();
+                element.find('.photo-obj').empty();
+                element.find('.picrow').remove();
+                element.append('<div class="picrow" />');
             }
 
-            function loadImages (newValue, oldValue) {
+            function loadImages (newValue) {
 
                 console.log('loadImages');
                 console.log(newValue);
@@ -400,32 +400,34 @@ directives.directive('thumbAlignment', function($compile){
 
                     var i = newValue,
                         len = i.length,
+                        len2 = len,
                         x = 0;
 
-                    window.setTimeout(function(){
-                        console.log('set timeout');
-                        console.log($(element).find('img'));
-                        // handle image loading errors
-                        $(element).find('img').on('error',function(){
-                            console.log('image loading error');
-                            $(this).remove();
-                            if (++x == len) {
-                                console.log(x);
-                                parseImages();
-                            }
-                        }).on('load', function(){
-                            console.log('image loaded successfully');
-                            if (++x == len) {
-                                console.log(x);
-                                parseImages();
-                            }
-                        }).each(function(){
-                            $(this).attr('src', $(this).data('src'));
-                        });
-                    },0);
+                    console.log('len2: ' + len2);
+
+                    while(len2--) {
+
+                        element.find('.photo-obj').prepend(
+                            $('<img src="' + newValue[len2] + '">')
+                            .on('error',function(){
+                                console.log('image loading error');
+                                $(this).remove();
+                                if (++x == len) {
+                                    console.log(x);
+                                    parseImages();
+                                }
+                            }).on('load', function(){
+                                console.log('image loaded successfully');
+                                if (++x == len) {
+                                    console.log(x);
+                                    parseImages();
+                                }
+                            })
+                        );
+                    }
 
                 } else {
-                    console.log('empty');
+                    console.log('no images');
                     // $(picPhotoObj).empty();
                 }
 
@@ -433,7 +435,7 @@ directives.directive('thumbAlignment', function($compile){
 
             scope.$watch(displayArray, function(newValue, oldValue){
                 if (!arraysAreEqual(newValue, oldValue)) {
-                    loadImages(newValue, oldValue);
+                    loadImages(newValue);
                 }
 
             }, true);
