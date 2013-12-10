@@ -11,9 +11,9 @@ class UserCreationForm(forms.ModelForm):
     error_messages = {
         'duplicate_email': _("A user with that email already exists."),
     }
-    email = forms.RegexField(label=_("Username"), max_length=30,
+    email = forms.RegexField(label=_("Username"), max_length=255,
         regex=r'^[\w.@+-]+$',
-        help_text=_("Required. 30 characters or fewer. Letters, digits and "
+        help_text=_("Required. 255 characters or fewer. Letters, digits and "
                       "@/./+/-/_ only."),
         error_messages={
             'invalid': _("This value may contain only letters, numbers and "
