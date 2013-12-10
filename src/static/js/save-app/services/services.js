@@ -76,6 +76,12 @@ services.factory('StateService', function() {
     }
 });
 
+services.factory('UserLogin', ['$resource', function($resource) {
+
+    return $resource('/api/user/login');
+
+}]);
+
 services.factory('UserLogout', ['$resource', function($resource) {
 
     return $resource('/api/user/logout');
@@ -116,13 +122,16 @@ services.factory('PointResource', ['$resource', function($resource) {
 
     return $resource('/api/points/:id', { id: '@id' }, {
         update: {
-            method: "POST",
+            method: "PUT",
             params: {
                 id: "@id",
                 title: "@title",
                 description: "@description",
                 type: "@type",
                 collection: "@collection"
+            },
+            headers: {
+                'Content-type': 'application/json'
             }
         }
     });

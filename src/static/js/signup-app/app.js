@@ -66,7 +66,7 @@ SignupApp.run(function($http, $cookies) {
 /**
     Overall page controller
  */
-SignupApp.controller('mainController', function($scope, $timeout, Presets, BroadcastService, User, UserResource) {
+SignupApp.controller('mainController', function($scope, $timeout, Presets, BroadcastService, User, UserResource, CurrentUser) {
 
     $scope.email = '';
     $scope.password = '';
@@ -83,7 +83,37 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
 
             if ($scope.password.length >= 6) {
 
-                $scope.addUser();
+                // check to see if this is a generated user
+                // if generated user, update this user id with new info
+                var user = CurrentUser.get(function(data) {
+
+                    if(typeof data.id !== 'undefined'
+                        && typeof data.email !== 'undefined') {
+                        // user exists
+
+                        // is registered "legit" user
+                        // show error?
+                        if (!/@gu.pingismo.com/.test(data.email)) {
+
+                            // TODO: email
+                            // ask Derek about scenario here
+
+                        // migrate generated user
+                        } else {
+
+                            $scope.migrateGeneratedUser();
+
+                        }
+
+
+                    } else {
+
+                        // else add a new user
+                        $scope.addUser();
+
+                    }
+
+                });
 
             } else {
                 $scope.errorPasswordTooShort = true;
@@ -107,6 +137,21 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
         };
 
         UserResource.save(newUser, function(data, headers) {
+            $scope.accountCreated = true;
+        });
+
+    };
+
+    $scope.migrateGeneratedUser = function() {
+
+        console.log('migrateGeneratedUser');
+
+        var migratedUser = {
+            email: $scope.email,
+            password: $scope.password
+        };
+
+        UserResource.update(migratedUser, function(data, headers) {
             $scope.accountCreated = true;
         });
 

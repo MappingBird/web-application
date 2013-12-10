@@ -1,12 +1,17 @@
 Django==1.5.5
+Fabric==1.8.0
 South==0.8.2
 Unipath==1.0
 argparse==1.2.1
 dj-database-url==0.2.2
 django-allauth==0.14.1
 djangorestframework==2.3.8
+ecdsa==0.10
+lxml==3.2.4
 oauthlib==0.6.0
+paramiko==1.12.0
 psycopg2==2.5.1
+pycrypto==2.6.1
 python-openid==2.2.5
 requests==2.0.1
 requests-oauthlib==0.4.0

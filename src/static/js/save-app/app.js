@@ -229,7 +229,7 @@ SaveApp.run(function($http, $cookies) {
 });
 
 
-SaveApp.controller('userController', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogout) {
+SaveApp.controller('userController', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout) {
 
     $scope.user = CurrentUser.get(function(data) {
 
@@ -241,17 +241,15 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
 
             console.log('user logged in');
 
-            User.data.isLoggedIn = true;
-            $scope.isLoggedIn = true;
+            User.data.emailAddress = data.email;
+            User.data.id = data.id;
 
-            if (typeof data.email !== 'undefined') {
-                User.data.emailAddress = data.email;
-                if (!/@gu.pingismo.com/.test(data.email)) {
-                    User.data.isRegisteredUser = true;
-                } else {
-                    User.data.isRegisteredUser = false;
-                }
-                User.data.id = data.id;
+            if (!/@gu.pingismo.com/.test(data.email)) {
+                User.data.isRegisteredUser = true;
+                User.data.isLoggedIn = true;
+                $scope.isLoggedIn = true;
+            } else {
+                User.data.isRegisteredUser = false;
             }
 
             // send event
@@ -263,7 +261,41 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
         } else {
 
             console.log('user not logged in');
+
+            // even though they are generated and can save points
+            // they are not technically logged in
             $scope.isLoggedIn = false;
+
+            var time = new Date().getTime(),
+                userCredentials = {
+                    email: getRandomInt(0,100) + time + '@gu.pingismo.com',
+                    password: 'pword' + getRandomInt(0,1000000000)
+                };
+
+            // generate user
+            UserResource.save(userCredentials, function(data, headers) {
+
+                // login this generated user
+                UserLogin.save(userCredentials, function(data, headers) {
+                    if (typeof data !== 'undefined'
+                        && typeof data.user !== 'undefined'
+                        && typeof data.user.email !== 'undefined'
+                        && typeof data.user.id !==  'undefined') {
+
+                        $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
+
+                        console.log(headers);
+                        BroadcastService.prepForBroadcast({
+                            type: 'userLoaded',
+                            data: { userId: data.id }
+                        });
+                    } else {
+                        // TODO: login error
+                        console.log('Login error with generated user');
+                    }
+                });
+
+            });
 
         }
 
@@ -419,6 +451,8 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
 
     console.log('init searchResultsController');
 
+    var map;
+
     $scope.presets = Presets;
     $scope.numResults = 0;
     $scope.searchQuery = ''; // decodeURIComponent(getParameterByName('search'))
@@ -492,12 +526,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
 
     $scope.$watch('activeCollectionId', function(activeCollectionId){
         console.log('triggered watcher of activeCollectionId');
-        Collections.activeCollectionId = $scope.activeCollectionId;
+        Collections.activeCollectionId = activeCollectionId;
 
         // update activeCollectionName
         if ($scope.collections.length > 0) {
             for (var c in $scope.collections) {
-                console.log($scope.collections[c].id);
                 if ($scope.collections[c].id == activeCollectionId) {
                     $scope.activeCollectionName = $scope.collections[c].name;
                     break;
@@ -558,25 +591,6 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
                 $scope.pageImages = data.images;
             });
 
-            /*
-            $http({
-                url: Presets.parseUrl,
-                method: "POST",
-                data: { 'url': $scope.targetUrl }
-                }).
-                success(function(data, status, headers, config) {
-                    console.log('getPageData return');
-                    console.log(data);
-                    $scope.pageData = {
-                        title: data.title,
-                        text: data.text
-                    };
-                    $scope.pageImages = data.images;
-                }).
-                error(function(data, status, headers, config) {
-                    // TODO: error with parser
-                });
-*/
         } else {
             console.log('no url');
             // TODO: show error?
@@ -657,18 +671,31 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
 
     $scope.fetchPlacesSearchResults = function (){
         console.log('fetchPlacesSearchResults');
-
+        console.log('fetchPlacesSearchResults map');
         $scope.searchResultsLoading = true;
+        console.log(map);
 
         var center = new google.maps.LatLng(25.035061,121.53986), // default coords
-            map = $('#map')[0],
             geocoder = new google.maps.Geocoder(),
-            gMap = new google.maps.Map(map, {
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
+            placesRequest;
+
+            // TODO: map needs to be moved to directive
+            // TODO: mapOptions is duplicated from mapController
+            map = map || new google.maps.Map($('#map')[0], {
+                zoom: Presets.mapZoom,
                 center: center,
-                zoom: $scope.presets.mapZoom
-            }),
-            placesRequest = new google.maps.places.PlacesService(gMap);
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                panControl: true,
+                streetViewControl: false,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.LARGE
+                },
+                scaleControl: false
+            });
+            placesRequest = new google.maps.places.PlacesService(map);
+
+        console.log(map);
 
         placesRequest.textSearch({ query: [$scope.searchQuery]}, placesSearchCallback);
 
@@ -1057,16 +1084,14 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
 
     $scope.showCollections = function() {
         // toggle between map and collection viewing
+        console.log('showCollections');
         if ($scope.mapMode === true) {
             BroadcastService.prepForBroadcast({
                 type: 'viewingCollections',
                 data: {}
             });
         } else {
-            BroadcastService.prepForBroadcast({
-                type: 'viewingCollection',
-                data: {}
-            });
+            $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
         }
 
     }
@@ -1132,6 +1157,9 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         ;
 
     $scope.$watch(function() { return MapPoints.activeSavePoint; }, function(activeSavePoint) {
+
+        console.log ('activeSavePoint change');
+        console.log ($scope.saveMode);
         $scope.activeSavePoint = activeSavePoint;
 
         if ($scope.saveMode) {
@@ -1242,7 +1270,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
                 myLatLng = new google.maps.LatLng(firstPoint.lat, firstPoint.lng);
                 mapOptions.center = myLatLng;
-                map = new google.maps.Map($('#map')[0], mapOptions);
+                map = map || new google.maps.Map($('#map')[0], mapOptions);
                 bounds;
 
             // get bounds
@@ -1327,7 +1355,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         type = 'misc';
         myLatLng = new google.maps.LatLng(lat, lng);
         mapOptions.center = myLatLng;
-        map = new google.maps.Map($('#map')[0], mapOptions);
+        map = map || new google.maps.Map($('#map')[0], mapOptions);
         bounds = map.getBounds();
         srcImage = '';
         title = "Where were you searching for?";
@@ -1368,9 +1396,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         resetMapSize();
     });
 
-
-    $("#map").height($("#map").height()-75);
-
 });
 
 SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage) {
@@ -1399,6 +1424,10 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
             while (len--) {
                 if (x[len].id == activeViewPointId) {
                     $scope.activeViewPoint = x[len];
+                    BroadcastService.prepForBroadcast({
+                        type: 'pointLoaded',
+                        data: {}
+                    })
                     break;
                 }
             }
@@ -1417,7 +1446,8 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
     $scope.$watch(function() { return MapPoints.activeViewPoint; }, function(activeViewPoint) {
         $scope.activeViewPoint = activeViewPoint;
-        $scope.activeCollectionId = activeViewPoint.collection_id;
+        $scope.activeViewPoint.date_created = moment(activeViewPoint.create_time).fromNow();
+        $scope.activeCollectionId = activeViewPoint.collection;
     });
 
     $scope.$watch('activeViewPoint', function(activeViewPoint) {
@@ -1566,6 +1596,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
     $scope.deletePoint = function() {
         PointResource.delete({ id: $scope.activeViewPoint.id }, function() {
             $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
+            $scope.pointEditMode = false;
             $scope.unselectPointForDelete();
         })
     };

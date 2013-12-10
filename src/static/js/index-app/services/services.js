@@ -1,4 +1,4 @@
-var services = angular.module('SignupApp.services', ['ngResource']);
+var services = angular.module('IndexApp.services', ['ngResource']);
 
 services.factory('Presets', function(){
     return {
@@ -41,18 +41,7 @@ services.factory('StateService', function() {
 
 services.factory('UserResource', ['$resource', function($resource) {
 
-    var UserResource = $resource('/api/users/:id/', { id: '@id' }, {
-        update: {
-            method: "PUT",
-            params: {
-                email: "@email",
-                password: "@password"
-            },
-            headers: {
-                'Content-type': 'application/json'
-            }
-        }
-    });
+    var UserResource = $resource('/api/users/:id/', { id: '@id' });
 
     return UserResource;
 
@@ -61,6 +50,12 @@ services.factory('UserResource', ['$resource', function($resource) {
 services.factory('CurrentUser', ['$resource', function($resource) {
 
     return $resource('/api/user/current');
+
+}]);
+
+services.factory('UserLogout', ['$resource', function($resource) {
+
+    return $resource('/api/user/logout');
 
 }]);
 

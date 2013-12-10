@@ -15,8 +15,8 @@
         <section class="map-section">
 
             <header ng-controller="userController" class="float-top">
-                <a href="#/" class="logo"></a>
-                <div class="navbar pingismo-navbar" id="account-menu" ng-show="isLoggedIn">
+                <a href="/" class="logo"></a>
+                <div class="navbar pingismo-navbar" ng-show="isLoggedIn">
                     <ul class="nav">
                         <li class="ver-divider"><span></span></li>
                         <li class="dropdown">
@@ -24,8 +24,8 @@
                                 <span ng-bind="user.email"></span>
                                 <b class="caret"></b>                        </a>
                             <ul class="dropdown-menu pingismo-dropdown-menu">
-                              <li><a href="#/"><i class="icon-globe"></i> View map</a></li>
-                              <li><a href="#/settings"><i class="icon-wrench"></i> Settings</a></li>
+                              <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
+                              <li><a href="/static/settings.html"><i class="icon-wrench"></i> Settings</a></li>
                               <li class="divider"></li>
                               <li><a href="#" ng-click="logout()"><i class="icon-off"></i> Logout</a></li>
                             </ul>
@@ -34,9 +34,9 @@
                 </div>
                 <div class="navbar pingismo-navbar pull-right" ng-show="!isLoggedIn">
                     <ul class="nav">
-                        <li class="signup-button"><button href="signup.html" class="btn btn-large btn-primary pingismo-btn" type="button">Sign up</button></li>
+                        <li class="signup-button"><button href="/static/signup.html" class="btn btn-large btn-primary pingismo-btn" type="button">Sign up</button></li>
                         <li class="ver-divider"><span></span></li>
-                        <li><a href="login.html">Login Your Account</a></li>
+                        <li><a href="/static/login.html">Login To Your Account</a></li>
                     </ul>
                 </div>
             </header>
@@ -44,7 +44,7 @@
             <div class="save-panel" ng-controller="searchResultsController" ng-show="showSavePanel">
                 <form class="form-search" ng-submit="searchPlaces()">
                     <input type="text" class="input-medium search-query" ng-model="searchQuery" search-box><i class="icon-search"></i>
-                    <span class="help-block search-static">{{numResults}} places are found. Pick one you want to save.</span>
+                    <span class="help-block search-static">{{numResults}} places found. Pick one you want to save.</span>
                 </form>
 
                 <!-- No search keyword tip -->
@@ -136,7 +136,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <ul class="nav nav-stacked">
-                    <li ng-repeat="coll in collections" ng-class="{active: coll.id == activeCollectionId}"><a href="#" ng-class="{collection: true, edit: editMode}" ng-click="clickCollection(coll.id)">{{coll.name}} ({{coll.num_of_points || 0}})</a></li>
+                    <li ng-repeat="coll in collections" ng-class="{active: coll.id == activeCollectionId}"><a href="#" ng-class="{collection: true, edit: editMode}" ng-click="clickCollection(coll.id)">{{coll.name}} ({{coll.points.length || 0}})</a></li>
                     <li class="divider"></li>
                     <li><a href="#" class="btn-default pingismo-btn" ng-click="toggleEditMode()" id="edit-list-btn">{{ editMode && 'Done' || 'Edit'}}</a></li>
                 </ul>
@@ -154,7 +154,7 @@
                             <a ng-href="{{activeViewPoint.url}}" class="ref-url" new-window>{{activeViewPoint.url}}</a>
                             <p class="ref-context">{{activeViewPoint.description}}</p>
                             <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
-                            <div class="ref-context-img" thumb-alignment="{displayArray: 'activeViewPoint.images', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages'}">
+                            <div class="ref-context-img" thumb-alignment="{displayArray: 'activeViewPoint.images', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages'}" height-to-bottom m-custom-scrollbar="{scrollInertia: 0}">
                                 <img ng-repeat="image in activeViewPoint.images" data-src="{{image.url}}" data-id="{{image.id}}" />
                             </div>
                         </div>
@@ -175,7 +175,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li>Added: {{activeViewPoint.created}}</li>
+                                <li>Added: {{activeViewPoint.date_created}}</li>
                                 <li>
                                     <ul class="types">
                                         <li ng-class="{active : activeViewPoint.type == 'scenicspot'}"><a href="#" class="types-scenicspot" ng-click="setPointType($event, 'scenicspot')"></a></li>
@@ -260,6 +260,7 @@
         <script src="/static/js/vendor/angular/angular-sanitize.min.js"></script>
         <script src="/static/js/vendor/angular/angular-resource.min.js"></script>
         <script src="/static/js/vendor/angular/angular-cookies.min.js"></script>
+        <script src="/static/js/vendor/momentjs/moment.min.js"></script>
         <script src="/static/js/mod.google-maps.js"></script>
         <script src="/static/js/mod.bucketlist.overlay.js"></script>
         <script src="/static/js/save-app/services/services.js"></script>
