@@ -25,7 +25,7 @@
                     <p class="title">Sign up</p>
                     <form ng-submit="checkInput()">
                         <div class="control-group">
-                        	<input type="text" placeholder="Email address" name="email" ng-model="email" required />
+                        	<input type="text" placeholder="Email address" name="email" ng-model="email" required autofocus />
                         </div>
                         <div class="error-message control-group" ng-show="errorEmailAlreadyRegistered">
                         	<p class="help-inline">The email has been registered.</p>
