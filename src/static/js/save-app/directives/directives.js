@@ -172,16 +172,18 @@ directives.directive('thumbAlignment', function($compile){
         scope: true,
         replace: false,
         template: '<div class="photo-obj"></div><div id="picstest"></div>',
-        link: function(scope, element, attrs){
+        controller: function($scope, $element, $attrs, BroadcastService){
 
-            var config = scope.$eval(attrs.thumbAlignment),
+            var config = $scope.$eval($attrs.thumbAlignment),
                 displayArray = config.displayArray,
                 selectArray = config.selectArray,
                 deselectArray = config.deselectArray,
                 photo_array = null, //photo.js
                 lastWidth = 0, // photo.js
-                picPhotoObj = $($(element).find(".photo-obj")[0]), // photo.js
-                picContainer = $(element), // photo.js
+                picPhotoObj = $($($element).find(".photo-obj")[0]), // photo.js
+                picContainer = $($element), // photo.js
+                editMode = config.editMode || false,
+                enableLightbox = config.enableLightbox || false,
                 picRow //photo.js
                 ;
 
@@ -270,8 +272,8 @@ directives.directive('thumbAlignment', function($compile){
 
                                 n++;
 
-                                // add to scope
-                                scope[selectArray][img_id] = url;
+                                // add to $scope
+                                $scope[selectArray][img_id] = url;
 
                                 a.on('click', selectImg);
                                 a.append(img);
@@ -328,7 +330,7 @@ directives.directive('thumbAlignment', function($compile){
                 }
 
                 // done, broadcast
-                scope.$emit("placesLoaded");
+                $scope.$emit("placesLoaded");
             }
 
             function selectImg(e){
@@ -341,29 +343,37 @@ directives.directive('thumbAlignment', function($compile){
                     span = $("#check_" + imgID),
                     src = $($(this).find('img')[0]).attr('src');
 
-                // deselect
-                if($(this).hasClass("is-selected")){
-                    $(this).removeClass("is-selected");
-                    $(span).hide();
+                if (!editMode && enableLightbox) {
 
-                    scope.$apply(function(){
-                        console.log('delete selected image');
-                        scope[deselectArray][imgID] = scope[selectArray][imgID];
-                        delete scope[selectArray][imgID];
-                    });
+                    $.slimbox(src, "", { resizeDuration: 100});
 
-                }
-                // select
-                else{
-                    $(this).addClass("is-selected");
-                    $(span).show();
-                    scope.$apply(function(){
-                        console.log('add selected image');
-                        scope[selectArray][imgID] = src;
-                        if (scope[deselectArray][imgID]) {
-                            delete scope[deselectArray][imgID];
-                        }
-                    });
+                } else {
+
+                    // deselect
+                    if($(this).hasClass("is-selected")){
+                        $(this).removeClass("is-selected");
+                        $(span).hide();
+
+                        $scope.$apply(function(){
+                            console.log('delete selected image');
+                            $scope[deselectArray][imgID] = $scope[selectArray][imgID];
+                            delete $scope[selectArray][imgID];
+                        });
+
+                    }
+                    // select
+                    else{
+                        $(this).addClass("is-selected");
+                        $(span).show();
+                        $scope.$apply(function(){
+                            console.log('add selected image');
+                            $scope[selectArray][imgID] = src;
+                            if ($scope[deselectArray][imgID]) {
+                                delete $scope[deselectArray][imgID];
+                            }
+                        });
+
+                    }
 
                 }
 
@@ -372,18 +382,18 @@ directives.directive('thumbAlignment', function($compile){
             function parseImages () {
                 console.log('last image load');
                 // auto-sizing
-                photo_array = element.find('.photo-obj').children();
+                photo_array = $element.find('.photo-obj').children();
                 console.log(photo_array);
-                lastWidth = $(element).find("#picstest").innerWidth() - 15;
-                picRow = $(element).find('.picrow');
+                lastWidth = $($element).find("#picstest").innerWidth() - 15;
+                picRow = $($element).find('.picrow');
                 picRow.width(lastWidth);
                 processPhotos(photo_array, lastWidth);
             }
 
             function resetImages () {
-                element.find('.photo-obj').empty();
-                element.find('.picrow').remove();
-                element.append('<div class="picrow" />');
+                $element.find('.photo-obj').empty();
+                $element.find('.picrow').remove();
+                $element.append('<div class="picrow" />');
             }
 
             function loadImages (newValue) {
@@ -407,7 +417,7 @@ directives.directive('thumbAlignment', function($compile){
 
                     while(len2--) {
 
-                        element.find('.photo-obj').prepend(
+                        $element.find('.photo-obj').prepend(
                             $('<img src="' + newValue[len2] + '">')
                             .on('error',function(){
                                 console.log('image loading error');
@@ -433,12 +443,19 @@ directives.directive('thumbAlignment', function($compile){
 
             }
 
-            scope.$watch(displayArray, function(newValue, oldValue){
+            $scope.$watch(displayArray, function(newValue, oldValue){
                 if (!arraysAreEqual(newValue, oldValue)) {
                     loadImages(newValue);
                 }
 
             }, true);
+
+            $scope.$on('stateChange', function() {
+                if (typeof BroadcastService.message == 'object' &&
+                    BroadcastService.message.type == 'pointEditModeChanged') {
+                    editMode = BroadcastService.message.data.editMode;
+                }
+            });
 
         }
     };

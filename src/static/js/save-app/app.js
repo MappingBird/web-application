@@ -1419,6 +1419,17 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
     });
 
+    $scope.$watch('pointEditMode', function(pointEditMode) {
+        console.log('pointEditMode changed');
+        console.log(pointEditMode);
+        BroadcastService.prepForBroadcast({
+            type: 'pointEditModeChanged',
+            data: {
+                editMode: pointEditMode
+            }
+        });
+    });
+
     $scope.$watch(function() { return MapPoints.activeViewPoint; }, function(activeViewPoint) {
         $scope.activeViewPoint = activeViewPoint;
         $scope.activeViewPoint.date_created = moment(activeViewPoint.create_time).fromNow();
