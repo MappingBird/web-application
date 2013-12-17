@@ -195,6 +195,9 @@ section.map-section{
 }
 
 #map.retracted {
+	height: -moz-calc(100% - 75px);
+	height: -webkit-calc(100% - 75px);
+	height: calc(100% - 75px);
 	left: 420px;
 	width: -moz-calc(100% - 420px);
 	width: -webkit-calc(100% - 420px);
