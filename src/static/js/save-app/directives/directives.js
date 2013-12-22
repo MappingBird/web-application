@@ -120,7 +120,7 @@ directives.directive('searchBox', function() {
 });
 
 // alert
-directives.directive('pAlert', function(BroadcastService, $timeout) {
+directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
     return {
         restrict: 'A',
         link: function($scope, $elem, $attrs) {
@@ -128,7 +128,7 @@ directives.directive('pAlert', function(BroadcastService, $timeout) {
                 $elem.hide();
             });
         },
-        controller: function($scope, $element, $attrs, BroadcastService) {
+        controller: function($scope, $element, $attrs, BroadcastService, $sce) {
 
             $scope.alertActive = false;
 
@@ -136,7 +136,7 @@ directives.directive('pAlert', function(BroadcastService, $timeout) {
                 if (typeof BroadcastService.message == 'object' &&
                     BroadcastService.message.type == 'pointSaveComplete') {
                     $scope.alertActive = true;
-                    $scope.message = 'A new place was saved to <strong>' + BroadcastService.message.data.savedCollectionName + '</strong> successfully. :)';
+                    $scope.message = $sce.trustAsHtml('A new place was saved to <strong>' + BroadcastService.message.data.savedCollectionName + '</strong> successfully. :)');
 
                     $timeout(function(){
                         $element.hide();
