@@ -419,7 +419,9 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
 
     console.log('init searchResultsController');
 
-    var map;
+    var map,
+        lat = 0,
+        lng = 0;
 
     $scope.presets = Presets;
     $scope.numResults = 0;
@@ -624,6 +626,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
 
                     $scope.activeSavePoint = $scope.places[0];
                     $scope.activeSearchResult = 0;
+                    console.log('set activeSavePoint multiple');
                     console.log($scope.activeSavePoint);
 
                 });
@@ -643,7 +646,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
         $scope.searchResultsLoading = true;
         console.log(map);
 
-        var center = new google.maps.LatLng(25.035061,121.53986), // default coords
+        var center = new google.maps.LatLng(0, 0), // default coords
             geocoder = new google.maps.Geocoder(),
             placesRequest;
 
@@ -1101,6 +1104,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
     var saveOverlay,
         saveMarker,
+        overlay,
+        marker,
         lat = 0,
         lng = 0,
         type = '',
@@ -1175,12 +1180,12 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             type = $scope.activeSavePoint.type || 'scenicspot';
             myLatLng = new google.maps.LatLng(lat, lng);
             mapOptions.center = myLatLng;
-            if (map) {
-                map.panTo(new google.maps.LatLng(lat, lng));
+            map = new google.maps.Map($('#map')[0], mapOptions);
+            if (saveOverlay) {
                 saveOverlay.setMap(null);
+            }
+            if (saveMarker) {
                 saveMarker.setMap(null);
-            } else {
-                map = new google.maps.Map($('#map')[0], mapOptions);
             }
             bounds = map.getBounds();
             srcImage = $scope.activeSavePoint.image;
@@ -1318,19 +1323,17 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
         var title, message;
 
-        lat = 25.033580;
-        lng = 121.564820;
         type = 'misc';
         myLatLng = new google.maps.LatLng(lat, lng);
         mapOptions.center = myLatLng;
-        map = map || new google.maps.Map($('#map')[0], mapOptions);
+        map = new google.maps.Map($('#map')[0], mapOptions);
         bounds = map.getBounds();
         srcImage = '';
         title = "Where were you searching for?";
         message = "Provide the name or address of a place in the search bar";
 
-        saveOverlay = new BucketListMessageOverlay(bounds, Presets.mapZoom, map, myLatLng, type, title, message);
-        saveMarker = new BucketListPin(bounds, Presets.mapZoom, srcImage, map, myLatLng);
+        overlay = new BucketListMessageOverlay(bounds, Presets.mapZoom, map, myLatLng, type, title, message);
+        marker = new BucketListPin(bounds, Presets.mapZoom, srcImage, map, myLatLng);
     }
 
     $scope.$on('stateChange', function() {
