@@ -190,11 +190,13 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
 });
 
 SaveApp.run(function($http, $cookies) {
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!run!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    console.log($cookies.csrftoken);
     $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
 });
 
 
-SaveApp.controller('userController', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout) {
+SaveApp.controller('userController', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token) {
 
     $scope.user = CurrentUser.get(function(data) {
 
@@ -237,30 +239,61 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
                     password: 'pword' + getRandomInt(0,1000000000)
                 };
 
-            // generate user
-            UserResource.save(userCredentials, function(data, headers) {
+            function generateUser () {
 
-                // login this generated user
-                UserLogin.save(userCredentials, function(data, headers) {
-                    if (typeof data !== 'undefined'
-                        && typeof data.user !== 'undefined'
-                        && typeof data.user.email !== 'undefined'
-                        && typeof data.user.id !==  'undefined') {
+                // generate user
+                UserResource.save(userCredentials, function(data, headers) {
 
-                        $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
+                    // login this generated user
+                    UserLogin.save(userCredentials, function(data, headers) {
+                        if (typeof data !== 'undefined'
+                            && typeof data.user !== 'undefined'
+                            && typeof data.user.email !== 'undefined'
+                            && typeof data.user.id !==  'undefined') {
 
-                        console.log(headers);
-                        BroadcastService.prepForBroadcast({
-                            type: 'userLoaded',
-                            data: { userId: data.id }
-                        });
-                    } else {
-                        // TODO: login error
-                        console.log('Login error with generated user');
-                    }
+                            console.log('login after generate user');
+                            console.log(data);
+                            //console.log($cookies.csrftoken);
+                            console.log(headers('Set-Cookie'));
+
+                            $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
+
+                            User.data.emailAddress = data.user.email;
+                            User.data.id = data.user.id;
+
+                            if (!/@gu.pingismo.com/.test(data.user.email)) {
+                                User.data.isRegisteredUser = true;
+                                User.data.isLoggedIn = true;
+                                $scope.isLoggedIn = true;
+                            } else {
+                                User.data.isRegisteredUser = false;
+                            }
+
+                            BroadcastService.prepForBroadcast({
+                                type: 'userLoaded',
+                                data: { userId: data.user.id }
+                            });
+                        } else {
+                            // TODO: login error
+                            console.log('Login error with generated user');
+                        }
+                    });
+
                 });
 
-            });
+            }
+
+            if ($cookies.csrftoken) {
+                generateUser();
+            } else {
+                Token.get(function(data, headers) {
+
+                    $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
+
+                    generateUser();
+
+                });
+            }
 
         }
 
