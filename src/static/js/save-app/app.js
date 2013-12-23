@@ -190,11 +190,13 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
 });
 
 SaveApp.run(function($http, $cookies) {
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!run!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    console.log($cookies.csrftoken);
     $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
 });
 
 
-SaveApp.controller('userController', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout) {
+SaveApp.controller('userController', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token) {
 
     $scope.user = CurrentUser.get(function(data) {
 
@@ -209,7 +211,7 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
             User.data.emailAddress = data.email;
             User.data.id = data.id;
 
-            if (!/@gu.pingismo.com/.test(data.email)) {
+            if (!/@gu.pingismo.com$/.test(data.email)) {
                 User.data.isRegisteredUser = true;
                 User.data.isLoggedIn = true;
                 $scope.isLoggedIn = true;
@@ -237,30 +239,78 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
                     password: 'pword' + getRandomInt(0,1000000000)
                 };
 
-            // generate user
-            UserResource.save(userCredentials, function(data, headers) {
+            function generateUser () {
 
-                // login this generated user
-                UserLogin.save(userCredentials, function(data, headers) {
-                    if (typeof data !== 'undefined'
-                        && typeof data.user !== 'undefined'
-                        && typeof data.user.email !== 'undefined'
-                        && typeof data.user.id !==  'undefined') {
+                // generate user
+                UserResource.save(userCredentials, function(data, headers) {
 
-                        $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
+                    // login this generated user
+                    UserLogin.save(userCredentials, function(data, headers) {
+                        if (typeof data !== 'undefined'
+                            && typeof data.user !== 'undefined'
+                            && typeof data.user.email !== 'undefined'
+                            && typeof data.user.id !==  'undefined') {
 
-                        console.log(headers);
-                        BroadcastService.prepForBroadcast({
-                            type: 'userLoaded',
-                            data: { userId: data.id }
-                        });
-                    } else {
-                        // TODO: login error
-                        console.log('Login error with generated user');
-                    }
+                            /**
+                                We've decided to directly extract the csrftoken
+                                from document.cookie because Angular can't detect
+                                the updated csrftoken cookie value. Possibly b/c
+                                of the fact there are multiple "Set-Cookie" headers
+                                in the response.
+                             */
+
+                            console.log('UserLogin token');
+                            var re = /csrftoken=([a-zA-Z0-9]*)/g,
+                                cookieArray = document.cookie.match(re),
+                                csrftoken;
+
+                            if (re.test(document.cookie) && cookieArray.length == 1) {
+
+                                csrftoken = cookieArray[0].replace("csrftoken=", "");
+
+                                $http.defaults.headers.common['X-CSRFToken'] = csrftoken;
+
+                                User.data.emailAddress = data.user.email;
+                                User.data.id = data.user.id;
+
+                                if (!/@gu.pingismo.com$/.test(data.user.email)) {
+                                    User.data.isRegisteredUser = true;
+                                    User.data.isLoggedIn = true;
+                                    $scope.isLoggedIn = true;
+                                } else {
+                                    User.data.isRegisteredUser = false;
+                                }
+
+                                BroadcastService.prepForBroadcast({
+                                    type: 'userLoaded',
+                                    data: { userId: data.user.id }
+                                });
+
+                            } else {
+                                // TODO: multiple or no csrftoken error
+                            }
+
+                        } else {
+                            // TODO: login error
+                            console.log('Login error with generated user');
+                        }
+                    });
+
                 });
 
-            });
+            }
+
+            if ($cookies.csrftoken) {
+                generateUser();
+            } else {
+                Token.get(function(data, headers) {
+
+                    $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
+
+                    generateUser();
+
+                });
+            }
 
         }
 
@@ -752,7 +802,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
                     // set user data
                     if (typeof data.email_address !== 'undefined') {
                         User.data.emailAddress = data.email_address;
-                        if (!/@gu.pingismo.com/.test(data.email_address)) {
+                        if (!/@gu.pingismo.com$/.test(data.email_address)) {
                             User.data.isRegisteredUser = true;
                         } else {
                             User.data.isRegisteredUser = false;
