@@ -211,7 +211,7 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
             User.data.emailAddress = data.email;
             User.data.id = data.id;
 
-            if (!/@gu.pingismo.com/.test(data.email)) {
+            if (!/@gu.pingismo.com$/.test(data.email)) {
                 User.data.isRegisteredUser = true;
                 User.data.isLoggedIn = true;
                 $scope.isLoggedIn = true;
@@ -251,28 +251,45 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
                             && typeof data.user.email !== 'undefined'
                             && typeof data.user.id !==  'undefined') {
 
-                            console.log('login after generate user');
-                            console.log(data);
-                            //console.log($cookies.csrftoken);
-                            console.log(headers('Set-Cookie'));
+                            /**
+                                We've decided to directly extract the csrftoken
+                                from document.cookie because Angular can't detect
+                                the updated csrftoken cookie value. Possibly b/c
+                                of the fact there are multiple "Set-Cookie" headers
+                                in the response.
+                             */
 
-                            $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
+                            console.log('UserLogin token');
+                            var re = /csrftoken=([a-zA-Z0-9]*)/g,
+                                cookieArray = document.cookie.match(re),
+                                csrftoken;
 
-                            User.data.emailAddress = data.user.email;
-                            User.data.id = data.user.id;
+                            if (re.test(document.cookie) && cookieArray.length == 1) {
 
-                            if (!/@gu.pingismo.com/.test(data.user.email)) {
-                                User.data.isRegisteredUser = true;
-                                User.data.isLoggedIn = true;
-                                $scope.isLoggedIn = true;
+                                csrftoken = cookieArray[0].replace("csrftoken=", "");
+
+                                $http.defaults.headers.common['X-CSRFToken'] = csrftoken;
+
+                                User.data.emailAddress = data.user.email;
+                                User.data.id = data.user.id;
+
+                                if (!/@gu.pingismo.com$/.test(data.user.email)) {
+                                    User.data.isRegisteredUser = true;
+                                    User.data.isLoggedIn = true;
+                                    $scope.isLoggedIn = true;
+                                } else {
+                                    User.data.isRegisteredUser = false;
+                                }
+
+                                BroadcastService.prepForBroadcast({
+                                    type: 'userLoaded',
+                                    data: { userId: data.user.id }
+                                });
+
                             } else {
-                                User.data.isRegisteredUser = false;
+                                // TODO: multiple or no csrftoken error
                             }
 
-                            BroadcastService.prepForBroadcast({
-                                type: 'userLoaded',
-                                data: { userId: data.user.id }
-                            });
                         } else {
                             // TODO: login error
                             console.log('Login error with generated user');
@@ -785,7 +802,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
                     // set user data
                     if (typeof data.email_address !== 'undefined') {
                         User.data.emailAddress = data.email_address;
-                        if (!/@gu.pingismo.com/.test(data.email_address)) {
+                        if (!/@gu.pingismo.com$/.test(data.email_address)) {
                             User.data.isRegisteredUser = true;
                         } else {
                             User.data.isRegisteredUser = false;
