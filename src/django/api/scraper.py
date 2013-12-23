@@ -1,7 +1,7 @@
 # Create your views here.
 import json
 import urllib2
-from StringIO import StringIO
+from cStringIO import StringIO
 from urlparse import urlparse, urljoin
 from collections import OrderedDict
 
@@ -35,9 +35,14 @@ class URLImage:
         self._get_image()
 
     def _get_image(self):
-        image_raw = StringIO(requests.get(self.url).content)
-        self.image = Image.open(image_raw)
-        self.size = self.image.size[0] * self.image.size[1]
+        try:
+            image_raw = StringIO(requests.get(self.url).content)
+            self.image = Image.open(image_raw)
+            self.size = self.image.size[0] * self.image.size[1]
+        except IOError:
+            self.image = None
+            self.size = 0
+            pass
 
     def is_valid(self):
         return self.size > 10000
@@ -91,6 +96,7 @@ def scraper(request):
     _images['png'] = []
     _images['gif'] = []
 
+    included = 0
     for image in images:
         exclude = False
 
@@ -113,7 +119,12 @@ def scraper(request):
         for suffix in SUFFIX_INCLUDE:
             length = len(suffix)
             if image_url[-length:].lower() == suffix and image_url not in output_images:
+                included += 1
+                if included > 10:
+                    break
+
                 image_obj = URLImage(url=image_url, type=suffix[1:])
+                
                 if image_obj.is_valid():
                     _images[image_obj.type].append(image_obj)
 
