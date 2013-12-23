@@ -70,7 +70,7 @@
                 <!-- End of Searching for location -->
 
                 <!-- Search result -->
-                <div class="left-panel-container" ng-show="searchResultsLoaded" m-custom-scrollbar="{scrollInertia: 0}" left-outer-height>
+                <div class="left-panel-container" ng-show="searchResultsLoaded" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placesLoaded'}" left-outer-height>
                     <ul class="location-list">
                         <li ng-repeat="place in places" on-repeat-done="places_loaded" ng-class="{active: $index==activeSearchResult}"><p>{{place.name}}<span>{{place.address}}</span></p>
                             <a href="#" class="save-this-place" id="btnSaveThisPlace" ng-click="prepSaveActiveSearchResult($index)"><i class="icon-save"></i> Save this place</a>
@@ -85,7 +85,7 @@
                 <div class="save-content" ng-class="{retracted: !searchResultSelected}" m-custom-scrollbar-parent>
                     <a class="back" href="#" ng-click="cancelSaveActiveSearchResult()" ng-show="numResults > 1"><img src="/static/img/icon-back.png" /></a>
                     <form class="form-save-content" ng-submit="savePoint($event)">
-                        <div class="primary-content" m-custom-scrollbar="{scrollInertia: 0}">
+                        <div class="primary-content" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
                             <input type="text" ng-model="pageData.title" class="content-title" />
                             <textarea rows="8" ng-model="pageData.text"></textarea>
                             <div class="ref-context-img" thumb-alignment="{displayArray: 'pageImages', selectArray: 'selectedPageImages', deselectArray: 'deselectedPageImages'}"></div>
@@ -153,7 +153,7 @@
                             <a ng-href="{{activeViewPoint.url}}" class="ref-url" new-window>{{activeViewPoint.url}}</a>
                             <p class="ref-context">{{activeViewPoint.description}}</p>
                             <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
-                            <div height-to-bottom m-custom-scrollbar="{scrollInertia: 0}">
+                            <div height-to-bottom m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
                                 <div class="ref-context-img" thumb-alignment="{displayArray: 'pointImages', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages', enableLightbox: true, editMode: pointEditMode}"></div>
                             </div>
                         </div>
