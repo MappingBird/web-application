@@ -35,6 +35,7 @@ class URLImage:
         self._get_image()
 
     def _get_image(self):
+        '''
         try:
             image_raw = StringIO(requests.get(self.url).content)
             self.image = Image.open(image_raw)
@@ -43,9 +44,16 @@ class URLImage:
             self.image = None
             self.size = 0
             pass
+        '''
+        r = requests.head(self.url)
+        print r.headers
+        if r.headers.get('content-length'):
+            self.size = int(r.headers.get('content-length'))
+        else:
+            self.size = 0
 
     def is_valid(self):
-        return self.size > 10000
+        return self.size == 0 or self.size > 2000
 
     def __str__(self):
         return '(%s) %s %s' % (self.size, self.type, self.url)
