@@ -97,7 +97,7 @@
                             </div>
                             <div class="btn-group pingismo-btn-group" ng-show="collections.length > 0">
                                 <a class="btn exist collections-selection" href="#" ng-click="clickShowSelectCollection()" ng-show="!showSelectCollection">{{saveCollectionName}} <span class="caret"></span></a>
-                                <ul class="collections-menu" ng-show="showSelectCollection">
+                                <ul class="collections-menu upward-menu" ng-show="showSelectCollection">
                                     <li ng-repeat="collection in collections"><a href="#" ng-click="selectCollection(collection.id, $event)">{{collection.name}}</a></li>
                                     <li ng-class="{'input-append' : true, 'control-group' : true, error: noCollectionError}">
                                         <input type="text" class="span2" ng-model="newCollectionName" id="appendedInputButton" placeholder="{{ noCollectionError && 'Select from above or enter a new name' || 'Create a new map'}}" />
@@ -166,8 +166,8 @@
                                 <li class="collection">{{activeCollectionName}}</li>
                                 <li class="btn-group pingismo-btn-group">
                                     <a class="btn exist" href="#" ng-click="showSelectCollection = true" ng-show="!showSelectCollection">{{activeCollectionName}} <span class="caret"></span></a>
-                                    <ul class="collections-menu" ng-show="showSelectCollection">
-                                        <li ng-repeat="collection in collections"><a href="#" ng-click="selectPointCollection(collection.id)">{{collection.name}}</a></li>
+                                    <ul class="collections-menu thin-menu" ng-show="showSelectCollection" scrollbar-height-to-bottom>
+                                        <li ng-repeat="collection in collections"><a href="#" ng-click="selectPointCollection(collection.id)" title="{{collection.name}}">{{collection.name}}</a></li>
                                         <li class="input-append">
                                             <input type="text" class="span2" id="appendedInputButton" placeholder="Create a new collection" />
                                             <button class="btn" type="button">Create</button>
