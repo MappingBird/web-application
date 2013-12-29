@@ -1,6 +1,6 @@
 // HTTP solution from
 // http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/
-var IndexApp = angular.module('IndexApp', ['IndexApp.services', 'ngCookies', 'ngSanitize', 'ui.bootstrap'], function($httpProvider, $dialogProvider) {
+var IndexApp = angular.module('IndexApp', ['IndexApp.services', 'IndexApp.directives', 'ngCookies', 'ngSanitize', 'ui.bootstrap'], function($httpProvider, $dialogProvider) {
     // angular bootstrap
     //$dialogProvider.options({dialogFade: true});
 

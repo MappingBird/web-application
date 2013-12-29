@@ -32,7 +32,7 @@
             </div>
             <div class="navbar pingismo-navbar pull-right" ng-show="!isLoggedIn">
                 <ul class="nav">
-                    <li class="signup-button"><button href="/static/signup.html" class="btn btn-large btn-primary pingismo-btn" type="button">Sign up</button></li>
+                    <li class="signup-button"><button data-href="/static/signup.html" class="btn btn-large btn-primary pingismo-btn" type="button" button-href>Sign up</button></li>
                     <li class="ver-divider"><span></span></li>
                     <li><a href="/static/login.html">Login To Your Account</a></li>
                 </ul>
@@ -242,6 +242,7 @@ You can also click Ctrl+Shift+B (or Command+Shit+B on Mac) to show Bookmarks bar
     <script src="/static/js/vendor/angular/angular-cookies.min.js"></script>
     <script src="/static/js/vendor/angular-bootstrap/ui-bootstrap-tpls-0.4.0.min.js"></script>
     <script src="/static/js/index-app/services/services.js"></script>
+    <script src="/static/js/index-app/directives/directives.js"></script>
     <script src="/static/js/index-app/app.js"></script>
     <script>
             // Include the UserVoice JavaScript SDK (only needed once on a page)
