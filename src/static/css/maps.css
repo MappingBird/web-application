@@ -848,30 +848,57 @@ ul.types > li{
 	position: relative;
 	margin-bottom: 15px;
 }
-.collection-header .collestion-name{
+.collection-header .collection-name{
 	line-height: 20px;
 	display: inline-block;
 	color: #fff;
 	font-size: 20px;
 }
-.collection-header .collestion-name .icon-expand-collapse{
+.collection-header .collection-name .icon-expand-collapse{
 	background: url(../img/collection_expand_collapse_btn.png) 0 0 no-repeat;
 	width: 20px;
 	height: 20px;
 	margin: 4px 0 0 0;
 	text-indent: 0px;
 }
-.collection-header .collestion-name:hover{
+.collection-header .collection-name:hover{
 	text-decoration: none;
 	color: #01a9e7;
 }
-.collection-header .collestion-name:hover .icon-expand-collapse{
+.collection-header .collection-name:hover .icon-expand-collapse{
 	background-position: 0 -20px;
 }
-.collection-header .collestion-name.active{
+.collection-header .collection-name.active{
 	background-position: 0 -40px;
 }
-.collection-header .collestion-name.active:hover{
+
+.collection-header .collection-name.active i{
+	-webkit-animation:spindown 0.25s linear 0;
+    -moz-animation:spindown 0.25s linear 0;
+    animation:spindown 0.25s linear 0;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+.collection-header .collection-name i{
+	-webkit-animation:spinup 0.25s linear 0;
+    -moz-animation:spinup 0.25s linear 0;
+    animation:spinup 0.25s linear 0;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@-moz-keyframes spindown { 100% { -moz-transform: rotate(90deg); } }
+@-webkit-keyframes spindown { 100% { -webkit-transform: rotate(90deg); } }
+@keyframes spindown { 100% { transform:rotate(90deg); } }
+
+@-moz-keyframes spinup { 0% { -moz-transform: rotate(90deg); } 100% { -moz-transform: rotate(0deg); } }
+@-webkit-keyframes spinup { 0% { -webkit-transform: rotate(90deg); } 100% { -webkit-transform: rotate(0deg); } }
+@keyframes spinup { 0% { transform:rotate(90deg); } 100% { transform:rotate(0deg); } }
+
+.collection-header .collection-name.active:hover{
 	background-position: 0 -60px;
 }
 .collection-header span{
