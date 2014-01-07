@@ -128,6 +128,7 @@ def scraper(request):
             length = len(suffix)
             if image_url[-length:].lower() == suffix and image_url not in output_images:
                 included += 1
+                '''
                 if included > 10:
                     break
 
@@ -136,12 +137,15 @@ def scraper(request):
                 if image_obj.is_valid():
                     _images[image_obj.type].append(image_obj)
 
-                # output_images.append(image_url)
+                '''
+                output_images.append(image_url)
 
+    '''
     for images in _images.values():
         images.sort(key=lambda x: x.size, reverse=True)
         for image in images:
             output_images.append(image.url)
+    '''
 
 
     out = {
