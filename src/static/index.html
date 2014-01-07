@@ -211,6 +211,7 @@ You can also click Ctrl+Shift+B (or Command+Shit+B on Mac) to show Bookmarks bar
     (function(){var BASE='http://www.pingismo.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
             </div>
         </div>
+        <div ui-view></div>
         <footer>
                 <div class="logo-copyright">
                     <p class="slogan"><img src="/static/img/logo-footer.png" /> Remember places for later.</p>
@@ -241,6 +242,7 @@ You can also click Ctrl+Shift+B (or Command+Shit+B on Mac) to show Bookmarks bar
     <script src="/static/js/vendor/angular/angular-resource.min.js"></script>
     <script src="/static/js/vendor/angular/angular-cookies.min.js"></script>
     <script src="/static/js/vendor/angular-bootstrap/ui-bootstrap-tpls-0.4.0.min.js"></script>
+    <script src="/static/js/vendor/angular-ui-router/angular-ui-router-0.2.0.min.js"></script>
     <script src="/static/js/index-app/services/services.js"></script>
     <script src="/static/js/index-app/directives/directives.js"></script>
     <script src="/static/js/index-app/app.js"></script>
