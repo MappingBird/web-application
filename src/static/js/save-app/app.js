@@ -634,10 +634,6 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
             console.log('there are search results');
             console.log(len);
             // if there's only one result, select search result
-            $scope.$apply(function(){
-                $scope.searchResultsLoaded = true;
-            });
-
             if (len === 1) {
                 len--;
                 $scope.$apply(function(){
@@ -682,6 +678,10 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
                 });
 
             }
+
+            $scope.$apply(function(){
+                $scope.searchResultsLoaded = true;
+            });
 
             $scope.$emit("placesLoaded");
 

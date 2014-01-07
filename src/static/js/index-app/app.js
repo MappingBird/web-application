@@ -1,6 +1,6 @@
 // HTTP solution from
 // http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/
-var IndexApp = angular.module('IndexApp', ['IndexApp.services', 'IndexApp.directives', 'ngCookies', 'ngSanitize', 'ui.bootstrap'], function($httpProvider, $dialogProvider) {
+var IndexApp = angular.module('IndexApp', ['IndexApp.services', 'IndexApp.directives', 'ngCookies', 'ngSanitize', 'ui.bootstrap', 'ui.router'], function($httpProvider, $dialogProvider) {
     // angular bootstrap
     //$dialogProvider.options({dialogFade: true});
 
@@ -57,6 +57,28 @@ var IndexApp = angular.module('IndexApp', ['IndexApp.services', 'IndexApp.direct
 
         return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
     }];
+});
+
+// Routing
+IndexApp.config(function($stateProvider, $urlRouterProvider) {
+
+    // states
+    $stateProvider
+        .state('gettingStarted', {
+            url: '/how-it-works',
+            template: '<span></span>',
+            controller: ['$scope', '$location', function($scope, $location) {
+
+                // TODO: dirty hack... :(
+                var top = $('#how-it-works').offset().top;
+                $(document.body).animate({scrollTop: top}, 800);
+
+            }]
+        });
+
+    // fallback
+    //$urlRouterProvider.otherwise("/");
+
 });
 
 IndexApp.run(function($http, $cookies) {
