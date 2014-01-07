@@ -125,7 +125,7 @@
             <!-- Collections -->
             <div ng-controller="collectionsController" class="collection-list-wrapper" ng-show="showCollectionList">
                 <div class="collection-header">
-                    <a href="#" class="collestion-name" ng-click="showCollections()">
+                    <a href="#" class="collection-name" ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="showCollections()">
                         <i class="icon-expand-collapse"></i>
                         {{activeCollectionName}}
                     </a>
