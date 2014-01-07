@@ -973,6 +973,7 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
     $scope.activeCollectionPoints = [];
     $scope.activeCollectionPointLength = 0;
     $scope.activeCollectionName = '';
+    $scope.collectionsListVisible = false;
     $scope.editMode = false;
 
     // watchers
@@ -1101,20 +1102,33 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
             });
         } else {
             console.log('viewCollection ' + id);
+            $scope.collectionsListVisible = false;
             $state.go('viewCollection', { collectionId: id});
+            BroadcastService.prepForBroadcast({
+                type: 'viewingCollection',
+                data: {}
+            });
         }
     };
 
     $scope.showCollections = function() {
         // toggle between map and collection viewing
         console.log('showCollections');
+        // hide collections list
         if ($scope.mapMode === true) {
+            $scope.collectionsListVisible = true;
             BroadcastService.prepForBroadcast({
                 type: 'viewingCollections',
                 data: {}
             });
+        // show collections list
         } else {
+            $scope.collectionsListVisible = false;
             $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
+            BroadcastService.prepForBroadcast({
+                type: 'viewingCollection',
+                data: {}
+            });
         }
 
     }
