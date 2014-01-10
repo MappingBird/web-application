@@ -462,6 +462,11 @@ a.show-on-map i.icon-show{
 	background-color: #F2F2F2;
 	width: 326px;
 }
+
+.save-content input.fresh {
+	width: 281px;
+}
+
 .save-content input.span2{
 	width: 258px;
 }
