@@ -150,7 +150,7 @@
                         <div class="pin-details pull-left">
                             <h4>{{activeViewPoint.title}}</h4>
                             <input type="text" ng-model="activeViewPoint.title" class="content-title" />
-                            <a ng-href="{{activeViewPoint.url}}" class="ref-url" new-window>{{activeViewPoint.url}}</a>
+                            <a ng-href="{{activeViewPoint.url}}" class="ref-url ellipsis" title="{{activeViewPoint.url}}" new-window>{{activeViewPoint.url}}</a>
                             <p class="ref-context">{{activeViewPoint.description}}</p>
                             <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
                             <div height-to-bottom m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
