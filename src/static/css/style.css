@@ -348,3 +348,11 @@ footer.narrow { padding: 5px 0 0; }
 	height: 500px;
 	overflow: hidden;
 }
+
+.ellipsis {
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+}

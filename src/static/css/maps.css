@@ -424,7 +424,7 @@ a.show-on-map i.icon-show{
 .save-content{
 	background-color: #fff;
 	position: absolute;
-	padding: 15px 40px 141px;
+	padding: 15px 40px 176px;
 	height: -moz-calc(100% - 123px);
 	height: -webkit-calc(100% - 123px);
 	height: calc(100% - 123px);
@@ -462,6 +462,11 @@ a.show-on-map i.icon-show{
 	background-color: #F2F2F2;
 	width: 326px;
 }
+
+.save-content input.fresh {
+	width: 281px;
+}
+
 .save-content input.span2{
 	width: 258px;
 }

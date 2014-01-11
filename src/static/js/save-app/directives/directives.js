@@ -49,7 +49,7 @@ directives.directive('heightToBottom', function() {
 
             // DIRTY DIRTY HACK
             // but in the interest of time...
-            height = $('body').height() - 325;
+            height = $('body').height() - 305;
 
             $element.css('height', height + 'px');
 
@@ -91,7 +91,7 @@ directives.directive('mCustomScrollbarParent', function() {
         scope: false,
         controller: function($scope, $element, $attrs, BroadcastService) {
             // DIRTY HACK
-            var tolerance = 30; // pixels
+            var tolerance = 35; // pixels
             var height = $($('body')[0]).height() - $($('header')[0]).height() - $($('.collection-wrapper')[0]).height() - $($('footer')[0]).height() - tolerance;
             console.log('mCustomScrollbarParent height: ' + height);
             $element.css('height', height + 'px');
