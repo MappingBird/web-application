@@ -42,9 +42,9 @@ section.main form .action-button{
 	display: block;
 	margin-bottom: 15px;
 }
-section.main form input[type="text"],
-section.main form input[type="email"],
-section.main form input[type="password"]{
+
+input[type="text"],
+input[type="password"]{
 	border-radius: 0;
 	background-color: #FFF;
 	width: 360px;
@@ -54,7 +54,7 @@ section.main form input[type="password"]{
 	-moz-box-sizing: border-box;
 }
 form .error-message {
-	display: none;
+
 }
 form .help-inline{
 	padding: 0;
