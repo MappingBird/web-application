@@ -3,7 +3,7 @@
 
   "name": "PinGisom",
   "description": "The PingGismo for chrome extension.",
-  "version": "0.2",
+  "version": "0.6",
 
   "background": {
     "scripts": ["bgscript.js"],

@@ -48,7 +48,8 @@ var chromeContentSettings = {
 			var tab = tabs[0];
 			this.incognito_ = tab.incognito;
 			this.url_ = tab.url;
-			this.tabID_ = tab.id;
+			this.tabID_ = tab.id;			
+			if ("undefined" === typeof this.url_) return;
 
 			chrome.contentSettings.javascript.get({'primaryUrl': this.url_, 'incognito': this.incognito_}, (function(details) {
 				this.url_ ? this.disableToChange_ = this.schemaChrome_regex_.test(this.url_) : this.disableToChange_ = false;
@@ -66,6 +67,8 @@ console.info("DisableToChange=" + this.disableToChange_ + ", " + details.setting
 	
 	changeSettings: function () {		
 		if (!this.disableToChange_) {
+			if ("undefined" === typeof this.url_) return;
+			
 			chrome.contentSettings.javascript.get({'primaryUrl': this.url_, 'incognito': this.incognito_}, (function(details) {
 				setting = details.setting;
 console.info(setting);
@@ -83,6 +86,7 @@ console.info(setting);
 								this.updateControl_({disabled: false, checked: false}) : 
 								this.updateControl_({disabled: false, checked: true});								
 								chrome.tabs.reload(this.tabID_);
+								window.close();
 							//setLocalStorageRule(pattern, newSetting);
 					}).bind(this));
 				}
