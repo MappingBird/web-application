@@ -3,7 +3,7 @@ from fabric.api import *
 from fabric.contrib.console import confirm
 from fabric.contrib.files import exists
 
-env.hosts = ['django@pingismo.com']
+env.hosts = ['django@mappingbird.com']
  
 def get_code():
     with cd('pingismo'):
