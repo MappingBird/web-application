@@ -119,6 +119,9 @@ IndexApp.controller('userController', function($scope, $cookies, $http, $resourc
                 data: { userId: data.id }
             });
 
+            // change location
+            $window.location.href = '/static/app.html';
+
         } else {
 
             console.log('user not logged in');
