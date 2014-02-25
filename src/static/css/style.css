@@ -356,3 +356,8 @@ footer.narrow { padding: 5px 0 0; }
 	white-space: nowrap;
 	width: 100%;
 }
+
+.editable:hover {
+	cursor: pointer;
+	background: #333;
+}
