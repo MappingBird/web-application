@@ -1329,7 +1329,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 lat = $scope.activeViewPoints[len].lat;
                 lng = $scope.activeViewPoints[len].lng;
                 type = $scope.activeViewPoints[len].type || 'scenicspot';
-                name = $scope.activeViewPoints[len].place_name;
+                name = $scope.activeViewPoints[len].title;
                 address = $scope.activeViewPoints[len].place_address;
                 phone = $scope.activeViewPoints[len].phone || '';
                 if ($scope.activeViewPoints[len].images && $scope.activeViewPoints[len].images.length > 0) {
