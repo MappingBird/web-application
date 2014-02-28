@@ -160,26 +160,27 @@ BucketListSmallOverlay.prototype.onAdd = function() {
 
     div.append(icon);
     popup.append(detail);
-    div.append(popup);
-    div.append(check);
+    popup.append(check);
     tip.append('<i></i>');
 
     this.div_ = div[0];
     this.checkmark_ = check;
-    this.popup_ = popup;
+    this.popup_ = popup[0];
     this.icon_ = icon;
     this.tip_ = tip;
 
     // We add an overlay to a map via one of the map's panes.
     // We'll add this overlay to the overlayImage pane.
     var panes = this.getPanes();
-    panes.floatPane.appendChild(div[0]);
+    panes.overlayLayer.appendChild(div[0]);
     icon.addClass('showme').css({'display': 'block'});
+
+    panes.floatPane.appendChild(popup[0]);
     popup.addClass('showme');
 
     // click event for top-right
     if (true) {
-        popup.append(tip);
+        $(popup).append(tip);
         tip.children('i').on('click', function(e){
             self.callback_();
         });
@@ -201,7 +202,7 @@ BucketListSmallOverlay.prototype.onAdd = function() {
 
     // default state
     if (this.defaultState_ === 'closed') {
-        popup.hide();
+        $(popup).hide();
     }
 
     // overlay type
@@ -240,7 +241,7 @@ BucketListSmallOverlay.prototype.setImage = function(imageUrl) {
  * Show checkmark, hide content after point saved
  */
 BucketListSmallOverlay.prototype.save = function() {
-    this.popup_.hide();
+    $(this.popup_).hide();
     this.checkmark_.show();
 };
 
@@ -259,6 +260,12 @@ BucketListSmallOverlay.prototype.draw = function() {
     var div = this.div_;
     div.style.left = (lf.x) + 'px'; // center horizontally
     div.style.top = (lf.y - $(div).height()) + 'px'; // position above vertically
+
+    var popup = this.popup_;
+    $(popup).css({
+        'left' : (lf.x) + 'px', // center horizontally
+        'top' : (lf.y - $(popup).height()) + 'px' // position above vertically
+    });
 
 };
 
