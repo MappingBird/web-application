@@ -111,7 +111,7 @@ BucketListSmallOverlay.prototype.constructor = BucketListSmallOverlay;
 // Overlay for Google maps
 // https://developers.google.com/maps/documentation/javascript/overlays#CustomOverlays
 // Requires jQuery, Google Maps
-function BucketListSmallOverlay(bounds, zoom, image, map, latlng, type, name, address, phone, defaultState, overlayType, callback, point, markerArray) {
+function BucketListSmallOverlay(bounds, zoom, image, map, latlng, type, name, address, phone, defaultState, overlayType, callback, popupClickCallback, point, markerArray) {
     // console.log('BucketListSmallOverlay');
 
     // Now initialize all properties.
@@ -127,6 +127,7 @@ function BucketListSmallOverlay(bounds, zoom, image, map, latlng, type, name, ad
     this.defaultState_ = defaultState || 'open';
     this.overlayType_ = overlayType || 'save';
     this.callback_ = callback;
+    this.popupClickCallback_ = popupClickCallback;
     this.point_ = point || null;
     this.markerArray_ = markerArray;
 
@@ -186,6 +187,9 @@ BucketListSmallOverlay.prototype.onAdd = function() {
     // click event for pin
         $(icon).on('click', function(e){
             e.preventDefault();
+            if (typeof self.popupClickCallback_ === 'function') {
+                self.popupClickCallback_();
+            }
             $(popup).toggle();
         });
     }
@@ -213,6 +217,11 @@ BucketListSmallOverlay.prototype.changeType = function(newType) {
     this.icon_.removeClass('pin-' + this.type_);
     this.type_ = newType;
     this.icon_.addClass('pin-' + this.type_);
+};
+
+// hide open popup
+BucketListSmallOverlay.prototype.hidePopup = function() {
+    $(this.popup_).hide();
 };
 
 // set thumbnail
