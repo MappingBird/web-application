@@ -1191,8 +1191,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         map,
         bounds,
         srcImage = '', // TODO
-        viewOverlays = [],
-        viewMarkers = []
+        viewOverlays = {},
+        viewMarkers = {}
         ;
 
     $scope.$watch(function() { return MapPoints.activeSavePoint; }, function(activeSavePoint) {
@@ -1273,16 +1273,20 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         }
 
         if (viewOverlays.length > 0) {
-            var l = viewOverlays.length;
-            while (l--) {
-                viewOverlays[l].setMap(null);
+            var l;
+            for (l in viewOverlays) {
+                if (Object.prototype.hasOwnProperty.call(viewOverlays, l)) {
+                    viewOverlays[l].setMap(null);
+                }
             }
         }
 
         if (viewMarkers.length > 0) {
-            var x = viewMarkers.length;
-            while (x--) {
-                viewMarkers[x].setMap(null);
+            var x;
+            for (x in viewMarkers) {
+                if (Object.prototype.hasOwnProperty.call(viewMarkers, x)) {
+                    viewMarkers[x].setMap(null);
+                }
             }
         }
 
@@ -1305,7 +1309,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 phone,
                 firstPoint = $scope.activeViewPoints[0],
                 split,
-                srcImage;
+                srcImage,
+                activePoint;
 
                 myLatLng = new google.maps.LatLng(firstPoint.lat, firstPoint.lng);
                 mapOptions.center = myLatLng;
@@ -1361,11 +1366,21 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                                 });
                                 return false;
                             };
+                        })($scope.activeViewPoints[len]),
+                        (function(point) {
+                            return function() {
+                                if (activePoint) {
+                                    viewOverlays[activePoint].hidePopup();
+                                }
+                                activePoint = point.id;
+                                return false;
+                            };
                         })($scope.activeViewPoints[len])
                     );
 
-                viewOverlays.unshift(marker);
-                viewMarkers.unshift(new BucketListPin(bounds, Presets.mapZoom, srcImage, map, myLatLng));
+                viewOverlays[$scope.activeViewPoints[len].id] = marker;
+                viewMarkers[$scope.activeViewPoints[len].id] = new BucketListPin(bounds, Presets.mapZoom, srcImage, map, myLatLng);
+
             }
 
             resetMapSize();
