@@ -725,19 +725,19 @@ ul.types > li{
 .pingismo-pin .pin-misc{
 	background: url(../img/pin-misc.png) 0 0 no-repeat;
 }
-.pingismo-pin .pin-popup{
+.pin-popup{
 	width: 310px;
 	height: 100px;
 	background: url(../img/popup-background.png) 0 0 no-repeat;
-	position: relative;
-	margin-top: -131px;
-	margin-left: 22px;
+	position: absolute;
+	margin-top: -24px;
+	margin-left: 0px;
 	color: #707070;
 	line-height: 16px;
 	overflow: hidden;
 	opacity: 0;
 }
-.pingismo-pin .pin-popup p{
+.pin-popup p{
 	width: 165px;
 	padding: 10px 15px 10px 30px;
 	float: left;
@@ -748,7 +748,7 @@ ul.types > li{
 	padding-left: 15px;
 }
 
-.pingismo-pin .pin-popup strong{
+.pin-popup strong{
 	font-size: 18px;
 	font-weight: normal;
 	color: #fff;
@@ -799,31 +799,31 @@ ul.types > li{
 }
 
 /* Pin - animiation */
-.pingismo-pin .pin-bar.showme{
+.pin-bar.showme{
 	animation: pingismo-pin-bar-anim 0.6s both;
 	-webkit-animation: pingismo-pin-bar-anim 0.6s both;
 }
-.pingismo-pin .pin-hotel.showme{
+.pin-hotel.showme{
 	animation: pingismo-pin-hotel-anim 0.6s both;
 	-webkit-animation: pingismo-pin-hotel-anim 0.6s both;
 }
-.pingismo-pin .pin-mall.showme{
+.pin-mall.showme{
 	animation: pingismo-pin-mall-anim 0.6s both;
 	-webkit-animation: pingismo-pin-mall-anim 0.6s both;
 }
-.pingismo-pin .pin-misc.showme{
+.pin-misc.showme{
 	animation: pingismo-pin-misc-anim 0.6s both;
 	-webkit-animation: pingismo-pin-misc-anim 0.6s both;
 }
-.pingismo-pin .pin-restaurant.showme{
+.pin-restaurant.showme{
 	animation: pingismo-pin-restaurant-anim 0.6s both;
 	-webkit-animation: pingismo-pin-restaurant-anim 0.6s both;
 }
-.pingismo-pin .pin-scenicspot.showme{
+.pin-scenicspot.showme{
 	animation: pingismo-pin-scenicspot-anim 0.6s both;
 	-webkit-animation: pingismo-pin-scenicspot-anim 0.6s both;
 }
-.pingismo-pin .pin-popup.showme{
+.pin-popup.showme{
 	animation: pingismo-pinpopup-anim 0.3s ease-in 0.35s both;
 	-webkit-animation: pingismo-pinpopup-anim 0.3s ease-in 0.35s both;
 }
