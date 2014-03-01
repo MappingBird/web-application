@@ -790,7 +790,7 @@ ul.types > li{
 .pin-popup .pin-popup-img i.is-expanded{
 	background-position: 0 -25px;
 }
-.pingismo-pin .icon-check{
+.pin-popup .icon-check{
 	background: url(../img/icon-checked.png) 0 0 no-repeat;
 	width: 21px;
 	height: 21px;
