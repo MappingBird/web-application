@@ -1,4 +1,6 @@
-
+/**
+ * Bucketlist Overlay prototype
+ */
 
 function BucketListOverlay() {
     return;
@@ -62,6 +64,10 @@ BucketListOverlay.prototype.toggleDOM = function() {
     }
 };
 
+/**
+ * Bucketlist Pin
+ */
+
 BucketListPin.prototype = new BucketListOverlay();
 BucketListPin.prototype.constructor = BucketListPin;
 
@@ -105,13 +111,17 @@ BucketListPin.prototype.onAdd = function() {
     panes.overlayLayer.appendChild(div[0]);
 };
 
+
+/**
+ * Bucketlist Small Overlay
+ */
 BucketListSmallOverlay.prototype = new BucketListOverlay();
 BucketListSmallOverlay.prototype.constructor = BucketListSmallOverlay;
 
 // Overlay for Google maps
 // https://developers.google.com/maps/documentation/javascript/overlays#CustomOverlays
 // Requires jQuery, Google Maps
-function BucketListSmallOverlay(bounds, zoom, image, map, latlng, type, name, address, phone, defaultState, overlayType, callback, popupClickCallback, point, markerArray) {
+function BucketListSmallOverlay(bounds, zoom, image, map, latlng, type, name, address, phone, defaultState, overlayType, callback, popupClickCallback) {
     // console.log('BucketListSmallOverlay');
 
     // Now initialize all properties.
@@ -128,8 +138,6 @@ function BucketListSmallOverlay(bounds, zoom, image, map, latlng, type, name, ad
     this.overlayType_ = overlayType || 'save';
     this.callback_ = callback;
     this.popupClickCallback_ = popupClickCallback;
-    this.point_ = point || null;
-    this.markerArray_ = markerArray;
 
     // We define a property to hold the image's
     // div. We'll actually create this div
@@ -149,6 +157,7 @@ BucketListSmallOverlay.prototype.onAdd = function() {
     // Note: an overlay's receipt of onAdd() indicates that
     // the map's panes are now available for attaching
     // the overlay to the map via the DOM.
+    console.log('add new small overlay');
 
     var div = $('<div class="pingismo-pin" />'),
         icon = $('<a href="#" class="pin-' + this.type_ + '" title="' + this.placeName_ + '"></a>'),
@@ -188,7 +197,11 @@ BucketListSmallOverlay.prototype.onAdd = function() {
     // click event for pin
         $(icon).on('click', function(e){
             e.preventDefault();
+            e.stopPropagation();
+            console.log('clickety clack');
+            console.log(typeof self.popupClickCallback_);
             if (typeof self.popupClickCallback_ === 'function') {
+                console.log('is function');
                 self.popupClickCallback_();
             }
             $(popup).toggle();
@@ -269,8 +282,17 @@ BucketListSmallOverlay.prototype.draw = function() {
 
 };
 
+BucketListSmallOverlay.prototype.onRemove = function() {
+
+    this.div_.parentNode.removeChild(this.div_);
+    this.popup_.parentNode.removeChild(this.popup_);
+
+};
 
 
+/**
+ * Bucketlist Message Overlay
+ */
 BucketListMessageOverlay.prototype = new BucketListOverlay();
 BucketListMessageOverlay.prototype.constructor = BucketListMessageOverlay;
 
@@ -344,7 +366,9 @@ BucketListMessageOverlay.prototype.draw = function() {
 
 };
 
-
+/**
+ * Bucketlist Large Overlay
+ */
 BucketListLargeOverlay.prototype = new BucketListOverlay();
 BucketListLargeOverlay.prototype.constructor = BucketListLargeOverlay;
 

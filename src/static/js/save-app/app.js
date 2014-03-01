@@ -190,8 +190,6 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
 });
 
 SaveApp.run(function($http, $cookies) {
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!run!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-    console.log($cookies.csrftoken);
     $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
 });
 
@@ -397,7 +395,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
         $scope.halfMap = true;
-        resetMapSize();
+        //resetMapSize();
     }
 
     // collection viewing mode
@@ -412,7 +410,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = true;
         $scope.halfMap = false;
-        resetMapSize();
+        //resetMapSize();
     }
 
     function reloadCollections() {
@@ -1067,13 +1065,15 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
                 }
                 break;
             case 'viewingCollection':
-                if (BroadcastService.message.data.collectionId != -1) {
+                if (BroadcastService.message.data.collectionId != -1
+                    && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
                     $scope.activeCollectionId = BroadcastService.message.data.collectionId;
                     refreshCollectionPoints($scope.activeCollectionId);
                 }
                 break;
             case 'pointSelected':
-                if (BroadcastService.message.data.collectionId != -1) {
+                if (BroadcastService.message.data.collectionId != -1
+                    && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
                     $scope.activeCollectionId = BroadcastService.message.data.collectionId;
                     refreshCollectionPoints($scope.activeCollectionId);
                 }
@@ -1191,8 +1191,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         map,
         bounds,
         srcImage = '', // TODO
-        viewOverlays = {},
-        viewMarkers = {}
+        viewOverlays = {}
         ;
 
     $scope.$watch(function() { return MapPoints.activeSavePoint; }, function(activeSavePoint) {
@@ -1272,27 +1271,17 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             saveMarker.setMap(null);
         }
 
-        if (viewOverlays.length > 0) {
-            var l;
-            for (l in viewOverlays) {
-                if (Object.prototype.hasOwnProperty.call(viewOverlays, l)) {
-                    viewOverlays[l].setMap(null);
-                }
+        // clear overlays
+        var l;
+        for (l in viewOverlays) {
+            console.log('clearing overlays');
+            if (Object.prototype.hasOwnProperty.call(viewOverlays, l)) {
+                console.log('clearing overlay: ' + l);
+                viewOverlays[l].setMap(null);
             }
         }
-
-        if (viewMarkers.length > 0) {
-            var x;
-            for (x in viewMarkers) {
-                if (Object.prototype.hasOwnProperty.call(viewMarkers, x)) {
-                    viewMarkers[x].setMap(null);
-                }
-            }
-        }
-
-        // clear map
-        // viewOverlays.splice(0, viewOverlays.length);
-        // viewMarkers.splice(0, viewMarkers.length);
+        viewOverlays = {};
+        console.log(viewOverlays);
 
         if ($scope.activeViewPoints && $scope.activeViewPoints.length > 0) {
 
@@ -1328,6 +1317,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
             map.fitBounds(bounds);
 
+            console.log('number of active view points: ' + len);
 
             // place markers
             while (len--) {
@@ -1354,22 +1344,24 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                         'view',
                         (function(point) {
                             return function() {
+                                console.log('------------------------POINT CLICK');
                                 $state.go('viewPoint', { pointId: point.id, collectionId: point.collection});
 
                                 /*
                                 $scope.activeViewPoint = point;
                                 console.log(point);
                                 */
-                                google.maps.event.addListener(map, 'bounds_changed', function() {
+                                google.maps.event.addListener(map, 'resize', function() {
                                     map.panTo(new google.maps.LatLng(lat, lng));
-                                    google.maps.event.clearListeners(map, 'bounds_changed');
+                                    google.maps.event.clearListeners(map, 'resize');
                                 });
+
                                 return false;
                             };
                         })($scope.activeViewPoints[len]),
                         (function(point) {
                             return function() {
-                                if (activePoint) {
+                                if (activePoint && activePoint !== point.id && viewOverlays[activePoint]) {
                                     viewOverlays[activePoint].hidePopup();
                                 }
                                 activePoint = point.id;
@@ -1379,11 +1371,13 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                     );
 
                 viewOverlays[$scope.activeViewPoints[len].id] = marker;
-                viewMarkers[$scope.activeViewPoints[len].id] = new BucketListPin(bounds, Presets.mapZoom, srcImage, map, myLatLng);
 
             }
 
-            resetMapSize();
+            console.log('viewOverlays post marker');
+            console.log(viewOverlays);
+
+            //resetMapSize();
 
         }
     }
@@ -1397,6 +1391,22 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
     function updateSavePointImage (imageUrl) {
         if (saveOverlay && saveOverlay.setImage) {
             saveOverlay.setImage(imageUrl);
+        }
+    }
+
+    function removeActiveViewPoint (id) {
+
+        console.log('removeActiveViewPoint: ' + id);
+
+        if (id) {
+
+            if (viewOverlays[id]) {
+                console.log('deleted overlay exists');
+                viewOverlays[id].setMap(null);
+                delete viewOverlays[id];
+                console.log(typeof viewOverlays[id]);
+            }
+
         }
     }
 
@@ -1429,6 +1439,9 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             case 'collectionViewingMode':
                 displayActiveViewPoints();
                 break;
+            case 'pointDeleted':
+                removeActiveViewPoint(BroadcastService.message.data.id);
+                break;
             case 'pointSavingMode':
                 displayActiveSavePoint();
                 break;
@@ -1443,11 +1456,11 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 break;
         }
     });
-
+/*
     $scope.$on('mapChange', function(){
         resetMapSize();
     });
-
+*/
 });
 
 SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage) {
@@ -1456,6 +1469,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
     $scope.selectedPointImages = [];
     $scope.deselectedPointImages = [];
     $scope.pointEditMode = false;
+    $scope.pointDeleteError = false;
     $scope.activeViewPointId = -1;
     $scope.showSelectCollection = false;
     $scope.showDeletePoint = false;
@@ -1661,11 +1675,24 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
     };
 
     $scope.deletePoint = function() {
+
+        console.log('deletePoint');
+
         PointResource.delete({ id: $scope.activeViewPoint.id }, function() {
+
+            console.log('deletePoint return true');
+
+            BroadcastService.prepForBroadcast({
+                type: 'pointDeleted',
+                data: { 'id' : $scope.activeViewPoint.id }
+            });
+
             $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
             $scope.pointEditMode = false;
             $scope.unselectPointForDelete();
-        })
+        }, function() {
+            $scope.pointDeleteError = true;
+        });
     };
 
 });
