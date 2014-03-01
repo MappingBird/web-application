@@ -395,7 +395,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
         $scope.halfMap = true;
-        //resetMapSize();
+        resetMapSize();
     }
 
     // collection viewing mode
@@ -410,7 +410,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = true;
         $scope.halfMap = false;
-        //resetMapSize();
+        resetMapSize();
     }
 
     function reloadCollections() {
@@ -1229,10 +1229,19 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         MapPoints.activeViewPoint = activeViewPoint;
     });
 
-    function resetMapSize() {
+    function resetMapSize(callback) {
         console.log('resetMapSize');
         if (typeof map !== 'undefined') {
-            google.maps.event.trigger(map, "resize");
+            $('#map').on('transitionend.resize', function() {
+                google.maps.event.trigger(map, "resize");
+                $('map').off('transitionend.resize');
+            });
+        }
+
+        if (typeof callback === 'function') {
+            $('#map').on('transitionend', function() {
+                callback();
+            });
         }
     }
 
@@ -1258,6 +1267,35 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             saveOverlay = new BucketListSmallOverlay(bounds, Presets.mapZoom, srcImage, map, myLatLng, type, $scope.activeSavePoint.name, $scope.activeSavePoint.address, $scope.activeSavePoint.phone, 'open', 'save');
             saveMarker = new BucketListPin(bounds, Presets.mapZoom, srcImage, map, myLatLng);
         }
+    }
+
+    // http://stackoverflow.com/questions/10656743/how-to-offset-the-center-point-in-google-maps-api-v3
+    function offsetCenter(latlng,offsetx,offsety) {
+
+        // latlng is the apparent centre-point
+        // offsetx is the distance you want that point to move to the right, in pixels
+        // offsety is the distance you want that point to move upwards, in pixels
+        // offset can be negative
+        // offsetx and offsety are both optional
+
+        var scale = Math.pow(2, map.getZoom());
+        var nw = new google.maps.LatLng(
+            map.getBounds().getNorthEast().lat(),
+            map.getBounds().getSouthWest().lng()
+        );
+
+        var worldCoordinateCenter = map.getProjection().fromLatLngToPoint(latlng);
+        var pixelOffset = new google.maps.Point((offsetx/scale) || 0,(offsety/scale) ||0)
+
+        var worldCoordinateNewCenter = new google.maps.Point(
+            worldCoordinateCenter.x - pixelOffset.x,
+            worldCoordinateCenter.y + pixelOffset.y
+        );
+
+        var newCenter = map.getProjection().fromPointToLatLng(worldCoordinateNewCenter);
+
+        map.panTo(newCenter);
+
     }
 
     function displayActiveViewPoints () {
@@ -1317,8 +1355,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
             map.fitBounds(bounds);
 
-            console.log('number of active view points: ' + len);
-
             // place markers
             while (len--) {
                 lat = $scope.activeViewPoints[len].lat;
@@ -1344,17 +1380,19 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                         'view',
                         (function(point) {
                             return function() {
-                                console.log('------------------------POINT CLICK');
-                                $state.go('viewPoint', { pointId: point.id, collectionId: point.collection});
 
-                                /*
-                                $scope.activeViewPoint = point;
-                                console.log(point);
-                                */
-                                google.maps.event.addListener(map, 'resize', function() {
-                                    map.panTo(new google.maps.LatLng(lat, lng));
-                                    google.maps.event.clearListeners(map, 'resize');
+                                // pan to offset if not full map, otherwise just pan to center
+                                $('#map').on('transitionend.' + point.id, function() {
+                                        if ($scope.fullMap) {
+                                            map.panTo(new google.maps.LatLng(point.lat, point.lng));
+                                        } else {
+                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
+                                        }
+
+                                    $('#map').off('transitionend.' + point.id);
                                 });
+
+                                $state.go('viewPoint', { pointId: point.id, collectionId: point.collection});
 
                                 return false;
                             };
@@ -1365,6 +1403,14 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                                     viewOverlays[activePoint].hidePopup();
                                 }
                                 activePoint = point.id;
+
+                                /*
+                                $('#map').on('transitionend.' + point.id, function() {
+                                    map.panTo(new google.maps.LatLng(point.lat, point.lng));
+                                    $('#map').off('transitionend.' + point.id);
+                                });
+*/
+
                                 return false;
                             };
                         })($scope.activeViewPoints[len])
