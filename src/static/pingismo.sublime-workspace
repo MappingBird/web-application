@@ -4,6 +4,90 @@
 		"selected_items":
 		[
 			[
+				"maker",
+				"marker"
+			],
+			[
+				"del",
+				"deletePoint"
+			],
+			[
+				"pointD",
+				"pointDeleted"
+			],
+			[
+				"app",
+				"appendChild"
+			],
+			[
+				"popup",
+				"popupClickCallback_"
+			],
+			[
+				"active",
+				"activePoint"
+			],
+			[
+				"view",
+				"viewOverlays"
+			],
+			[
+				"Mapp",
+				"MappingBird"
+			],
+			[
+				"anc",
+				"anchorScroll"
+			],
+			[
+				"collection",
+				"collections-menu"
+			],
+			[
+				"trigger",
+				"triggerEvent"
+			],
+			[
+				"cookie",
+				"cookieArray"
+			],
+			[
+				"cook",
+				"cookieArray"
+			],
+			[
+				"gen",
+				"generateUser"
+			],
+			[
+				"poin",
+				"pointImages"
+			],
+			[
+				"phot",
+				"photo-obj"
+			],
+			[
+				"migrated",
+				"migrateGeneratedUser"
+			],
+			[
+				"place",
+				"placesRequest"
+			],
+			[
+				"act",
+				"activeCollectionId"
+			],
+			[
+				"res",
+				"resetImages"
+			],
+			[
+				"check",
+				"checkInput"
+			],
+			[
 				"pre",
 				"preventDefault"
 			],
@@ -22,14 +106,6 @@
 			[
 				"acti",
 				"activeCollectionId"
-			],
-			[
-				"act",
-				"activeSavePoint"
-			],
-			[
-				"active",
-				"activeSavePoint"
 			],
 			[
 				"savePoint",
@@ -96,10 +172,6 @@
 				"collectionsController"
 			],
 			[
-				"view",
-				"viewingCollection"
-			],
-			[
 				"sta",
 				"stateChange"
 			],
@@ -110,10 +182,6 @@
 			[
 				"user",
 				"userLoaded"
-			],
-			[
-				"collection",
-				"collectionId"
 			],
 			[
 				"stae",
@@ -300,10 +368,6 @@
 				"collectionViewingMode"
 			],
 			[
-				"check",
-				"checkmark_"
-			],
-			[
 				"load",
 				"loadCollections"
 			],
@@ -436,10 +500,138 @@
 	"buffers":
 	[
 		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 23214,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/index-app/app.js",
+			"settings":
+			{
+				"buffer_size": 4502,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/mike/Documents/baycitykitchenbath/2.0/htdocs/index.php",
+			"settings":
+			{
+				"buffer_size": 9188,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "login.html",
+			"settings":
+			{
+				"buffer_size": 6637,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "css/maps.css",
+			"settings":
+			{
+				"buffer_size": 28924,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "css/style.css",
+			"settings":
+			{
+				"buffer_size": 7895,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "css/account.css",
+			"settings":
+			{
+				"buffer_size": 1167,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/save-app/app.js",
+			"settings":
+			{
+				"buffer_size": 57409,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app.html",
+			"settings":
+			{
+				"buffer_size": 22905,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/mod.bucketlist.overlay.js",
+			"settings":
+			{
+				"buffer_size": 16176,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/mike/Documents/pingismo/src/django/api/views.py",
+			"settings":
+			{
+				"buffer_size": 5172,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/save-app/services/services.js",
+			"settings":
+			{
+				"buffer_size": 6431,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/save-app/directives/directives.js",
+			"settings":
+			{
+				"buffer_size": 18239,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/login-app/services/services.js",
+			"settings":
+			{
+				"buffer_size": 2193,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/login-app/app.js",
+			"settings":
+			{
+				"buffer_size": 3724,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/signup-app/app.js",
+			"settings":
+			{
+				"buffer_size": 4869,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "signup.html",
 			"settings":
 			{
-				"buffer_size": 3347,
+				"buffer_size": 8279,
 				"line_ending": "Unix"
 			}
 		}
@@ -451,19 +643,31 @@
 		"selected_items":
 		[
 			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"pacckage",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Discover Packages"
+			],
+			[
+				"piac",
+				"Package Control: Install Package"
+			],
+			[
+				"packages",
+				"Package Control: Install Package"
+			],
+			[
 				"install",
 				"Package Control: Install Package"
 			],
 			[
 				"",
-				"Package Control: Install Package"
-			],
-			[
-				"package",
-				"Preferences: Browse Packages"
-			],
-			[
-				"Package Control: ",
 				"Package Control: Install Package"
 			],
 			[
@@ -483,7 +687,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 467.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -500,20 +704,66 @@
 	},
 	"file_history":
 	[
+		"/home/mike/Documents/pingismo/src/static/js/save-app/utilities.js",
+		"/home/mike/Documents/pingismo/src/static/app.html",
+		"/home/mike/Documents/pingismo/src/static/prototype_assets/css/style.css",
+		"/home/mike/Documents/pingismo/src/static/js/save-app/directives/directives.js",
+		"/home/mike/Documents/pingismo/src/chrome_extension/manifest.json",
+		"/home/mike/Documents/pingismo/src/chrome_extension/app.html",
+		"/home/mike/Documents/pingismo/src/chrome_extension/js/save-app/contentscript.js",
+		"/home/mike/Documents/pingismo/src/chrome_extension/js/save-app/app.js",
+		"/home/mike/Documents/baycitykitchenbath/2.0/application/controllers/Welcome.php",
+		"/home/mike/Documents/baycitykitchenbath/2.0/application/controllers/projects.php",
+		"/home/mike/Documents/baycitykitchenbath/2.0/application/controllers/home.php",
+		"/home/mike/Documents/baycitykitchenbath/2.0/application/controllers/products.php",
+		"/home/mike/Documents/baycitykitchenbath/2.0/application/controllers/index.html",
+		"/home/mike/Documents/pingismo/src/chrome_extension/js/vendor/angular/angular-route.min.js",
+		"/home/mike/Documents/pingismo/src/chrome_extension/js/vendor/angular/angular.js",
+		"/home/mike/Documents/bucketlist/prototypes ver 2/js/maps.js",
+		"/home/mike/Documents/bucketlist/prototypes ver 2/save.html",
+		"/home/mike/Documents/pingismo/src/static/prototype_assets/css/account.css",
+		"/home/mike/Documents/pingismo/src/static/index.html",
+		"/home/mike/Documents/pingismo/src/static/css/index.css",
+		"/home/mike/Documents/pingismo/src/static/prototype_assets/css/index.css",
+		"/home/mike/Documents/pingismo/src/static/js/index-app/app.js",
+		"/home/mike/Documents/pingismo/src/static/js/signup-app/services/services.js",
+		"/home/mike/Documents/artinfo-2.0/ArtInfo-2.0/src/system/application/config/config.php",
+		"/home/mike/Documents/artinfo-2.0/ArtInfo-2.0/src/htdocs/index.php",
+		"/home/mike/Documents/pingismo/src/static/css/style.css",
+		"/home/mike/Documents/pingismo/src/static/js/index-app/directives/directives.js",
+		"/home/mike/Documents/pingismo/src/static/js/vendor/angular/angular.js",
+		"/home/mike/Documents/pingismo/src/static/js/vendor/angular/angular.min.js",
+		"/home/mike/Documents/pingismo/src/static/signup.html",
+		"/home/mike/Documents/pingismo/src/static/login.html",
+		"/home/mike/Documents/pingismo/src/static/css/maps.css",
+		"/home/mike/Documents/pingismo/src/static/js/save-app/templates/point.html",
+		"/home/mike/Documents/pingismo/src/django/api/permissions.py",
+		"/home/mike/Documents/pingismo/src/django/api/views.py",
+		"/home/mike/Documents/pingismo/src/django/api/models.py",
+		"/home/mike/Documents/pingismo/src/static/js/index-app/services/services.js",
+		"/home/mike/Documents/pingismo/src/static/js/vendor/momentjs/moment.min.js",
+		"/home/mike/Documents/pingismo/src/static/js/mod.bucketlist.overlay.js",
+		"/home/mike/Documents/pingismo/src/static/js/save-app/app.js",
+		"/home/mike/Documents/pingismo/src/static/js/save-app/services/services.js",
+		"/home/mike/Documents/pingismo/src/static/js/login-app/services/services.js",
+		"/home/mike/Documents/pingismo/src/static/js/login-app/app.js",
+		"/home/mike/Documents/pingismo/src/static/js/signup-app/app.js",
+		"/home/mike/Documents/bucketlist/src/application/models/point_model.php",
+		"/home/mike/Documents/bucketlist/src/application/models/collection_model.php",
+		"/home/mike/Documents/pingismo/src/django/api/urls.py",
+		"/home/mike/Documents/bucketlist/prototypes ver 2/login.html",
+		"/home/mike/Documents/pingismo/src/django/pingismo/settings/base.py",
+		"/home/mike/Documents/bucketlist/prototypes ver 2/account_created.html",
+		"/home/mike/Documents/pingismo/src/static/js/signup-app/controllers/mainController.js",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/save-app/directives/directives.js",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/save-app/services/services.js",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/save-app/utilities.js",
-		"/home/mike/Documents/pingismo/src/static/js/save-app/app.js",
-		"/home/mike/Documents/pingismo/src/static/js/save-app/services/services.js",
 		"/home/mike/Documents/bucketlist/src/htdocs/css/style.css",
 		"/home/mike/Documents/bucketlist/src/htdocs/css/maps.css",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/mod.bucketlist.overlay.js",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/bookmarklet.js",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/save-app/app.js",
 		"/home/mike/Documents/bucketlist/src/application/views/home.php",
-		"/home/mike/Documents/pingismo/src/static/app.html",
-		"/home/mike/Documents/pingismo/src/static/signup.html",
-		"/home/mike/Documents/pingismo/src/static/index.html",
 		"/home/mike/Documents/bucketlist/src/htdocs/app.html",
 		"/home/mike/Documents/bucketlist/prototypes ver 2/index.html",
 		"/home/mike/Documents/bucketlist/src/htdocs/css/index.css",
@@ -523,16 +773,13 @@
 		"/home/mike/Documents/bucketlist/prototypes ver 2/js/pingismo.js",
 		"/home/mike/Documents/bucketlist/src/application/libraries/REST_Controller.php",
 		"/home/mike/Documents/bucketlist/src/application/libraries/Format.php",
-		"/home/mike/Documents/bucketlist/prototypes ver 2/save.html",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/save-app/templates/partials/point_detail.html",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/save-app/templates/partials/collection_list.html",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/save-app/templates/partials/user_panel.html",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/save-app/templates/partials/save_panel.html",
-		"/home/mike/Documents/bucketlist/src/application/models/collection_model.php",
 		"/home/mike/Documents/bucketlist/src/application/models/forgotpassword_model.php",
 		"/home/mike/Documents/bucketlist/src/application/models/image_model.php",
 		"/home/mike/Documents/bucketlist/src/application/models/index.html",
-		"/home/mike/Documents/bucketlist/src/application/models/point_model.php",
 		"/home/mike/Documents/bucketlist/src/application/models/user_model.php",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/vendor/jquery/jquery-1.10.2.min.js",
 		"/home/mike/Documents/bucketlist/src/application/views/save.php",
@@ -542,7 +789,6 @@
 		"/home/mike/Documents/bucketlist/src/htdocs/js/page.maps.js",
 		"/home/mike/Documents/bucketlist/prototypes ver 2/css/index.css",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/page.save.js",
-		"/home/mike/Documents/bucketlist/prototypes ver 2/js/maps.js",
 		"/home/mike/Documents/bucketlist/build/build.xml",
 		"/home/mike/Documents/bucketlist/src/application/controllers/blapi.php",
 		"/home/mike/Documents/bucketlist/prototypes ver 2/js/photo.js",
@@ -551,7 +797,6 @@
 		"/home/mike/Documents/bucketlist/src/application/config/rest.php",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/save-app/views/dialog_add_new_collection.html",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/save-app/views/dialog_add_new_collection",
-		"/home/mike/Documents/bucketlist/prototypes ver 2/login.html",
 		"/home/mike/Documents/bucketlist/src/htdocs/js/page.signup.js",
 		"/home/mike/Documents/bucketlist/src/application/views/signup.php",
 		"/home/mike/Documents/bucketlist/prototypes ver 2/signup.html",
@@ -580,6 +825,66 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"viewmarker",
+			"savePointChanges",
+			"update",
+			"viewmarkers",
+			"BucketListSmallOverlay",
+			"logo",
+			"function",
+			"pingismo",
+			"usercontroller",
+			"google",
+			"src=\"/static/",
+			"href=\"/static/",
+			"collestion-name",
+			".pingismo-btn-group.btn-group .collections-menu",
+			"custom",
+			"custome",
+			"placesLoaded",
+			"gu.pingismo.com",
+			"csrf",
+			"userloaded",
+			"csrftoken",
+			"lat",
+			"showNoSearchQueryPoint",
+			"nosearchresults",
+			"displayActiveSavePoint",
+			"attrs",
+			"element",
+			"scope",
+			"csrf",
+			"LoginApp",
+			"#map",
+			"fetchPlacesSearchResults",
+			"searchplaces",
+			"map",
+			"fetchPlacesSearchResults",
+			"sear",
+			"pointSelected",
+			"viewingCollection",
+			"pointselected",
+			"overlay",
+			"app.html",
+			"_id",
+			"coordinates",
+			"gps_coords",
+			"user_id",
+			"pageData.text",
+			"point_id",
+			"collection_id",
+			"icon-proceed",
+			"src=\"/img/",
+			"src=\"img/",
+			"src=img/",
+			"src=\"img/",
+			"href=\"css/",
+			"SignupApp",
+			"blapi",
+			"num",
+			"num_of_points",
+			"savecollection",
+			"SaveApp",
 			"signup",
 			"href=\"css/",
 			"src=\"js/",
@@ -647,67 +952,7 @@
 			"proceed",
 			"pointDetailController",
 			"pointSelected",
-			"activeViewPoints",
-			"mktime",
-			"<?",
-			"<?=base_url()?>",
-			"bkl_user",
-			"reloadCollections",
-			"displayActiveSavePoint",
-			"del-pin-content-btn",
-			"collections-selection",
-			"collections-menu",
-			".exist",
-			"selectedPageImages",
-			"default",
-			"console",
-			"pageImages",
-			"pageimages",
-			"pin-content-wrapper",
-			"pingismo-content-wrapper",
-			"markerarray",
-			"console.log",
-			"lf'",
-			"console",
-			"placesL",
-			"placesloaded",
-			"location-list",
-			"m-custom-scrollbar",
-			"$timeout",
-			"activesavepoint",
-			"activePoint",
-			"activepoint",
-			"statechange",
-			"no col",
-			"Point",
-			"activeCollectionIndex",
-			"selectcollection",
-			"activecollection",
-			"selectCollection",
-			"collections",
-			"mapRetr",
-			"for",
-			"thumb",
-			"activePoint",
-			"save-content",
-			"overlay",
-			"scenicspot",
-			"pin",
-			"pageDat",
-			"photo-obj",
-			"picPhotoObj",
-			"$apply",
-			"pageData",
-			"map",
-			"transition",
-			"selectCollection",
-			"default",
-			"collection-",
-			"prepForBroadcast",
-			"pointSaveComplete",
-			"alert",
-			"most_recent_modified_collection",
-			"save"
+			"activeViewPoints"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -715,6 +960,22 @@
 		"regex": false,
 		"replace_history":
 		[
+			"public function",
+			"src=\"",
+			"href=\"",
+			"collection-name",
+			".collections-menu",
+			"$attrs",
+			"$element",
+			"$scope",
+			"IndexApp",
+			"coordinates",
+			"src=\"/static/img/",
+			"href=\"/static/css/",
+			"href=\"/static/css/\"",
+			"LoginApp",
+			"api",
+			"SignupApp",
 			"href=\"/static/css/",
 			"src=\"/static/js/",
 			"href=\"/static/css/",
@@ -748,15 +1009,291 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 10,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "signup.html",
+					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 3347,
+						"buffer_size": 23214,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								117,
+								117
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/index-app/app.js",
+					"settings":
+					{
+						"buffer_size": 4502,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2816,
+								2816
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 684.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/mike/Documents/baycitykitchenbath/2.0/htdocs/index.php",
+					"settings":
+					{
+						"buffer_size": 9188,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3278,
+								3278
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1254.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "login.html",
+					"settings":
+					{
+						"buffer_size": 6637,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								507,
+								507
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "css/maps.css",
+					"settings":
+					{
+						"buffer_size": 28924,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								21981,
+								21981
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 14380.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "css/style.css",
+					"settings":
+					{
+						"buffer_size": 7895,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7892,
+								7892
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6156.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "css/account.css",
+					"settings":
+					{
+						"buffer_size": 1167,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								163,
+								163
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 133.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "js/save-app/app.js",
+					"settings":
+					{
+						"buffer_size": 57409,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								54647,
+								54647
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 30777.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app.html",
+					"settings":
+					{
+						"buffer_size": 22905,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								211,
+								211
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "js/mod.bucketlist.overlay.js",
+					"settings":
+					{
+						"buffer_size": 16176,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								144,
+								144
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/home/mike/Documents/pingismo/src/django/api/views.py",
+					"settings":
+					{
+						"buffer_size": 5172,
 						"regions":
 						{
 						},
@@ -769,12 +1306,180 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 380.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "js/save-app/services/services.js",
+					"settings":
+					{
+						"buffer_size": 6431,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1748,
+								1748
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1026.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "js/save-app/directives/directives.js",
+					"settings":
+					{
+						"buffer_size": 18239,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "js/login-app/services/services.js",
+					"settings":
+					{
+						"buffer_size": 2193,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1667,
+								1667
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 969.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "js/login-app/app.js",
+					"settings":
+					{
+						"buffer_size": 3724,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3285,
+								3285
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 779.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "js/signup-app/app.js",
+					"settings":
+					{
+						"buffer_size": 4869,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4648,
+								4648
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 361.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "signup.html",
+					"settings":
+					{
+						"buffer_size": 8279,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								499,
+								499
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 76.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -843,7 +1548,7 @@
 		"width": 380.0
 	},
 	"show_minimap": true,
-	"show_open_files": false,
+	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 211.0,
