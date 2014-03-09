@@ -1398,18 +1398,30 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                             };
                         })($scope.activeViewPoints[len]),
                         (function(point) {
-                            return function() {
+                            return function(x, y) {
                                 if (activePoint && activePoint !== point.id && viewOverlays[activePoint]) {
                                     viewOverlays[activePoint].hidePopup();
                                 }
                                 activePoint = point.id;
 
-                                /*
-                                $('#map').on('transitionend.' + point.id, function() {
-                                    map.panTo(new google.maps.LatLng(point.lat, point.lng));
-                                    $('#map').off('transitionend.' + point.id);
-                                });
-*/
+                                var mapWidth = $('#map').width(),
+                                    mapHeight = $('#map').height(),
+                                    mapOffsetLeft = $('#map').offset().left,
+                                    mapOffsetTop = $('#map').offset().top,
+                                    popupWidth = 310, // hard-coded from maps.css
+                                    popupHeight = 100 // hard-coded from maps.css
+                                    ;
+
+                                if (mapOffsetLeft + mapWidth - x < popupWidth ||
+                                    mapOffsetTop + mapHeight - y < popupHeight ||
+                                    y - mapOffsetTop < popupHeight
+                                    ) {
+                                    if ($scope.fullMap) {
+                                            map.panTo(new google.maps.LatLng(point.lat, point.lng));
+                                        } else {
+                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
+                                        }
+                                }
 
                                 return false;
                             };

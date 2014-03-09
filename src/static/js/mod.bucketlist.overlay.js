@@ -198,11 +198,11 @@ BucketListSmallOverlay.prototype.onAdd = function() {
         $(icon).on('click', function(e){
             e.preventDefault();
             e.stopPropagation();
-            console.log('clickety clack');
-            console.log(typeof self.popupClickCallback_);
+            var posX = $(this).offset().left,
+                posY = $(this).offset().top;
+
             if (typeof self.popupClickCallback_ === 'function') {
-                console.log('is function');
-                self.popupClickCallback_();
+                self.popupClickCallback_(posX, posY);
             }
             $(popup).toggle();
         });
