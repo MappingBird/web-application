@@ -1521,7 +1521,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 */
 });
 
-SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage) {
+SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage, User, Collection) {
 
     $scope.pointImages = [];
     $scope.selectedPointImages = [];
@@ -1529,6 +1529,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
     $scope.pointEditMode = false;
     $scope.pointDeleteError = false;
     $scope.activeViewPointId = -1;
+    $scope.newCollectionName = '';
     $scope.showSelectCollection = false;
     $scope.showDeletePoint = false;
     $scope.activeViewPoint;
@@ -1650,11 +1651,6 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
         $scope.activeViewPoint.type = t;
     };
 
-    $scope.selectPointCollection = function(new_id) {
-        console.log('new collection id: ' + new_id);
-        $scope.activeViewPoint.collection = new_id;
-    };
-
     $scope.togglePointEditMode = function() {
 
         // saved / clicked "Done"
@@ -1698,7 +1694,6 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
                     deletedImageUrl = $scope.activeViewPoint.images[len2].url;
 
-                    console.log('delete image: ' + $scope.activeViewPoint.images[len2].id);
                     PointImage.delete({id: $scope.activeViewPoint.images[len2].id}, function(){
 
                         var lenImages = $scope.pointImages.length;
@@ -1713,9 +1708,10 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
                             }
                         }
 
+                        delete $scope.activeViewPoint.images[len2];
+
                     });
-                    console.log('delete image from activeViewPoint: ' + $scope.activeViewPoint.images[len2]);
-                    delete $scope.activeViewPoint.images[len2];
+
                     break;
                 }
 
@@ -1734,8 +1730,54 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
         }
         console.log('selectCollection');
         console.log('saveCollectionId: ' + id);
+        $scope.activeViewPoint.collection = id;
         $scope.activeCollectionId = id;
         $scope.showSelectCollection = false; // close the selector
+    };
+
+    $scope.saveNewCollection = function($e) {
+        if (typeof $e.stopPropagation === 'function') {
+            $e.stopPropagation();
+        }
+        console.log('saveNewCollection');
+        console.log($scope.newCollectionName);
+        console.log($scope.newCollectionName.length);
+
+        function save(d) {
+            //var newCollection = new Collection();
+            Collection.save(d, function(data, headers){
+                console.log('saveNewCollection successful');
+                console.log(data);
+                $scope.collections.push(data);
+
+                // set this collection as active collection
+                $scope.selectPointCollection(data.id);
+
+                // blank the form
+                $scope.newCollectionName = '';
+            });
+
+            // send event
+            BroadcastService.prepForBroadcast({
+                type: 'collectionUpdate',
+                data: { }
+            });
+        }
+
+        // check that collection name is entered
+        if ($scope.newCollectionName.length > 0) {
+
+            save({ name: $scope.newCollectionName, user: User.data.id });
+
+        } else {
+
+            // error
+            console.log('no new collection name error');
+            $scope.noCollectionError = true;
+
+        }
+
+
     };
 
     // user has selected to delete point, show confirm dialog
