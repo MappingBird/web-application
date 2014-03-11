@@ -1087,18 +1087,19 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         $scope.activeCollectionId = id;
     };
 
-    $scope.clickCollection = function(id) {
+    $scope.clickCollection = function(id, name) {
         console.log('clickCollection');
         console.log(id);
 
         // edit mode - delete collection
         if ($scope.editMode) {
             console.log('delete collection: ' + id);
-            Collection.delete({id: id}, function(data, headers){
-                BroadcastService.prepForBroadcast({
-                    type: 'collectionUpdate',
-                    data: {}
-                });
+            BroadcastService.prepForBroadcast({
+                type: 'requestDeleteCollection',
+                data: {
+                    collectionToBeDeletedId: id,
+                    collectionToBeDeletedName: name
+                }
             });
         } else {
             console.log('viewCollection ' + id);
@@ -1162,6 +1163,22 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
     $scope.toggleEditMode = function() {
         $scope.editMode = !$scope.editMode;
     };
+
+
+    $scope.$on('stateChange', function() {
+        console.log ('[[[stateChange collectionsController]]]');
+        console.log (BroadcastService.message.type);
+        switch (BroadcastService.message.type) {
+            case 'deleteCollection':
+                Collection.delete({id: BroadcastService.message.collectionToBeDeletedId}, function(data, headers){
+                    BroadcastService.prepForBroadcast({
+                        type: 'collectionUpdate',
+                        data: {}
+                    });
+                });
+                break;
+        }
+    });
 
 
 });
