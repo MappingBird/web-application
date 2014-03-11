@@ -155,16 +155,46 @@ directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
             $scope.alertActive = false;
 
             $scope.$on('stateChange', function() {
-                if (typeof BroadcastService.message == 'object' &&
-                    BroadcastService.message.type == 'pointSaveComplete') {
-                    $scope.alertActive = true;
-                    $scope.message = $sce.trustAsHtml('A new place was saved to <strong>' + BroadcastService.message.data.savedCollectionName + '</strong> successfully. :)');
+                if (typeof BroadcastService.message == 'object') {
+                    switch (BroadcastService.message.type) {
+                        case 'pointSaveComplete':
 
-                    $timeout(function(){
-                        $element.hide();
-                    }, 2000);
+                            $scope.alertActive = true;
+                            $scope.message = $sce.trustAsHtml('A new place was saved to <strong>' + BroadcastService.message.data.savedCollectionName + '</strong> successfully. :)');
+                            $scope.actionMessage = '';
 
+                            $timeout(function(){
+                                $element.hide();
+                            }, 2000);
+                            break;
 
+                        case 'requestDeleteCollection':
+
+                            $scope.alertActive = true;
+                            $scope.message = $sce.trustAsHtml('<strong>' + BroadcastService.message.data.collectionToBeDeletedName + '</strong> is being deleted.');
+                            $scope.actionMessage = 'Undo';
+
+                            var timer = $timeout(function(){
+                                $element.hide();
+                                BroadcastService.prepForBroadcast({
+                                    type: 'deleteCollection',
+                                    data: {
+                                        id: BroadcastService.message.data.collectionToBeDeletedId
+                                    }
+                                });
+                            }, 4000);
+
+                            $element.find('.alert-action').on('click', function(e){
+                                e.preventDefault();
+                                e.stopPropagation();
+                                $timeout.cancel(timer);
+                                $(this).off('click');
+                                $element.hide();
+                            });
+
+                            break;
+
+                    }
                 }
             });
 
