@@ -1684,7 +1684,8 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
         console.log($scope.deselectedPointImages);
         console.log(typeof $scope.deselectedPointImages);
 
-        var len2;
+        var len2,
+            deletedImageUrl;
 
         for (var x in $scope.deselectedPointImages) {
 
@@ -1694,8 +1695,25 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
                 if (typeof $scope.activeViewPoint.images[len2] !== 'undefined'
                     && $scope.activeViewPoint.images[len2].url == $scope.deselectedPointImages[x]) {
+
+                    deletedImageUrl = $scope.activeViewPoint.images[len2].url;
+
                     console.log('delete image: ' + $scope.activeViewPoint.images[len2].id);
-                    PointImage.delete({id: $scope.activeViewPoint.images[len2].id});
+                    PointImage.delete({id: $scope.activeViewPoint.images[len2].id}, function(){
+
+                        var lenImages = $scope.pointImages.length;
+
+                        // remove deleted image from pointImages
+                        if (lenImages) {
+                            while (lenImages--) {
+                                if ($scope.pointImages[lenImages] == deletedImageUrl) {
+                                    $scope.pointImages.splice(lenImages, 1);
+                                    break;
+                                }
+                            }
+                        }
+
+                    });
                     console.log('delete image from activeViewPoint: ' + $scope.activeViewPoint.images[len2]);
                     delete $scope.activeViewPoint.images[len2];
                     break;
