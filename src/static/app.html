@@ -135,7 +135,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <ul class="nav nav-stacked">
-                    <li ng-repeat="coll in collections" ng-class="{active: coll.id == activeCollectionId}"><a href="#" ng-class="{collection: true, edit: editMode}" ng-click="clickCollection(coll.id)">{{coll.name}} ({{coll.points.length || 0}})</a></li>
+                    <li ng-repeat="coll in collections" ng-class="{active: coll.id == activeCollectionId}"><a href="#" ng-class="{collection: true, edit: editMode}" ng-click="clickCollection(coll.id, coll.name)">{{coll.name}} ({{coll.points.length || 0}})</a></li>
                     <li class="divider"></li>
                     <li><a href="#" class="btn-default pingismo-btn" ng-click="toggleEditMode()" id="edit-list-btn">{{ editMode && 'Done' || 'Edit'}}</a></li>
                 </ul>
@@ -218,7 +218,7 @@
             <div class="map-alert" id="place-saved-alert" p-alert ng-class="{ visible: alertActive }">
                 <div class="alert alert-info pingismo-alert">
                     <button type="button" class="close" data-dismiss="alert">x</button>
-                    <i class="icon-check" ></i> <span ng-bind-html="message"></span>
+                        <i class="icon-check" ></i> <span ng-bind-html="message"></span> <a href="" class="alert-action">{{actionMessage}}</a>
                 </div>
             </div>
             <!-- End of alert -->
