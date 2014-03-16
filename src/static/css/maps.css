@@ -743,7 +743,7 @@ ul.types > li{
 	float: left;
 }
 
-.pingismo-pin.message-overlay .pin-popup p{
+.message-popup.pin-popup p{
 	width: 285px;
 	padding-left: 15px;
 }

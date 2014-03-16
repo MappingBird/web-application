@@ -1504,7 +1504,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         message = "Provide the name or address of a place in the search bar";
 
         overlay = new BucketListMessageOverlay(bounds, Presets.mapZoom, map, myLatLng, type, title, message);
-        marker = new BucketListPin(bounds, Presets.mapZoom, srcImage, map, myLatLng);
     }
 
     $scope.$on('stateChange', function() {
