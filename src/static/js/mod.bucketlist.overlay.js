@@ -327,7 +327,7 @@ BucketListMessageOverlay.prototype.onAdd = function() {
 
     var div = $('<div class="pingismo-pin message-overlay" />'),
         icon = $('<a href="#" class="pin-' + this.type_ + '"></a>'),
-        popup = $('<div class="pin-popup" />'),
+        popup = $('<div class="message-popup pin-popup" />'),
         detail = $('<p><strong>' + this.title_ + '</strong>' + this.message_ + '</p>'),
         self = this;
 
@@ -342,8 +342,10 @@ BucketListMessageOverlay.prototype.onAdd = function() {
     // We add an overlay to a map via one of the map's panes.
     // We'll add this overlay to the overlayImage pane.
     var panes = this.getPanes();
-    panes.floatPane.appendChild(div[0]);
+    panes.overlayLayer.appendChild(div[0]);
     icon.addClass('showme').css({'display': 'block'});
+
+    panes.floatPane.appendChild(popup[0]);
     popup.addClass('showme');
 
 };
@@ -363,6 +365,12 @@ BucketListMessageOverlay.prototype.draw = function() {
     var div = this.div_;
     div.style.left = (lf.x) + 'px'; // center horizontally
     div.style.top = (lf.y - $(div).height()) + 'px'; // position above vertically
+
+    var popup = this.popup_;
+    $(popup).css({
+        'left' : (lf.x) + 'px', // center horizontally
+        'top' : (lf.y - $(popup).height()) + 'px' // position above vertically
+    });
 
 };
 
