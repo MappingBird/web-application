@@ -346,10 +346,9 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
     $scope.pointMode = false;
 
     function resetMapSize() {
-        console.log('resetMapSize');
-        setTimeout(function() {
+        $('map').on('transitionend', function() {
             $scope.$broadcast('mapChange');
-        }, 500);
+        });
     }
 
 
