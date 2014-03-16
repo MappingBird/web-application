@@ -1440,6 +1440,11 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                                         }
                                 }
 
+                                // show point information if point detail panel is already open
+                                if ($scope.showPointDetailPanel) {
+                                    $state.go('viewPoint', { pointId: point.id, collectionId: point.collection});
+                                }
+
                                 return false;
                             };
                         })($scope.activeViewPoints[len])
@@ -1531,11 +1536,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 break;
         }
     });
-/*
-    $scope.$on('mapChange', function(){
-        resetMapSize();
-    });
-*/
+
 });
 
 SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage, User, Collection) {
