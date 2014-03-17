@@ -269,6 +269,9 @@ directives.directive('thumbAlignment', function($compile){
                     ws.push(wt);
                 });
 
+                // show loading animation
+                picContainer.addClass('loading-images');
+
                 while (baseLine < numPhotos) {
 
                     rowNum++;
@@ -384,6 +387,9 @@ directives.directive('thumbAlignment', function($compile){
 
                 // done, broadcast
                 $scope.$emit("placeImagesLoaded");
+
+                // remove loading animation
+                picContainer.removeClass('loading-images');
             }
 
             function selectImg(e){

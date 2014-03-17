@@ -304,9 +304,11 @@ section.map-section{
 	height: 20px;
 	width: 180px;
 	margin: -40px 0 0;
-	background: url(../img/searching-pin.png) center 0 no-repeat;
+	background:
+		url(../img/searching-pin.png) center 25px no-repeat,
+		url(../img/loading-circle.png) center 0 no-repeat;
 	text-align: center;
-	padding-top: 60px;
+	padding-top: 100px;
 }
 
 .loading-wrapper img {
@@ -323,6 +325,10 @@ section.map-section{
     -moz-animation-duration: 2s;
     -moz-animation-iteration-count: infinite;
     -moz-animation-timing-function: linear;
+}
+
+.loading-images {
+	background: url(../img/loading-circle.png) center 0 no-repeat;
 }
 
 /* No search keyword */
