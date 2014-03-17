@@ -345,12 +345,9 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
     $scope.mapMode = false;
     $scope.pointMode = false;
 
-    function resetMapSize() {
-        $('map').on('transitionend', function() {
-            $scope.$broadcast('mapChange');
-        });
-    }
-
+    $('#map').on('transitionend', function() {
+        $scope.$broadcast('mapChange');
+    });
 
     // map viewing mode
     function mapViewingMode () {
@@ -364,7 +361,6 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = false;
         $scope.halfMap = false;
-        resetMapSize();
     }
 
     // point saving mode
@@ -379,7 +375,6 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
         $scope.halfMap = false;
-        resetMapSize();
     }
 
     // point viewing mode
@@ -394,7 +389,6 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
         $scope.halfMap = true;
-        resetMapSize();
     }
 
     // collection viewing mode
@@ -409,7 +403,6 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = true;
         $scope.halfMap = false;
-        resetMapSize();
     }
 
     function reloadCollections() {
@@ -1115,7 +1108,7 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         // toggle between map and collection viewing
         console.log('showCollections');
         // hide collections list
-        if ($scope.mapMode === true) {
+        if (!$scope.collectionsMode) {
             $scope.collectionsListVisible = true;
             BroadcastService.prepForBroadcast({
                 type: 'viewingCollections',
