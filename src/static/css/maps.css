@@ -190,7 +190,7 @@ section.map-section{
 	top: 45px;
 	width: 100%;
 	box-shadow: -8px 0 15px rgba(0,0,0,0.6), 8px 0 15px rgba(0,0,0,0.6);
-	background: url(../img/white_wall.png) 0 0;
+	background: url(../img/white_wall.jpg) 0 0;
 }
 
 #map img {
@@ -214,9 +214,9 @@ section.map-section{
 }
 
 #map.semi-retracted {
-	height: -moz-calc(100% - 50px);
-	height: -webkit-calc(100% - 50px);
-	height: calc(100% - 50px);
+	height: -moz-calc(100% - 125px);
+	height: -webkit-calc(100% - 125px);
+	height: calc(100% - 125px);
 	left: 300px;
 	top: 95px;
 	width: -moz-calc(100% - 300px);
