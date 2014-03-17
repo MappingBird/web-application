@@ -269,6 +269,9 @@ directives.directive('thumbAlignment', function($compile){
                     ws.push(wt);
                 });
 
+                // show loading animation
+                picContainer.addClass('loading-images');
+
                 while (baseLine < numPhotos) {
 
                     rowNum++;
@@ -315,17 +318,20 @@ directives.directive('thumbAlignment', function($compile){
                             (function() {
                                 var url = photo.src,
                                     token = Math.floor(Math.random() * 10 + 1), // url ? url.substring(url.lastIndexOf("/") + 1) :
+                                    cl = (i == 0 && rowNum == 1) ? "is-selected" : "", // only first photo is selected
                                     img_id = n + "_" + token,
-                                    a = $('<a></a>', {class: "is-selected",href: "#", id: img_id}).css("margin", border + "px"),
-                                    img = $('<img/>',{class: "photo", src: url, width: wt}),
+                                    a = $('<a></a>', {'class': cl, href: "#", id: img_id}).css("margin", border + "px"),
+                                    img = $('<img/>',{'class': "photo", src: url, width: wt}),
                                     // Add Check icon on top of selected image
-                                    span = $('<span></span>', {class: "select-img"}),
+                                    span = $('<span></span>', {'class': "select-img"}),
                                     currentIndex = baseLine + i;
 
                                 n++;
 
                                 // add to $scope
-                                $scope[selectArray][img_id] = url;
+                                if (i == 0 && rowNum == 1) {
+                                    $scope[selectArray][img_id] = url;
+                                }
 
                                 a.on('click', selectImg);
                                 a.append(img);
@@ -383,6 +389,9 @@ directives.directive('thumbAlignment', function($compile){
 
                 // done, broadcast
                 $scope.$emit("placeImagesLoaded");
+
+                // remove loading animation
+                picContainer.removeClass('loading-images');
             }
 
             function selectImg(e){
