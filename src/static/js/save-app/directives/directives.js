@@ -329,7 +329,9 @@ directives.directive('thumbAlignment', function($compile){
                                 n++;
 
                                 // add to $scope
-                                $scope[selectArray][img_id] = url;
+                                if (i == 0 && rowNum == 1) {
+                                    $scope[selectArray][img_id] = url;
+                                }
 
                                 a.on('click', selectImg);
                                 a.append(img);
