@@ -304,9 +304,7 @@ section.map-section{
 	height: 20px;
 	width: 180px;
 	margin: -40px 0 0;
-	background:
-		url(../img/searching-pin.png) center 25px no-repeat,
-		url(../img/loading-circle.png) center 0 no-repeat;
+	background: url(../img/searching-pin.png) center 25px no-repeat;
 	text-align: center;
 	padding-top: 100px;
 }
@@ -428,7 +426,44 @@ a.show-on-map i.icon-show{
 	border: 0;
 }
 
-/* Save Content */
+/* Save Content including rotating background */
+@-webkit-keyframes infinite_rotate {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(359deg); }
+}
+@-moz-keyframes infinite_rotate {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(359deg); }
+}
+@keyframes infinite_rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}
+
+.form-save-content .loading {
+	background: url(../img/loading-circle.png) 0 0 no-repeat;
+	height: 87px;
+	left: -webkit-calc(50% - 43px);
+	left: -moz-calc(50% - 43px);
+	left: calc(50% - 43px);
+	position: absolute;
+	top: 250px;
+	width: 86px;
+	-webkit-animation-name:             infinite_rotate;
+    -webkit-animation-duration:         1.5s;
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name:             infinite_rotate;
+    -moz-animation-duration:         1.5s;
+    -moz-animation-iteration-count:  infinite;
+    -moz-animation-timing-function: linear;
+    animation-name:             infinite_rotate;
+    animation-duration:         1.5s;
+    animation-iteration-count:  infinite;
+    animation-timing-function: linear;
+}
+
+
 .save-content{
 	background-color: #fff;
 	position: absolute;
@@ -507,6 +542,9 @@ a.show-on-map i.icon-show{
 .photo{
 	opacity: 0.4;
 	filter: alpha(opacity=40);
+}
+.picrow {
+	background: white;
 }
 .picrow > a{
 	position: relative;
