@@ -84,7 +84,7 @@
                 <div class="save-content" ng-class="{retracted: !searchResultSelected}" m-custom-scrollbar-parent>
                     <a class="back" href="#" ng-click="cancelSaveActiveSearchResult()" ng-show="numResults > 1"><img src="/static/img/icon-back.png" /></a>
                     <form class="form-save-content" ng-submit="savePoint($event)">
-                        <div class="loading"></div>
+                        <div class="loading">Loading...<img src="/static/img/loading-circle.png"></div>
                         <div class="primary-content" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
                             <input type="text" ng-model="pageData.title" class="content-title" />
                             <textarea rows="8" ng-model="pageData.text"></textarea>
@@ -251,7 +251,7 @@
         <script src="/static/js/mod.noconsole.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
         <script src="/static/js/vendor/jquery/jquery-1.10.2.min.js"></script>
-        <script src="/static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="/static/js/vendor/m-custom-scrollbar/jquery.mCustomScrollbar.min.js"></script>
         <script src="/static/js/save-app/utilities.js"></script>
         <script src="/static/js/vendor/angular/angular.min.js"></script>
         <script src="/static/js/vendor/angular-bootstrap/ui-bootstrap-tpls-0.4.0.min.js"></script>
