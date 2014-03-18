@@ -84,6 +84,7 @@
                 <div class="save-content" ng-class="{retracted: !searchResultSelected}" m-custom-scrollbar-parent>
                     <a class="back" href="#" ng-click="cancelSaveActiveSearchResult()" ng-show="numResults > 1"><img src="/static/img/icon-back.png" /></a>
                     <form class="form-save-content" ng-submit="savePoint($event)">
+                        <div class="loading"></div>
                         <div class="primary-content" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
                             <input type="text" ng-model="pageData.title" class="content-title" />
                             <textarea rows="8" ng-model="pageData.text"></textarea>
