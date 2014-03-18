@@ -441,14 +441,22 @@ a.show-on-map i.icon-show{
 }
 
 .form-save-content .loading {
-	background: url(../img/loading-circle.png) 0 0 no-repeat;
+	font-size: 11px;
 	height: 87px;
 	left: -webkit-calc(50% - 43px);
 	left: -moz-calc(50% - 43px);
 	left: calc(50% - 43px);
+	line-height: 87px;
 	position: absolute;
+	text-align: center;
 	top: 250px;
 	width: 86px;
+}
+
+.form-save-content .loading img {
+	position: absolute;
+	top: 0;
+	left: 0;
 	-webkit-animation-name:             infinite_rotate;
     -webkit-animation-duration:         1.5s;
     -webkit-animation-iteration-count:  infinite;
