@@ -938,8 +938,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     };
 
     $scope.searchPlaces = function ($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
+        if ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+        }
+
         if ($scope.searchQuery && $scope.searchQuery.length > 0 && $scope.searchQuery !== 'undefined') {
             $scope.placesApiUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyCixleTjJLXPDQs9AIG6-18Gvx1X6M7If8&sensor=false&query=' + $scope.searchQuery + '&callback=?';
             $scope.noSearchQuery =  false;
@@ -1734,7 +1737,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
             type: $scope.activeViewPoint.type,
             collection: $scope.activeViewPoint.collection
         }, function(data, headers) {
-            $scope.togglePointEditMode();
+            $scope.togglePointEditMode($event);
         });
 
         console.log($scope.deselectedPointImages);
@@ -1874,7 +1877,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
             $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
             $scope.pointEditMode = false;
-            $scope.unselectPointForDelete();
+            $scope.unselectPointForDelete($event);
         }, function() {
             $scope.pointDeleteError = true;
         });
