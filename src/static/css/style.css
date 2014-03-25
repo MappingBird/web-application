@@ -301,19 +301,42 @@ footer .nav>li>a:focus{
 footer.narrow { padding: 5px 0 0; }
 
 /* tips */
-.tips-below{
+.tip {
 	background: #fff;
 	position: relative;
 	padding: 5px 20px;
 	color: #707070;
 	margin: 22px 20px 0;
 }
-.tips-below:before{
+
+.tip-below:before{
 	top: -22px;
 	left: 18px;
 	border-style: solid;
 	border-width: 0 13px 22px 13px;
 	border-color: transparent transparent #ffffff transparent;
+	position: absolute;
+	content: '';
+}
+
+.search-info-tip {
+	left: -1000px;
+}
+
+.search-info-tip.visible {
+	position: absolute;
+	left: 410px;
+	top: 36px;
+	z-index: 1000;
+	width: 480px;
+}
+
+.tip-right:before{
+	left: -44px;
+	top: 18px;
+	border-style: solid;
+	border-width: 0 44px 13px 13px;
+	border-color: transparent #ffffff transparent transparent;
 	position: absolute;
 	content: '';
 }
