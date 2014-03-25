@@ -191,6 +191,8 @@ BucketListSmallOverlay.prototype.onAdd = function() {
     if (true) {
         $(popup).append(tip);
         tip.children('i').on('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
             self.callback_();
         });
 

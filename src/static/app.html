@@ -28,7 +28,7 @@
                               <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
                               <li><a href="/static/settings.html"><i class="icon-wrench"></i> Settings</a></li>
                               <li class="divider"></li>
-                              <li><a href="#" ng-click="logout()"><i class="icon-off"></i> Logout</a></li>
+                              <li><a href="#" ng-click="logout($event)"><i class="icon-off"></i> Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -44,19 +44,31 @@
 
             <div class="save-panel" ng-controller="searchResultsController" ng-show="showSavePanel">
                 <form class="form-search" ng-submit="searchPlaces()">
-                    <input type="text" class="input-medium search-query" ng-model="searchQuery" search-box><i class="icon-search"></i>
+                    <input type="text" class="input-medium search-query" ng-model="searchQuery" search-box><i class="icon-search" ng-click="displaySearchTip($event)"></i>
                     <span class="help-block search-static">{{numResults}} places found. Pick one you want to save.</span>
                 </form>
 
+                <!-- Search keyword tip -->
+                <div class="search-info-tip tip tip-right" ng-class="{ 'visible' : showSearchTip }" ng-show="showSearchTip">
+                    <h2>Can't Find the Place You're Looking For?</h2>
+                    <p>Try to:</p>
+                    <ol>
+                        <li>Add the city of the place and press <b>Enter</b></li>
+                        <li>Enter the address of the place and press <b>Enter</b></li>
+                    </ol>
+                    <p><a href="#" ng-click="hideSearchTip($event)">Don't show again</a></p>
+                </div>
+                <!-- End of search keyword tip -->
+
                 <!-- No search keyword tip -->
-                <div class="no-keyword tips-below" ng-show="noSearchQuery">
+                <div class="no-keyword tip tip-below" ng-show="noSearchQuery">
                     <h2>Try entering a name or address to get better results</h2>
                     <p>Before clicking "Remember this place", don't forget to use your mouse to select the name or address of a place in the website you're browsing.<br><br>You can also try entering the name or address of the place in the search bar above and pressing <b>Enter</b>.</p>
                 </div>
                 <!-- End of no search keyword tip -->
 
                 <!-- No search results tip -->
-                <div class="no-keyword tips-below" ng-show="noSearchResults">
+                <div class="no-keyword tip tip-below" ng-show="noSearchResults">
                     <h2>There were no search results.</h2>
                     <p>We were unable to find search results for the place <b>{{searchQuery}}</b> that you selected. Try again by typing in the name of the place you're searching for above.</p>
                 </div>
@@ -72,8 +84,8 @@
                 <div class="left-panel-container" ng-show="searchResultsLoaded" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placesLoaded'}" left-outer-height>
                     <ul class="location-list">
                         <li ng-repeat="place in places" on-repeat-done="places_loaded" ng-class="{active: $index==activeSearchResult}"><p>{{place.name}}<span>{{place.address}}</span></p>
-                            <a href="#" class="save-this-place" id="btnSaveThisPlace" ng-click="prepSaveActiveSearchResult($index)"><i class="icon-save"></i> Save this place</a>
-                            <a href="#" class="show-on-map" ng-click="setActiveSavePoint($index)"><i class="icon-show"></i> Show on map</a>
+                            <a href="#" class="save-this-place" id="btnSaveThisPlace" ng-click="prepSaveActiveSearchResult($event, $index)"><i class="icon-save"></i> Save this place</a>
+                            <a href="#" class="show-on-map" ng-click="setActiveSavePoint($event, $index)"><i class="icon-show"></i> Show on map</a>
                             <div class="clearfix">
                         </li>
                     </ul>
@@ -82,7 +94,7 @@
 
                 <!-- Save Contents -->
                 <div class="save-content" ng-class="{retracted: !searchResultSelected}" m-custom-scrollbar-parent>
-                    <a class="back" href="#" ng-click="cancelSaveActiveSearchResult()" ng-show="numResults > 1"><img src="/static/img/icon-back.png" /></a>
+                    <a class="back" href="#" ng-click="cancelSaveActiveSearchResult($event)" ng-show="numResults > 1"><img src="/static/img/icon-back.png" /></a>
                     <form class="form-save-content" ng-submit="savePoint($event)">
                         <div class="loading">Loading...<img src="/static/img/loading-circle.png"></div>
                         <div class="primary-content" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
@@ -96,9 +108,9 @@
                                 <button class="btn btn-default" type="button" ng-click="saveNewCollection($event)">Create</button>
                             </div>
                             <div class="btn-group pingismo-btn-group" ng-show="collections.length > 0">
-                                <a class="btn exist collections-selection" href="#" ng-click="clickShowSelectCollection()" ng-show="!showSelectCollection">{{saveCollectionName}} <span class="caret"></span></a>
+                                <a class="btn exist collections-selection" href="#" ng-click="clickShowSelectCollection($event)" ng-show="!showSelectCollection">{{saveCollectionName}} <span class="caret"></span></a>
                                 <ul class="collections-menu upward-menu" ng-show="showSelectCollection">
-                                    <li ng-repeat="collection in collections"><a href="#" ng-click="selectCollection(collection.id, $event)">{{collection.name}}</a></li>
+                                    <li ng-repeat="collection in collections"><a href="#" ng-click="selectCollection($event, collection.id)">{{collection.name}}</a></li>
                                     <li ng-class="{'input-append' : true, 'control-group' : true, error: noCollectionError}">
                                         <input type="text" class="span2" ng-model="newCollectionName" id="appendedInputButton" placeholder="{{ noCollectionError && 'Select from above or enter a new name' || 'Create a new map'}}" />
                                         <button class="btn" type="button" ng-click="saveNewCollection($event)">Create</button>
@@ -125,7 +137,7 @@
             <!-- Collections -->
             <div ng-controller="collectionsController" class="collection-list-wrapper" ng-show="showCollectionList">
                 <div class="collection-header">
-                    <a href="#" class="collection-name" ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="showCollections()">
+                    <a href="#" class="collection-name" ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="showCollections($event)">
                         <i class="icon-expand-collapse"></i>
                         {{activeCollectionName}}
                     </a>
@@ -135,9 +147,9 @@
                     <div class="clearfix"></div>
                 </div>
                 <ul class="nav nav-stacked">
-                    <li ng-repeat="coll in collections" ng-class="{active: coll.id == activeCollectionId}"><a href="#" ng-class="{collection: true, edit: editMode}" ng-click="clickCollection(coll.id, coll.name)">{{coll.name}} ({{coll.points.length || 0}})</a></li>
+                    <li ng-repeat="coll in collections" ng-class="{active: coll.id == activeCollectionId}"><a href="#" ng-class="{collection: true, edit: editMode}" ng-click="clickCollection($event, coll.id, coll.name)">{{coll.name}} ({{coll.points.length || 0}})</a></li>
                     <li class="divider"></li>
-                    <li><a href="#" class="btn-default pingismo-btn" ng-click="toggleEditMode()" id="edit-list-btn">{{ editMode && 'Done' || 'Edit'}}</a></li>
+                    <li><a href="#" class="btn-default pingismo-btn" ng-click="toggleEditMode($event)" id="edit-list-btn">{{ editMode && 'Done' || 'Edit'}}</a></li>
                 </ul>
             </div>
             <!-- End of collections -->
@@ -145,13 +157,13 @@
             <!-- Content of Pin -->
             <div ng-controller="pointDetailController">
                 <div class="pin-content-wrapper" ng-show="showPointDetailPanel" ng-class="{ editable: pointEditMode}">
-                    <a href="#" ng-click="closePoint()" class="pingismo-proceed"><img src="/static/img/icon-proceed.png" /></a>
+                    <a href="#" ng-click="closePoint($event)" class="pingismo-proceed"><img src="/static/img/icon-proceed.png" /></a>
                     <div class="pin-content">
                         <div class="pin-details pull-left">
-                            <h4 ng-click="togglePointEditMode()" ng-bind="activeViewPoint.title" class="editable"></h4>
+                            <h4 ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.title" class="editable"></h4>
                             <input type="text" ng-model="activeViewPoint.title" class="content-title" />
                             <a ng-href="{{activeViewPoint.url}}" class="ref-url ellipsis" title="{{activeViewPoint.url}}" new-window>{{activeViewPoint.url}}</a>
-                            <p class="ref-context editable" ng-click="togglePointEditMode()" ng-bind="activeViewPoint.description"></p>
+                            <p class="ref-context editable" ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.description"></p>
                             <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
                             <div height-to-bottom m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
                                 <div class="ref-context-img" thumb-alignment="{displayArray: 'pointImages', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages', enableLightbox: true, editMode: pointEditMode}"></div>
@@ -167,7 +179,7 @@
                                 <li class="btn-group pingismo-btn-group">
                                     <a class="btn exist" href="#" ng-click="showSelectCollection = true" ng-show="!showSelectCollection">{{activeCollectionName}} <span class="caret"></span></a>
                                     <ul class="collections-menu thin-menu" ng-show="showSelectCollection" scrollbar-height-to-bottom>
-                                        <li ng-repeat="collection in collections"><a href="#" ng-click="selectPointCollection(collection.id, $event)" title="{{collection.name}}" ng-bind="collection.name"></a></li>
+                                        <li ng-repeat="collection in collections"><a href="#" ng-click="selectPointCollection($event, collection.id)" title="{{collection.name}}" ng-bind="collection.name"></a></li>
                                         <li class="input-append">
                                             <input type="text" class="span2" id="appendedInputButton" ng-model="newCollectionName" placeholder="Create a new collection" />
                                             <button class="btn" type="button" ng-click="saveNewCollection($event)">Create</button>
@@ -192,9 +204,9 @@
                     </div>
                     <div class="pin-content-footer fixed">
                         <hr />
-                        <a href="#" ng-click="togglePointEditMode()" class="btn-default pingismo-btn" id="edit-pin-content-btn">Edit</a>
-                        <a href="#" ng-click="savePointChanges()" class="btn-highlight pingismo-btn" id="done-edit-pin-content-btn">Done</a>
-                        <a href="#" ng-click="selectPointForDelete()" class="btn-default pingismo-btn pull-right" id="del-pin-content-btn">Delete This Place</a>
+                        <a href="#" ng-click="togglePointEditMode($event)" class="btn-default pingismo-btn" id="edit-pin-content-btn">Edit</a>
+                        <a href="#" ng-click="savePointChanges($event)" class="btn-highlight pingismo-btn" id="done-edit-pin-content-btn">Done</a>
+                        <a href="#" ng-click="selectPointForDelete($event)" class="btn-default pingismo-btn pull-right" id="del-pin-content-btn">Delete This Place</a>
                     </div>
                 </div>
 
@@ -204,8 +216,8 @@
                     Do you really want to delete this place permanently? Once you delete it, it will be removed from your map forever.
                     <div class="pin-content-footer">
                         <hr />
-                        <a href="#" class="btn-risk pingismo-btn" id="delete-pin-btn" ng-click="deletePoint()">Yes, Delete It.</a>
-                        <a href="#" class="btn-default pingismo-btn" id="cancel-delete-pin-btn" ng-click="unselectPointForDelete()">Cancel</a>
+                        <a href="#" class="btn-risk pingismo-btn" id="delete-pin-btn" ng-click="deletePoint($event)">Yes, Delete It.</a>
+                        <a href="#" class="btn-default pingismo-btn" id="cancel-delete-pin-btn" ng-click="unselectPointForDelete($event)">Cancel</a>
                     </div>
                     <p ng-show="pointDeletError">There was an error deleting this point.</p>
                 </div>
