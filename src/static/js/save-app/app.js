@@ -363,7 +363,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = false;
         $scope.halfMap = false;
-        resetMapSize();
+        //resetMapSize();
     }
 
     // point saving mode
@@ -378,7 +378,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
         $scope.halfMap = false;
-        resetMapSize();
+        //resetMapSize();
     }
 
     // point viewing mode
@@ -393,7 +393,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
         $scope.halfMap = true;
-        resetMapSize();
+        //resetMapSize();
     }
 
     // collection viewing mode
@@ -408,7 +408,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = true;
         $scope.halfMap = false;
-        resetMapSize();
+        //resetMapSize();
     }
 
     function reloadCollections() {
@@ -461,7 +461,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
 
 });
 
-SaveApp.controller('searchResultsController', function($scope, $dialog, $http, Presets, MapPoints, User, UserResource, Collection, Collections, PointResource, BroadcastService, PointImage, Scraper) {
+SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $cookieStore, Presets, MapPoints, User, UserResource, Collection, Collections, PointResource, BroadcastService, PointImage, Scraper) {
 
     console.log('init searchResultsController');
 
@@ -491,6 +491,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
     $scope.saveCollectionId;
     $scope.saveCollectionName;
     $scope.noCollectionError = false;
+    $scope.showSearchTip = false;
 
     // service watchers
     $scope.$watch( function () { return Collections.collections; }, function ( collections ) {
@@ -941,6 +942,20 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
 
     };
 
+    $scope.displaySearchTip = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $cookieStore.remove('dontShowSearchTip');
+        $scope.showSearchTip = true;
+        $scope.searchPlaces();
+    }
+
+    $scope.hideSearchTip = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $cookieStore.put('dontShowSearchTip', true);
+        $scope.showSearchTip = false;
+    };
 
     // init code
     $scope.$on('stateChange', function() {
@@ -959,6 +974,15 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, P
         }
 
     });
+
+    // init show search tip
+    if ($cookieStore.get('dontShowSearchTip') ||
+        $scope.noSearchQuery ||
+        $scope.noSearchResults) {
+        $scope.showSearchTip = false;
+    } else {
+        $scope.showSearchTip = true;
+    }
 
 
 });

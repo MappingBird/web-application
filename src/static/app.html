@@ -44,19 +44,31 @@
 
             <div class="save-panel" ng-controller="searchResultsController" ng-show="showSavePanel">
                 <form class="form-search" ng-submit="searchPlaces()">
-                    <input type="text" class="input-medium search-query" ng-model="searchQuery" search-box><i class="icon-search"></i>
+                    <input type="text" class="input-medium search-query" ng-model="searchQuery" search-box><i class="icon-search" ng-click="displaySearchTip($event)"></i>
                     <span class="help-block search-static">{{numResults}} places found. Pick one you want to save.</span>
                 </form>
 
+                <!-- Search keyword tip -->
+                <div class="search-info-tip tip tip-right" ng-class="{ 'visible' : showSearchTip }" ng-show="showSearchTip">
+                    <h2>Can't Find the Place You're Looking For?</h2>
+                    <p>Try to:</p>
+                    <ol>
+                        <li>Add the city of the place and press <b>Enter</b></li>
+                        <li>Enter the address of the place and press <b>Enter</b></li>
+                    </ol>
+                    <p><a href="#" ng-click="hideSearchTip($event)">Don't show again</a></p>
+                </div>
+                <!-- End of search keyword tip -->
+
                 <!-- No search keyword tip -->
-                <div class="no-keyword tips-below" ng-show="noSearchQuery">
+                <div class="no-keyword tip tip-below" ng-show="noSearchQuery">
                     <h2>Try entering a name or address to get better results</h2>
                     <p>Before clicking "Remember this place", don't forget to use your mouse to select the name or address of a place in the website you're browsing.<br><br>You can also try entering the name or address of the place in the search bar above and pressing <b>Enter</b>.</p>
                 </div>
                 <!-- End of no search keyword tip -->
 
                 <!-- No search results tip -->
-                <div class="no-keyword tips-below" ng-show="noSearchResults">
+                <div class="no-keyword tip tip-below" ng-show="noSearchResults">
                     <h2>There were no search results.</h2>
                     <p>We were unable to find search results for the place <b>{{searchQuery}}</b> that you selected. Try again by typing in the name of the place you're searching for above.</p>
                 </div>
