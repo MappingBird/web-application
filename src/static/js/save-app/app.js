@@ -318,7 +318,10 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
         $window.location.href = '/static/signup.html';
     };
 
-    $scope.logout = function() {
+    $scope.logout = function($event) {
+
+        $event.preventDefault();
+        $event.stopPropagation();
 
         UserLogout.get(function(data, headers) {
 
@@ -722,7 +725,10 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     };
 
 
-    $scope.setActiveSavePoint = function(index) {
+    $scope.setActiveSavePoint = function($event, index) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
         console.log('setactiveSavePoint ' + index);
 
         var image,
@@ -746,16 +752,21 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     };
 
-    $scope.prepSaveActiveSearchResult = function () {
+    $scope.prepSaveActiveSearchResult = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $scope.searchResultSelected = true;
     };
 
-    $scope.cancelSaveActiveSearchResult = function () {
+    $scope.cancelSaveActiveSearchResult = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $scope.searchResultSelected = false;
     };
 
     $scope.saveNewCollection = function($e) {
         if (typeof $e.stopPropagation === 'function') {
+            $e.preventDefault();
             $e.stopPropagation();
         }
         console.log('saveNewCollection');
@@ -824,12 +835,14 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     };
 
-    $scope.clickShowSelectCollection = function() {
+    $scope.clickShowSelectCollection = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $scope.showSelectCollection = true;
         $scope.saveCollectionId = undefined;
     };
 
-    $scope.selectCollection = function(id, $e) {
+    $scope.selectCollection = function($e, id) {
         if ($e && typeof $e.stopPropagation === 'function') {
             $e.preventDefault();
             $e.stopPropagation();
@@ -924,7 +937,9 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     };
 
-    $scope.searchPlaces = function () {
+    $scope.searchPlaces = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         if ($scope.searchQuery && $scope.searchQuery.length > 0 && $scope.searchQuery !== 'undefined') {
             $scope.placesApiUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyCixleTjJLXPDQs9AIG6-18Gvx1X6M7If8&sensor=false&query=' + $scope.searchQuery + '&callback=?';
             $scope.noSearchQuery =  false;
@@ -942,17 +957,17 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     };
 
-    $scope.displaySearchTip = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $scope.displaySearchTip = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $cookieStore.remove('dontShowSearchTip');
         $scope.showSearchTip = true;
         $scope.searchPlaces();
     }
 
-    $scope.hideSearchTip = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    $scope.hideSearchTip = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $cookieStore.put('dontShowSearchTip', true);
         $scope.showSearchTip = false;
     };
@@ -1104,12 +1119,16 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
 
     });
 
-    $scope.setActiveCollection = function(id) {
+    $scope.setActiveCollection = function($event, id) {
+        $event.preventDefault();
+        $event.stopPropagation();
         console.log('setActiveCollection: ' + id);
         $scope.activeCollectionId = id;
     };
 
-    $scope.clickCollection = function(id, name) {
+    $scope.clickCollection = function($event, id, name) {
+        $event.preventDefault();
+        $event.stopPropagation();
         console.log('clickCollection');
         console.log(id);
 
@@ -1134,7 +1153,9 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         }
     };
 
-    $scope.showCollections = function() {
+    $scope.showCollections = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         // toggle between map and collection viewing
         console.log('showCollections');
         // hide collections list
@@ -1182,7 +1203,9 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         });
     }
 
-    $scope.toggleEditMode = function() {
+    $scope.toggleEditMode = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $scope.editMode = !$scope.editMode;
     };
 
@@ -1677,8 +1700,9 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
         }
     });
 
-    $scope.closePoint = function() {
-
+    $scope.closePoint = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
     };
 
@@ -1690,21 +1714,18 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
         $scope.activeViewPoint.type = t;
     };
 
-    $scope.togglePointEditMode = function() {
-
-        // saved / clicked "Done"
-        if ($scope.pointEditMode == false) {
-
-            console.log($scope.activeViewPoint);
-
-        }
+    $scope.togglePointEditMode = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
 
         // toggle
         $scope.pointEditMode = !$scope.pointEditMode;
 
     };
 
-    $scope.savePointChanges = function() {
+    $scope.savePointChanges = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
 
         PointResource.update({
             id: $scope.activeViewPointId,
@@ -1762,7 +1783,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
     };
 
     // TODO: make directive for the dropdown
-    $scope.selectPointCollection = function(id, $e) {
+    $scope.selectPointCollection = function($e, id) {
         if ($e && typeof $e.stopPropagation === 'function') {
             $e.preventDefault();
             $e.stopPropagation();
@@ -1776,6 +1797,7 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
     $scope.saveNewCollection = function($e) {
         if (typeof $e.stopPropagation === 'function') {
+            $e.preventDefault();
             $e.stopPropagation();
         }
         console.log('saveNewCollection');
@@ -1820,18 +1842,24 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
     };
 
     // user has selected to delete point, show confirm dialog
-    $scope.selectPointForDelete = function() {
+    $scope.selectPointForDelete = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $scope.showDeletePoint = true;
         $scope.showPointDetailPanel = false;
     };
 
     // user has cancelled point deletion, hide confirm dialog
-    $scope.unselectPointForDelete = function () {
+    $scope.unselectPointForDelete = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $scope.showDeletePoint = false;
         $scope.showPointDetailPanel = true;
     };
 
-    $scope.deletePoint = function() {
+    $scope.deletePoint = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
 
         console.log('deletePoint');
 

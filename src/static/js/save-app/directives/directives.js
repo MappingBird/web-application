@@ -523,6 +523,7 @@ directives.directive('thumbAlignment', function($compile){
 });
 
 // http://stackoverflow.com/questions/10931315/how-to-preventdefault-on-anchor-tags-in-angularjs
+/*
 directives.directive('a', function() {
     return {
         restrict: 'E',
@@ -535,3 +536,4 @@ directives.directive('a', function() {
         }
    };
 });
+*/
