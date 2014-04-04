@@ -11,11 +11,11 @@ from rest_framework.decorators import link, api_view
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 
-from serializers import UserSerializer, CollectionSerializer, PointSerializer, ImageSerializer, CollectionByUserSerializer
+from serializers import UserSerializer, CollectionSerializer, PointSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
 from api.forms import UserCreationForm, UserChangeForm
 from base.models import User
 from base.mail import send_mail
-from bucketlist.models import Collection, Point, Image
+from bucketlist.models import Collection, Point, Image, Location, Tag
 from permissions import IsOwner
 
 
@@ -48,6 +48,20 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @link(permission_classes=[IsOwner])
     def collections(self, request, pk=None):
+        user = self.get_object()
+        queryset = user.collection_set.all()
+        serializer = CollectionByUserSerializer(queryset, many=True)
+
+        data = {'collections': serializer.data, }
+        try:
+            data['most_recent_modified_collection'] = queryset.order_by('-points__update_time')[0].id
+        except Exception, e:
+            data['most_recent_modified_collection'] = None
+
+        return Response(data)
+
+    @link(permission_classes=[IsOwner])
+    def tags(self, request, pk=None):
         user = self.get_object()
         queryset = user.collection_set.all()
         serializer = CollectionByUserSerializer(queryset, many=True)
@@ -98,6 +112,22 @@ class CollectionViewSet(APIViewSet):
     permission_classes = (IsOwner,)
 
 
+class LocationViewSet(APIViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
+
+
+class TagViewSet(APIViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+
 class PointViewSet(APIViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -107,6 +137,55 @@ class PointViewSet(APIViewSet):
 
     authentication_classes = (SessionAuthentication,)
     permission_classes = (IsOwner,)
+
+    def create(self, request, *args, **kwargs):
+        data = request.DATA.copy()
+        tags = None
+        if data.get('tags'):
+            tags = data.get('tags')
+            del data['tags']
+
+        # Deal with Location first
+        # TODO: Need to check which stays and which goes
+        try:
+            location = Location.objects.get(place_name=data.get('place_name'), coordinates=data.get('coordinates'))
+        except Location.DoesNotExist:
+            location_serializer = LocationSerializer(data=data)
+            if location_serializer.is_valid():
+                location = location_serializer.save(force_insert=True)
+            else:
+                return Response(location_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        data['location'] = location.id
+        del data['place_name']
+        del data['place_address']
+        del data['place_phone']
+        del data['coordinates']
+
+        serializer = self.get_serializer(data=data, files=request.FILES)
+        if serializer.is_valid():
+            self.pre_save(serializer.object)
+            self.object = serializer.save(force_insert=True)
+            self.post_save(self.object, created=True)
+            headers = self.get_success_headers(serializer.data)
+
+            # Deal with the tags
+            # tags need to be separated by commas
+            tags_splitted = tags.split(',')
+            for tag in tags_splitted:
+                try:
+                    tag_model = Tag.objects.get(name=tag)
+                except Tag.DoesNotExist:
+                    tag_model = Tag(name=tag)
+                    tag_model.save()
+
+                self.object.tags.add(tag_model)
+
+            serializer = self.get_serializer(self.object)
+            return Response(serializer.data, status=status.HTTP_201_CREATED,
+                                        headers=headers)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ImageViewSet(APIViewSet):
@@ -119,6 +198,16 @@ class ImageViewSet(APIViewSet):
     authentication_classes = (SessionAuthentication,)
     permission_classes = (IsOwner,)
 
+
+@api_view(['GET'])
+def tags(request, name=None):
+    if request.user.is_authenticated():
+        points = Point.objects.filter(collection__user=request.user, tags__name=name)
+        serializer = PointSerializer(points, many=True)
+
+        return Response(serializer.data)
+
+    return Response({})
 
 @api_view(['GET'])
 def token(request):
