@@ -231,6 +231,7 @@ directives.directive('thumbAlignment', function($compile){
                 selectArray = config.selectArray,
                 deselectArray = config.deselectArray,
                 onlyFirstSelected = config.onlyFirstSelected,
+                whiteBackground = config.whiteBackground,
                 photo_array = null, //photo.js
                 lastWidth = 0, // photo.js
                 picPhotoObj = $($($element).find(".photo-obj")[0]), // photo.js
@@ -279,6 +280,10 @@ directives.directive('thumbAlignment', function($compile){
 
                     // add a div to contain images
                     d_row = $("<div class='picrow'></div>");
+                    // white background?
+                    if (whiteBackground) {
+                        d_row.addClass('white');
+                    }
                     picContainer.append(d_row);
                     d_row.width(lastWidth);
                     d_row.empty();
