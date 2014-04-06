@@ -551,7 +551,7 @@ a.show-on-map i.icon-show{
 	opacity: 0.4;
 	filter: alpha(opacity=40);
 }
-.picrow {
+.picrow.white {
 	background: white;
 }
 .picrow > a{
