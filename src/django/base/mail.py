@@ -3,7 +3,7 @@ from django.core.mail import EmailMessage
 from django.template import Context, loader
 
 def send_mail(recipient, template, context_dict, subject):
-    from_email = 'Pingismo <no-reply@pingismo.com>'
+    from_email = 'Pingismo <no-reply@mappingbird.com>'
     # headers = {'Reply-To': 'service@house123.com.tw'}
     headers = {}
     to = recipient
