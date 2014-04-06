@@ -100,7 +100,7 @@
                         <div class="primary-content" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
                             <input type="text" ng-model="pageData.title" class="content-title" />
                             <textarea rows="8" ng-model="pageData.text"></textarea>
-                            <div class="ref-context-img" thumb-alignment="{displayArray: 'pageImages', selectArray: 'selectedPageImages', deselectArray: 'deselectedPageImages'}"></div>
+                            <div class="ref-context-img" thumb-alignment="{displayArray: 'pageImages', selectArray: 'selectedPageImages', deselectArray: 'deselectedPageImages', onlyFirstSelected: true}"></div>
                         </div>
                         <div class="collection-wrapper">
                             <div ng-class="{'input-append' : true, 'control-group' : true, error: noCollectionError}" ng-show="collections.length == 0">
@@ -166,7 +166,7 @@
                             <p class="ref-context editable" ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.description"></p>
                             <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
                             <div height-to-bottom m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
-                                <div class="ref-context-img" thumb-alignment="{displayArray: 'pointImages', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages', enableLightbox: true, editMode: pointEditMode}"></div>
+                                <div class="ref-context-img" thumb-alignment="{displayArray: 'pointImages', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages', enableLightbox: true, editMode: pointEditMode, onlyFirstSelected: false}"></div>
                             </div>
                         </div>
                         <div class="pin-cover">

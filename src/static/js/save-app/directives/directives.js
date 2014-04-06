@@ -230,6 +230,7 @@ directives.directive('thumbAlignment', function($compile){
                 displayArray = config.displayArray,
                 selectArray = config.selectArray,
                 deselectArray = config.deselectArray,
+                onlyFirstSelected = config.onlyFirstSelected,
                 photo_array = null, //photo.js
                 lastWidth = 0, // photo.js
                 picPhotoObj = $($($element).find(".photo-obj")[0]), // photo.js
@@ -318,13 +319,22 @@ directives.directive('thumbAlignment', function($compile){
                             (function() {
                                 var url = photo.src,
                                     token = Math.floor(Math.random() * 10 + 1), // url ? url.substring(url.lastIndexOf("/") + 1) :
-                                    cl = (i == 0 && rowNum == 1) ? "is-selected" : "", // only first photo is selected
+                                    cl = "", // image class
                                     img_id = n + "_" + token,
-                                    a = $('<a></a>', {'class': cl, href: "#", id: img_id}).css("margin", border + "px"),
                                     img = $('<img/>',{'class': "photo", src: url, width: wt}),
                                     // Add Check icon on top of selected image
                                     span = $('<span></span>', {'class': "select-img"}),
-                                    currentIndex = baseLine + i;
+                                    currentIndex = baseLine + i,
+                                    a;
+
+                                // only first image selected
+                                if (onlyFirstSelected) {
+                                    cl = (i == 0 && rowNum == 1) ? "is-selected" : "";
+                                } else { // all images selected
+                                    cl = "is-selected";
+                                }
+
+                                a = $('<a></a>', {'class': cl, href: "#", id: img_id}).css("margin", border + "px");
 
                                 n++;
 
