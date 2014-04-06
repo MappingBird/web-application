@@ -13,20 +13,18 @@ class Collection(models.Model):
 
 
 class Location(models.Model):
-    title = models.CharField(max_length=512, blank=True)
-    description = models.TextField(blank=True)
     place_name = models.CharField(max_length=512, blank=True)
     place_address = models.CharField(max_length=128, blank=True)
     place_phone = models.CharField(max_length=64, blank=True)
     coordinates = models.CharField(max_length=64, blank=True)
-    type = models.CharField(max_length=32, blank=True) # Should define the choices afterwards
+    category = models.CharField(max_length=32, blank=True) # Should define the choices afterwards
 
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=64)
 
 
 class Point(models.Model):
