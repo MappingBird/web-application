@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from base.models import User
-from bucketlist.models import Collection, Point, Image
+from bucketlist.models import Collection, Point, Image, Location, Tag
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -18,13 +18,27 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'url', 'point', 'create_time', 'update_time', )
 
 
+class LocationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Location
+        fields = ('id', 'title', 'description', 'place_name', 'place_address', 'place_phone', 'coordinates', 'type', 'create_time', 'update_time', )
+
+
+class TagSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('id', 'name', )
+
+
 class PointSerializer(serializers.HyperlinkedModelSerializer):
     collection = serializers.PrimaryKeyRelatedField()
+    location = serializers.PrimaryKeyRelatedField(required=False)
     images = ImageSerializer(many=True, read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
     
     class Meta:
         model = Point
-        fields = ('id', 'title', 'url', 'description', 'place_name', 'place_address', 'place_phone', 'coordinates', 'type', 'images', 'collection', 'create_time', 'update_time', )
+        fields = ('id', 'title', 'url', 'description', 'place_name', 'place_address', 'place_phone', 'coordinates', 'type', 'images', 'tags', 'collection', 'location', 'create_time', 'update_time', )
 
 
 class CollectionSerializer(serializers.HyperlinkedModelSerializer):

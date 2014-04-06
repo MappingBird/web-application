@@ -689,6 +689,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             // TODO: show error
             console.log('no places search result');
             $scope.noSearchResults = true;
+
+            BroadcastService.prepForBroadcast({
+                type: 'noSearchResults',
+                data: {}
+            });
         }
     }
 
@@ -1579,6 +1584,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 updateSavePointImage(BroadcastService.message.data.imageUrl);
                 break;
             case 'noSearchQuery':
+            case 'noSearchResults':
                 showNoSearchQueryPoint();
                 break;
         }
