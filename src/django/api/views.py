@@ -5,6 +5,7 @@ from django.middleware import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib.auth import login as django_login, logout as django_logout, authenticate
+from django.db.models import Count
 
 from rest_framework import viewsets, status
 from rest_framework.decorators import link, api_view
@@ -48,20 +49,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @link(permission_classes=[IsOwner])
     def collections(self, request, pk=None):
-        user = self.get_object()
-        queryset = user.collection_set.all()
-        serializer = CollectionByUserSerializer(queryset, many=True)
-
-        data = {'collections': serializer.data, }
-        try:
-            data['most_recent_modified_collection'] = queryset.order_by('-points__update_time')[0].id
-        except Exception, e:
-            data['most_recent_modified_collection'] = None
-
-        return Response(data)
-
-    @link(permission_classes=[IsOwner])
-    def tags(self, request, pk=None):
         user = self.get_object()
         queryset = user.collection_set.all()
         serializer = CollectionByUserSerializer(queryset, many=True)
@@ -146,7 +133,6 @@ class PointViewSet(APIViewSet):
             del data['tags']
 
         # Deal with Location first
-        # TODO: Need to check which stays and which goes
         try:
             location = Location.objects.get(place_name=data.get('place_name'), coordinates=data.get('coordinates'))
         except Location.DoesNotExist:
@@ -171,15 +157,16 @@ class PointViewSet(APIViewSet):
 
             # Deal with the tags
             # tags need to be separated by commas
-            tags_splitted = tags.split(',')
-            for tag in tags_splitted:
-                try:
-                    tag_model = Tag.objects.get(name=tag)
-                except Tag.DoesNotExist:
-                    tag_model = Tag(name=tag)
-                    tag_model.save()
+            if tags:
+                tags_splitted = tags.split(',')
+                for tag in tags_splitted:
+                    try:
+                        tag_model = Tag.objects.get(name=tag)
+                    except Tag.DoesNotExist:
+                        tag_model = Tag(name=tag)
+                        tag_model.save()
 
-                self.object.tags.add(tag_model)
+                    self.object.tags.add(tag_model)
 
             serializer = self.get_serializer(self.object)
             return Response(serializer.data, status=status.HTTP_201_CREATED,
@@ -200,7 +187,7 @@ class ImageViewSet(APIViewSet):
 
 
 @api_view(['GET'])
-def tags(request, name=None):
+def pointsbytag(request, name=None):
     if request.user.is_authenticated():
         points = Point.objects.filter(collection__user=request.user, tags__name=name)
         serializer = PointSerializer(points, many=True)
@@ -208,6 +195,26 @@ def tags(request, name=None):
         return Response(serializer.data)
 
     return Response({})
+
+
+@api_view(['GET'])
+def tags(request):
+    if request.user.is_authenticated():
+        tags = Point.objects.filter(collection__user=request.user).values('tags__name', 'tags__id').annotate(count=Count('tags')).order_by('-count')
+        output = []
+        for t in tags:
+            record = {
+                'id': t['tags__id'],
+                'name': t['tags__name'],
+                'count': t['count'],
+            }
+
+            output.append(record)
+
+        return Response({'tags': output})
+
+    return Response({})
+
 
 @api_view(['GET'])
 def token(request):
