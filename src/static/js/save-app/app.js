@@ -209,7 +209,7 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
             User.data.emailAddress = data.email;
             User.data.id = data.id;
 
-            if (!/@gu.pingismo.com$/.test(data.email)) {
+            if (!/@gu.mappingbird.com$/.test(data.email)) {
                 User.data.isRegisteredUser = true;
                 User.data.isLoggedIn = true;
                 $scope.isLoggedIn = true;
@@ -233,7 +233,7 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
 
             var time = new Date().getTime(),
                 userCredentials = {
-                    email: getRandomInt(0,100) + time + '@gu.pingismo.com',
+                    email: getRandomInt(0,100) + time + '@gu.mappingbird.com',
                     password: 'pword' + getRandomInt(0,1000000000)
                 };
 
@@ -271,7 +271,7 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
                                 User.data.emailAddress = data.user.email;
                                 User.data.id = data.user.id;
 
-                                if (!/@gu.pingismo.com$/.test(data.user.email)) {
+                                if (!/@gu.mappingbird.com$/.test(data.user.email)) {
                                     User.data.isRegisteredUser = true;
                                     User.data.isLoggedIn = true;
                                     $scope.isLoggedIn = true;
@@ -812,7 +812,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                     // set user data
                     if (typeof data.email_address !== 'undefined') {
                         User.data.emailAddress = data.email_address;
-                        if (!/@gu.pingismo.com$/.test(data.email_address)) {
+                        if (!/@gu.mappingbird.com$/.test(data.email_address)) {
                             User.data.isRegisteredUser = true;
                         } else {
                             User.data.isRegisteredUser = false;
