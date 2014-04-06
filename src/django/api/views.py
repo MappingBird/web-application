@@ -86,7 +86,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response('The logined in user does not match the PUT user id', status=status.HTTP_400_BAD_REQUEST)
         else:
             email = request.DATA.get('email')
-            if email and not self.object.email.endswith('@gu.pingismo.com') and email != self.object.email:
+            if email and not self.object.email.endswith('@gu.mappingbird.com') and email != self.object.email:
                 # Error
                 return Response('Trying to change email with a normal account', status=status.HTTP_400_BAD_REQUEST)
 
