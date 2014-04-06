@@ -21,7 +21,7 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
 class LocationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Location
-        fields = ('id', 'title', 'description', 'place_name', 'place_address', 'place_phone', 'coordinates', 'type', 'create_time', 'update_time', )
+        fields = ('id', 'place_name', 'place_address', 'place_phone', 'coordinates', 'category', 'create_time', 'update_time', )
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
