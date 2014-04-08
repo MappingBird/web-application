@@ -12,7 +12,7 @@ from rest_framework.decorators import link, api_view
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 
-from serializers import UserSerializer, CollectionSerializer, PointSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
+from serializers import UserSerializer, CollectionSerializer, PointSerializer, PointWriteSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
 from api.forms import UserCreationForm, UserChangeForm
 from base.models import User
 from base.mail import send_mail
@@ -142,13 +142,13 @@ class PointViewSet(APIViewSet):
             else:
                 return Response(location_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        data['location'] = location.id
         del data['place_name']
         del data['place_address']
         del data['place_phone']
         del data['coordinates']
 
-        serializer = self.get_serializer(data=data, files=request.FILES)
+        # Need to use Write Serializer for related field (location)
+        serializer = PointWriteSerializer(data=data, files=request.FILES)
         if serializer.is_valid():
             self.pre_save(serializer.object)
             self.object = serializer.save(force_insert=True)
