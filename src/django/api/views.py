@@ -132,6 +132,8 @@ class PointViewSet(APIViewSet):
             tags = data.get('tags')
             del data['tags']
 
+        data['category'] = data['type']
+
         # Deal with Location first
         try:
             location = Location.objects.get(place_name=data.get('place_name'), coordinates=data.get('coordinates'))
@@ -147,6 +149,7 @@ class PointViewSet(APIViewSet):
         del data['place_address']
         del data['place_phone']
         del data['coordinates']
+        del data['category']
 
         serializer = self.get_serializer(data=data, files=request.FILES)
         if serializer.is_valid():
