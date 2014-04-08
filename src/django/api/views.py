@@ -142,6 +142,7 @@ class PointViewSet(APIViewSet):
             else:
                 return Response(location_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+        data['location'] = location.id
         del data['place_name']
         del data['place_address']
         del data['place_phone']
