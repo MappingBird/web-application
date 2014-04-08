@@ -95,7 +95,7 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
 
                         // is registered "legit" user
                         // show error?
-                        if (!/@gu.pingismo.com/.test(data.email)) {
+                        if (!/@gu.mappingbird.com/.test(data.email)) {
 
                             // TODO: email
                             // ask Derek about scenario here
