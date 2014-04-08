@@ -1417,7 +1417,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             // get bounds
             bounds = new google.maps.LatLngBounds();
             while (len2--) {
-                split = $scope.activeViewPoints[len2].coordinates.split(',');
+                split = $scope.activeViewPoints[len2].location.coordinates.split(',');
                 $scope.activeViewPoints[len2].lat = Number(split[0]);
                 $scope.activeViewPoints[len2].lng = Number(split[1]);
                 bounds.extend(new google.maps.LatLng($scope.activeViewPoints[len2].lat, $scope.activeViewPoints[len2].lng));
@@ -1431,8 +1431,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 lng = $scope.activeViewPoints[len].lng;
                 type = $scope.activeViewPoints[len].type || 'scenicspot';
                 name = $scope.activeViewPoints[len].title;
-                address = $scope.activeViewPoints[len].place_address;
-                phone = $scope.activeViewPoints[len].phone || '';
+                address = $scope.activeViewPoints[len].location.place_address;
+                phone = $scope.activeViewPoints[len].location.place_phone || '';
                 if ($scope.activeViewPoints[len].images && $scope.activeViewPoints[len].images.length > 0) {
                     srcImage = $scope.activeViewPoints[len].images[0].url || '';
                 }
