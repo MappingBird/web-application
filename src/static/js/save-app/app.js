@@ -1,6 +1,6 @@
 // HTTP solution from
 // http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/
-var SaveApp = angular.module('SaveApp', ['SaveApp.directives', 'SaveApp.services', 'ngCookies', 'ngSanitize', 'ui.bootstrap', 'ui.router'], function($httpProvider, $dialogProvider) {
+var SaveApp = angular.module('SaveApp', ['SaveApp.directives', 'SaveApp.services', 'ngCookies', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'ngTagsInput'], function($httpProvider, $dialogProvider) {
     // angular bootstrap
     //$dialogProvider.options({dialogFade: true});
 
@@ -873,17 +873,30 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             $e.stopPropagation();
         }
 
-        var pointData;
+        var pointData,
+            tags = $scope.pageData.tags,
+            saveTags = "",
+            x;
 
         // check if saveCollectionId is set
         if (typeof $scope.saveCollectionId !== 'undefined') {
 
             $scope.noCollectionError = false;
 
+            // prep tags
+            if (typeof tags.length != 'undefined' && tags.length > 0) {
+                for (x in tags) {
+                    saveTags += tags[x].text + ",";
+                }
+            } else {
+                saveTags = "";
+            }
+
             pointData = {
                 title: $scope.pageData.title,
                 url: $scope.targetUrl,
                 description: $scope.pageData.text,
+                tags: saveTags,
                 place_name: $scope.activeSavePoint.name,
                 place_address: $scope.activeSavePoint.address,
                 place_phone: $scope.activeSavePoint.phone,
