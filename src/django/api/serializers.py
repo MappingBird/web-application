@@ -32,7 +32,8 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
 
 class PointSerializer(serializers.HyperlinkedModelSerializer):
     collection = serializers.PrimaryKeyRelatedField()
-    location = serializers.PrimaryKeyRelatedField(required=False)
+    # location = serializers.PrimaryKeyRelatedField(required=False)
+    location = LocationSerializer(read_only=True)
     images = ImageSerializer(many=True, read_only=True)
     tags = TagSerializer(many=True, read_only=True)
     
