@@ -596,6 +596,22 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     });
 
+    $scope.$watch('noSearchResults', function(noSearchResults) {
+        if ($scope.noSearchResults) {
+            $scope.showSearchTip = false;
+        } else {
+            $scope.showSearchTip = true;
+        }
+    });
+
+    $scope.$watch('noSearchQuery', function(noSearchQuery) {
+        if ($scope.noSearchQuery) {
+            $scope.showSearchTip = false;
+        } else {
+            $scope.showSearchTip = true;
+        }
+    });
+
     // functions
     $scope.getPageData = function() {
         console.log('getPageData');
