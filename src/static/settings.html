@@ -63,6 +63,9 @@
                         <div class="error-message control-group" ng-class="{ 'error-message' : 1, 'control-group' : 1, 'error' : errorNewPasswordsNoMatch }" ng-show="errorNewPasswordsNoMatch">
                             <p class="help-inline">New passwords don't match.</p>
                         </div>
+                        <div class="control-group" ng-show="passwordChanged">
+                            <p class="help-inline">Password changed successfully.</p>
+                        </div>
                         <div class="action-button">
                             <input class="btn btn-primary pingismo-btn" type="submit" value="Update Password">
                         </div>
