@@ -64,6 +64,12 @@ services.factory('UserLogin', ['$resource', function($resource) {
 
 }]);
 
+services.factory('UserLogout', ['$resource', function($resource) {
+
+    return $resource('/api/user/logout');
+
+}]);
+
 services.factory('CurrentUser', ['$resource', function($resource) {
 
     return $resource('/api/user/current');
