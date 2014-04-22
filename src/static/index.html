@@ -370,7 +370,7 @@ You can also click Ctrl+Shift+B (or Command+Shit+B on Mac) to show Bookmarks bar
             $(window).on("mousemove.bookmarklet", function(e) {
                 console.log(e);
                 if (e.pageY < 1) {
-                    window.location.hash = "how-it-works";
+                    window.location.hash = "/how-it-works";
                     $(window).off("mousemove.bookmarklet");
                 }
             });
