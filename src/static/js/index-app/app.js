@@ -71,7 +71,7 @@ IndexApp.config(function($stateProvider, $urlRouterProvider) {
 
                 // TODO: dirty hack... :(
                 var top = $('#how-it-works').offset().top;
-                $(document.body).animate({scrollTop: top}, 800);
+                $(document.body).animate({scrollTop: top}, 1000);
 
             }]
         });
