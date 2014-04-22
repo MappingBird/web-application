@@ -66,7 +66,7 @@ SettingsApp.run(function($http, $cookies) {
 /**
     Overall page controller
  */
-SettingsApp.controller('mainController', function($scope, $timeout, Presets, BroadcastService, User, UserResource, CurrentUser, UserLogin, $http, $cookies) {
+SettingsApp.controller('mainController', function($scope, $timeout, Presets, BroadcastService, User, UserResource, CurrentUser, UserLogin, UserLogout, $http, $cookies, $window) {
 
     $scope.id = '';
     $scope.isLoggedIn = false;
@@ -79,6 +79,20 @@ SettingsApp.controller('mainController', function($scope, $timeout, Presets, Bro
     $scope.errorNewPasswordsNoMatch = false;
     $scope.errorOldPasswordNewPasswordSame = false;
     $scope.passwordChanged = false;
+
+    $scope.logout = function($event) {
+
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        UserLogout.get(function(data, headers) {
+
+            delete $cookies['sessionid'];
+            $window.location.href = "/static/index.html";
+
+        });
+
+    };
 
     $scope.checkInput = function($event) {
 
