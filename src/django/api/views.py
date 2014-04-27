@@ -12,8 +12,9 @@ from django.db.models import Count
 from django.conf import settings
 
 from rest_framework import viewsets, status
-from rest_framework.decorators import link, api_view, parser_classes, authentication_classes
+from rest_framework.decorators import link, api_view, parser_classes, authentication_classes, permission_classes
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 
@@ -41,6 +42,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
 
     @csrf_exempt
     def create(self, request):
@@ -103,7 +105,7 @@ class CollectionViewSet(APIViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
 
-    authentication_classes = (SessionAuthentication, BasicAuthentication)
+    authentication_classes = (SessionAuthentication, )
     permission_classes = (IsOwner,)
 
 
@@ -130,7 +132,7 @@ class PointViewSet(APIViewSet):
     queryset = Point.objects.all()
     serializer_class = PointSerializer
 
-    authentication_classes = (SessionAuthentication, BasicAuthentication)
+    authentication_classes = (SessionAuthentication, )
     permission_classes = (IsOwner,)
 
     def create(self, request, *args, **kwargs):
@@ -194,38 +196,36 @@ class ImageViewSet(APIViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
-    authentication_classes = (SessionAuthentication, BasicAuthentication)
+    authentication_classes = (SessionAuthentication, )
     permission_classes = (IsOwner,)
 
 
 @api_view(['GET'])
+@authentication_classes((SessionAuthentication, BasicAuthentication))
+@permission_classes((IsAuthenticated, ))
 def pointsbytag(request, name=None):
-    if request.user.is_authenticated():
-        points = Point.objects.filter(collection__user=request.user, tags__name=name)
-        serializer = PointSerializer(points, many=True)
+    points = Point.objects.filter(collection__user=request.user, tags__name=name)
+    serializer = PointSerializer(points, many=True)
 
-        return Response(serializer.data)
-
-    return Response({})
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
+@authentication_classes((SessionAuthentication, BasicAuthentication))
+@permission_classes((IsAuthenticated, ))
 def tags(request):
-    if request.user.is_authenticated():
-        tags = Point.objects.filter(collection__user=request.user).values('tags__name', 'tags__id').annotate(count=Count('tags')).order_by('-count')
-        output = []
-        for t in tags:
-            record = {
-                'id': t['tags__id'],
-                'name': t['tags__name'],
-                'count': t['count'],
-            }
+    tags = Point.objects.filter(collection__user=request.user).values('tags__name', 'tags__id').annotate(count=Count('tags')).order_by('-count')
+    output = []
+    for t in tags:
+        record = {
+            'id': t['tags__id'],
+            'name': t['tags__name'],
+            'count': t['count'],
+        }
 
-            output.append(record)
+        output.append(record)
 
-        return Response({'tags': output})
-
-    return Response({})
+    return Response({'tags': output})
 
 
 @api_view(['GET'])
@@ -310,7 +310,8 @@ def geocode(request):
 
 @api_view(['POST'])
 @parser_classes((FileUploadParser,))
-@authentication_classes((BasicAuthentication,))
+@authentication_classes((SessionAuthentication, BasicAuthentication))
+@permission_classes((IsAuthenticated, ))
 def upload_media(request):
     out = {}
     file_obj = request.FILES['media']
