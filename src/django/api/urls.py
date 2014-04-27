@@ -21,4 +21,6 @@ urlpatterns = patterns('',
     url(r'^user/login$', 'api.views.login', name='login'),
     url(r'^user/logout$', 'api.views.logout', name='logout'),
     url(r'^scraper$', 'api.scraper.scraper', name='scraper'),
+    url(r'^geocode$', 'api.views.geocode', name='geocode'),
+    url(r'^upload$', 'api.views.upload_media', name='upload'),
 )
