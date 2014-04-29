@@ -85,8 +85,10 @@
                 <div class="left-panel-container" ng-show="searchResultsLoaded" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placesLoaded'}" left-outer-height>
                     <ul class="location-list">
                         <li ng-repeat="place in places" on-repeat-done="places_loaded" ng-class="{active: $index==activeSearchResult}"><p>{{place.name}}<span>{{place.address}}</span></p>
+                            <!--
                             <a href="#" class="save-this-place" id="btnSaveThisPlace" ng-click="prepSaveActiveSearchResult($event, $index)"><i class="icon-save"></i> Save this place</a>
-                            <a href="#" class="show-on-map" ng-click="setActiveSavePoint($event, $index)"><i class="icon-show"></i> Show on map</a>
+                        -->
+                            <a href="#" class="show-on-map" ng-click="setActiveSavePoint($event, $index)"><img src="/static/img/icon-proceed.png" /></a>
                             <div class="clearfix">
                         </li>
                     </ul>
