@@ -1,3 +1,4 @@
 *.pyc
 *.swp
 build/*
+src/django/media/*

@@ -21,4 +21,33 @@ urlpatterns = patterns('',
     url(r'^user/login$', 'api.views.login', name='login'),
     url(r'^user/logout$', 'api.views.logout', name='logout'),
     url(r'^scraper$', 'api.scraper.scraper', name='scraper'),
+    url(r'^geocode$', 'api.views.geocode', name='geocode'),
+    url(r'^upload$', 'api.views.upload_media', name='upload'),
+)
+
+
+# mobile
+import mobile
+
+router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'users', mobile.UserViewSet)
+router.register(r'collections', mobile.CollectionViewSet)
+router.register(r'points', mobile.PointViewSet)
+router.register(r'locations', mobile.LocationViewSet)
+router.register(r'images', mobile.ImageViewSet)
+router.register(r'tags', mobile.TagViewSet)
+
+mobileurlpatterns = patterns('',
+    url(r'^', include(router.urls)),
+    url(r'^token$', 'api.mobile.token', name='token'),
+    url(r'^user/current$', 'api.mobile.current_user', name='current_user'),
+    url(r'^user/pointsbytag/(?P<name>\S+)?$', 'api.mobile.pointsbytag', name='user_pointsbytag'),
+    url(r'^user/tags$', 'api.mobile.tags', name='user_tags'),
+    url(r'^scraper$', 'api.scraper.scraper', name='scraper'),
+    url(r'^geocode$', 'api.mobile.geocode', name='geocode'),
+    url(r'^upload$', 'api.mobile.upload_media', name='upload'),
+)
+
+urlpatterns += (
+    url(r'^mobile/', include(mobileurlpatterns, namespace='mobile')),
 )

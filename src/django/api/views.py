@@ -1,16 +1,24 @@
 # Create your views here.
 import json
+import os
+import os.path
+import time
 
 from django.middleware import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib.auth import login as django_login, logout as django_logout, authenticate
 from django.db.models import Count
+from django.conf import settings
 
 from rest_framework import viewsets, status
-from rest_framework.decorators import link, api_view
-from rest_framework.authentication import SessionAuthentication
+from rest_framework.decorators import link, api_view, parser_classes, authentication_classes, permission_classes
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
+
+from geopy.geocoders import GoogleV3
 
 from serializers import UserSerializer, CollectionSerializer, PointSerializer, PointWriteSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
 from api.forms import UserCreationForm, UserChangeForm
@@ -34,6 +42,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
 
     @csrf_exempt
     def create(self, request):
@@ -88,6 +97,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
             return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class CollectionViewSet(APIViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -95,7 +105,7 @@ class CollectionViewSet(APIViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
 
-    authentication_classes = (SessionAuthentication,)
+    authentication_classes = (SessionAuthentication, )
     permission_classes = (IsOwner,)
 
 
@@ -122,7 +132,7 @@ class PointViewSet(APIViewSet):
     queryset = Point.objects.all()
     serializer_class = PointSerializer
 
-    authentication_classes = (SessionAuthentication,)
+    authentication_classes = (SessionAuthentication, )
     permission_classes = (IsOwner,)
 
     def create(self, request, *args, **kwargs):
@@ -186,38 +196,36 @@ class ImageViewSet(APIViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
-    authentication_classes = (SessionAuthentication,)
+    authentication_classes = (SessionAuthentication, )
     permission_classes = (IsOwner,)
 
 
 @api_view(['GET'])
+@authentication_classes((SessionAuthentication, BasicAuthentication))
+@permission_classes((IsAuthenticated, ))
 def pointsbytag(request, name=None):
-    if request.user.is_authenticated():
-        points = Point.objects.filter(collection__user=request.user, tags__name=name)
-        serializer = PointSerializer(points, many=True)
+    points = Point.objects.filter(collection__user=request.user, tags__name=name)
+    serializer = PointSerializer(points, many=True)
 
-        return Response(serializer.data)
-
-    return Response({})
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
+@authentication_classes((SessionAuthentication, BasicAuthentication))
+@permission_classes((IsAuthenticated, ))
 def tags(request):
-    if request.user.is_authenticated():
-        tags = Point.objects.filter(collection__user=request.user).values('tags__name', 'tags__id').annotate(count=Count('tags')).order_by('-count')
-        output = []
-        for t in tags:
-            record = {
-                'id': t['tags__id'],
-                'name': t['tags__name'],
-                'count': t['count'],
-            }
+    tags = Point.objects.filter(collection__user=request.user).values('tags__name', 'tags__id').annotate(count=Count('tags')).order_by('-count')
+    output = []
+    for t in tags:
+        record = {
+            'id': t['tags__id'],
+            'name': t['tags__name'],
+            'count': t['count'],
+        }
 
-            output.append(record)
+        output.append(record)
 
-        return Response({'tags': output})
-
-    return Response({})
+    return Response({'tags': output})
 
 
 @api_view(['GET'])
@@ -262,3 +270,88 @@ def logout(request):
     django_logout(request)
 
     return Response({})
+
+@api_view(['GET'])
+def geocode(request):
+    geolocator = GoogleV3()
+    out = {}
+    if request.GET.get('q'):
+        out['results'] = []
+        query = request.GET.get('q')
+        results = geolocator.geocode(query, exactly_one=False)
+
+        for result in results:
+            out_result = {
+                'address': result[0].encode('utf-8'),
+                'lat': result[1][0],
+                'lng': result[1][1],
+            }
+            out['results'].append(out_result)
+
+        return Response(out)
+
+    elif request.GET.get('lat') and request.GET.get('lng'):
+        out['results'] = []
+        results = geolocator.reverse('%s, %s' % (request.GET.get('lat'), request.GET.get('lng')), exactly_one=False)
+
+        for result in results:
+            out_result = {
+                'address': result[0].encode('utf-8'),
+                'lat': result[1][0],
+                'lng': result[1][1],
+            }
+            out['results'].append(out_result)
+
+        return Response(out)
+
+    out['error'] = 'No q or lat lng provided'
+    return Response(out)
+
+
+@api_view(['POST'])
+@parser_classes((FileUploadParser,))
+@authentication_classes((SessionAuthentication, BasicAuthentication))
+@permission_classes((IsAuthenticated, ))
+def upload_media(request):
+    out = {}
+    file_obj = request.FILES['media']
+
+    # path: media/users/$id
+    user_upload_path = os.path.join(settings.MEDIA_ROOT, 'users')
+
+    if not os.path.exists(user_upload_path):
+        os.mkdir(user_upload_path)
+
+    user_upload_path = os.path.join(user_upload_path, str(request.user.id))
+
+    if not os.path.exists(user_upload_path):
+        os.mkdir(user_upload_path)
+
+    orig_fn, orig_ext = os.path.splitext(file_obj.name)
+    filename = u'%s.%s' % (orig_fn, time.time())
+    outpath = u'users/%d/%s%s' % (request.user.id, filename, orig_ext)
+
+    f = open(os.path.join(settings.MEDIA_ROOT, outpath), 'wb+')
+    for chunk in file_obj.chunks():
+        f.write(chunk)
+    f.close()
+
+    url = 'http%s://%s%s%s' % ('s' if request.is_secure() else '', request.META.get('HTTP_HOST'), settings.MEDIA_URL, outpath)
+    out['url'] = url
+
+    if request.REQUEST.get('point'):
+        try:
+            point = Point.objects.get(pk=request.REQUEST.get('point'))
+            if point.collection.user == request.user:
+                image = Image()
+                image.url = url
+                image.point = point
+                image.save()
+
+                serialized = ImageSerializer(image)
+                return Response(serialized.data)
+
+        except Point.DoesNotExist:
+            pass
+
+    return Response(out)
