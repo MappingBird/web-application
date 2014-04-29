@@ -334,41 +334,41 @@ section.map-section{
 
 }
 /* Searching location result list */
-.save-panel .location-list{
+.location-list{
 	margin: 15px 0 0;
 	padding: 0;
 	list-style: none;
 	width: 420px;
 }
-.save-panel .location-list>li{
+.location-list>li{
 	margin: 0;
 	font-size: 15px;
 	color: #fff;
 	font-weight: bolder;
 	padding: 6px 29px 0 25px;
 }
-.save-panel .location-list>li.active,
-.save-panel .location-list>li:hover{
+.location-list .active,
+.location-list li:hover{
 	background: #01a9e7;
 }
-.save-panel .location-list>li>p{
-	width: 240px;
+.location-list p{
+	width: 318px;
 	float: left;
 }
-.save-panel .location-list>li>p>span{
+.location-list span{
 	font-size: 12px;
 	font-weight: normal;
 	display: block;
 	color: #707070
 }
-.save-panel .location-list>li.active>p>span,
-.save-panel .location-list>li:hover>p>span{
+.location-list .active span,
+.location-list li:hover span{
 	color: #fff;
 }
-.save-panel .location-list>li>a{
+.location-list a{
 	display: block;
 	padding: 8px 12px;
-	float: left;
+	float: right;
 	background: #1480a8;
 	display: none;
 	margin: 5px 0 0;
@@ -386,21 +386,27 @@ a.show-on-map i.icon-show{
 	height: 18px;
 	vertical-align: text-bottom;
 }
-.save-panel .location-list>li>a:hover{
+.location-list a:hover{
 	text-decoration: none;
 	background-color: #33ccff;
 }
-.save-panel .location-list>li.active>a.save-this-place{
+/*
+.location-list>li.active>a.save-this-place{
 	display: block;
 }
-.save-panel .location-list>li.active>a.show-on-map,
-.save-panel .location-list>li.active:hover>a.show-on-map,
-.save-panel .location-list>li>a.save-this-place{
+*/
+/*
+.location-list .active .show-on-map,
+.location-list .active:hover .show-on-map,
+.location-list .save-this-place{
 	display: none;
 }
-.save-panel .location-list>li:hover>a.show-on-map{
+*/
+.location-list .active .show-on-map,
+.location-list li:hover .show-on-map{
 	display: block;
 }
+
 
 /* Back & proceed button */
 .pingismo-back,

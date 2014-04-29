@@ -771,11 +771,13 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         $scope.activeSavePoint = point;
         $scope.activeSearchResult = index;
 
+        $scope.prepSaveActiveSearchResult();
+
     };
 
-    $scope.prepSaveActiveSearchResult = function ($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
+    $scope.prepSaveActiveSearchResult = function () {
+        //$event.preventDefault();
+        //$event.stopPropagation();
         $scope.searchResultSelected = true;
     };
 
