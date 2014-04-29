@@ -90,6 +90,12 @@ def geocode(request):
     return views.geocode(request)
 
 
+@api_view(['GET'])
+@authentication_classes((BasicAuthentication,))
+def places(request):
+    return views.places(request)
+
+
 @api_view(['POST'])
 @parser_classes((FileUploadParser,))
 @authentication_classes((BasicAuthentication,))

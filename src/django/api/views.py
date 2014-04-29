@@ -19,6 +19,7 @@ from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 
 from geopy.geocoders import GoogleV3
+from googleplaces import GooglePlaces
 
 from serializers import UserSerializer, CollectionSerializer, PointSerializer, PointWriteSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
 from api.forms import UserCreationForm, UserChangeForm
@@ -307,6 +308,28 @@ def geocode(request):
     out['error'] = 'No q or lat lng provided'
     return Response(out)
 
+@api_view(['GET'])
+def places(request):
+    out = {}
+    if request.GET.get('q'):
+        gp = GooglePlaces(settings.GOOGLE_API_KEY)
+        result = gp.text_search(query=request.GET.get('q').encode('utf-8'))
+        out['places'] = []
+
+        for place in result.places:
+            place.get_details()
+            entry = {
+                'name': place.name,
+                'address': place.formatted_address,
+                'coordinates': place.geo_location
+            }
+
+            out['places'].append(entry)
+
+        return Response(out)
+
+    out['error'] = 'No q is provided'
+    return Response(out)
 
 @api_view(['POST'])
 @parser_classes((FileUploadParser,))
