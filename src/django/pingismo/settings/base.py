@@ -194,6 +194,7 @@ TEMPLATE_DIRS = (
 
 DATABASES = {'default': dj_database_url.config()}
 ALLOWED_HOSTS = ['houz.tw', '127.0.0.1', 'localhost']
+SESSION_COOKIE_HTTPONLY = False
 
 # allauth configurations
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
@@ -203,6 +204,8 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_SIGNUP_FORM_CLASS = 'base.forms.SignupForm'
+
+GOOGLE_API_KEY = 'AIzaSyAjxAo8l6VqkDWuicXewu1MCWxQdmNA8tA'
 
 LOGIN_REDIRECT_URL = '/'
 

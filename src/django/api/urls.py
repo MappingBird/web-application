@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^scraper$', 'api.scraper.scraper', name='scraper'),
     url(r'^geocode$', 'api.views.geocode', name='geocode'),
     url(r'^upload$', 'api.views.upload_media', name='upload'),
+    url(r'^places$', 'api.views.places', name='places'),
 )
 
 
@@ -46,6 +47,7 @@ mobileurlpatterns = patterns('',
     url(r'^scraper$', 'api.scraper.scraper', name='scraper'),
     url(r'^geocode$', 'api.mobile.geocode', name='geocode'),
     url(r'^upload$', 'api.mobile.upload_media', name='upload'),
+    url(r'^places$', 'api.mobile.places', name='places'),
 )
 
 urlpatterns += (
