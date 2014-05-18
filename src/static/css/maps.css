@@ -785,6 +785,15 @@ ul.types > li{
 .pingismo-pin .pin-misc{
 	background: url(../img/pin-misc.png) 0 0 no-repeat;
 }
+
+.pingismo-pin .icon-check{
+	background: url(../img/icon-checked.png) 0 0 no-repeat;
+	width: 21px;
+	height: 21px;
+	margin: -20px -5px 0 0;
+	display: none;
+}
+
 .pin-popup{
 	width: 310px;
 	height: 100px;
@@ -849,13 +858,6 @@ ul.types > li{
 }
 .pin-popup .pin-popup-img i.is-expanded{
 	background-position: 0 -25px;
-}
-.pin-popup .icon-check{
-	background: url(../img/icon-checked.png) 0 0 no-repeat;
-	width: 21px;
-	height: 21px;
-	margin: -20px -5px 0 0;
-	display: none;
 }
 
 /* Pin - animiation */
