@@ -321,10 +321,11 @@ footer.narrow { padding: 5px 0 0; }
 
 .search-info-tip {
 	left: -1000px;
+	top: -400px;
+	position: absolute;
 }
 
 .search-info-tip.visible {
-	position: absolute;
 	left: 410px;
 	top: 36px;
 	z-index: 1000;

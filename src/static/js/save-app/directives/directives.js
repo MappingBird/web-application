@@ -165,7 +165,7 @@ directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
 
                             $timeout(function(){
                                 $element.hide();
-                            }, 2000);
+                            }, 3000);
                             break;
 
                         case 'requestDeleteCollection':

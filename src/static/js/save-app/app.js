@@ -588,17 +588,17 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     $scope.$watch('noSearchResults', function(noSearchResults) {
         if ($scope.noSearchResults) {
-            $scope.showSearchTip = false;
-        } else {
             $scope.showSearchTip = true;
+        } else {
+            // $scope.showSearchTip = false;
         }
     });
 
     $scope.$watch('noSearchQuery', function(noSearchQuery) {
         if ($scope.noSearchQuery) {
-            $scope.showSearchTip = false;
-        } else {
             $scope.showSearchTip = true;
+        } else {
+            //$scope.showSearchTip = true;
         }
     });
 
@@ -628,6 +628,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         console.log('placesSearchCallback');
         console.log(data);
         var len = data.length,
+            len2 = data.length,
             d;
 
         $scope.$apply(function(){
@@ -640,53 +641,36 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             console.log('there are search results');
             console.log(len);
             // if there's only one result, select search result
-            if (len === 1) {
-                len--;
-                $scope.$apply(function(){
-                    $scope.activeSavePoint = {
-                        index: 0,
+            $scope.$apply(function(){
+                while (len--) {
+                    $scope.places.unshift({
+                        index: len,
                         icon: data[len].icon,
                         name: data[len].name,
                         address: data[len].formatted_address,
                         phone: '',
+                        location: {
+                            place_name: data[len].name,
+                            place_address: data[len].formatted_address,
+                            coordinates: data[len].geometry.location.lat() + ',' + data[len].geometry.location.lng()
+                        },
                         coords: data[len].geometry.location.lat() + ',' + data[len].geometry.location.lng(),
                         type: data[len].type || 'misc',
                         lat: data[len].geometry.location.lat(),
                         lng: data[len].geometry.location.lng()
-                    };
-                    $scope.searchResultSelected = true;
-                    console.log('set activeSavePoint');
+                    });
+                }
+
+                if (len2 === 1) {
+                    $scope.setActiveSavePoint(null, 0);
+                    console.log('set activeSavePoint single');
                     console.log($scope.activeSavePoint);
-                });
-
-            // otherwise display results in multi-result page
-            } else {
-                $scope.$apply(function(){
-                    while (len--) {
-                        $scope.places.unshift({
-                            index: len,
-                            icon: data[len].icon,
-                            name: data[len].name,
-                            address: data[len].formatted_address,
-                            phone: '',
-                            coords: data[len].geometry.location.lat() + ',' + data[len].geometry.location.lng(),
-                            type: data[len].type || 'misc',
-                            lat: data[len].geometry.location.lat(),
-                            lng: data[len].geometry.location.lng()
-                        });
-                    }
-
-                    $scope.activeSavePoint = $scope.places[0];
-                    $scope.activeSearchResult = 0;
+                } else {
+                    $scope.setActiveSavePoint(null, 0, true);
                     console.log('set activeSavePoint multiple');
                     console.log($scope.activeSavePoint);
+                }
 
-                });
-
-            }
-
-            $scope.$apply(function(){
-                $scope.searchResultsLoaded = true;
             });
 
             $scope.$emit("placesLoaded");
@@ -736,9 +720,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     };
 
 
-    $scope.setActiveSavePoint = function($event, index) {
-        $event.preventDefault();
-        $event.stopPropagation();
+    $scope.setActiveSavePoint = function($event, index, $forceShowSearchResults) {
+        if ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+        }
 
         console.log('setactiveSavePoint ' + index);
 
@@ -774,10 +760,17 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         $scope.activeSavePoint = point;
         $scope.activeSearchResult = index;
 
-        $scope.prepSaveActiveSearchResult();
+        // in the case of multiple search results
+        // where we want to load a map but still
+        // show the search results in the side.
+        // A single search result will automatically
+        // show the save form.
+        if (!$forceShowSearchResults) {
+            $scope.prepSaveActiveSearchResult();
+        }
 
         BroadcastService.prepForBroadcast({
-            type: 'saveCollectionSet',
+            type: 'setSaveCollection',
             data: {
                 collectionId: $scope.activeCollectionId
             }
@@ -933,13 +926,19 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                 url: $scope.targetUrl,
                 description: $scope.pageData.text,
                 tags: saveTags,
-                place_name: $scope.activeSavePoint.name,
-                place_address: $scope.activeSavePoint.address,
-                place_phone: $scope.activeSavePoint.phone,
-                coordinates: $scope.activeSavePoint.coords,
+                place_name: $scope.activeSavePoint.location.place_name,
+                place_address: $scope.activeSavePoint.location.place_address,
+                place_phone: "", // empty
+                coordinates: $scope.activeSavePoint.location.coordinates,
                 type: $scope.activeSavePoint.type,
                 collection: $scope.saveCollectionId
             };
+
+            // send event
+            BroadcastService.prepForBroadcast({
+                type: 'pointSaveRequested',
+                data: {}
+            });
 
             PointResource.save(pointData, function(data, headers){
                 console.log('save point successful');
@@ -1166,7 +1165,7 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
                     refreshCollectionPoints($scope.activeCollectionId);
                 }
                 break;
-            case 'saveCollectionSet':
+            case 'setSaveCollection':
                 if (BroadcastService.message.data.collectionId != -1) {
                     $scope.activeCollectionId = BroadcastService.message.data.collectionId;
                     refreshCollectionPoints($scope.activeCollectionId);
@@ -1249,7 +1248,7 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
             console.log('loading points for collection');
             console.log(data);
             if (typeof data.points !== 'undefined') {
-                if ($scope.saveMode) {
+                if ($scope.saveMode && MapPoints.activeSavePoint.name != '') {
                     data.points.push(MapPoints.activeSavePoint);
                 }
                 $scope.activeCollectionPoints = data.points;
@@ -1295,7 +1294,7 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
 
 });
 
-SaveApp.controller('mapController', function($scope, Presets, MapPoints, BroadcastService, $state) {
+SaveApp.controller('mapController', function($scope, Presets, MapPoints, BroadcastService, $state, $timeout) {
 
     var saveOverlay,
         saveMarker,
@@ -1527,9 +1526,20 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 // special rendering for save point
                 if (typeof $scope.activeViewPoints[len].isSavePoint != 'undefined' && $scope.activeViewPoints[len].isSavePoint) {
 
-                    //srcImage = $scope.activeViewPoints[len].images[0].url || '';
+                    marker = new BucketListSmallOverlay(
+                        bounds,
+                        Presets.mapZoom,
+                        srcImage,
+                        map,
+                        new google.maps.LatLng(lat, lng),
+                        type,
+                        name,
+                        address,
+                        phone,
+                        'open',
+                        'save');
 
-                    marker = new BucketListSmallOverlay(bounds, Presets.mapZoom, srcImage, map, new google.maps.LatLng(lat, lng), type, name, address, phone, 'open', 'save');
+                    saveOverlay = marker;
 
                     // now check to see if any overlays go off the screen
                     console.log(marker);
@@ -1546,7 +1556,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
                     latlng = projection.fromContainerPixelToLatLng(point);
                     bounds.extend(latlng);
-                    //saveMarker = new BucketListPin(bounds, Presets.mapZoom, srcImage, map, myLatLng);
 
                 // else just show points
                 } else {
@@ -1676,9 +1685,16 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         console.log ('[[[stateChange mapController]]]');
         console.log (BroadcastService.message.type);
         switch (BroadcastService.message.type) {
+            case 'pointSaveRequested':
+                if (saveOverlay) {
+                    saveOverlay.showSavedCheckmark();
+                }
+                break;
             case 'pointSaveComplete':
                 if (saveOverlay) {
-                    saveOverlay.save();
+                    $timeout(function(){
+                        saveOverlay.hideSavedCheckmark();
+                    }, 3000);
                 }
                 break;
             case 'collectionViewingMode':
