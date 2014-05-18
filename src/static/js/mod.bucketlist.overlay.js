@@ -164,16 +164,16 @@ BucketListSmallOverlay.prototype.onAdd = function() {
         tip = $('<a href="#" class="pin-popup-img show-details-btn"></a>'),
         popup = $('<div class="pin-popup" />'),
         detail = $('<p><strong>' + this.placeName_ + '</strong>' + this.placeAddress_ + ' ' + this.placePhone_ + '</p>'),
-        check = $('<i class="icon-check pull-right"></i>'),
+        checkmark = $('<i class="icon-check pull-right"></i>'),
         self = this;
 
     div.append(icon);
+    div.append(checkmark);
     popup.append(detail);
-    popup.append(check);
     tip.append('<i></i>');
 
     this.div_ = div[0];
-    this.checkmark_ = check;
+    this.checkmark_ = checkmark;
     this.popup_ = popup[0];
     this.icon_ = icon;
     this.tip_ = tip;
@@ -253,11 +253,20 @@ BucketListSmallOverlay.prototype.setImage = function(imageUrl) {
 };
 
 /**
- * Show checkmark, hide content after point saved
+ * Show checkmark, hide content when point saved
  */
-BucketListSmallOverlay.prototype.save = function() {
+BucketListSmallOverlay.prototype.showSavedCheckmark = function() {
+    console.log('showSavedCheckmark');
     $(this.popup_).hide();
     this.checkmark_.show();
+};
+
+/**
+ * Hide checkmark after point saved confirm
+ */
+BucketListSmallOverlay.prototype.hideSavedCheckmark = function() {
+    console.log('hideSavedCheckmark');
+    this.checkmark_.hide();
 };
 
 BucketListSmallOverlay.prototype.draw = function() {
