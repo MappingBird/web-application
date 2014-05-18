@@ -348,12 +348,6 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
     $scope.mapMode = false;
     $scope.pointMode = false;
 
-    function resetMapSize () {
-        $('#map').on('transitionend', function() {
-            $scope.$broadcast('mapChange');
-        });
-    }
-
     // map viewing mode
     function mapViewingMode () {
         $scope.mapMode = true;
@@ -366,7 +360,6 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = false;
         $scope.halfMap = false;
-        //resetMapSize();
     }
 
     // point saving mode
@@ -381,7 +374,6 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
         $scope.halfMap = false;
-        //resetMapSize();
     }
 
     // point viewing mode
@@ -396,7 +388,6 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
         $scope.halfMap = true;
-        //resetMapSize();
     }
 
     // collection viewing mode
@@ -411,7 +402,6 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = true;
         $scope.halfMap = false;
-        //resetMapSize();
     }
 
     function reloadCollections() {
@@ -753,12 +743,25 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         console.log('setactiveSavePoint ' + index);
 
         var image,
-            point = $scope.places[index];
+            place = $scope.places[index],
+            point = {};
 
+        // build point object to match structure of saved points
+        // so can display correctly on map
+        point.title = place.name;
+        point.type = place.type;
+        point.location = {
+            place_name: place.name,
+            place_address: place.address,
+            coordinates: place.coords
+        }
+        point.isSavePoint = true;
+
+        // images
         if (typeof $scope.pageImages !== 'undefined'
             && $scope.pageImages.length > 0) {
 
-            point.image = $scope.pageImages[0];
+            point.images = [ { url: $scope.pageImages[0] }];
 
             BroadcastService.prepForBroadcast({
                 type: 'savePointSetImage',
@@ -772,6 +775,13 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         $scope.activeSearchResult = index;
 
         $scope.prepSaveActiveSearchResult();
+
+        BroadcastService.prepForBroadcast({
+            type: 'saveCollectionSet',
+            data: {
+                collectionId: $scope.activeCollectionId
+            }
+        });
 
     };
 
@@ -874,6 +884,14 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         console.log('saveCollectionId: ' + id);
         $scope.saveCollectionId = id;
         $scope.showSelectCollection = false; // close the selector
+        $scope.activeCollectionId = id; // set the active collection id
+
+        BroadcastService.prepForBroadcast({
+            type: 'saveCollectionChanged',
+            data: {
+                collectionId: id
+            }
+        });
     };
 
     $scope.setPointType = function($e, t){
@@ -1140,9 +1158,16 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
                     refreshCollectionPointLength(BroadcastService.message.data.savedCollectionId);
                 }
                 break;
+            case 'saveCollectionChanged':
             case 'viewingCollection':
                 if (BroadcastService.message.data.collectionId != -1
                     && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
+                    $scope.activeCollectionId = BroadcastService.message.data.collectionId;
+                    refreshCollectionPoints($scope.activeCollectionId);
+                }
+                break;
+            case 'saveCollectionSet':
+                if (BroadcastService.message.data.collectionId != -1) {
                     $scope.activeCollectionId = BroadcastService.message.data.collectionId;
                     refreshCollectionPoints($scope.activeCollectionId);
                 }
@@ -1224,6 +1249,9 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
             console.log('loading points for collection');
             console.log(data);
             if (typeof data.points !== 'undefined') {
+                if ($scope.saveMode) {
+                    data.points.push(MapPoints.activeSavePoint);
+                }
                 $scope.activeCollectionPoints = data.points;
                 $scope.activeCollectionPointLength = data.points.length;
             }
@@ -1301,9 +1329,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         console.log ($scope.saveMode);
         $scope.activeSavePoint = activeSavePoint;
 
-        if ($scope.saveMode) {
-            displayActiveSavePoint();
-        }
     });
 
     $scope.$watch(function() { return MapPoints.activeViewPoints; }, function(activeViewPoints) {
@@ -1315,10 +1340,16 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         if (!angular.equals($scope.activeViewPoints, activeViewPoints)) {
             console.log('not equal');
             $scope.activeViewPoints = activeViewPoints;
-            if (!$scope.saveMode) {
-                console.log('displayActiveViewPoints');
+            console.log('map height: ' + (function() { return $('#map').height()})());
+        console.log('map width: ' + (function() { return $('#map').width()})());
+            if ($('#map').data('transitioning')) {
+                resetMapSize(displayActiveViewPoints);
+            } else {
                 displayActiveViewPoints();
             }
+
+            //displayActiveViewPoints();
+
         }
     });
 
@@ -1332,10 +1363,14 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
     function resetMapSize(callback) {
         console.log('resetMapSize');
+
+        $('#map').data('transitioning', true);
+
         if (typeof map !== 'undefined') {
             $('#map').on('transitionend.resize', function() {
                 google.maps.event.trigger(map, "resize");
-                $('map').off('transitionend.resize');
+                $('#map').off('transitionend.resize');
+                $('#map').data('transitioning', false);
             });
         }
 
@@ -1400,7 +1435,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
     }
 
     function displayActiveViewPoints () {
-
+        console.log('map height: ' + (function() { return $('#map').height()})());
+        console.log('map width: ' + (function() { return $('#map').width()})());
         // clear existing pins
         if (saveOverlay) {
             saveOverlay.setMap(null);
@@ -1435,25 +1471,43 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 name,
                 address,
                 phone,
-                firstPoint = $scope.activeViewPoints[0],
+                centerPoint = $scope.activeViewPoints[0],
                 split,
                 srcImage,
-                activePoint;
+                activePoint,
+                bounds = new google.maps.LatLngBounds(),
+                overlayHelper = new google.maps.OverlayView(),
+                projection,
+                point,
+                widestPoint = $('#map').width() - 332,
+                highestPoint = 130;
 
-                myLatLng = new google.maps.LatLng(firstPoint.lat, firstPoint.lng);
-                mapOptions.center = myLatLng;
-                map = map || new google.maps.Map($('#map')[0], mapOptions);
-                bounds;
+            // http://stackoverflow.com/questions/10339365/googlemaps-api-3-fitbounds-padding
+            overlayHelper.onAdd = function() {};
+            overlayHelper.onRemove = function() {};
+            overlayHelper.draw = function() {};
+            overlayHelper.setMap(map);
+            projection = overlayHelper.getProjection();
 
-            // get bounds
-            bounds = new google.maps.LatLngBounds();
             while (len2--) {
                 split = $scope.activeViewPoints[len2].location.coordinates.split(',');
                 $scope.activeViewPoints[len2].lat = Number(split[0]);
                 $scope.activeViewPoints[len2].lng = Number(split[1]);
+
+                // if saving a point, center the map around the point to be saved
+                console.log('len2: ' + len2);
+                if (typeof $scope.activeViewPoints[len2].isSavePoint != 'undefined' && $scope.activeViewPoints[len2].isSavePoint) {
+                    console.log('savepoint: ' + len2);
+                    centerPoint = $scope.activeViewPoints[len2];
+                }
+
+                // set bounds
                 bounds.extend(new google.maps.LatLng($scope.activeViewPoints[len2].lat, $scope.activeViewPoints[len2].lng));
             }
 
+            myLatLng = new google.maps.LatLng(centerPoint.lat, centerPoint.lng);
+            mapOptions.center = myLatLng;
+            map = map || new google.maps.Map($('#map')[0], mapOptions);
             map.fitBounds(bounds);
 
             // place markers
@@ -1465,9 +1519,38 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 address = $scope.activeViewPoints[len].location.place_address;
                 phone = $scope.activeViewPoints[len].location.place_phone || '';
                 if ($scope.activeViewPoints[len].images && $scope.activeViewPoints[len].images.length > 0) {
-                    srcImage = $scope.activeViewPoints[len].images[0].url || '';
+                    srcImage = $scope.activeViewPoints[len].images[0].url;
+                } else {
+                    srcImage = '';
                 }
-                marker = new BucketListSmallOverlay(
+
+                // special rendering for save point
+                if (typeof $scope.activeViewPoints[len].isSavePoint != 'undefined' && $scope.activeViewPoints[len].isSavePoint) {
+
+                    //srcImage = $scope.activeViewPoints[len].images[0].url || '';
+
+                    marker = new BucketListSmallOverlay(bounds, Presets.mapZoom, srcImage, map, new google.maps.LatLng(lat, lng), type, name, address, phone, 'open', 'save');
+
+                    // now check to see if any overlays go off the screen
+                    console.log(marker);
+                    console.log(marker.getPosition);
+                    console.log(projection.fromLatLngToContainerPixel);
+                    point = projection.fromLatLngToContainerPixel(new google.maps.LatLng(marker.latlng_.A, marker.latlng_.k));
+                    if (point.x > widestPoint || point.y < highestPoint) {
+                        widestPoint = point.x;
+                    }
+
+                    point = new google.maps.Point(
+                                $('#map').width() + widestPoint,
+                                -highestPoint); // middle of map height, since we only want to reposition bounds to the left and not up and down
+
+                    latlng = projection.fromContainerPixelToLatLng(point);
+                    bounds.extend(latlng);
+                    //saveMarker = new BucketListPin(bounds, Presets.mapZoom, srcImage, map, myLatLng);
+
+                // else just show points
+                } else {
+                    marker = new BucketListSmallOverlay(
                         bounds,
                         Presets.mapZoom,
                         srcImage,
@@ -1533,6 +1616,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                             };
                         })($scope.activeViewPoints[len])
                     );
+                }
 
                 viewOverlays[$scope.activeViewPoints[len].id] = marker;
 
@@ -1540,8 +1624,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
             console.log('viewOverlays post marker');
             console.log(viewOverlays);
-
-            //resetMapSize();
 
         }
     }
