@@ -21,10 +21,11 @@ urlpatterns = patterns('',
     url(r'^api/', include('api.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'', include('bucketlist.urls', namespace='bucketlist')),
+
+    # home
+    url(r'^$', 'base.views.home', name='home'),
 )
 
-urlpatterns += patterns('django.contrib.staticfiles.views',
-        url(r'^$', 'serve', {'path': '/index.html'}))
 urlpatterns += patterns('django.contrib.staticfiles.views',
         url(r'^app$', 'serve', {'path': '/app.html'}))
 urlpatterns += patterns('django.contrib.staticfiles.views',
