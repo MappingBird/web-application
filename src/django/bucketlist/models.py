@@ -46,6 +46,7 @@ class Point(models.Model):
 
 class Image(models.Model):
     url = models.URLField(blank=True)
+    thumb_path = models.URLField(blank=True)
     point = models.ForeignKey(Point, related_name='images')
 
     create_time = models.DateTimeField(auto_now_add=True)

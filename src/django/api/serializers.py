@@ -15,7 +15,7 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Image
-        fields = ('id', 'url', 'point', 'create_time', 'update_time', )
+        fields = ('id', 'url', 'thumb_path', 'point', 'create_time', 'update_time', )
 
 
 class LocationSerializer(serializers.HyperlinkedModelSerializer):
