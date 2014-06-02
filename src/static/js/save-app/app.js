@@ -1234,6 +1234,8 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
                     collectionToBeDeletedName: name
                 }
             });
+
+            $scope.editMode = false;
         } else {
             console.log('viewCollection ' + id);
             $scope.collectionsListVisible = false;
