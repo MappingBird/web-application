@@ -348,8 +348,13 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
     $scope.mapMode = false;
     $scope.pointMode = false;
 
+    function changeMapParams () {
+        $('#map').data('transitioning', true);
+    }
+
     // map viewing mode
     function mapViewingMode () {
+        changeMapParams();
         $scope.mapMode = true;
         $scope.saveMode = false;
         $scope.collectionsMode = false;
@@ -364,6 +369,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
 
     // point saving mode
     function pointSavingMode () {
+        changeMapParams();
         $scope.mapMode = false;
         $scope.saveMode = true;
         $scope.collectionsMode = false;
@@ -378,6 +384,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
 
     // point viewing mode
     function pointViewingMode () {
+        changeMapParams();
         $scope.mapMode = false;
         $scope.saveMode = false;
         $scope.collectionsMode = false;
@@ -392,6 +399,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
 
     // collection viewing mode
     function collectionViewingMode() {
+        changeMapParams();
         $scope.mapMode = false;
         $scope.saveMode = false;
         $scope.collectionsMode = true;
@@ -996,6 +1004,8 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             $event.stopPropagation();
         }
 
+        $scope.noSearchResults = false;
+
         if ($scope.searchQuery && $scope.searchQuery.length > 0 && $scope.searchQuery !== 'undefined') {
             $scope.placesApiUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyCixleTjJLXPDQs9AIG6-18Gvx1X6M7If8&sensor=false&query=' + $scope.searchQuery + '&callback=?';
             $scope.noSearchQuery =  false;
@@ -1281,7 +1291,7 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         console.log (BroadcastService.message.type);
         switch (BroadcastService.message.type) {
             case 'deleteCollection':
-                Collection.delete({id: BroadcastService.message.collectionToBeDeletedId}, function(data, headers){
+                Collection.delete({id: BroadcastService.message.data.id}, function(data, headers){
                     BroadcastService.prepForBroadcast({
                         type: 'collectionUpdate',
                         data: {}
@@ -1370,14 +1380,46 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 google.maps.event.trigger(map, "resize");
                 $('#map').off('transitionend.resize');
                 $('#map').data('transitioning', false);
+                //recenterMap();
             });
         }
 
         if (typeof callback === 'function') {
             $('#map').on('transitionend', function() {
                 callback();
+                $('#map').off('transitionend');
             });
         }
+    }
+/*
+    map = new google.maps.Map($('#map')[0], mapOptions);
+
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+        recenterMap();
+    });
+*/
+
+    function recenterMap() {
+
+        var len2 = $scope.activeViewPoints.length,
+            bounds = new google.maps.LatLngBounds(),
+            centerPoint = $scope.activeViewPoints[0];
+
+        while (len2--) {
+            split = $scope.activeViewPoints[len2].location.coordinates.split(',');
+            $scope.activeViewPoints[len2].lat = Number(split[0]);
+            $scope.activeViewPoints[len2].lng = Number(split[1]);
+
+            // set bounds
+            bounds.extend(new google.maps.LatLng($scope.activeViewPoints[len2].lat, $scope.activeViewPoints[len2].lng));
+        }
+
+        myLatLng = new google.maps.LatLng(centerPoint.lat, centerPoint.lng);
+        mapOptions.center = myLatLng;
+        map = map || new google.maps.Map($('#map')[0], mapOptions);
+        map.fitBounds(bounds);
+        map.panTo(myLatLng)
+
     }
 
     function displayActiveSavePoint () {
@@ -2006,8 +2048,15 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
             console.log('deletePoint return true');
 
             BroadcastService.prepForBroadcast({
+                type: 'collectionUpdate',
+                data: { }
+            });
+
+            BroadcastService.prepForBroadcast({
                 type: 'pointDeleted',
-                data: { 'id' : $scope.activeViewPoint.id }
+                data: {
+                    'id' : $scope.activeViewPoint.id
+                }
             });
 
             $state.go('viewCollection', { collectionId: $scope.activeCollectionId});

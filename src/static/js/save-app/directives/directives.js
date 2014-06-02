@@ -168,6 +168,17 @@ directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
                             }, 3000);
                             break;
 
+                        case 'pointDeleted':
+
+                            $scope.alertActive = true;
+                            $scope.message = $sce.trustAsHtml('Point deleted successfully.');
+                            $scope.actionMessage = '';
+
+                            $timeout(function(){
+                                $element.hide();
+                            }, 3000);
+                            break;
+
                         case 'requestDeleteCollection':
 
                             $scope.alertActive = true;
