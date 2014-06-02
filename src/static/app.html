@@ -146,8 +146,8 @@
                         {{activeCollectionName}}
                     </a>
                     <span>{{activeCollectionPointLength}} places saved</span>
-                    <a href="#" class="list-view pull-right">List</a>
-                    <a href="#" class="map-view pull-right active">Map</a>
+                    <a href="#" class="list-view pull-right" ng-class="{ 'active' : listMode }" ng-click="gotoListView($event)">List</a>
+                    <a href="#" class="map-view pull-right" ng-class="{ 'active' : !listMode }" ng-click="gotoMapView($event)">Map</a>
                     <div class="clearfix"></div>
                 </div>
                 <ul class="nav nav-stacked">
@@ -240,8 +240,24 @@
             <!-- End of alert -->
 
             <!-- Google maps -->
-            <div id="map" ng-class="{retracted: mapRetracted, full: fullMap, half: halfMap, 'semi-retracted': semiRetractedMap}" ng-show="mapVisible" ng-controller="mapController"></div>
+            <div id="map" ng-class="{retracted: mapRetracted, full: fullMap, half: halfMap, 'semi-retracted': semiRetractedMap}" ng-show="mapVisible && !listMode" ng-controller="mapController"></div>
             <!-- End of Google maps -->
+
+            <!-- List view -->
+            <div class="collection-list-view" ng-class="" ng-show="listMode" ng-controller="listController">
+                <div class="list-item" ng-repeat="point in activeViewPoints">
+                    <div class="item-header">
+                        <p class="item-pin {{point.type}}">{{point.type}}</p>
+                        <p class="item-title" title="{{point.title}}">{{point.title}}</p>
+                        <p class="item-time-added"><span class="icon-clock"></span> {{ point.create_time | amCalendar }}</p>
+                    </div>
+                    <div class="item-body">
+                        <img ng-src="{{point.images[0].url}}">
+                        <p class="item-description">{{point.description}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- End of List view -->
 
             <div ui-view></div>
 
@@ -278,6 +294,7 @@
         <script src="/static/js/vendor/angular/angular-cookies.min.js"></script>
         <script src="/static/js/vendor/ng-tags-input/ng-tags-input.min.js"></script>
         <script src="/static/js/vendor/momentjs/moment.min.js"></script>
+        <script src="/static/js/vendor/momentjs/angular-moment.min.js"></script>
         <script src="/static/js/vendor/slimbox2/slimbox2.js"></script>
         <script src="/static/js/mod.google-maps.js"></script>
         <script src="/static/js/mod.bucketlist.overlay.js"></script>
