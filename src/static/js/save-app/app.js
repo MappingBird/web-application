@@ -1113,7 +1113,24 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
             && $scope.collections.length > 0) {
 
             console.log('setting active collection');
-            if ($scope.activeCollectionId == -1) {
+
+            if ($scope.activeCollectionId != -1) {
+                // already have collection open
+                // check to see if active collection has been deleted
+                // switch to most recent if has
+
+                var activeCollectionStillExists = false;
+
+                for (var c in $scope.collections) {
+                    if ($scope.activeCollectionId == $scope.collections[c].id) {
+                        activeCollectionStillExists = true;
+                        break;
+                    }
+                }
+            }
+
+            // if have to change collection
+            if (!activeCollectionStillExists || $scope.activeCollectionId == -1) {
                 if ($scope.collections.length > 1
                     && Collections.mostRecentModifiedCollection !== -1
                     ) {
@@ -1123,6 +1140,8 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
                     console.log('setting active collection to first collection as default');
                     $scope.activeCollectionId = $scope.collections[0].id;
                 }
+
+                refreshCollectionPoints($scope.activeCollectionId);
             }
 
             console.log('get collectionName');
@@ -1728,7 +1747,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         console.log (BroadcastService.message.type);
         switch (BroadcastService.message.type) {
             case 'pointSaveRequested':
-                if (saveOverlay) {
+                if (saveOverlay && typeof saveOverlay.showSavedCheckmark != 'undefined') {
                     saveOverlay.showSavedCheckmark();
                 }
                 break;
