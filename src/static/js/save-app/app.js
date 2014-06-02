@@ -1,6 +1,6 @@
 // HTTP solution from
 // http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/
-var SaveApp = angular.module('SaveApp', ['SaveApp.directives', 'SaveApp.services', 'ngCookies', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'ngTagsInput'], function($httpProvider, $dialogProvider) {
+var SaveApp = angular.module('SaveApp', ['SaveApp.directives', 'SaveApp.services', 'ngCookies', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'ngTagsInput', 'angularMoment'], function($httpProvider, $dialogProvider) {
     // angular bootstrap
     //$dialogProvider.options({dialogFade: true});
 
@@ -101,6 +101,33 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
                 function b () {
                     BroadcastService.prepForBroadcast({
                         type: 'viewingCollection',
+                        data: {
+                            collectionId: $stateParams.collectionId
+                        }
+                    });
+                }
+
+                if (User.data.isLoggedIn == true) {
+                    b();
+                } else {
+                    $scope.$on('stateChange', function() {
+                        if (BroadcastService.message.type == 'userLoaded') {
+                            b();
+                        }
+                    });
+                }
+
+
+            }]
+        })
+        .state('viewCollectionList', {
+            url: '/collection/:collectionId/list',
+            template: '<span></span>',
+            controller: ['BroadcastService', 'User', '$stateParams', '$scope', function(BroadcastService, User, $stateParams, $scope) {
+
+                function b () {
+                    BroadcastService.prepForBroadcast({
+                        type: 'viewingCollectionList',
                         data: {
                             collectionId: $stateParams.collectionId
                         }
@@ -347,6 +374,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
     $scope.collectionsMode = false;
     $scope.mapMode = false;
     $scope.pointMode = false;
+    $scope.listMode = false;
 
     function changeMapParams () {
         $('#map').data('transitioning', true);
@@ -365,6 +393,8 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = false;
         $scope.halfMap = false;
+
+        $scope.listMode = false;
     }
 
     // point saving mode
@@ -380,6 +410,8 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
         $scope.halfMap = false;
+
+        $scope.listMode = false;
     }
 
     // point viewing mode
@@ -395,6 +427,8 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
         $scope.halfMap = true;
+
+        $scope.listMode = false;
     }
 
     // collection viewing mode
@@ -410,6 +444,25 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = true;
         $scope.halfMap = false;
+
+        $scope.listMode = false;
+    }
+
+    // list viewing mode
+    function listViewingMode() {
+        changeMapParams();
+        $scope.mapMode = true;
+        $scope.saveMode = false;
+        $scope.collectionsMode = false;
+        $scope.showCollectionList = true;
+        $scope.showSavePanel = false;
+        $scope.showPointDetailPanel = false;
+        $scope.fullMap = true;
+        $scope.mapRetracted = false;
+        $scope.semiRetractedMap = false;
+        $scope.halfMap = false;
+
+        $scope.listMode = true;
     }
 
     function reloadCollections() {
@@ -439,6 +492,9 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
             case 'pointClosed':
             case 'viewingCollection':
                 mapViewingMode();
+                break;
+            case 'viewingCollectionList':
+                listViewingMode();
                 break;
             case 'pointSavingMode':
                 pointSavingMode();
@@ -1234,6 +1290,8 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
                     collectionToBeDeletedName: name
                 }
             });
+
+            $scope.editMode = false;
         } else {
             console.log('viewCollection ' + id);
             $scope.collectionsListVisible = false;
@@ -1302,6 +1360,18 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         $event.preventDefault();
         $event.stopPropagation();
         $scope.editMode = !$scope.editMode;
+    };
+
+    $scope.gotoListView = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $state.go('viewCollectionList', { collectionId: $scope.activeCollectionId});
+    };
+
+    $scope.gotoMapView = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
     };
 
 
@@ -2088,3 +2158,27 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
 });
 
+SaveApp.controller('listController', function($scope, Presets, MapPoints, BroadcastService, $state, $timeout) {
+
+    $scope.$watch(function() { return MapPoints.activeViewPoints; }, function(activeViewPoints) {
+
+        console.log('MapPoints.activeViewPoints changed');
+        console.log($scope.activeViewPoints);
+        console.log(activeViewPoints);
+
+        if (!angular.equals($scope.activeViewPoints, activeViewPoints)) {
+            $scope.activeViewPoints = activeViewPoints;
+        }
+    });
+
+
+    $scope.$on('stateChange', function() {
+        console.log ('[[[stateChange listController]]]');
+        console.log (BroadcastService.message.type);
+        switch (BroadcastService.message.type) {
+            case 'listMode':
+                break;
+        }
+    });
+
+});
