@@ -377,7 +377,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
     $scope.listMode = false;
 
     function changeMapParams () {
-        $('#map').data('transitioning', true);
+       // $('#map').data('transitioning', true);
     }
 
     // map viewing mode
@@ -1310,14 +1310,16 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         $event.stopPropagation();
         // toggle between map and collection viewing
         console.log('showCollections');
-        // hide collections list
+        // show collections list
+        // show partial map
         if (!$scope.collectionsMode) {
             $scope.collectionsListVisible = true;
             BroadcastService.prepForBroadcast({
                 type: 'viewingCollections',
                 data: {}
             });
-        // show collections list
+        // hide collections list
+        // show full map
         } else {
             $scope.collectionsListVisible = false;
             $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
