@@ -1243,20 +1243,23 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
                 break;
             case 'saveCollectionChanged':
             case 'viewingCollection':
-                if (BroadcastService.message.data.collectionId != -1
+                if (typeof BroadcastService.message.data.collectionId != 'undefined'
+                    && BroadcastService.message.data.collectionId != -1
                     && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
                     $scope.activeCollectionId = BroadcastService.message.data.collectionId;
                     refreshCollectionPoints($scope.activeCollectionId);
                 }
                 break;
             case 'setSaveCollection':
-                if (BroadcastService.message.data.collectionId != -1) {
+                if (typeof BroadcastService.message.data.collectionId != 'undefined'
+                    && BroadcastService.message.data.collectionId != -1) {
                     $scope.activeCollectionId = BroadcastService.message.data.collectionId;
                     refreshCollectionPoints($scope.activeCollectionId);
                 }
                 break;
             case 'pointSelected':
-                if (BroadcastService.message.data.collectionId != -1
+                if (typeof BroadcastService.message.data.collectionId != 'undefined'
+                    && BroadcastService.message.data.collectionId != -1
                     && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
                     $scope.activeCollectionId = BroadcastService.message.data.collectionId;
                     refreshCollectionPoints($scope.activeCollectionId);
@@ -1331,29 +1334,34 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         console.log('refreshCollectionPoints');
         console.log(collectionId);
 
-        Collection.get({id: collectionId}, function(data, headers){
-            console.log('loading points for collection');
-            console.log(data);
-            if (typeof data.points !== 'undefined') {
-                if ($scope.saveMode && MapPoints.activeSavePoint.name != '') {
-                    data.points.push(MapPoints.activeSavePoint);
+        if (collectionId) {
+            Collection.get({id: collectionId}, function(data, headers){
+                console.log('loading points for collection');
+                console.log(data);
+                if (typeof data.points !== 'undefined') {
+                    if ($scope.saveMode && MapPoints.activeSavePoint.name != '') {
+                        data.points.push(MapPoints.activeSavePoint);
+                    }
+                    $scope.activeCollectionPoints = data.points;
+                    $scope.activeCollectionPointLength = data.points.length;
                 }
-                $scope.activeCollectionPoints = data.points;
-                $scope.activeCollectionPointLength = data.points.length;
-            }
-        });
+            });
+        }
+
     }
 
     function refreshCollectionPointLength (collectionId) {
         console.log('refreshCollectionPointLength');
 
-        Collection.get({id: collectionId}, function(data, headers){
-            console.log('getting number of points for collection');
-            console.log(data);
-            if (typeof data.points !== 'undefined') {
-                $scope.activeCollectionPointLength = data.points.length;
-            }
-        });
+        if (collectionId) {
+            Collection.get({id: collectionId}, function(data, headers){
+                console.log('getting number of points for collection');
+                console.log(data);
+                if (typeof data.points !== 'undefined') {
+                    $scope.activeCollectionPointLength = data.points.length;
+                }
+            });
+        }
     }
 
     $scope.toggleEditMode = function($event) {
