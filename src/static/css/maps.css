@@ -1230,6 +1230,7 @@ ul.types > li{
 .collection-list-view .item-body {
 	bottom: 0;
 	position: absolute;
+	width: 100%;
 }
 
 .collection-list-view img {
