@@ -1318,10 +1318,6 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         } else {
             $scope.collectionsListVisible = false;
             $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
-            BroadcastService.prepForBroadcast({
-                type: 'viewingCollection',
-                data: {}
-            });
         }
 
     }
@@ -1567,11 +1563,11 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         console.log('map height: ' + (function() { return $('#map').height()})());
         console.log('map width: ' + (function() { return $('#map').width()})());
         // clear existing pins
-        if (saveOverlay) {
+        if (saveOverlay && typeof saveOverlay.setMap != 'undefined') {
             saveOverlay.setMap(null);
         }
 
-        if (saveMarker) {
+        if (saveMarker && typeof saveMarker.setMap != 'undefined') {
             saveMarker.setMap(null);
         }
 
