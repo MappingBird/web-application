@@ -1015,7 +1015,6 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                 for (var p in $scope.selectedPageImages) {
                     imageData = {
                         url: $scope.selectedPageImages[p],
-                        thumb_path: '',
                         point: pointId
                     };
 

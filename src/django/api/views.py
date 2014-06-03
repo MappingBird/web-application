@@ -21,6 +21,9 @@ from rest_framework.response import Response
 from geopy.geocoders import GoogleV3
 from googleplaces import GooglePlaces
 
+import requests
+from PIL import Image as PImage
+
 from serializers import UserSerializer, CollectionSerializer, PointSerializer, PointWriteSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
 from api.forms import UserCreationForm, UserChangeForm
 from base.models import User
@@ -199,6 +202,66 @@ class ImageViewSet(APIViewSet):
 
     authentication_classes = (SessionAuthentication, )
     permission_classes = (IsOwner,)
+
+    def create(self, request, *args, **kwargs):
+        data = request.DATA.copy()
+
+        # save thumbnail
+        url = data.get('url')
+        r = requests.get(url, stream=True)
+        if r.status_code == 200:
+
+            # path: media/images/$id
+            images_upload_path = os.path.join(settings.MEDIA_ROOT, 'images')
+
+            if not os.path.exists(images_upload_path):
+                os.mkdir(images_upload_path)
+
+            images_upload_path = os.path.join(images_upload_path, data.get('point'))
+
+            if not os.path.exists(images_upload_path):
+                os.mkdir(images_upload_path)
+
+            path = '%s/%f' % (images_upload_path, time.time())
+            with open(path, 'wb') as f:
+                for chunk in r.iter_content():
+                    f.write(chunk)
+
+            f.close()
+
+            im = PImage.open(path)
+            im.thumbnail((512, 512), PImage.ANTIALIAS)
+
+            format_map = {
+                'JPEG': 'jpg',
+                'PNG': 'png',
+                'GIF': 'gif',
+                'TIFF': 'tiff',
+            }
+            final_path = '%s_thumb.%s' % (path, format_map[im.format])
+            im.save('%s' % final_path, format=im.format, quality=90)
+
+            split_index = final_path.find('/media')
+            url_path = final_path[split_index:]
+            data['thumb_path'] = request.build_absolute_uri(url_path)
+
+        serializer = self.get_serializer(data=data, files=request.FILES)
+
+        if serializer.is_valid():
+            self.pre_save(serializer.object)
+            self.object = serializer.save(force_insert=True)
+            self.post_save(self.object, created=True)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED,
+                            headers=headers)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get_success_headers(self, data):
+        try:
+            return {'Location': data['url']}
+        except (TypeError, KeyError):
+            return {}
 
 
 @api_view(['GET'])
