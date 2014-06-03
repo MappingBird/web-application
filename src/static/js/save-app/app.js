@@ -1318,6 +1318,10 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         } else {
             $scope.collectionsListVisible = false;
             $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
+            BroadcastService.prepForBroadcast({
+                type: 'viewingCollection',
+                data: {}
+            });
         }
 
     }
@@ -1325,6 +1329,7 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
     // functions
     function refreshCollectionPoints (collectionId) {
         console.log('refreshCollectionPoints');
+        console.log(collectionId);
 
         Collection.get({id: collectionId}, function(data, headers){
             console.log('loading points for collection');
