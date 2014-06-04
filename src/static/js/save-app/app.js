@@ -549,6 +549,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     $scope.saveCollectionName;
     $scope.noCollectionError = false;
     $scope.showSearchTip = false;
+    $scope.userDontShowSearchTip = $cookieStore.get('dontShowSearchTip') || false;
 
     // service watchers
     $scope.$watch( function () { return Collections.collections; }, function ( collections ) {
@@ -652,18 +653,12 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     $scope.$watch('noSearchResults', function(noSearchResults) {
         if ($scope.noSearchResults) {
-            $scope.showSearchTip = true;
-        } else {
-            // $scope.showSearchTip = false;
+            $scope.showSearchTip = false;
         }
     });
 
     $scope.$watch('noSearchQuery', function(noSearchQuery) {
-        if ($scope.noSearchQuery) {
-            $scope.showSearchTip = true;
-        } else {
-            //$scope.showSearchTip = true;
-        }
+
     });
 
     // functions
@@ -1082,6 +1077,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         $event.preventDefault();
         $event.stopPropagation();
         $cookieStore.remove('dontShowSearchTip');
+        $scope.userDontShowSearchTip = false;
         $scope.showSearchTip = true;
         $scope.searchPlaces();
     }
@@ -1090,6 +1086,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         $event.preventDefault();
         $event.stopPropagation();
         $cookieStore.put('dontShowSearchTip', true);
+        $scope.userDontShowSearchTip = true;
         $scope.showSearchTip = false;
     };
 
@@ -1112,7 +1109,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     });
 
     // init show search tip
-    if ($cookieStore.get('dontShowSearchTip') ||
+    if ($scope.userDontShowSearchTip ||
         $scope.noSearchQuery ||
         $scope.noSearchResults) {
         $scope.showSearchTip = false;
