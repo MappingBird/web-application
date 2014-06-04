@@ -529,6 +529,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     $scope.presets = Presets;
     $scope.numResults = 0;
     $scope.searchQuery = ''; // decodeURIComponent(getParameterByName('search'))
+    $scope.lastSearchQuery = '';
     $scope.targetUrl = ''; // decodeURIComponent(getParameterByName('url'))
     $scope.placesApiUrl = '';
     $scope.searchResultsLoading = false;
@@ -738,6 +739,8 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             // TODO: show error
             console.log('no places search result');
             $scope.noSearchResults = true;
+
+            $scope.lastSearchQuery = $scope.searchQuery;
 
             if ($scope.places.length > 0) {
                 // empty places array in case it already had search results
