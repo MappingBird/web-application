@@ -1197,7 +1197,7 @@ ul.types > li{
 	-webkit-flex: 1;          /* Chrome */
 	-ms-flex: 1;              /* IE 10 */
 	flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
-	height: 270px;
+	height: 280px;
 	position: relative;
 	width: 25%;
 	-webkit-box-flex-basis: 250px;      /* OLD - iOS 6-, Safari 3.1-6 */
@@ -1208,22 +1208,24 @@ ul.types > li{
 }
 
 .collection-list-view .item-header {
-	padding: 0.5em;
+	margin: 19px 9px 0;
 }
 
 .collection-list-view .item-title {
 	font-size: 1.5em;
 	font-weight: bold;
-	white-space: nowrap;
+	margin-bottom: 0.1em;
+	margin-top: 0.4em;
 	overflow: hidden;
 	padding-left: 4px;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 	width: calc(100% - 52px);
 }
 
 .collection-list-view .item-time-added {
 	color: #777777;
-	padding-left: 4px;
+	padding-left: 48px;
 	width: calc(100% - 52px);
 }
 
@@ -1239,21 +1241,24 @@ ul.types > li{
 }
 
 .collection-list-view .item-body .item-description {
-	background-color: rgba(51, 51, 51, 0.7);
+	background: transparent url(../img/list_description_background.png) center bottom no-repeat;
 	bottom: 0;
 	color: white;
-	max-height: 4.2em;
+	margin-bottom: 0;
+	height: 50px;
 	overflow: hidden;
-	padding: 0.5em;
+	padding: 0.5em 5px;
 	position: absolute;
 	text-overflow: ellipsis;
 	/* white-space: nowrap; */
 }
 
 .icon-clock {
-	background: transparent url(../img/icon-clock.png) 0 -16px no-repeat;
+	background: transparent url(../img/icon-clock.png) 0 -32px no-repeat;
 	display: inline-block;
 	height: 16px;
+	margin-top: 0;
+	margin-bottom: 0;
 	width: 16px;
 }
 
