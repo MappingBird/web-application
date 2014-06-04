@@ -12,9 +12,9 @@ from django.db.models import Count
 from django.conf import settings
 
 from rest_framework import viewsets, status
-from rest_framework.decorators import link, api_view, parser_classes, authentication_classes, permission_classes
+from rest_framework.decorators import link, action, api_view, parser_classes, authentication_classes, permission_classes
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 
@@ -46,7 +46,6 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
 
     @csrf_exempt
     def create(self, request):
@@ -59,6 +58,11 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response(request.DATA, status=status.HTTP_201_CREATED)
 
         return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # TODO: the permission is not working
+    @link(permission_classes=[IsAdminUser])
+    def list(self, request, *args, **kwargs):
+        return super(UserViewSet, self).list(request, args, kwargs)
 
     @link(permission_classes=[IsOwner])
     def collections(self, request, pk=None):
@@ -74,6 +78,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response(data)
 
+    @action(permission_classes=[IsOwner])
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', None)
         self.object = self.get_object_or_none()
@@ -101,6 +106,9 @@ class UserViewSet(viewsets.ModelViewSet):
 
             return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @action(permission_classes=[IsOwner])
+    def destroy(self, request, *args, **kwargs):
+        return super(UserViewSet, self).list(request, args, kwargs)
 
 class CollectionViewSet(APIViewSet):
     """
