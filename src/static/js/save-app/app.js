@@ -552,6 +552,19 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     $scope.showSearchTip = false;
     $scope.userDontShowSearchTip = $cookieStore.get('dontShowSearchTip') || false;
 
+    // show search tip only if the user hasn't hidden them
+    // and there is a search query
+    // and there are search results
+    function checkSearchTip () {
+        if (!$scope.userDontShowSearchTip &&
+            !$scope.noSearchQuery &&
+            !$scope.noSearchResults) {
+            $scope.showSearchTip = true;
+        } else {
+            $scope.showSearchTip = false;
+        }
+    }
+
     // service watchers
     $scope.$watch( function () { return Collections.collections; }, function ( collections ) {
         console.log('Collections watcher: ' + $scope.activeCollectionId);
@@ -652,14 +665,16 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     });
 
+    $scope.$watch('userDontShowSearchTip', function(userDontShowSearchTip) {
+        checkSearchTip();
+    });
+
     $scope.$watch('noSearchResults', function(noSearchResults) {
-        if ($scope.noSearchResults) {
-            $scope.showSearchTip = false;
-        }
+        checkSearchTip();
     });
 
     $scope.$watch('noSearchQuery', function(noSearchQuery) {
-
+        checkSearchTip();
     });
 
     // functions
@@ -1117,14 +1132,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     });
 
     // init show search tip
-    if ($scope.userDontShowSearchTip ||
-        $scope.noSearchQuery ||
-        $scope.noSearchResults) {
-        $scope.showSearchTip = false;
-    } else {
-        $scope.showSearchTip = true;
-    }
-
+    checkSearchTip();
 
 });
 
