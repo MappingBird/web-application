@@ -1813,17 +1813,20 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
     function showNoSearchQueryPoint () {
 
-        var title, message;
+        var title,
+            message,
+            type = 'misc',
+            myLatLng = new google.maps.LatLng(0,0),
+            bounds = new google.maps.LatLngBounds(),
+            srcImage = '';
 
-        type = 'misc';
-        myLatLng = new google.maps.LatLng(lat, lng);
         mapOptions.center = myLatLng;
-        map = new google.maps.Map($('#map')[0], mapOptions);
-        bounds = map.getBounds();
-        srcImage = '';
+        map = new google.maps.Map($('#map')[0], mapOptions) || map;
+        bounds.extend(myLatLng);
+        map.fitBounds(bounds);
+
         title = "Where were you searching for?";
         message = "Provide the name or address of a place in the search bar";
-
         overlay = new BucketListMessageOverlay(bounds, Presets.mapZoom, map, myLatLng, type, title, message);
     }
 
