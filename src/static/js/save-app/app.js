@@ -739,6 +739,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             console.log('no places search result');
             $scope.noSearchResults = true;
 
+            if ($scope.places.length > 0) {
+                // empty places array in case it already had search results
+                $scope.places.splice(0, $scope.places.length);
+            }
+
             BroadcastService.prepForBroadcast({
                 type: 'noSearchResults',
                 data: {}
