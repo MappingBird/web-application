@@ -529,6 +529,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     $scope.presets = Presets;
     $scope.numResults = 0;
     $scope.searchQuery = ''; // decodeURIComponent(getParameterByName('search'))
+    $scope.lastSearchQuery = '';
     $scope.targetUrl = ''; // decodeURIComponent(getParameterByName('url'))
     $scope.placesApiUrl = '';
     $scope.searchResultsLoading = false;
@@ -549,6 +550,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     $scope.saveCollectionName;
     $scope.noCollectionError = false;
     $scope.showSearchTip = false;
+    $scope.userDontShowSearchTip = $cookieStore.get('dontShowSearchTip') || false;
 
     // service watchers
     $scope.$watch( function () { return Collections.collections; }, function ( collections ) {
@@ -652,18 +654,12 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     $scope.$watch('noSearchResults', function(noSearchResults) {
         if ($scope.noSearchResults) {
-            $scope.showSearchTip = true;
-        } else {
-            // $scope.showSearchTip = false;
+            $scope.showSearchTip = false;
         }
     });
 
     $scope.$watch('noSearchQuery', function(noSearchQuery) {
-        if ($scope.noSearchQuery) {
-            $scope.showSearchTip = true;
-        } else {
-            //$scope.showSearchTip = true;
-        }
+
     });
 
     // functions
@@ -743,6 +739,13 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             // TODO: show error
             console.log('no places search result');
             $scope.noSearchResults = true;
+
+            $scope.lastSearchQuery = $scope.searchQuery;
+
+            if ($scope.places.length > 0) {
+                // empty places array in case it already had search results
+                $scope.places.splice(0, $scope.places.length);
+            }
 
             BroadcastService.prepForBroadcast({
                 type: 'noSearchResults',
@@ -1082,6 +1085,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         $event.preventDefault();
         $event.stopPropagation();
         $cookieStore.remove('dontShowSearchTip');
+        $scope.userDontShowSearchTip = false;
         $scope.showSearchTip = true;
         $scope.searchPlaces();
     }
@@ -1090,6 +1094,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         $event.preventDefault();
         $event.stopPropagation();
         $cookieStore.put('dontShowSearchTip', true);
+        $scope.userDontShowSearchTip = true;
         $scope.showSearchTip = false;
     };
 
@@ -1112,7 +1117,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     });
 
     // init show search tip
-    if ($cookieStore.get('dontShowSearchTip') ||
+    if ($scope.userDontShowSearchTip ||
         $scope.noSearchQuery ||
         $scope.noSearchResults) {
         $scope.showSearchTip = false;
@@ -1808,17 +1813,20 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
     function showNoSearchQueryPoint () {
 
-        var title, message;
+        var title,
+            message,
+            type = 'misc',
+            myLatLng = new google.maps.LatLng(0,0),
+            bounds = new google.maps.LatLngBounds(),
+            srcImage = '';
 
-        type = 'misc';
-        myLatLng = new google.maps.LatLng(lat, lng);
         mapOptions.center = myLatLng;
-        map = new google.maps.Map($('#map')[0], mapOptions);
-        bounds = map.getBounds();
-        srcImage = '';
+        map = new google.maps.Map($('#map')[0], mapOptions) || map;
+        bounds.extend(myLatLng);
+        map.fitBounds(bounds);
+
         title = "Where were you searching for?";
         message = "Provide the name or address of a place in the search bar";
-
         overlay = new BucketListMessageOverlay(bounds, Presets.mapZoom, map, myLatLng, type, title, message);
     }
 
