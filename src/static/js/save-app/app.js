@@ -552,6 +552,19 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     $scope.showSearchTip = false;
     $scope.userDontShowSearchTip = $cookieStore.get('dontShowSearchTip') || false;
 
+    // show search tip only if the user hasn't hidden them
+    // and there is a search query
+    // and there are search results
+    function checkSearchTip () {
+        if (!$scope.userDontShowSearchTip &&
+            !$scope.noSearchQuery &&
+            !$scope.noSearchResults) {
+            $scope.showSearchTip = true;
+        } else {
+            $scope.showSearchTip = false;
+        }
+    }
+
     // service watchers
     $scope.$watch( function () { return Collections.collections; }, function ( collections ) {
         console.log('Collections watcher: ' + $scope.activeCollectionId);
@@ -652,14 +665,16 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     });
 
+    $scope.$watch('userDontShowSearchTip', function(userDontShowSearchTip) {
+        checkSearchTip();
+    });
+
     $scope.$watch('noSearchResults', function(noSearchResults) {
-        if ($scope.noSearchResults) {
-            $scope.showSearchTip = false;
-        }
+        checkSearchTip();
     });
 
     $scope.$watch('noSearchQuery', function(noSearchQuery) {
-
+        checkSearchTip();
     });
 
     // functions
@@ -1117,14 +1132,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     });
 
     // init show search tip
-    if ($scope.userDontShowSearchTip ||
-        $scope.noSearchQuery ||
-        $scope.noSearchResults) {
-        $scope.showSearchTip = false;
-    } else {
-        $scope.showSearchTip = true;
-    }
-
+    checkSearchTip();
 
 });
 
@@ -1413,6 +1421,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
     var saveOverlay,
         saveMarker,
         overlay,
+        noSearchQueryOverlay,
         marker,
         lat = 0,
         lng = 0,
@@ -1430,7 +1439,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             },
             scaleControl: false
         },
-        map,
+        map = new google.maps.Map($('#map')[0], mapOptions),
         bounds,
         srcImage = '', // TODO
         viewOverlays = {}
@@ -1453,16 +1462,11 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         if (!angular.equals($scope.activeViewPoints, activeViewPoints)) {
             console.log('not equal');
             $scope.activeViewPoints = activeViewPoints;
-            console.log('map height: ' + (function() { return $('#map').height()})());
-        console.log('map width: ' + (function() { return $('#map').width()})());
             if ($('#map').data('transitioning')) {
                 resetMapSize(displayActiveViewPoints);
             } else {
                 displayActiveViewPoints();
             }
-
-            //displayActiveViewPoints();
-
         }
     });
 
@@ -1813,6 +1817,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
     function showNoSearchQueryPoint () {
 
+        console.log('showNoSearchQueryPoint');
+
         var title,
             message,
             type = 'misc',
@@ -1820,14 +1826,19 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             bounds = new google.maps.LatLngBounds(),
             srcImage = '';
 
-        mapOptions.center = myLatLng;
-        map = new google.maps.Map($('#map')[0], mapOptions) || map;
-        bounds.extend(myLatLng);
-        map.fitBounds(bounds);
+        google.maps.event.addListener(map, 'idle', function() {
+            if (typeof noSearchQueryOverlay == 'undefined') {
+                bounds.extend(myLatLng);
+                map.setCenter(myLatLng);
+                map.fitBounds(bounds);
 
-        title = "Where were you searching for?";
-        message = "Provide the name or address of a place in the search bar";
-        overlay = new BucketListMessageOverlay(bounds, Presets.mapZoom, map, myLatLng, type, title, message);
+                title = "Where were you searching for?";
+                message = "Provide the name or address of a place in the search bar";
+                noSearchQueryOverlay = new BucketListMessageOverlay(bounds, Presets.mapZoom, map, myLatLng, type, title, message);
+            }
+            google.maps.event.clearListeners(map, 'idle');
+        });
+
     }
 
     $scope.$on('stateChange', function() {

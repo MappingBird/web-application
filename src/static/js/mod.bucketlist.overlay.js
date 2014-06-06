@@ -311,7 +311,7 @@ function BucketListMessageOverlay(bounds, zoom, map, latlng, type, title, messag
     //console.log('BucketListSmallOverlay');
 
     // Now initialize all properties.
-    this.bounds_ = map.boundsAt(zoom);
+    this.bounds_ = bounds;//map.boundsAt(zoom);
     this.zoom_ = zoom;
     this.map_ = map;
     this.latlng_ = latlng;
