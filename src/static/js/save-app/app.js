@@ -890,7 +890,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                 $scope.collections.push(data);
 
                 // set this collection as active collection
-                $scope.selectCollection(data.id);
+                $scope.selectCollection(null, data.id);
 
                 // blank the form
                 $scope.newCollectionName = '';

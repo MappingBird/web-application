@@ -447,6 +447,11 @@ directives.directive('thumbAlignment', function($compile){
                             delete $scope[selectArray][imgID];
                         });
 
+                        // google analytics
+                        if (typeof _trackEvent != 'undefined') {
+                            _trackEvent('Save Panel Photos', 'Deselect', 'Save Panel');
+                        }
+
                     }
                     // select
                     else{
@@ -459,6 +464,11 @@ directives.directive('thumbAlignment', function($compile){
                                 delete $scope[deselectArray][imgID];
                             }
                         });
+
+                        // google analytics
+                        if (typeof _trackEvent != 'undefined') {
+                            _trackEvent('Save Panel Photos', 'Select', 'Save Panel');
+                        }
 
                     }
 
@@ -498,13 +508,14 @@ directives.directive('thumbAlignment', function($compile){
                     var i = newValue,
                         len = i.length,
                         len2 = len,
-                        x = 0;
+                        x = 0,
+                        photoObj = $element.find('.photo-obj');
 
                     console.log('len2: ' + len2);
 
                     while(len2--) {
 
-                        $element.find('.photo-obj').prepend(
+                        photoObj.prepend(
                             $('<img src="' + newValue[len2] + '">')
                             .on('error',function(){
                                 console.log('image loading error');
@@ -515,6 +526,11 @@ directives.directive('thumbAlignment', function($compile){
                                 }
                             }).on('load', function(){
                                 console.log('image loaded successfully');
+                                // remove images smaller than 100 on either dimension
+                                if (this.width < 100 || this.height < 100) {
+                                    $(this).remove();
+                                }
+
                                 if (++x == len) {
                                     console.log(x);
                                     parseImages();
