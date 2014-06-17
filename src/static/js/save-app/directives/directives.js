@@ -447,6 +447,11 @@ directives.directive('thumbAlignment', function($compile){
                             delete $scope[selectArray][imgID];
                         });
 
+                        // google analytics
+                        if (typeof _trackEvent != 'undefined') {
+                            _trackEvent('Save Panel Photos', 'Deselect', 'Save Panel');
+                        }
+
                     }
                     // select
                     else{
@@ -459,6 +464,11 @@ directives.directive('thumbAlignment', function($compile){
                                 delete $scope[deselectArray][imgID];
                             }
                         });
+
+                        // google analytics
+                        if (typeof _trackEvent != 'undefined') {
+                            _trackEvent('Save Panel Photos', 'Select', 'Save Panel');
+                        }
 
                     }
 
