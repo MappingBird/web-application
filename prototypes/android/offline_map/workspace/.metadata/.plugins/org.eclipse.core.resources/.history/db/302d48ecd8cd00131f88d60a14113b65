@@ -1,0 +1,64 @@
+package com.mappingbird;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.util.Log;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.TileOverlayOptions;
+import com.google.android.gms.maps.model.TileOverlay;
+
+import org.json.JSONObject;
+
+public class MainActivity extends Activity {
+	static String TAG = "MainActivity";
+	
+	GoogleMap mMap = null;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {		
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+	    if (mMap == null) {
+	        mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
+	                            .getMap();
+	        // Check if we were successful in obtaining the map.
+	        if (mMap != null) {
+//	        	LatLng ll = new LatLng(25.2103039, 121.6659421);
+	        	GeoBoundary geoBnd = new GeoBoundary();
+	        	JSONObject json = geoBnd.getBounds("еxе_ел");
+Log.i(TAG, json.toString());
+	        	
+	        	LatLng ll = new LatLng(24.9605085, 121.4570603); 
+	    			        	        
+	    		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ll, 12));
+	    		mMap.addMarker(
+	    				new MarkerOptions()
+	    				.position(ll)
+	    				.title("Trend Micro"));
+	    		
+	    		
+	    		TileOverlayOptions opts = new TileOverlayOptions();
+	        	opts.tileProvider(new MapBoxOnlineTileProvider("ericyang.hpda7fd5"));
+//	        	opts.zIndex(15);	        	
+	        	TileOverlay tileOverlay = mMap.addTileOverlay(opts);	        	
+	        }
+	    }	
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}
+
+

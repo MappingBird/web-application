@@ -1,0 +1,5 @@
+package com.mappingbird;
+
+public class OfflineTileProvider {
+
+}

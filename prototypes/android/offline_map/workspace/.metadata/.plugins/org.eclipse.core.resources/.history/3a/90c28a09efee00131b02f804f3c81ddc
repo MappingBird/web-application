@@ -1,0 +1,6 @@
+package com.mappingbird;
+
+public class OfflineTileProvider extends UrlTileProvider {
+	
+
+}
