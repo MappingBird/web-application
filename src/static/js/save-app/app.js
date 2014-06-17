@@ -551,6 +551,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     $scope.noCollectionError = false;
     $scope.showSearchTip = false;
     $scope.userDontShowSearchTip = $cookieStore.get('dontShowSearchTip') || false;
+    $scope.placeImagesLoaded = false;
 
     // show search tip only if the user hasn't hidden them
     // and there is a search query
@@ -1130,6 +1131,10 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         }
 
     });
+
+    $scope.$on('placeImagesLoaded', function() {
+        $scope.placeImagesLoaded = true;
+    })
 
     // init show search tip
     checkSearchTip();

@@ -459,6 +459,10 @@ a.show-on-map i.icon-show{
 	width: 86px;
 }
 
+.form-save-content .loading.loaded {
+	display: none;
+}
+
 .form-save-content .loading img {
 	position: absolute;
 	top: 0;
