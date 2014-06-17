@@ -275,7 +275,7 @@ section.map-section{
 	width: 35px;
 	background-color: #181818;
 	padding: 7px 0;
-	margin-top: -2px;
+	margin-top: -5px;
 	background-position: -36px 6px;
 
 	-webkit-box-shadow: inset 0px 1px 2px rgba(0,0,0,0.75);
@@ -888,6 +888,18 @@ ul.types > li{
 .pin-popup.showme{
 	animation: pingismo-pinpopup-anim 0.3s ease-in 0.35s both;
 	-webkit-animation: pingismo-pinpopup-anim 0.3s ease-in 0.35s both;
+}
+
+.map-pin{
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	z-index: 99999;
+}
+
+.pin-img{
+	width: 32px;
+	height: 32px;
 }
 
 /* alert */
