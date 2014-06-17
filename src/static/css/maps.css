@@ -355,14 +355,14 @@ section.map-section{
 	width: 318px;
 	float: left;
 }
-.location-list span{
+.location-list .place-address{
 	font-size: 12px;
 	font-weight: normal;
 	display: block;
 	color: #707070
 }
-.location-list .active span,
-.location-list li:hover span{
+.location-list .active  .place-address,
+.location-list li:hover  .place-address{
 	color: #fff;
 }
 .location-list a{
@@ -984,7 +984,7 @@ ul.types > li{
 .collection-header .collection-name.active:hover{
 	background-position: 0 -60px;
 }
-.collection-header span{
+.collection-header .description{
 	color: #707070;
 	font-size: 12px;
 	margin-left: 5px;
