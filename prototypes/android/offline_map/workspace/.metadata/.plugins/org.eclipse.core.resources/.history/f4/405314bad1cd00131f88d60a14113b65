@@ -1,0 +1,40 @@
+package com.mappingbird;
+
+import org.json.JSONObject;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import android.util.Log;
+
+public class GeoBoundary {
+	static String GEO_API = "https://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false";
+	static String TAG = "GeoBoundary";
+	
+	public JSONObject getBounds (String keyword) {
+		JSONObject json = null;
+		
+		try {
+			HttpClient client = new DefaultHttpClient();
+			String uri = String.format(GEO_API, keyword);
+			HttpGet getRequest = new HttpGet(uri);
+			HttpResponse response;			
+			response = client.execute(getRequest);
+			String resp = EntityUtils.toString(response.getEntity());
+Log.i(TAG, resp);
+			json = new JSONObject(resp);
+			json = json.getJSONObject("geometry").getJSONObject("bounds");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			java.io.StringWriter sw = new java.io.StringWriter();
+			e.printStackTrace(new java.io.PrintWriter(sw));			
+			Log.e(TAG, sw.toString());
+		}								
+		
+		return json;
+	}
+		
+		
+
+}

@@ -1,0 +1,11 @@
+package com.mappingbird;
+
+
+public class GeoBoundary {
+	static String GEO_API = "https://maps.googleapis.com/maps/api/geocode/json?address=еxе_ел&sensor=false";
+	
+	
+		
+		
+
+}

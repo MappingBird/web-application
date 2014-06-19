@@ -1,0 +1,20 @@
+package com.mappingbird;
+
+import org.json.JSONObject;
+import android.util.Log;
+
+public class GeoBoundary {
+	static String GEO_API = "https://maps.googleapis.com/maps/api/geocode/json?address=еxе_ел&sensor=false";
+	
+	public JSONObject getBounds (String keyword) {
+		
+		
+		
+		JSONObject json = new JSONObject();
+		
+		return json;
+	}
+		
+		
+
+}
