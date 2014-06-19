@@ -448,8 +448,8 @@ directives.directive('thumbAlignment', function($compile){
                         });
 
                         // google analytics
-                        if (typeof _trackEvent != 'undefined') {
-                            _trackEvent('Save Panel Photos', 'Deselect', 'Save Panel');
+                        if (typeof ga != 'undefined') {
+                            ga('send', 'event', 'Save Panel Photos', 'Deselect', 'Save Panel');
                         }
 
                     }
@@ -466,8 +466,8 @@ directives.directive('thumbAlignment', function($compile){
                         });
 
                         // google analytics
-                        if (typeof _trackEvent != 'undefined') {
-                            _trackEvent('Save Panel Photos', 'Select', 'Save Panel');
+                        if (typeof ga != 'undefined') {
+                            ga('send', 'event', 'Save Panel Photos', 'Select', 'Save Panel');
                         }
 
                     }
