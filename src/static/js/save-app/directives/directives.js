@@ -527,7 +527,7 @@ directives.directive('thumbAlignment', function($compile){
                             }).on('load', function(){
                                 console.log('image loaded successfully');
                                 // remove images smaller than 100 on either dimension
-                                if (this.width < 100 || this.height < 100) {
+                                if (this.width < 250 || this.height < 250) {
                                     $(this).remove();
                                 }
 
