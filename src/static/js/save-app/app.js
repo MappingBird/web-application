@@ -352,6 +352,11 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
 
         UserLogout.get(function(data, headers) {
 
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Account', 'Logged Out', 'Account Menu');
+            }
+
             delete $cookies['sessionid'];
             $window.location.href = "/static/index.html";
 
@@ -696,6 +701,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         } else {
             console.log('no url');
             // TODO: show error?
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Search', 'No URL', 'Save Panel');
+            }
         }
 
     };
@@ -741,10 +751,20 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                     $scope.setActiveSavePoint(null, 0);
                     console.log('set activeSavePoint single');
                     console.log($scope.activeSavePoint);
+
+                    // google analytics
+                    if (typeof ga != 'undefined') {
+                        ga('send', 'event', 'Search', 'One search result', 'Save Panel');
+                    }
                 } else {
                     $scope.setActiveSavePoint(null, 0, true);
                     console.log('set activeSavePoint multiple');
                     console.log($scope.activeSavePoint);
+
+                    // google analytics
+                    if (typeof ga != 'undefined') {
+                        ga('send', 'event', 'Search', 'Multiple search results', 'Save Panel');
+                    }
                 }
 
             });
@@ -767,6 +787,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                 type: 'noSearchResults',
                 data: {}
             });
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Search', 'No search results', 'Save Panel');
+            }
         }
     }
 
@@ -894,13 +919,19 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
                 // blank the form
                 $scope.newCollectionName = '';
+
+                // send event
+                BroadcastService.prepForBroadcast({
+                    type: 'collectionUpdate',
+                    data: { }
+                });
+
+                // google analytics
+                if (typeof ga != 'undefined') {
+                    ga('send', 'event', 'Collection', 'Saved new', 'Save Panel');
+                }
             });
 
-            // send event
-            BroadcastService.prepForBroadcast({
-                type: 'collectionUpdate',
-                data: { }
-            });
         }
 
         // check that collection name is entered
@@ -923,8 +954,16 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                         User.data.emailAddress = data.email_address;
                         if (!/@gu.mappingbird.com$/.test(data.email_address)) {
                             User.data.isRegisteredUser = true;
+                            // google analytics
+                            if (typeof ga != 'undefined') {
+                                ga('send', 'event', 'User', 'New registered user', 'Save Panel');
+                            }
                         } else {
                             User.data.isRegisteredUser = false;
+                            // google analytics
+                            if (typeof ga != 'undefined') {
+                                ga('send', 'event', 'User', 'New unregistered user', 'Save Panel');
+                            }
                         }
                         User.data.id = data.id;
                     }
@@ -938,6 +977,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             // error
             console.log('no new collection name error');
             $scope.noCollectionError = true;
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Collection', 'Failed to save - No collection name', 'Save Panel');
+            }
 
         }
 
@@ -968,6 +1012,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                 collectionId: id
             }
         });
+
+        // google analytics
+        if (typeof ga != 'undefined') {
+            ga('send', 'event', 'Collection', 'Changed collection', 'Save Panel');
+        }
     };
 
     $scope.setPointType = function($e, t){
@@ -976,6 +1025,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             $e.stopPropagation();
         }
         $scope.activeSavePoint.type = t;
+
+        // google analytics
+        if (typeof ga != 'undefined') {
+            ga('send', 'event', 'Point', 'Changed point type', 'Save Panel');
+        }
     };
 
     $scope.savePoint = function($e){
@@ -1059,6 +1113,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                     data: { }
                 });
 
+                // google analytics
+                if (typeof ga != 'undefined') {
+                    ga('send', 'event', 'Point', 'Saved new', 'Save Panel');
+                }
+
             });
 
         } else {
@@ -1068,6 +1127,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
             // show select collection with error message
             $scope.noCollectionError = true;
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Point', 'Failed to save - No collection selected', 'Save Panel');
+            }
         }
 
     };
@@ -1086,6 +1150,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
             $scope.fetchPlacesSearchResults();
             $scope.getPageData();
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Search', 'Has search query', 'Save Panel');
+            }
         } else {
             $scope.noSearchQuery = true;
 
@@ -1093,6 +1162,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                 type: 'noSearchQuery',
                 data: {}
             });
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Search', 'No search query', 'Save Panel');
+            }
         }
 
     };
@@ -1292,6 +1366,11 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         $event.stopPropagation();
         console.log('setActiveCollection: ' + id);
         $scope.activeCollectionId = id;
+
+        // google analytics
+        if (typeof ga != 'undefined') {
+            ga('send', 'event', 'Collection', 'Change collection', 'Collection List');
+        }
     };
 
     $scope.clickCollection = function($event, id, name) {
@@ -1312,6 +1391,12 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
             });
 
             $scope.editMode = false;
+
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Collection', 'Delete collection', 'Collection List');
+            }
         } else {
             console.log('viewCollection ' + id);
             $scope.collectionsListVisible = false;
@@ -1320,6 +1405,11 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
                 type: 'viewingCollection',
                 data: {}
             });
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Collection', 'Change collection', 'Collection List');
+            }
         }
     };
 
@@ -1394,12 +1484,20 @@ SaveApp.controller('collectionsController', function($scope, Collection, Collect
         $event.preventDefault();
         $event.stopPropagation();
         $state.go('viewCollectionList', { collectionId: $scope.activeCollectionId});
+        // google analytics
+        if (typeof ga != 'undefined') {
+            ga('send', 'event', 'Collection', 'Change to List View', 'Collection List');
+        }
     };
 
     $scope.gotoMapView = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
         $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
+        // google analytics
+        if (typeof ga != 'undefined') {
+            ga('send', 'event', 'Collection', 'Change to Map View', 'Collection List');
+        }
     };
 
 
@@ -1742,6 +1840,11 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
                                 $state.go('viewPoint', { pointId: point.id, collectionId: point.collection});
 
+                                // google analytics
+                                if (typeof ga != 'undefined') {
+                                    ga('send', 'event', 'Point', 'View point detail', 'Map');
+                                }
+
                                 return false;
                             };
                         })($scope.activeViewPoints[len]),
@@ -1774,6 +1877,10 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                                 // show point information if point detail panel is already open
                                 if ($scope.showPointDetailPanel) {
                                     $state.go('viewPoint', { pointId: point.id, collectionId: point.collection});
+                                    // google analytics
+                                    if (typeof ga != 'undefined') {
+                                        ga('send', 'event', 'Point', 'View point detail', 'Map');
+                                    }
                                 }
 
                                 return false;
@@ -2015,6 +2122,10 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
             $e.stopPropagation();
         }
         $scope.activeViewPoint.type = t;
+        // google analytics
+        if (typeof ga != 'undefined') {
+            ga('send', 'event', 'Point', 'Changed point type', 'Point Detail Panel');
+        }
     };
 
     $scope.togglePointEditMode = function($event) {
@@ -2038,6 +2149,10 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
             collection: $scope.activeViewPoint.collection
         }, function(data, headers) {
             $scope.togglePointEditMode($event);
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Point', 'Saved point detail changes', 'Point Detail Panel');
+            }
         });
 
         console.log($scope.deselectedPointImages);
@@ -2119,13 +2234,19 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
                 // blank the form
                 $scope.newCollectionName = '';
+
+                // send event
+                BroadcastService.prepForBroadcast({
+                    type: 'collectionUpdate',
+                    data: { }
+                });
+
+                // google analytics
+                if (typeof ga != 'undefined') {
+                    ga('send', 'event', 'Collection', 'Saved new', 'Point Detail Panel');
+                }
             });
 
-            // send event
-            BroadcastService.prepForBroadcast({
-                type: 'collectionUpdate',
-                data: { }
-            });
         }
 
         // check that collection name is entered
@@ -2138,6 +2259,11 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
             // error
             console.log('no new collection name error');
             $scope.noCollectionError = true;
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Collection', 'Failed to save - no collection name', 'Point Detail Panel');
+            }
 
         }
 
@@ -2181,6 +2307,11 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
                     'id' : $scope.activeViewPoint.id
                 }
             });
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Point', 'Deleted point', 'Point Detail Panel');
+            }
 
             $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
             $scope.pointEditMode = false;
