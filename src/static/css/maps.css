@@ -1193,9 +1193,9 @@ ul.types > li{
 	display: -ms-flexbox;      /* TWEENER - IE 10 */
 	display: -webkit-flex;     /* NEW - Chrome */
 	display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-	height: -moz-calc(100% - 75px);
-	height: -webkit-calc(100% - 75px);
-	height: calc(100% - 75px);
+	height: -moz-calc(100% - 125px);
+	height: -webkit-calc(100% - 125px);
+	height: calc(100% - 125px);
 	position: absolute;
 	top: 95px;
 	width: 100%;
@@ -1257,7 +1257,7 @@ ul.types > li{
 }
 
 .collection-list-view .item-body .item-description {
-	background: transparent url(../img/list_description_background.png) center bottom no-repeat;
+	background: transparent url(../img/list_description_background.png) center bottom repeat-x;
 	bottom: 0;
 	color: white;
 	margin-bottom: 0;
@@ -1267,6 +1267,7 @@ ul.types > li{
 	position: absolute;
 	text-overflow: ellipsis;
 	/* white-space: nowrap; */
+	width: calc(100% - 10px);
 }
 
 .icon-clock {
