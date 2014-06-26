@@ -214,6 +214,46 @@ directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
     };
 });
 
+// show collection list view
+directives.directive('collectionListView', function() {
+    return {
+        restrict: 'A',
+        scope: false,
+        templateUrl: '/static/js/save-app/templates/partials/collection_list_view.html',
+        replace: false
+    };
+});
+
+// show save panel
+directives.directive('savePanel', function() {
+    return {
+        restrict: 'A',
+        scope: false,
+        templateUrl: '/static/js/save-app/templates/partials/save_panel.html',
+        replace: false
+    };
+});
+
+// show point detail
+directives.directive('pointDetail', function() {
+    return {
+        restrict: 'A',
+        scope: false,
+        templateUrl: '/static/js/save-app/templates/partials/point_detail.html',
+        replace: false
+    };
+});
+
+// show collection list
+directives.directive('collectionList', function() {
+    return {
+        restrict: 'A',
+        scope: false,
+        templateUrl: '/static/js/save-app/templates/partials/collection_list.html',
+        replace: false
+    };
+});
+
 // open url in new window
 directives.directive('newWindow', function() {
     return {
