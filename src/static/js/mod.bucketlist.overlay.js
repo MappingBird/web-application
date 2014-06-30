@@ -230,9 +230,11 @@ BucketListSmallOverlay.prototype.onAdd = function() {
 
 // change the type of the pin
 BucketListSmallOverlay.prototype.changeType = function(newType) {
-    this.icon_.removeClass('pin-' + this.type_);
-    this.type_ = newType;
-    this.icon_.addClass('pin-' + this.type_);
+    if (this.icon_) {
+        this.icon_.removeClass('pin-' + this.type_);
+        this.type_ = newType;
+        this.icon_.addClass('pin-' + this.type_);
+    }
 };
 
 // hide open popup
