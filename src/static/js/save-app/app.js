@@ -1207,6 +1207,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     });
 
     $scope.$on('placeImagesLoaded', function() {
+        console.log('>>> placesImagesLoaded received');
         $scope.placeImagesLoaded = true;
     })
 

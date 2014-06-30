@@ -459,7 +459,8 @@ a.show-on-map i.icon-show{
 	width: 86px;
 }
 
-.form-save-content .loading.loaded {
+.form-save-content .loading.loaded,
+.places-loaded .loading {
 	display: none;
 }
 
