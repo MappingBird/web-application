@@ -6,8 +6,9 @@ import logging
 import string
 import urllib2
 
-sys.path.insert(0, 'libs')
-from bs4 import BeautifulSoup
+# sys.path.insert(0, 'libs')
+# from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 
 
 class Enum(set):
