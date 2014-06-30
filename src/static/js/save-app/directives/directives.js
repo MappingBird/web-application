@@ -453,6 +453,8 @@ directives.directive('thumbAlignment', function($compile){
                     baseLine += c;
                 }
 
+                console.log('<<< placeImagesLoaded');
+
                 // done, broadcast
                 $scope.$emit("placeImagesLoaded");
 
