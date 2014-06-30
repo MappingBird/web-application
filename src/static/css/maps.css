@@ -340,13 +340,17 @@ section.map-section{
 	list-style: none;
 	width: 420px;
 }
-.location-list>li{
+.location-list li{
 	margin: 0;
 	font-size: 15px;
 	color: #fff;
 	font-weight: bolder;
 	padding: 6px 29px 0 25px;
 }
+.location-list li:hover {
+	cursor: pointer;
+}
+
 .location-list .active,
 .location-list li:hover{
 	background: #01a9e7;
