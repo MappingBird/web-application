@@ -12,6 +12,7 @@ from PIL import Image
 from lxml import etree
 
 from imageinfo import info
+from page_profiler.pageProfiler import PageProfiler
 
 KEYWORD_EXCLUDE = [
     'doubleclick.net',
@@ -147,11 +148,22 @@ def scraper(request):
             output_images.append(image.url)
     '''
 
+    pp = PageProfiler()
+    elements = pp.profile(raw_html=page.text)
 
     out = {
         'title': title.strip(),
         'text': text.strip(),
         'images': output_images,
+        'address': [],
+        'phone': [],
     }
-    
+
+    for el in elements:
+        if 'address' in el:
+            out['address'].append(el['address'])
+
+        if 'phone_number' in el:
+            out['phone'].append(el['phone_number'])
+
     return HttpResponse(json.dumps(out), content_type='application/json')

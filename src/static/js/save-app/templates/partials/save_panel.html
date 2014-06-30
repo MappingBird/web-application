@@ -31,6 +31,7 @@
 
                 <!-- Searching for location -->
                 <div class="loading-wrapper" ng-show="searchResultsLoading">
+                    <img src="/static/img/blue-loading-circle.png" class="loading-img" />
                     <p>Searching...</p>
                 </div>
                 <!-- End of Searching for location -->
@@ -38,7 +39,7 @@
                 <!-- Search result -->
                 <div class="left-panel-container" ng-show="searchResultsLoaded" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placesLoaded'}" left-outer-height>
                     <ul class="location-list">
-                        <li ng-repeat="place in places" on-repeat-done="places_loaded" ng-class="{active: $index==activeSearchResult}"><p><span class="place-name" ng-bind="place.name"></span> <span class="place-address" ng-bind="place.address"></span></p>
+                        <li ng-repeat="place in places" on-repeat-done="places_loaded" ng-class="{active: $index==activeSearchResult}" ng-click="setActiveSavePoint($event, $index, true)"><p><span class="place-name" ng-bind="place.name"></span> <span class="place-address" ng-bind="place.address"></span></p>
                             <!--
                             <a href="#" class="save-this-place" id="btnSaveThisPlace" ng-click="prepSaveActiveSearchResult($event, $index)"><i class="icon-save"></i> Save this place</a>
                         -->
