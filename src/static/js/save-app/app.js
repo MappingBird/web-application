@@ -529,7 +529,9 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     var map,
         lat = 0,
-        lng = 0;
+        lng = 0,
+        placesSearchTimeBeforeRequest,
+        placesSearchTimeAfterRequest;
 
     $scope.presets = Presets;
     $scope.numResults = 0;
@@ -715,7 +717,18 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         console.log(data);
         var len = data.length,
             len2 = data.length,
-            d;
+            d,
+            timeToRespond;
+
+        // tracking the performance of the Google Places API
+        placesSearchTimeAfterRequest = new Date();
+
+        // google analytics
+        if (typeof ga != 'undefined') {
+            timeToRespond = (placesSearchTimeAfterRequest.getTime() - placesSearchTimeBeforeRequest.getTime())/1000;
+            console.log('Google Places Search response time (secs): ' + timeToRespond);
+            ga('send', 'event', 'Performance', 'Google Places Search', 'Save Panel', timeToRespond);
+        }
 
         $scope.$apply(function(){
             $scope.numResults = data.length;
@@ -822,6 +835,8 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             placesRequest = new google.maps.places.PlacesService(map);
 
         console.log(map);
+
+        placesSearchTimeBeforeRequest = new Date();
 
         placesRequest.textSearch({ query: [$scope.searchQuery]}, placesSearchCallback);
 
