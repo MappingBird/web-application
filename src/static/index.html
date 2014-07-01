@@ -207,7 +207,7 @@ You can also click Ctrl+Shift+B (or Command+Shit+B on Mac) to show Bookmarks bar
         	<div class="getstarted-btn-wrapper pull-right">
             	<h1>Start creating your collections</h1>
                 <p>Drag button above to your bookmark bar to get started.</p>
-                <a class="btn btn-giant btn-primary pingismo-btn" type="button" href="javascript:
+                <a class="btn btn-giant btn-primary pingismo-btn" id="second-remember-btn" type="button" href="javascript:
     (function(){var BASE='http://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
             </div>
         </div>
@@ -295,7 +295,7 @@ You can also click Ctrl+Shift+B (or Command+Shit+B on Mac) to show Bookmarks bar
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-48784866-1', 'mappingbird.com');
+        ga('create', 'UA-48784866-1', 'auto');
         ga('send', 'pageview');
 
     </script>
@@ -366,12 +366,23 @@ You can also click Ctrl+Shift+B (or Command+Shit+B on Mac) to show Bookmarks bar
 
 
         // go to "How it works" after drag bookmarklet to the top
-        $('#main-remember-btn').on("mousedown.bookmarklet", function() {
+        $('#main-remember-btn, #second-remember-btn').on("mousedown.bookmarklet", function() {
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Bookmarklet', 'Mouse down on bookmarklet', 'Homepage');
+            }
+
             $(window).on("mousemove.bookmarklet", function(e) {
                 console.log(e);
                 if (e.pageY < 1) {
                     window.location.hash = "/how-it-works";
                     $(window).off("mousemove.bookmarklet");
+
+                    // google analytics
+                    if (typeof ga != 'undefined') {
+                        ga('send', 'event', 'Bookmarklet', 'Drag past top of page', 'Homepage');
+                    }
                 }
             });
         });
