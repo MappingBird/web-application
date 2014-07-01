@@ -100,6 +100,11 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
                             // TODO: email
                             // ask Derek about scenario here
 
+                            // google analytics
+                            if (typeof ga != 'undefined') {
+                                ga('send', 'event', 'Signup', 'Signup failed - user already exists', 'Signup Page');
+                            }
+
                         // migrate generated user
                         } else {
 
@@ -119,11 +124,21 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
 
             } else {
                 $scope.errorPasswordTooShort = true;
+
+                // google analytics
+                if (typeof ga != 'undefined') {
+                    ga('send', 'event', 'Signup', 'Signup failed - password too short', 'Signup Page');
+                }
             }
 
         } else {
             // TODO: email address checking regexp
             $scope.errorEmailRequired = true;
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Signup', 'Signup failed - invalid email address', 'Signup Page');
+            }
 
         }
 
@@ -140,6 +155,10 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
 
         UserResource.save(newUser, function(data, headers) {
             $scope.accountCreated = true;
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Signup', 'Signup success - new user created', 'Signup Page');
+            }
         });
 
     };
@@ -156,6 +175,11 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
 
         UserResource.update(migratedUser, function(data, headers) {
             $scope.accountCreated = true;
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Signup', 'Signup success - migrate generated user', 'Signup Page');
+            }
         });
 
     };

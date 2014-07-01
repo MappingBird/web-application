@@ -84,11 +84,21 @@ LoginApp.controller('mainController', function($scope, $timeout, Presets, Broadc
 
             } else {
                 $scope.errorInvalidLogin = true;
+
+                // google analytics
+                if (typeof ga != 'undefined') {
+                    ga('send', 'event', 'Login', 'Login failed - no password', 'Login Page');
+                }
             }
 
         } else {
             // TODO: email address checking regexp
             $scope.errorInvalidLogin = true;
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Login', 'Login failed - no email address', 'Login Page');
+            }
 
         }
 
@@ -109,9 +119,15 @@ LoginApp.controller('mainController', function($scope, $timeout, Presets, Broadc
                 && typeof data.user !== 'undefined'
                 && typeof data.user.email !== 'undefined'
                 && typeof data.user.id !==  'undefined') {
+
                 window.location.href="/static/app.html";
             } else {
                 $scope.errorInvalidLogin = true;
+
+                // google analytics
+                if (typeof ga != 'undefined') {
+                    ga('send', 'event', 'Login', 'Login failed - invalid credentials', 'Login Page');
+                }
             }
         });
 
