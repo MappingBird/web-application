@@ -335,7 +335,7 @@ section.map-section{
 }
 /* Searching location result list */
 .location-list{
-	margin: 15px 0 0 15px;
+	margin: 5px 0 0 15px;
 	padding: 0;
 	list-style: none;
 	width: 405px;

@@ -375,6 +375,7 @@ footer.narrow { padding: 5px 0 0; }
 .left-panel-container {
 	width: 100%;
 	height: 500px;
+	margin-top: 10px;
 	overflow: hidden;
 }
 
