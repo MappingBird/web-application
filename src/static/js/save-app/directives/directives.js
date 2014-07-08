@@ -91,7 +91,7 @@ directives.directive('mCustomScrollbarParent', function() {
         scope: false,
         controller: function($scope, $element, $attrs, BroadcastService) {
             // DIRTY HACK
-            var tolerance = 35; // pixels
+            var tolerance = 68; // pixels
             var height = $($('body')[0]).height() - $($('header')[0]).height() - $($('.collection-wrapper')[0]).height() - $($('footer')[0]).height() - tolerance;
             console.log('mCustomScrollbarParent height: ' + height);
             $element.css('height', height + 'px');

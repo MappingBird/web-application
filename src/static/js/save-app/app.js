@@ -547,6 +547,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     $scope.activeCollectionName = "";
     $scope.pageData = {};
     $scope.pageImages = [];
+    $scope.pageAddresses = [];
     $scope.selectedPageImages = [];
     $scope.deselectedPageImages = [];
     $scope.noSearchQuery = false;
@@ -698,6 +699,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                     text: data.text
                 };
                 $scope.pageImages = data.images;
+                $scope.pageAddresses = data.address;
             });
 
         } else {
