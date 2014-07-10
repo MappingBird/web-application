@@ -5,38 +5,58 @@ import re
 import logging
 import string
 import urllib2
+import json
 
-# sys.path.insert(0, 'libs')
-# from bs4 import BeautifulSoup
-from BeautifulSoup import BeautifulSoup
+from urlparse import urlparse
+from bs4 import BeautifulSoup
+# from BeautifulSoup import BeautifulSoup
 
-
-class Enum(set):
-    def __getattr__(self, name):
-        if name in self:
-            return name
-        raise AttributeError
-	
-
-class PageProfiler :
-	def __init__(self) : 
-		self.AttrEnum = Enum(["address", "phone_number"])
 		
+class PlaceInfo:
+	def __init__(self): 
+		self.name = None
+		self.address = None
+		self.phone_number = None
+	
+	def is_ascii(sefl, str):
+		return all(ord(c) < 128 for c in str)
+		
+	def dumpJson(self):
+		ensureAscii = True		
+		if not self.is_ascii(self.address) :
+			ensureAscii = False
+		
+		jsonStr = json.dumps({
+			"name" : self.name,
+			"address" : self.address,
+			"phone_number" : self.phone_number
+		}, ensure_ascii=ensureAscii)
+
+		return jsonStr
+		
+
+class PageProfiler :	
 	def profile(self, url=None, raw_html=None) :
 		elem_list = []
 		if url is None and raw_html is None:
 			return 	elem_list
-	
+
 		try:
-			if url :
+			if not raw_html and url :
 				hdr = {'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'}
 				req = urllib2.Request(url, headers = hdr)
 				resp = urllib2.urlopen(req)
 				raw_html = resp.read()	
+				
 			if not raw_html :
+				return elem_list
+				
+			dp_ipeen = DomainParser_iPeen()
+			elem_list = dp_ipeen.parse(url, raw_html)
+			if elem_list is not None and 0 < len(elem_list):				
 				return elem_list			
 			
-			soup = BeautifulSoup(raw_html)
+			soup = BeautifulSoup(raw_html)			
 			pp = PageParser()
 			
 			curTagName = ""
@@ -89,22 +109,22 @@ class PageProfiler :
 					if 'A' == stk[0] and 'P' == stk[1]: 
 						addr = None
 						tPhone = None
-						placeInfo_dict = {}
+						placeInfo_dict = PlaceInfo()
 						for i in range(2) :
 							tag = pairTagAddrPhone_stack.pop()
 							val = pairAddrPhone_stack.pop()
 							if tag == 'A' : addr = val
 							if tag == 'P' : tPhone = val
-						placeInfo_dict["address"] = addr
-						placeInfo_dict["phone_number"] = tPhone
+						placeInfo_dict.address = addr
+						placeInfo_dict.phone_number = tPhone
 						elem_list.append(placeInfo_dict)		
 			
-			placeInfo_dict = {}
+			placeInfo_dict = PlaceInfo()
 			for i in range(len(pairTagAddrPhone_stack)) :
 				tag = pairTagAddrPhone_stack.pop()
 				val = pairAddrPhone_stack.pop()
-				if tag == 'A' : placeInfo_dict["address"] = val
-				if tag == 'P' : placeInfo_dict["phone_number"] = val
+				if tag == 'A' : placeInfo_dict.address = val
+				if tag == 'P' : placeInfo_dict.phone_number = val
 				elem_list.append(placeInfo_dict)
 							
 		except urllib2.HTTPError, e:
@@ -114,7 +134,48 @@ class PageProfiler :
 			
 		return elem_list		
 
+#-- ipeen
+class DomainParser_iPeen :
+	def __init__(self):
+		self.DOMAIN_NAME = "www.ipeen.com.tw"
+	
+	def isHost(self, url=None):
+		if url is not None:
+			urlComps = urlparse(url)
+			if urlComps.netloc == self.DOMAIN_NAME:
+				return True			
+		return False
+	
+	def parse(self, url=None, raw_html=None):
+		if not self.isHost(url) or raw_html is None: 
+			return []
 		
+		pInfo = PlaceInfo()
+		soup = BeautifulSoup(raw_html)
+		
+		#-- div for place information
+		div_info_shop = soup.find("div", class_="info shop")
+	
+		#-- place name
+		a_name = div_info_shop.find("a", attrs={"data-action":"info_shopname"})
+		if a_name is not None and a_name.string is not None:
+			pInfo.name = a_name.string
+		
+		#-- address and phone
+		pp = PageParser()
+		for str in div_info_shop.stripped_strings :
+			if str is not None : 
+				#print str.encode("big5","ignore")
+				addr = pp.RegexTWAddress(str)
+				phoneNum = pp.RegexTWPhoneNum(str)
+				if addr is not None: pInfo.address = addr.group(0)
+				if phoneNum is not None: pInfo.phone_number = phoneNum.group(0)
+		
+		elem_list = []
+		elem_list.append(pInfo)
+		return elem_list
+		
+
 class TagAddress :	
 	def __init__(self):
 		self.address = ""
