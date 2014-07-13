@@ -204,6 +204,11 @@ header .btn-large.pingismo-btn{
 	background-image: linear-gradient(to bottom,#47cdff,#01a9e7);
 	border-color: #0089bc;
 }
+
+.btn-primary.pingismo-btn.super-wide {
+	width: 100%;
+}
+
 .btn-primary.pingismo-btn:hover,
 .btn-primary.pingismo-btn:focus,
 .btn-primary.pingismo-btn:active,

@@ -72,7 +72,7 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
 
                 function b () {
                     BroadcastService.prepForBroadcast({
-                        type: 'pointSavingMode',
+                        type: 'viewSearchResults',
                         data: {
                             url: $stateParams.url,
                             search: $stateParams.search
@@ -221,7 +221,7 @@ SaveApp.run(function($http, $cookies) {
 });
 
 
-SaveApp.controller('userController', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token) {
+SaveApp.controller('userController', ['$scope', '$cookies', '$http', '$resource', '$window', 'User', 'UserResource', 'Presets', 'BroadcastService', 'CurrentUser', 'UserLogin', 'UserLogout', 'Token', 'TagResource', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token, TagResource) {
 
     $scope.user = CurrentUser.get(function(data) {
 
@@ -243,6 +243,20 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
             } else {
                 User.data.isRegisteredUser = false;
             }
+
+            $scope.tags = TagResource.getTags(function(data) {
+                var l = data.length,
+                    v = [];
+
+                while (l--) {
+                    if (data[l].name) {
+                        v.unshift({ 'text' : data[l].name});
+                    }
+                }
+
+                User.data.tags = v;
+
+            });
 
             // send event
             BroadcastService.prepForBroadcast({
@@ -364,7 +378,7 @@ SaveApp.controller('userController', function($scope, $cookies, $http, $resource
 
     };
 
-});
+}]);
 
 /**
     Overall page controller
@@ -397,6 +411,23 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.fullMap = true;
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = false;
+        $scope.halfMap = false;
+
+        $scope.listMode = false;
+    }
+
+    // search results mode
+    function searchResultsMode () {
+        changeMapParams();
+        $scope.mapMode = false;
+        $scope.saveMode = true;
+        $scope.collectionsMode = false;
+        $scope.showCollectionList = false;
+        $scope.showSavePanel = true;
+        $scope.showPointDetailPanel = false;
+        $scope.fullMap = false;
+        $scope.mapRetracted = false;
+        $scope.semiRetractedMap = true;
         $scope.halfMap = false;
 
         $scope.listMode = false;
@@ -501,6 +532,10 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
             case 'viewingCollectionList':
                 listViewingMode();
                 break;
+            case 'viewSearchResults':
+            case 'pointViewingMode':
+                searchResultsMode();
+                break;
             case 'pointSavingMode':
                 pointSavingMode();
                 break;
@@ -523,7 +558,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
 
 });
 
-SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $cookieStore, Presets, MapPoints, User, UserResource, Collection, Collections, PointResource, BroadcastService, PointImage, Scraper) {
+SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $q, $cookieStore, Presets, MapPoints, User, UserResource, Collection, Collections, PointResource, BroadcastService, PointImage, Scraper) {
 
     console.log('init searchResultsController');
 
@@ -560,6 +595,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     $scope.showSearchTip = false;
     $scope.userDontShowSearchTip = $cookieStore.get('dontShowSearchTip') || false;
     $scope.placeImagesLoaded = false;
+    $scope.tags = [];
 
     // show search tip only if the user hasn't hidden them
     // and there is a search query
@@ -606,6 +642,10 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
     $scope.$watch('collections', function(collections) {
         Collections.collections = collections;
+    });
+
+    $scope.$watch(function(){return User.data.tags;}, function(tags) {
+        $scope.tags = tags;
     });
 
     $scope.$watch(function(){return MapPoints.activeSavePoint;}, function(activeSavePoint) {
@@ -699,7 +739,16 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                     text: data.text
                 };
                 $scope.pageImages = data.images;
-                $scope.pageAddresses = data.address;
+
+                // remove duplicates which are being returned by the backend
+                if (data.address && data.address.length > 0) {
+
+                    $.each(data.address, function(i, el){
+                        if($.inArray(el, $scope.pageAddresses) === -1) $scope.pageAddresses.push(el);
+                    });
+
+                }
+
             });
 
         } else {
@@ -895,6 +944,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         }
 
         BroadcastService.prepForBroadcast({
+            type: 'savePointSelected',
+            data: {}
+        });
+
+        BroadcastService.prepForBroadcast({
             type: 'setSaveCollection',
             data: {
                 collectionId: $scope.activeCollectionId
@@ -907,12 +961,21 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         //$event.preventDefault();
         //$event.stopPropagation();
         $scope.searchResultSelected = true;
+        BroadcastService.prepForBroadcast({
+            type: 'pointSavingMode',
+            data: {}
+        });
     };
 
     $scope.cancelSaveActiveSearchResult = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
         $scope.searchResultSelected = false;
+        $scope.setActiveSavePoint(null, $scope.activeSearchResult, true);
+        BroadcastService.prepForBroadcast({
+            type: 'pointViewingMode',
+            data: {}
+        });
     };
 
     $scope.saveNewCollection = function($e) {
@@ -1168,6 +1231,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             $scope.fetchPlacesSearchResults();
             $scope.getPageData();
 
+            BroadcastService.prepForBroadcast({
+                type: 'pointViewingMode',
+                data: {}
+            });
+
             // google analytics
             if (typeof ga != 'undefined') {
                 ga('send', 'event', 'Search', 'Has search query', 'Save Panel');
@@ -1205,10 +1273,28 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         $scope.showSearchTip = false;
     };
 
+    // return a promise because ngTagInput expects a promise
+    $scope.loadTags = function(query) {
+
+        var subset = [],
+            l = $scope.tags.length;
+
+        while (l--) {
+            if ($scope.tags[l].text.indexOf(query.toLowerCase()) > -1) {
+                subset.unshift($scope.tags[l]);
+            }
+        }
+
+        var deferred = $q.defer();
+        deferred.resolve(subset);
+        return deferred.promise;
+    }
+
+
     // init code
     $scope.$on('stateChange', function() {
         switch(BroadcastService.message.type) {
-            case 'pointSavingMode':
+            case 'viewSearchResults':
                 $scope.targetUrl = BroadcastService.message.data.url;
                 $scope.searchQuery = BroadcastService.message.data.search;
 
@@ -1224,7 +1310,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     });
 
     $scope.$on('placeImagesLoaded', function() {
-        console.log('>>> placesImagesLoaded received');
+        console.log('>>> placeImagesLoaded received');
         $scope.placeImagesLoaded = true;
     })
 
@@ -1814,8 +1900,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
                     // now check to see if any overlays go off the screen
                     console.log(marker);
-                    console.log(marker.getPosition);
-                    console.log(projection.fromLatLngToContainerPixel);
+                    console.log(projection);
                     point = projection.fromLatLngToContainerPixel(new google.maps.LatLng(marker.latlng_.A, marker.latlng_.k));
                     if (point.x > widestPoint || point.y < highestPoint) {
                         widestPoint = point.x;
@@ -1993,7 +2078,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             case 'pointDeleted':
                 removeActiveViewPoint(BroadcastService.message.data.id);
                 break;
-            case 'pointSavingMode':
+            case 'savePointSelected':
                 displayActiveSavePoint();
                 break;
             case 'savePointTypeChange':

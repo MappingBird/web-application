@@ -40,10 +40,12 @@
                 <!-- Search result -->
                 <div class="left-panel-container" ng-show="searchResultsLoaded" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placesLoaded'}" left-outer-height>
                     <ul class="location-list">
+                        <!--
                         <li ng-repeat="address in pageAddresses" ng-click="setActiveSaveAddress($event, $index, true)" ng-class="{'last-item': $index == places.length-1}" class="item address-only"><i class="icon-pin"></i><p><span class="place-address" ng-bind="address"></span></p>
                             <a href="#" class="show-on-map" ng-click="setActiveSaveAddress($event, $index)"><img src="/static/img/icon-proceed.png" /></a>
                             <div class="clearfix">
                         </li>
+                        -->
                         <li ng-repeat="place in places" on-repeat-done="places_loaded" ng-class="{active: $index==activeSearchResult, 'last-item': $index == places.length-1}" ng-click="setActiveSavePoint($event, $index, true)" class="item"><i class="icon-pin"></i><p><span class="place-name" ng-bind="place.name"></span> <span class="place-address" ng-bind="place.address"></span></p>
                             <!--
                             <a href="#" class="save-this-place" id="btnSaveThisPlace" ng-click="prepSaveActiveSearchResult($event, $index)"><i class="icon-save"></i> Save this place</a>
@@ -69,7 +71,9 @@
                         <div class="primary-content">
                             <input type="text" ng-model="pageData.title" class="content-title" />
                             <textarea rows="8" ng-model="pageData.text"></textarea>
-                            <tags-input ng-model="pageData.tags"placeholder="Tags (optional)"></tags-input>
+                            <tags-input ng-model="pageData.tags" placeholder="Tags (optional)">
+                                <auto-complete source="loadTags($query)"></auto-complete>
+                            </tags-input>
                         </div>
                         <div ng-class="{'input-append' : true, 'control-group' : true, error: noCollectionError}" ng-show="collections.length == 0">
                             <input type="text" ng-model="newCollectionName" ng-class="{ 'fresh' : true, error: noCollectionError}" placeholder="{{ noCollectionError && 'Enter name of map to save this point to' || 'Create a map to save this place to, ex: Paris trip'}}" class="fresh" />
@@ -95,7 +99,7 @@
                             <div class=" clearfix"></div>
                         </ul>
                         <hr/>
-                        <button class="btn btn-large btn-primary pingismo-btn" type="submit" id="save-to-map">Save to Map</button>
+                        <button class="btn btn-large btn-primary pingismo-btn super-wide" type="submit" id="save-to-map">Save to Map</button>
                     </form>
                     <div class="image-select" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
                         <div class="ref-context-img" thumb-alignment="{displayArray: 'pageImages', selectArray: 'selectedPageImages', deselectArray: 'deselectedPageImages', onlyFirstSelected: false, whiteBackground: true}"></div>
