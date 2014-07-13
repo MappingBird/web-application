@@ -47,6 +47,7 @@ services.factory('User', function(){
             emailAddress: '',
             isRegisteredUser: false,
             collections: [],
+            tags: [],
             isLoggedIn: false
         }
     };
@@ -227,6 +228,17 @@ services.factory('UserResourceLoader', ['UserResource', '$cookies', '$q', functi
             return false;
         }
     };
+}]);
+
+services.factory('TagResource', ['$resource', function($resource) {
+
+    return $resource('/api/tags', {}, {
+        'getTags' : {
+            method : 'GET',
+            isArray: true
+        }
+    });
+
 }]);
 
 services.factory('BroadcastService', function($rootScope) {
