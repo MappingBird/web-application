@@ -149,21 +149,17 @@ def scraper(request):
     '''
 
     pp = PageProfiler()
-    elements = pp.profile(raw_html=page.text)
+    elements = pp.profile(url=url, raw_html=page.text)
 
     out = {
         'title': title.strip(),
         'text': text.strip(),
         'images': output_images,
-        'address': [],
-        'phone': [],
     }
 
-    for el in elements:
-        if 'address' in el:
-            out['address'].append(el['address'])
-
-        if 'phone_number' in el:
-            out['phone'].append(el['phone_number'])
+    for e in elements:
+        out['name'] = e.name
+        out['address'] = e.address
+        out['phone'] = e.phone_number
 
     return HttpResponse(json.dumps(out), content_type='application/json')
