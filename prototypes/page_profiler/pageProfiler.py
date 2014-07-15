@@ -54,7 +54,13 @@ class PageProfiler :
 			dp_ipeen = DomainParser_iPeen()
 			elem_list = dp_ipeen.parse(url, raw_html)
 			if elem_list is not None and 0 < len(elem_list):				
-				return elem_list			
+				return elem_list
+
+			dp_tripadv = DomainParser_Tripadvisor()
+			elem_list = dp_tripadv.parse(url, raw_html)
+			if elem_list is not None and 0 < len(elem_list):
+				return elem_list
+			
 			
 			soup = BeautifulSoup(raw_html)			
 			pp = PageParser()
@@ -134,7 +140,95 @@ class PageProfiler :
 			
 		return elem_list		
 
-#-- ipeen
+#-- Tripadvisor
+class DomainParser_Tripadvisor :
+	def __init__(self):
+		self.DOMAIN_NAME = "www.tripadvisor.com"
+	
+	def isHost(self, url=None):
+		if url is not None:
+			urlComps = urlparse(url)			
+			if 0 == urlComps.netloc.find(self.DOMAIN_NAME):
+				return True			
+		return False
+	
+	def parse(self, url=None, raw_html=None):		
+		if not self.isHost(url) or raw_html is None: 
+			return []
+		
+		pInfo = PlaceInfo()
+		soup = BeautifulSoup(raw_html)
+		
+		#-- div for place information
+		div_heading_group = soup.find("div", id="HEADING_GROUP")		
+		
+		#-- place name
+		h1_heading = div_heading_group.find("h1", id="HEADING")		
+		for str in h1_heading.stripped_strings :
+			pInfo.name = str			
+		
+		#-- address
+		addr = ""
+		span_format_address = div_heading_group.find("span", class_="format_address")
+		for str in span_format_address.stripped_strings :
+			if str is not None :
+				addr += str
+		if 0 < len(addr) : pInfo.address = addr	
+		
+		#-- phone		
+		#e.g. 
+		#
+		# <div class="fl phoneNumber">02-23465867</div>
+		#
+		div_f1_phoneNumber = div_heading_group.find("div", class_="fl phoneNumber")
+		if div_f1_phoneNumber is not None :
+			pInfo.phone_number = div_f1_phoneNumber.string
+		#e.g. 
+		#
+		# <div class="fl notLast">
+		# <div class="grayPhone sprite-grayPhone fl icnLink"></div>
+		# <div class="fl">
+		# <script>
+		# <!--
+		# function escramble_899(){
+		# var a,b,c
+		# a='+1 '
+		# b='21-'
+		# a+='800-'
+		# b+='2080'
+		# c='8'
+		# document.write(a+c+b)
+		# }
+		# escramble_899()
+		# //-->
+		# </script>
+		# </div>
+		# </div>
+		# 
+		else :
+			div_f1_all = div_heading_group.find_all("div", class_="fl notLast")			
+			for div_f1 in div_f1_all :
+				if div_f1.find("div", class_="grayPhone sprite-grayPhone fl icnLink") is not None :
+					script = div_f1.find("script")
+					if script is not None : 
+						for line in script.string.strip().splitlines():
+							if 0 <= line.strip().find("="):
+								#-- compile and execute statements by python
+								expr = line								
+								exec expr
+							if 0 <= line.strip().find("document.write"):
+								#-- evaluate final result, e.g. "document.write(a+c+b)"
+								expr_aggre = line[line.find('(')+1 : line.find(')')]
+								rs = eval(expr_aggre)
+								pInfo.phone_number = rs
+								break;
+		
+		elem_list = []
+		elem_list.append(pInfo)
+		return elem_list
+		
+		
+#-- iPeen
 class DomainParser_iPeen :
 	def __init__(self):
 		self.DOMAIN_NAME = "www.ipeen.com.tw"
