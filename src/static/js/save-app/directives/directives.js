@@ -214,6 +214,26 @@ directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
     };
 });
 
+// massive alert
+directives.directive('massiveAlert', function(BroadcastService) {
+    return {
+        restrict: 'A',
+        link: function($scope, $elem, $attrs) {
+            $scope.$on('stateChange', function() {
+                if (typeof BroadcastService.message == 'object') {
+                    switch (BroadcastService.message.type) {
+                        case 'noSearchResults':
+                            $elem.addClass('visible');
+                            break;
+
+                    }
+                }
+            });
+        },
+        replace: false
+    };
+});
+
 // show collection list view
 directives.directive('collectionListView', function() {
     return {

@@ -515,6 +515,7 @@ a.show-on-map i.icon-show{
 }
 .save-content.retracted{
 	left: 755px;
+	width: 350px;
 }
 
 .save-content .form-save-content {
@@ -780,7 +781,7 @@ ul.types > li{
 	display: block;
 	width: 38px;
 	height: 45px;
-	margin: 0 5px;
+	margin: 0 9px;
 }
 .types-scenicspot{
 	background: url(../img/type-scenicspot.png) 0 0 no-repeat;
