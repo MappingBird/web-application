@@ -13,10 +13,11 @@ from django.conf import settings
 
 from rest_framework import viewsets, status
 from rest_framework.decorators import link, action, api_view, parser_classes, authentication_classes, permission_classes
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 
 from geopy.geocoders import GoogleV3
 from googleplaces import GooglePlaces
@@ -321,14 +322,20 @@ def current_user(request):
 def login(request):
     email = request.DATA.get('email')
     password = request.DATA.get('password')
-    print email, password
+    token = request.DATA.get('token')
     user = authenticate(email=email, password=password)
     if user is not None:
         serializer = UserSerializer(user)
-        data = {'user': serializer.data}
 
         if user.is_active:
-            django_login(request, user)
+            data = {
+                'user': serializer.data,
+            }
+            if token == '1':
+                token = Token.objects.get_or_create(user=user)[0]
+                data['token'] = token.key
+            else:
+                django_login(request, user)
 
             return Response(data)
         else:
