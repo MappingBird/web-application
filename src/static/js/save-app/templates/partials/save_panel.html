@@ -24,10 +24,12 @@
                 <!-- End of no search keyword tip -->
 
                 <!-- No search results tip -->
+                <!--
                 <div class="no-keyword tip tip-below" ng-show="noSearchResults">
                     <h2>There were no search results.</h2>
                     <p>We were unable to find search results for the place <b ng-bind="lastSearchQuery"></b> that you selected. Try again by typing in the name of the place you're searching for above.</p>
                 </div>
+                -->
                 <!-- End of no search keyword tip -->
 
                 <!-- Searching for location -->
@@ -53,7 +55,7 @@
                             <a href="#" class="show-on-map" ng-click="setActiveSavePoint($event, $index)"><img src="/static/img/icon-proceed.png" /></a>
                             <div class="clearfix">
                         </li>
-                        <li class="text-only-item first-item" ng-hide="{{noSearchQuery || noSearchResults}}">
+                        <li class="text-only-item first-item" ng-hide="noSearchQuery || noSearchResults">
                             <p>
                                 <span class="item-title">Can't find what you're looking for?</span>
                                 <span class="item-text">Try entering the name or address of the place you are looking for in the search bar above to get better results.</span>
@@ -67,7 +69,6 @@
                 <div class="save-content" ng-class="{retracted: !searchResultSelected}" m-custom-scrollbar-parent>
                     <a class="back" href="#" ng-click="cancelSaveActiveSearchResult($event)" ng-show="numResults > 1"><img src="/static/img/icon-back.png" /></a>
                     <form class="form-save-content" ng-submit="savePoint($event)">
-                        <div class="loading" ng-hide="placeImagesLoaded">Loading...<img src="/static/img/loading-circle.png"></div>
                         <div class="primary-content">
                             <input type="text" ng-model="pageData.title" class="content-title" />
                             <textarea rows="8" ng-model="pageData.text"></textarea>

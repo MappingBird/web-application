@@ -216,11 +216,10 @@ section.map-section{
 }
 
 #map.semi-retracted {
-	height: -moz-calc(100% - 125px);
-	height: -webkit-calc(100% - 125px);
-	height: calc(100% - 125px);
+	height: -moz-calc(100% - 75px);
+	height: -webkit-calc(100% - 75px);
+	height: calc(100% - 75px);
 	left: 425px;
-	top: 95px;
 	width: -moz-calc(100% - 425px);
 	width: -webkit-calc(100% - 425px);
 	width: calc(100% - 425px);
@@ -516,6 +515,7 @@ a.show-on-map i.icon-show{
 }
 .save-content.retracted{
 	left: 755px;
+	width: 350px;
 }
 
 .save-content .form-save-content {
@@ -524,25 +524,16 @@ a.show-on-map i.icon-show{
 	width: 340px;
 }
 
-.form-save-content .loading {
+.loading {
 	font-size: 11px;
 	height: 87px;
-	left: -webkit-calc(75% - 43px);
-	left: -moz-calc(75% - 43px);
-	left: calc(75% - 43px);
 	line-height: 87px;
 	position: absolute;
 	text-align: center;
-	top: 102px;
 	width: 86px;
 }
 
-.form-save-content .loading.loaded,
-.places-loaded .loading {
-	display: none;
-}
-
-.form-save-content .loading img {
+.loading img {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -558,6 +549,18 @@ a.show-on-map i.icon-show{
     animation-duration:         1.5s;
     animation-iteration-count:  infinite;
     animation-timing-function: linear;
+}
+
+.image-select .loading {
+	left: -webkit-calc(50% - 43px);
+	left: -moz-calc(50% - 43px);
+	left: calc(50% - 43px);
+	top: 102px;
+}
+
+.loading.loaded,
+.places-loaded .loading {
+	display: none;
 }
 
 .save-content a.back{
@@ -605,6 +608,7 @@ a.show-on-map i.icon-show{
 .save-content .image-select {
 	float: left;
 	width: 350px;
+	position: relative;
 }
 
 .save-content .primary-content {
@@ -777,7 +781,7 @@ ul.types > li{
 	display: block;
 	width: 38px;
 	height: 45px;
-	margin: 0 5px;
+	margin: 0 9px;
 }
 .types-scenicspot{
 	background: url(../img/type-scenicspot.png) 0 0 no-repeat;

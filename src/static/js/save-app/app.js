@@ -836,9 +836,12 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             $scope.$emit("placesLoaded");
 
         } else {
-            // TODO: show error
+
             console.log('no places search result');
-            $scope.noSearchResults = true;
+            $scope.$apply(function(){
+                $scope.noSearchResults = true;
+            });
+
 
             $scope.lastSearchQuery = $scope.searchQuery;
 
