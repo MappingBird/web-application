@@ -3,33 +3,11 @@
                     <span class="help-block search-static"><span ng-bind="numResults"></span> places found. Pick one you want to save.</span>
                 </form>
 
-                <!-- Search keyword tip
-                <div class="search-info-tip tip tip-right" ng-class="{ 'visible' : showSearchTip }">
-                    <h2>Can't Find the Place You're Looking For?</h2>
-                    <p>Try to:</p>
-                    <ol>
-                        <li>Add the city of the place and press <b>Enter</b></li>
-                        <li>Enter the address of the place and press <b>Enter</b></li>
-                    </ol>
-                    <p><a href="#" ng-click="hideSearchTip($event)">Don't show again</a></p>
-                </div>
-                -->
-                <!-- End of search keyword tip -->
-
                 <!-- No search keyword tip -->
                 <div class="no-keyword tip tip-below" ng-show="noSearchQuery">
                     <h2>Try entering a name or address to get better results</h2>
                     <p>Before clicking "Remember this place", don't forget to use your mouse to select the name or address of a place in the website you're browsing.<br><br>You can also try entering the name or address of the place in the search bar above and pressing <b>Enter</b>.</p>
                 </div>
-                <!-- End of no search keyword tip -->
-
-                <!-- No search results tip -->
-                <!--
-                <div class="no-keyword tip tip-below" ng-show="noSearchResults">
-                    <h2>There were no search results.</h2>
-                    <p>We were unable to find search results for the place <b ng-bind="lastSearchQuery"></b> that you selected. Try again by typing in the name of the place you're searching for above.</p>
-                </div>
-                -->
                 <!-- End of no search keyword tip -->
 
                 <!-- Searching for location -->
@@ -49,9 +27,6 @@
                         </li>
                         -->
                         <li ng-repeat="place in places" on-repeat-done="places_loaded" ng-class="{active: $index==activeSearchResult, 'last-item': $index == places.length-1}" ng-click="setActiveSavePoint($event, $index, true)" class="item"><i class="icon-pin"></i><p><span class="place-name" ng-bind="place.name"></span> <span class="place-address" ng-bind="place.address"></span></p>
-                            <!--
-                            <a href="#" class="save-this-place" id="btnSaveThisPlace" ng-click="prepSaveActiveSearchResult($event, $index)"><i class="icon-save"></i> Save this place</a>
-                        -->
                             <a href="#" class="show-on-map" ng-click="setActiveSavePoint($event, $index)"><img src="/static/img/icon-proceed.png" /></a>
                             <div class="clearfix">
                         </li>
@@ -73,7 +48,7 @@
                             <input type="text" ng-model="pageData.title" class="content-title" />
                             <textarea rows="8" ng-model="pageData.text"></textarea>
                             <tags-input ng-model="pageData.tags" placeholder="Tags (optional)">
-                                <auto-complete source="loadTags($query)"></auto-complete>
+                                <auto-complete min-length="1" source="loadTags($query)"></auto-complete>
                             </tags-input>
                         </div>
                         <div ng-class="{'input-append' : true, 'control-group' : true, error: noCollectionError}" ng-show="collections.length == 0">
