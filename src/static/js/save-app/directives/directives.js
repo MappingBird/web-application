@@ -225,6 +225,9 @@ directives.directive('massiveAlert', function(BroadcastService) {
                         case 'noSearchResults':
                             $elem.addClass('visible');
                             break;
+                        case 'newSearch':
+                            $elem.removeClass('visible');
+                            break;
 
                     }
                 }

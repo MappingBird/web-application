@@ -1226,6 +1226,13 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         }
 
         $scope.noSearchResults = false;
+        $scope.noSearchQuery = false;
+
+        BroadcastService.prepForBroadcast({
+            type: 'newSearch',
+            data: {}
+        });
+
 
         if ($scope.searchQuery && $scope.searchQuery.length > 0 && $scope.searchQuery !== 'undefined') {
             $scope.placesApiUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyCixleTjJLXPDQs9AIG6-18Gvx1X6M7If8&sensor=false&query=' + $scope.searchQuery + '&callback=?';
