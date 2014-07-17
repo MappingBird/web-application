@@ -2148,6 +2148,8 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
                     break;
                 }
             }
+        } else {
+            $scope.pointImages = [];
         }
 
 
