@@ -59,11 +59,11 @@
                             <a class="btn exist collections-selection" href="#" ng-click="clickShowSelectCollection($event)" ng-show="!showSelectCollection"><span ng-bind="saveCollectionName"></span> <span class="caret"></span></a>
                             <ul class="collections-menu upward-menu" ng-show="showSelectCollection">
                                 <li ng-repeat="collection in collections"><a href="#" ng-click="selectCollection($event, collection.id)" ng-bind="collection.name"></a></li>
-                                <li ng-class="{'input-append' : true, 'control-group' : true, error: noCollectionError}">
-                                    <input type="text" class="span2" ng-model="newCollectionName" id="appendedInputButton" placeholder="{{ noCollectionError && 'Select from above or enter a new name' || 'Create a new map'}}" />
-                                    <button class="btn" type="button" ng-click="saveNewCollection($event)">Create</button>
-                                </li>
                             </ul>
+                            <div class="input-append control-group" ng-class="{ 'error': noCollectionError}" ng-show="showSelectCollection">
+                                <input type="text" class="span2" ng-model="newCollectionName" id="appendedInputButton" placeholder="{{ noCollectionError && 'Select from above or enter a new name' || 'Create a new map'}}" />
+                                    <button class="btn" type="button" ng-click="saveNewCollection($event)">Create</button>
+                            </div>
                         </div>
                         <ul class="types">
                             <li ng-class="{active: activeSavePoint.type == 'scenicspot'}"><a href="#" class="types-scenicspot" ng-click="setPointType($event, 'scenicspot')"></a></li>

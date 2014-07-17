@@ -693,6 +693,7 @@ a.show-on-map i.icon-show{
 	overflow-y: auto;
 	position: absolute;
 	/* bottom: 10px; */
+	width: 338px;
 	z-index: 10000;
 }
 
@@ -701,8 +702,8 @@ a.show-on-map i.icon-show{
 }
 
 .collections-menu.upward-menu {
-	bottom: 0;
-	max-height: 525px;
+	bottom: 39px;
+	max-height: 310px;
 }
 
 .collections-menu .input-append{
