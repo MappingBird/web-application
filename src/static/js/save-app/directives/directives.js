@@ -599,8 +599,8 @@ directives.directive('thumbAlignment', function($compile){
                     }
 
                 } else {
-                    console.log('no images');
-                    // $(picPhotoObj).empty();
+                    console.log('no images - empty photo');
+                    resetImages();
                     loadingAnimation.remove();
                     $scope.$emit('placeImagesLoaded');
                 }
