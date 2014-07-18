@@ -791,47 +791,53 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             console.log('there are search results');
             console.log(len);
             // if there's only one result, select search result
-            $scope.$apply(function(){
-                while (len--) {
-                    $scope.places.unshift({
-                        index: len,
-                        icon: data[len].icon,
-                        name: data[len].name,
-                        address: data[len].formatted_address,
-                        phone: '',
-                        location: {
-                            place_name: data[len].name,
-                            place_address: data[len].formatted_address,
-                            coordinates: data[len].geometry.location.lat() + ',' + data[len].geometry.location.lng()
-                        },
-                        coords: data[len].geometry.location.lat() + ',' + data[len].geometry.location.lng(),
-                        type: data[len].type || 'misc',
-                        lat: data[len].geometry.location.lat(),
-                        lng: data[len].geometry.location.lng()
-                    });
+            while (len--) {
+                $scope.places.unshift({
+                    index: len,
+                    icon: data[len].icon,
+                    name: data[len].name,
+                    address: data[len].formatted_address,
+                    phone: '',
+                    location: {
+                        place_name: data[len].name,
+                        place_address: data[len].formatted_address,
+                        coordinates: data[len].geometry.location.lat() + ',' + data[len].geometry.location.lng()
+                    },
+                    coords: data[len].geometry.location.lat() + ',' + data[len].geometry.location.lng(),
+                    type: data[len].type || 'misc',
+                    lat: data[len].geometry.location.lat(),
+                    lng: data[len].geometry.location.lng()
+                });
+            }
+
+            // need to apply scope here to ensure that
+            // the points are able to be referenced in
+            // $scope.setActiveSavePoint()
+            $scope.$apply();
+
+            if (len2 === 1) {
+                // single search results, jump to save panel
+                $scope.setActiveSavePoint(null, 0);
+                console.log('set activeSavePoint single');
+                console.log($scope.activeSavePoint);
+
+                // google analytics
+                if (typeof ga != 'undefined') {
+                    ga('send', 'event', 'Search', 'One search result', 'Save Panel');
                 }
+            } else {
+                // multiple search results, so set the first
+                // as the default but also show the search
+                // results panel
+                $scope.setActiveSavePoint(null, 0, true);
+                console.log('set activeSavePoint multiple');
+                console.log($scope.activeSavePoint);
 
-                if (len2 === 1) {
-                    $scope.setActiveSavePoint(null, 0);
-                    console.log('set activeSavePoint single');
-                    console.log($scope.activeSavePoint);
-
-                    // google analytics
-                    if (typeof ga != 'undefined') {
-                        ga('send', 'event', 'Search', 'One search result', 'Save Panel');
-                    }
-                } else {
-                    $scope.setActiveSavePoint(null, 0, true);
-                    console.log('set activeSavePoint multiple');
-                    console.log($scope.activeSavePoint);
-
-                    // google analytics
-                    if (typeof ga != 'undefined') {
-                        ga('send', 'event', 'Search', 'Multiple search results', 'Save Panel');
-                    }
+                // google analytics
+                if (typeof ga != 'undefined') {
+                    ga('send', 'event', 'Search', 'Multiple search results', 'Save Panel');
                 }
-
-            });
+            }
 
             $scope.$emit("placesLoaded");
 
@@ -908,6 +914,8 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         var image,
             place = $scope.places[index],
             point = {};
+
+        console.log(place);
 
         // build point object to match structure of saved points
         // so can display correctly on map
@@ -2088,8 +2096,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 removeActiveViewPoint(BroadcastService.message.data.id);
                 break;
             case 'savePointSelected':
-                displayActiveViewPoints();
-                //displayActiveSavePoint();
+                displayActiveSavePoint();
                 break;
             case 'savePointTypeChange':
                 updateSavePointType(BroadcastService.message.data.savePointType);
