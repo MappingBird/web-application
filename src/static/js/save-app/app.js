@@ -1861,7 +1861,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 $scope.activeViewPoints[len2].lng = Number(split[1]);
 
                 // if saving a point, center the map around the point to be saved
-                console.log('len2: ' + len2);
                 if (typeof $scope.activeViewPoints[len2].isSavePoint != 'undefined' && $scope.activeViewPoints[len2].isSavePoint) {
                     console.log('savepoint: ' + len2);
                     centerPoint = $scope.activeViewPoints[len2];
@@ -2089,7 +2088,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 removeActiveViewPoint(BroadcastService.message.data.id);
                 break;
             case 'savePointSelected':
-                displayActiveSavePoint();
+                displayActiveViewPoints();
+                //displayActiveSavePoint();
                 break;
             case 'savePointTypeChange':
                 updateSavePointType(BroadcastService.message.data.savePointType);
