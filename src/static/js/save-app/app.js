@@ -942,8 +942,10 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             });
         }
 
-        $scope.activeSavePoint = point;
-        $scope.activeSearchResult = index;
+        $scope.$apply(function(){
+            $scope.activeSavePoint = point;
+            $scope.activeSearchResult = index;
+        });
 
         // in the case of multiple search results
         // where we want to load a map but still
@@ -1673,7 +1675,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
     $scope.$watch(function() { return MapPoints.activeSavePoint; }, function(activeSavePoint) {
 
         console.log ('activeSavePoint change');
-        console.log ($scope.saveMode);
+        console.log (activeSavePoint);
         $scope.activeSavePoint = activeSavePoint;
 
     });
@@ -1724,13 +1726,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             });
         }
     }
-/*
-    map = new google.maps.Map($('#map')[0], mapOptions);
-
-    google.maps.event.addListener(map, 'bounds_changed', function() {
-        recenterMap();
-    });
-*/
 
     function recenterMap() {
 
