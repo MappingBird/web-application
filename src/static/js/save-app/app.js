@@ -1756,7 +1756,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         console.log($scope.activeSavePoint);
 
         var location,
-            coords;
+            coords,
+            phone = '';
 
         if ($scope.activeSavePoint) {
 
@@ -1776,9 +1777,14 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 saveMarker.setMap(null);
             }
             bounds = map.getBounds();
-            srcImage = $scope.activeSavePoint.image;
+            if ($scope.activeSavePoint.images.length > 0) {
+                srcImage = $scope.activeSavePoint.images[0].url;
+            } else {
+                srcImage = '';
+            }
 
-            saveOverlay = new BucketListSmallOverlay(bounds, Presets.mapZoom, srcImage, map, myLatLng, type, $scope.activeSavePoint.name, $scope.activeSavePoint.address, $scope.activeSavePoint.phone, 'open', 'save');
+
+            saveOverlay = new BucketListSmallOverlay(bounds, Presets.mapZoom, srcImage, map, myLatLng, type, location.place_name, location.place_address, phone, 'open', 'save');
             saveMarker = new BucketListPin(bounds, Presets.mapZoom, srcImage, map, myLatLng);
         }
     }
@@ -2100,8 +2106,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 removeActiveViewPoint(BroadcastService.message.data.id);
                 break;
             case 'savePointSelected':
-                displayActiveViewPoints();
-                //displayActiveSavePoint();
+                //displayActiveViewPoints();
+                displayActiveSavePoint();
                 break;
             case 'savePointTypeChange':
                 updateSavePointType(BroadcastService.message.data.savePointType);
