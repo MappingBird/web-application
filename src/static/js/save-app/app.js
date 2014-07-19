@@ -927,6 +927,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             coordinates: place.coords
         }
         point.isSavePoint = true;
+        point.images = [];
 
         // images
         if (typeof $scope.pageImages !== 'undefined'
@@ -1753,9 +1754,17 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
     function displayActiveSavePoint () {
         console.log('displayActiveSavePoint');
         console.log($scope.activeSavePoint);
+
+        var location,
+            coords;
+
         if ($scope.activeSavePoint) {
-            lat = $scope.activeSavePoint.lat;
-            lng = $scope.activeSavePoint.lng;
+
+            location = $scope.activeSavePoint.location;
+            coords = $scope.activeSavePoint.location.coordinates.split(',');
+
+            lat = coords[0];
+            lng = coords[1];
             type = $scope.activeSavePoint.type || 'scenicspot';
             myLatLng = new google.maps.LatLng(lat, lng);
             mapOptions.center = myLatLng;
@@ -2091,7 +2100,8 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 removeActiveViewPoint(BroadcastService.message.data.id);
                 break;
             case 'savePointSelected':
-                displayActiveSavePoint();
+                displayActiveViewPoints();
+                //displayActiveSavePoint();
                 break;
             case 'savePointTypeChange':
                 updateSavePointType(BroadcastService.message.data.savePointType);
