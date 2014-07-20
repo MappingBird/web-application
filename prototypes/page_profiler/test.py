@@ -13,16 +13,20 @@ from pageProfiler import PageParser
 #given_url = "http://www.tripadvisor.com/Hotel_Review-g60763-d93475-Reviews-New_York_Marriott_East_Side-New_York_City_New_York.html"
 #given_url = "http://www.tripadvisor.com/Hotel_Review-g45992-d124682-Reviews-Atlantis_Casino_Resort_Spa-Reno_Nevada.html"
 #given_url = "http://www.tripadvisor.com/Hotel_Review-g294212-d813642-Reviews-Double_Happiness_Courtyard_Hotel-Beijing.html"
-#given_url = "http://www.tripadvisor.com.tw/Restaurant_Review-g297907-d4273784-Reviews-Salt_Lick-Hualien.html"
-given_url = "http://www.tripadvisor.com.tw/Attraction_Review-g293913-d4739729-Reviews-Taiwan_Adventures_Hiking_and_Outdoor_Private_Day_Tour-Taipei.html"
-              
+given_url = "http://www.tripadvisor.com.tw/Restaurant_Review-g297907-d4273784-Reviews-Salt_Lick-Hualien.html"
+#given_url = "http://www.tripadvisor.com.tw/Attraction_Review-g293913-d4739729-Reviews-Taiwan_Adventures_Hiking_and_Outdoor_Private_Day_Tour-Taipei.html"
+#given_url = "http://www.yelp.com/biz/lazy-bear-san-francisco"
+#given_url = "http://www.yelp.com/biz/gary-danko-san-francisco"
+
 pp = PageProfiler()
 elem_list = pp.profile(url = given_url)
 #elem_list = pp.profile(raw_html=html)
 
 for e in elem_list :
 	print e.dumpJson()
-	
+
+print 
+
 for e in elem_list :
 	print e.name
 	print e.address
