@@ -9,7 +9,7 @@ import json
 
 from urlparse import urlparse
 from bs4 import BeautifulSoup
-# from BeautifulSoup import BeautifulSoup
+from lxml import etree
 
 		
 class PlaceInfo:
@@ -58,6 +58,11 @@ class PageProfiler :
 
 			dp_tripadv = DomainParser_Tripadvisor()
 			elem_list = dp_tripadv.parse(url, raw_html)
+			if elem_list is not None and 0 < len(elem_list):
+				return elem_list
+			
+			dp_yelp = DomainParser_Yelp()
+			elem_list = dp_yelp.parse(url, raw_html)
 			if elem_list is not None and 0 < len(elem_list):
 				return elem_list
 			
@@ -139,6 +144,54 @@ class PageProfiler :
 		#	logging.error("Unexpected error: {0}".format(sys.exc_info()[0]))
 			
 		return elem_list		
+
+		
+#-- Yelp
+class DomainParser_Yelp :
+	def __init__(self):
+		self.DOMAIN_NAME = "www.yelp.com"
+	
+	def isHost(self, url=None):
+		if url is not None:
+			urlComps = urlparse(url)
+			if urlComps.netloc == self.DOMAIN_NAME:
+				return True			
+		return False
+	
+	def parse(self, url=None, raw_html=None):
+		if not self.isHost(url) or raw_html is None: 
+			return []
+		
+		pInfo = PlaceInfo()
+		soup = BeautifulSoup(raw_html)
+		
+		h1_biz_page_title = soup.find("h1", class_=re.compile("biz-page-title.*"))
+		if h1_biz_page_title is not None and h1_biz_page_title.string is not None:
+			pInfo.name = h1_biz_page_title.string.strip()
+		
+		#-- div for map box information
+		div_mapbox = soup.find("div", class_="mapbox")
+		
+		#-- div for place information
+		div_mapbox_text = div_mapbox.find("div", class_="mapbox-text")
+			
+		#-- address
+		address = div_mapbox_text.find("address", attrs={"itemprop" : "address"})
+		addr = ""
+		for str in address.stripped_strings :
+			if str is not None : 				
+				addr += str
+		if 0 < len(addr) : pInfo.address = addr
+				
+		#-- phone
+		span_biz_phone = div_mapbox_text.find("span", class_="biz-phone")
+		if span_biz_phone.string is not None :
+			pInfo.phone_number = span_biz_phone.string.strip()						
+		
+		elem_list = []
+		elem_list.append(pInfo)
+		return elem_list
+		
 
 #-- Tripadvisor
 class DomainParser_Tripadvisor :
@@ -244,26 +297,29 @@ class DomainParser_iPeen :
 		if not self.isHost(url) or raw_html is None: 
 			return []
 		
-		pInfo = PlaceInfo()
-		soup = BeautifulSoup(raw_html)
+		pInfo = PlaceInfo()				
+		html = etree.HTML(raw_html)
 		
-		#-- div for place information
-		div_info_shop = soup.find("div", class_="info shop")
-	
-		#-- place name
-		a_name = div_info_shop.find("a", attrs={"data-action":"info_shopname"})
-		if a_name is not None and a_name.string is not None:
-			pInfo.name = a_name.string
+		#-- <div class="info shop">...</div>
+		div_info_shop = html.xpath("//div[contains(@class, 'info shop')]")
+		#print etree.tostring(div[0], pretty_print=True, method="html", encoding="big5")		
 		
-		#-- address and phone
-		pp = PageParser()
-		for str in div_info_shop.stripped_strings :
-			if str is not None : 
-				#print str.encode("big5","ignore")
-				addr = pp.RegexTWAddress(str)
-				phoneNum = pp.RegexTWPhoneNum(str)
-				if addr is not None: pInfo.address = addr.group(0)
-				if phoneNum is not None: pInfo.phone_number = phoneNum.group(0)
+		if div_info_shop is not None and 0 < len(div_info_shop) :
+			a_list = div_info_shop[0].xpath(("//a[contains(@data-action, 'info_shopname')]"))
+			#-- place name
+			if a_list is not None and 0 < len(a_list):
+				pInfo.name = a_list[0].text
+			
+			#-- address and phone number
+			pp = PageParser()
+			li_list = div_info_shop[0].xpath(("ul/li"))
+			for li in li_list:
+				if li.text is not None:
+					str = li.text.strip()								
+					phoneNum = pp.RegexTWPhoneNum(str)
+					if phoneNum is not None: pInfo.phone_number = phoneNum.group(0)									
+					addr = pp.RegexTWAddress(str)
+					if addr is not None: pInfo.address = addr.group(0)
 		
 		elem_list = []
 		elem_list.append(pInfo)
