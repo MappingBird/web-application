@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html ng-app="SaveApp">
     <head>
         <title>MappingBird - Remember places for later</title>
@@ -72,6 +72,16 @@
             <div class="collection-list-view" ng-show="listMode" ng-controller="listController" collection-list-view></div>
             <!-- End of List view -->
 
+            <!-- Massive Alert -->
+            <div class="massive-alert" massive-alert>
+                <div class="body">
+                    <h2 class="title">Try entering a name or address to get better results.</h2>
+                    <p>Before clicking "Remember this place", don't forget to use your mouse to select the name or address of a place in the website you're browsing.<br><br>You can also try entering the name or address of the place in the search bar above and pressing <b>Enter</b>.</p>
+                    <p><img src="/static/img/tutor-select-text.gif"></p>
+                </div>
+            </div>
+            <!-- End of List view -->
+
             <div ui-view></div>
 
             <footer class="narrow">
@@ -96,7 +106,7 @@
         <script src="/static/js/mod.noconsole.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
         <script src="/static/js/vendor/jquery/jquery-1.10.2.min.js"></script>
-        <script src="/static/js/vendor/m-custom-scrollbar/jquery.mCustomScrollbar.min.js"></script>
+        <script src="/static/js/vendor/m-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="/static/js/save-app/utilities.js"></script>
         <script src="/static/js/vendor/angular/angular.min.js"></script>
         <script src="/static/js/vendor/angular-bootstrap/ui-bootstrap-tpls-0.4.0.min.js"></script>

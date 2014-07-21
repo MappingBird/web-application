@@ -214,6 +214,29 @@ directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
     };
 });
 
+// massive alert
+directives.directive('massiveAlert', function(BroadcastService) {
+    return {
+        restrict: 'A',
+        link: function($scope, $elem, $attrs) {
+            $scope.$on('stateChange', function() {
+                if (typeof BroadcastService.message == 'object') {
+                    switch (BroadcastService.message.type) {
+                        case 'noSearchResults':
+                            $elem.addClass('visible');
+                            break;
+                        case 'newSearch':
+                            $elem.removeClass('visible');
+                            break;
+
+                    }
+                }
+            });
+        },
+        replace: false
+    };
+});
+
 // show collection list view
 directives.directive('collectionListView', function() {
     return {
@@ -289,6 +312,7 @@ directives.directive('thumbAlignment', function($compile){
                 picContainer = $($element), // photo.js
                 editMode = config.editMode || false,
                 enableLightbox = config.enableLightbox || false,
+                loadingAnimation = $('<div class="loading">Loading...<img src="/static/img/loading-circle.png"></div>'),
                 picRow //photo.js
                 ;
 
@@ -321,9 +345,6 @@ directives.directive('thumbAlignment', function($compile){
                     if( ht != h ) { wt = Math.floor(wt * (h / ht)); }
                     ws.push(wt);
                 });
-
-                // show loading animation
-                picContainer.addClass('loading-images');
 
                 while (baseLine < numPhotos) {
 
@@ -453,13 +474,9 @@ directives.directive('thumbAlignment', function($compile){
                     baseLine += c;
                 }
 
-                console.log('<<< placeImagesLoaded');
-
-                // done, broadcast
-                $scope.$emit("placeImagesLoaded");
-
-                // remove loading animation
-                picContainer.removeClass('loading-images');
+                // images loaded
+                loadingAnimation.remove();
+                $scope.$emit('placeImagesLoaded');
             }
 
             function selectImg(e){
@@ -520,7 +537,6 @@ directives.directive('thumbAlignment', function($compile){
 
             function parseImages () {
                 console.log('last image load');
-                // auto-sizing
                 photo_array = $element.find('.photo-obj').children();
                 console.log(photo_array);
                 lastWidth = $($element).find("#picstest").innerWidth() - 15;
@@ -532,6 +548,7 @@ directives.directive('thumbAlignment', function($compile){
             function resetImages () {
                 $element.find('.photo-obj').empty();
                 $element.find('.picrow').remove();
+                $element.append(loadingAnimation);
                 $element.append('<div class="picrow" />');
             }
 
@@ -582,8 +599,10 @@ directives.directive('thumbAlignment', function($compile){
                     }
 
                 } else {
-                    console.log('no images');
-                    // $(picPhotoObj).empty();
+                    console.log('no images - empty photo');
+                    resetImages();
+                    loadingAnimation.remove();
+                    $scope.$emit('placeImagesLoaded');
                 }
 
             }
