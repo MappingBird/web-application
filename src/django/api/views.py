@@ -331,7 +331,7 @@ def login(request):
             data = {
                 'user': serializer.data,
             }
-            if token == '1':
+            if token == '1' or token == 1:
                 token = Token.objects.get_or_create(user=user)[0]
                 data['token'] = token.key
             else:
