@@ -872,7 +872,6 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
         console.log('fetchPlacesSearchResults');
         console.log('fetchPlacesSearchResults map');
         $scope.searchResultsLoading = true;
-        console.log(map);
 
         var center = new google.maps.LatLng(0, 0), // default coords
             geocoder = new google.maps.Geocoder(),
@@ -981,8 +980,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     };
 
     $scope.cancelSaveActiveSearchResult = function ($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
+        if ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+        }
+
         $scope.searchResultSelected = false;
         $scope.setActiveSavePoint(null, $scope.activeSearchResult, true);
         BroadcastService.prepForBroadcast({
@@ -1235,9 +1237,10 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             $event.stopPropagation();
         }
 
+        // reset the save panel and other messages
         $scope.noSearchResults = false;
         $scope.noSearchQuery = false;
-
+        $scope.searchResultSelected = false;
         BroadcastService.prepForBroadcast({
             type: 'newSearch',
             data: {}
