@@ -943,10 +943,9 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             });
         }
 
-        $scope.$apply(function(){
-            $scope.activeSavePoint = point;
-            $scope.activeSearchResult = index;
-        });
+        $scope.activeSavePoint = point;
+        $scope.activeSearchResult = index;
+        $scope.$apply();
 
         // in the case of multiple search results
         // where we want to load a map but still
