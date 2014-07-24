@@ -60,9 +60,10 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # TODO: the permission is not working
-    @link(permission_classes=[IsAdminUser])
     def list(self, request, *args, **kwargs):
+        self.permission_classes = [IsAdminUser]
+        self.initial(request, args, kwargs)
+
         return super(UserViewSet, self).list(request, args, kwargs)
 
     @link(permission_classes=[IsOwner])
@@ -331,7 +332,7 @@ def login(request):
             data = {
                 'user': serializer.data,
             }
-            if token == '1':
+            if token == '1' or token == 1:
                 token = Token.objects.get_or_create(user=user)[0]
                 data['token'] = token.key
             else:
