@@ -108,7 +108,7 @@ BucketListPin.prototype.onAdd = function() {
     // We add an overlay to a map via one of the map's panes.
     // We'll add this overlay to the overlayImage pane.
     var panes = this.getPanes();
-    panes.overlayLayer.appendChild(div[0]);
+    panes.overlayMouseTarget.appendChild(div[0]);
 };
 
 
@@ -181,7 +181,7 @@ BucketListSmallOverlay.prototype.onAdd = function() {
     // We add an overlay to a map via one of the map's panes.
     // We'll add this overlay to the overlayImage pane.
     var panes = this.getPanes();
-    panes.overlayLayer.appendChild(div[0]);
+    panes.overlayMouseTarget.appendChild(div[0]);
     icon.addClass('showme').css({'display': 'block'});
 
     panes.floatPane.appendChild(popup[0]);
@@ -355,7 +355,7 @@ BucketListMessageOverlay.prototype.onAdd = function() {
     // We add an overlay to a map via one of the map's panes.
     // We'll add this overlay to the overlayImage pane.
     var panes = this.getPanes();
-    panes.overlayLayer.appendChild(div[0]);
+    panes.overlayMouseTarget.appendChild(div[0]);
     icon.addClass('showme').css({'display': 'block'});
 
     panes.floatPane.appendChild(popup[0]);
