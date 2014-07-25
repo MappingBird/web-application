@@ -80,6 +80,12 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response(data)
 
+    def retrieve(self, request, *args, **kwargs):
+        self.permission_classes = [IsOwner, ]
+        self.initial(request, args, kwargs)
+
+        return super(UserViewSet, self).retrieve(request, args, kwargs)
+
     @action(permission_classes=[IsOwner])
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', None)
