@@ -80,6 +80,12 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response(data)
 
+    def retrieve(self, request, *args, **kwargs):
+        self.permission_classes = [IsOwner, ]
+        self.initial(request, args, kwargs)
+
+        return super(UserViewSet, self).retrieve(request, args, kwargs)
+
     @action(permission_classes=[IsOwner])
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', None)
@@ -119,7 +125,7 @@ class CollectionViewSet(APIViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
 
-    authentication_classes = (SessionAuthentication, )
+    authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication, )
     permission_classes = (IsOwner,)
 
 
@@ -146,7 +152,7 @@ class PointViewSet(APIViewSet):
     queryset = Point.objects.all()
     serializer_class = PointSerializer
 
-    authentication_classes = (SessionAuthentication, )
+    authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication, )
     permission_classes = (IsOwner,)
 
     def create(self, request, *args, **kwargs):
@@ -210,7 +216,7 @@ class ImageViewSet(APIViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
-    authentication_classes = (SessionAuthentication, )
+    authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication, )
     permission_classes = (IsOwner,)
 
     def create(self, request, *args, **kwargs):
@@ -275,7 +281,7 @@ class ImageViewSet(APIViewSet):
 
 
 @api_view(['GET'])
-@authentication_classes((SessionAuthentication, BasicAuthentication))
+@authentication_classes((SessionAuthentication, TokenAuthentication, BasicAuthentication))
 @permission_classes((IsAuthenticated, ))
 def pointsbytag(request, name=None):
     points = Point.objects.filter(collection__user=request.user, tags__name=name)
@@ -285,7 +291,7 @@ def pointsbytag(request, name=None):
 
 
 @api_view(['GET'])
-@authentication_classes((SessionAuthentication, BasicAuthentication))
+@authentication_classes((SessionAuthentication, TokenAuthentication, BasicAuthentication))
 @permission_classes((IsAuthenticated, ))
 def tags(request):
     tags = Point.objects.filter(collection__user=request.user).values('tags__name', 'tags__id').annotate(count=Count('tags')).order_by('-count')
@@ -412,7 +418,7 @@ def places(request):
 
 @api_view(['POST'])
 @parser_classes((FileUploadParser,))
-@authentication_classes((SessionAuthentication, BasicAuthentication))
+@authentication_classes((SessionAuthentication, TokenAuthentication, BasicAuthentication))
 @permission_classes((IsAuthenticated, ))
 def upload_media(request):
     out = {}
