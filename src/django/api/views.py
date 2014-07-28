@@ -30,7 +30,7 @@ from api.forms import UserCreationForm, UserChangeForm
 from base.models import User
 from base.mail import send_mail
 from bucketlist.models import Collection, Point, Image, Location, Tag
-from permissions import IsOwner
+from permissions import IsOwner, IsOwnerOrAdmin
 
 
 class APIViewSet(viewsets.ModelViewSet):
@@ -66,7 +66,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return super(UserViewSet, self).list(request, args, kwargs)
 
-    @link(permission_classes=[IsOwner])
+    @link(permission_classes=[IsOwnerOrAdmin])
     def collections(self, request, pk=None):
         user = self.get_object()
         queryset = user.collection_set.all()
@@ -81,12 +81,12 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(data)
 
     def retrieve(self, request, *args, **kwargs):
-        self.permission_classes = [IsOwner, ]
+        self.permission_classes = [IsOwnerOrAdmin]
         self.initial(request, args, kwargs)
 
         return super(UserViewSet, self).retrieve(request, args, kwargs)
 
-    @action(permission_classes=[IsOwner])
+    @action(permission_classes=[IsOwnerOrAdmin])
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', None)
         self.object = self.get_object_or_none()
@@ -114,7 +114,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
             return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(permission_classes=[IsOwner])
+    @action(permission_classes=[IsOwnerOrAdmin])
     def destroy(self, request, *args, **kwargs):
         return super(UserViewSet, self).list(request, args, kwargs)
 
@@ -126,7 +126,7 @@ class CollectionViewSet(APIViewSet):
     serializer_class = CollectionSerializer
 
     authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication, )
-    permission_classes = (IsOwner,)
+    permission_classes = (IsOwnerOrAdmin,)
 
 
 class LocationViewSet(APIViewSet):
@@ -153,7 +153,7 @@ class PointViewSet(APIViewSet):
     serializer_class = PointSerializer
 
     authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication, )
-    permission_classes = (IsOwner,)
+    permission_classes = (IsOwnerOrAdmin,)
 
     def create(self, request, *args, **kwargs):
         data = request.DATA.copy()
@@ -217,7 +217,7 @@ class ImageViewSet(APIViewSet):
     serializer_class = ImageSerializer
 
     authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication, )
-    permission_classes = (IsOwner,)
+    permission_classes = (IsOwnerOrAdmin,)
 
     def create(self, request, *args, **kwargs):
         data = request.DATA.copy()
