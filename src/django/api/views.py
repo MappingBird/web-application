@@ -257,7 +257,8 @@ class ImageViewSet(APIViewSet):
             f.close()
 
             im = PImage.open(path)
-            im.thumbnail((512, 512), PImage.ANTIALIAS)
+            # im.thumbnail((512, 512), PImage.ANTIALIAS)
+            im.thumbnail((96, 96), PImage.ANTIALIAS)
 
             format_map = {
                 'JPEG': 'jpg',
