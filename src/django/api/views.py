@@ -25,7 +25,7 @@ from googleplaces import GooglePlaces
 import requests
 from PIL import Image as PImage
 
-from serializers import UserSerializer, CollectionSerializer, PointSerializer, PointWriteSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
+from serializers import UserSerializer, CollectionSerializer, CollectionShortSerializer, PointShortSerializer, PointSerializer, PointWriteSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
 from api.forms import UserCreationForm, UserChangeForm
 from base.models import User
 from base.mail import send_mail
@@ -124,6 +124,17 @@ class CollectionViewSet(APIViewSet):
     """
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
+
+    authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication, )
+    permission_classes = (IsOwnerOrAdmin,)
+
+
+class CollectionShortViewSet(APIViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Collection.objects.all()
+    serializer_class = CollectionShortSerializer
 
     authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication, )
     permission_classes = (IsOwnerOrAdmin,)

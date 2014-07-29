@@ -18,6 +18,12 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'url', 'thumb_path', 'point', 'create_time', 'update_time', )
 
 
+class ImageShortSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Image
+        fields = ('id', 'url', 'thumb_path', )
+
+
 class LocationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Location
@@ -41,6 +47,18 @@ class PointSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'title', 'url', 'description', 'place_name', 'place_address', 'place_phone', 'coordinates', 'type', 'images', 'tags', 'collection', 'location', 'create_time', 'update_time', )
 
 
+class PointShortSerializer(serializers.HyperlinkedModelSerializer):
+    collection = serializers.PrimaryKeyRelatedField()
+    # location = LocationSerializer(read_only=True)
+    location = serializers.PrimaryKeyRelatedField(read_only=True)
+    images = ImageShortSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Point
+        fields = ('id', 'title', 'coordinates', 'type', 'images', 'location', )
+
+
+
 class PointWriteSerializer(serializers.HyperlinkedModelSerializer):
     collection = serializers.PrimaryKeyRelatedField()
     location = serializers.PrimaryKeyRelatedField(required=False)
@@ -59,6 +77,15 @@ class CollectionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Collection
         fields = ('id', 'name', 'user', 'points', 'create_time', 'update_time', )
+
+
+class CollectionShortSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.PrimaryKeyRelatedField()
+    points = PointShortSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Collection
+        fields = ('id', 'name', 'user', 'points', )
 
 
 class CollectionByUserSerializer(serializers.HyperlinkedModelSerializer):
