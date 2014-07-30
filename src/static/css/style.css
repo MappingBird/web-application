@@ -238,6 +238,14 @@ footer{
 	padding: 25px 0 20px;
 	width: 100%;
 }
+
+@media screen and (max-height: 650px) {
+	.static footer {
+		bottom: auto;
+		position: static;
+	}
+}
+
 footer .logo-copyright{
 	padding-left: 25px;
 	width: 550px;
@@ -248,6 +256,7 @@ footer .lang-contact{
 	width: 250px;
 	text-align: right;
 }
+
 footer img{
 	vertical-align: text-bottom;
 }

@@ -7,6 +7,7 @@ import views
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'users', views.UserViewSet)
 router.register(r'collections', views.CollectionViewSet)
+router.register(r'col', views.CollectionShortViewSet)
 router.register(r'points', views.PointViewSet)
 router.register(r'locations', views.LocationViewSet)
 router.register(r'images', views.ImageViewSet)

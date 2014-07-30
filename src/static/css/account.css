@@ -22,7 +22,7 @@ section.main .container{
 }
 section.main form{
 	width: 360px;
-	margin: 0 auto;
+	margin: 0 auto 2.0em;
 	text-align:left;
 }
 section.main form .action-button{
