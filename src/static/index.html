@@ -454,7 +454,7 @@ You can also click <em>Ctrl+Shift+B</em> (or <em>Command+Shit+B</em> on Mac) to 
 
 	$(document).ready(function(){
 		//show scroll down hint when banner background is loaded
-		$("<img/>").attr("src", "img/intro-bg.jpg").load(function(){
+		$("<img/>").attr("src", "/static/prototype_assets/new_home/img/intro-bg.jpg").load(function(){
 			$(this).remove(); //prevent memory leaks
 			showScrollHint();
 		});
