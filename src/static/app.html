@@ -56,7 +56,7 @@
             <!-- End of content of pins -->
 
             <!-- Alert -->
-            <div class="map-alert" id="place-saved-alert" p-alert ng-class="{ visible: alertActive }">
+            <div class="top-alert" id="place-saved-alert" p-alert ng-class="{ visible: alertActive }">
                 <div class="alert alert-info pingismo-alert">
                     <button type="button" class="close" data-dismiss="alert">x</button>
                         <i class="icon-check" ></i> <span ng-bind-html="message"></span> <a href="" class="alert-action" ng-bind="actionMessage"></a>
@@ -67,6 +67,31 @@
             <!-- Google maps -->
             <div id="map" ng-class="{retracted: mapRetracted, full: fullMap, half: halfMap, 'semi-retracted': semiRetractedMap}" ng-show="mapVisible && !listMode" ng-controller="mapController"></div>
             <!-- End of Google maps -->
+
+            <!-- external map alert -->
+            <div class="map-alert" ng-class="{ visible: mapAlertActive }" map-alert>
+                <div class="pingismo-pin message-overlay">
+                    <a href="#" class="pin-misc"></a>
+                    <div class="message-popup pin-popup">
+                        <p>
+                            <strong ng-bind="mapAlertTitle"></strong>
+                            <span ng-bind="mapAlertMessage"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+    var div = $('<div class="pingismo-pin message-overlay" />'),
+        icon = $('<a href="#" class="pin-' + this.type_ + '"></a>'),
+        popup = $('<div class="message-popup pin-popup" />'),
+        detail = $('<p><strong>' + this.title_ + '</strong>' + this.message_ + '</p>'),
+        self = this;
+
+    div.append(icon);
+    popup.append(detail);
+    div.append(popup);
+            <!-- End of external map dialog -->
 
             <!-- List view -->
             <div class="collection-list-view" ng-show="listMode" ng-controller="listController" collection-list-view></div>
