@@ -2063,6 +2063,9 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
         console.log('showNoSearchQueryPoint');
 
+        // make no search results dialog visible
+
+        /*
         var title,
             message,
             type = 'misc',
@@ -2082,6 +2085,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
             }
             google.maps.event.clearListeners(map, 'idle');
         });
+        */
 
     }
 

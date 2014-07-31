@@ -214,6 +214,62 @@ directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
     };
 });
 
+// map alert
+directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
+    return {
+        restrict: 'A',
+        controller: function($scope, $element, $attrs, BroadcastService, $sce) {
+
+            $scope.mapAlertActive = false;
+
+            $scope.$on('stateChange', function() {
+
+                var p,
+                    t,
+                    l,
+                    w,
+                    h,
+                    top,
+                    left;
+
+                if (typeof BroadcastService.message == 'object') {
+                    switch (BroadcastService.message.type) {
+                        case 'noSearchResults':
+                        case 'noSearchQuery':
+
+                            p = $('#map').position();
+                            t = p.top;
+                            l = 425; //p.left;
+                            w = $(window).width(); //$('#map').width();
+                            h = $('#map').height();
+                            top = t + (h/2) - 26.5;
+                            left = l + (w/2) - 320;
+
+                            console.log ('Map motherfuck: ' + t + ' ' + l + ' ' + w + ' ' + h);
+
+                            $element.css({
+                                'top': top,
+                                'left': left
+                            });
+
+                            $scope.mapAlertActive = true;
+                            $scope.mapAlertTitle = "Where were you searching for?";
+                            $scope.mapAlertMessage = "Provide the name or address of a place in the search bar.";
+                            break;
+                        case 'newSearch':
+                            $scope.mapAlertActive = false;
+                            $scope.mapAlertTitle = "";
+                            $scope.mapAlertMessage = "";
+                            break;
+                    }
+                }
+            });
+
+        },
+        replace: false
+    };
+});
+
 // massive alert
 directives.directive('massiveAlert', function(BroadcastService) {
     return {
