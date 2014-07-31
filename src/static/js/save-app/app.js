@@ -1930,17 +1930,20 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                     // now check to see if any overlays go off the screen
                     console.log(marker);
                     console.log(projection);
-                    point = projection.fromLatLngToContainerPixel(new google.maps.LatLng(marker.latlng_.A, marker.latlng_.k));
-                    if (point.x > widestPoint || point.y < highestPoint) {
-                        widestPoint = point.x;
+                    if (projection && projection.fromLatLngToContainerPixel) {
+
+                        point = projection.fromLatLngToContainerPixel(new google.maps.LatLng(marker.latlng_.A, marker.latlng_.k));
+                        if (point.x > widestPoint || point.y < highestPoint) {
+                            widestPoint = point.x;
+                        }
+
+                        point = new google.maps.Point(
+                                    $('#map').width() + widestPoint,
+                                    -highestPoint); // middle of map height, since we only want to reposition bounds to the left and not up and down
+
+                        latlng = projection.fromContainerPixelToLatLng(point);
+                        bounds.extend(latlng);
                     }
-
-                    point = new google.maps.Point(
-                                $('#map').width() + widestPoint,
-                                -highestPoint); // middle of map height, since we only want to reposition bounds to the left and not up and down
-
-                    latlng = projection.fromContainerPixelToLatLng(point);
-                    bounds.extend(latlng);
 
                 // else just show points
                 } else {

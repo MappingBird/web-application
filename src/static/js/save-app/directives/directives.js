@@ -387,7 +387,8 @@ directives.directive('thumbAlignment', function($compile){
                     c = 0, // number of images appearing in this row
                     numPhotos = photos.length,
                     d_row,
-                    photo
+                    photo,
+                    photo_sizes = []
                     ;
 
                 console.log('lastWidth: ' + lastWidth);
@@ -398,8 +399,15 @@ directives.directive('thumbAlignment', function($compile){
                 $.each(photos, function(key, val) {
                     var wt = parseInt(val.width, 10),
                         ht = parseInt(val.height, 10);
-                    if( ht != h ) { wt = Math.floor(wt * (h / ht)); }
+                    photo_sizes.push({
+                        'height' : ht,
+                        'weight' : wt
+                    });
+                    if( ht != h ) {
+                        wt = Math.floor(wt * (h / ht));
+                    }
                     ws.push(wt);
+
                 });
 
                 while (baseLine < numPhotos) {
@@ -444,12 +452,12 @@ directives.directive('thumbAlignment', function($compile){
                         photo = photos[baseLine + i];
                         // Calculate new width based on ratio
                         if(photo){
-                            var wt = (ht == (h * 1.1))?Math.floor(parseInt(photos[baseLine + i].width,10) * (h * 1.1) / parseInt(photos[baseLine + i].height, 10)):Math.floor(ws[baseLine + i] * r);
+                            var wt = (ht == (h * 1.1))?Math.floor(parseInt(photo.width,10) * (h * 1.1) / parseInt(photo.height, 10)):Math.floor(ws[baseLine + i] * r);
 
                             // add to total width with margins
                             tw += wt + border * 2;
                             // Create image, set src, width, height and margin
-                            (function() {
+                            (function(photo, i) {
                                 var url = photo.src,
                                     token = Math.floor(Math.random() * 10 + 1), // url ? url.substring(url.lastIndexOf("/") + 1) :
                                     cl = "", // image class
@@ -463,8 +471,14 @@ directives.directive('thumbAlignment', function($compile){
                                 // only first image selected
                                 if (onlyFirstSelected) {
                                     cl = (i == 0 && rowNum == 1) ? "is-selected" : "";
-                                } else { // all images selected
-                                    cl = "is-selected";
+                                } else { // all images larger than 250 pixels selected
+                                    console.log('photo.width ' + photo.width);
+                                    console.log('photo.height ' + photo.height);
+                                    if (photo_sizes[i].width > 250 || photo_sizes[i].height > 250) {
+                                        cl = "is-selected";
+                                    } else {
+                                        cl = "";
+                                    }
                                 }
 
                                 a = $('<a></a>', {'class': cl, href: "#", id: img_id}).css("margin", border + "px");
@@ -490,7 +504,7 @@ directives.directive('thumbAlignment', function($compile){
                                     a.append(span);
                                 });
 
-                            })();
+                            })(photos[baseLine + i], i);
                         }
                         i++;
                     }
@@ -642,7 +656,7 @@ directives.directive('thumbAlignment', function($compile){
                             }).on('load', function(){
                                 console.log('image loaded successfully');
                                 // remove images smaller than 100 on either dimension
-                                if (this.width < 250 || this.height < 250) {
+                                if (this.width < 100 || this.height < 100) {
                                     $(this).remove();
                                 }
 
@@ -680,19 +694,3 @@ directives.directive('thumbAlignment', function($compile){
         }
     };
 });
-
-// http://stackoverflow.com/questions/10931315/how-to-preventdefault-on-anchor-tags-in-angularjs
-/*
-directives.directive('a', function() {
-    return {
-        restrict: 'E',
-        link: function(scope, elem, attrs) {
-            if(attrs.ngClick || attrs.href === '' || attrs.href === '#'){
-                elem.on('click', function(e){
-                    e.preventDefault();
-                });
-            }
-        }
-   };
-});
-*/
