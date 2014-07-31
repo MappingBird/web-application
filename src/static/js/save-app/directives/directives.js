@@ -234,7 +234,6 @@ directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
 
                 if (typeof BroadcastService.message == 'object') {
                     switch (BroadcastService.message.type) {
-                        case 'noSearchResults':
                         case 'noSearchQuery':
 
                             p = $('#map').position();
@@ -388,7 +387,7 @@ directives.directive('thumbAlignment', function($compile){
                     numPhotos = photos.length,
                     d_row,
                     photo,
-                    photo_sizes = []
+                    imageSelected = false // will define image on map overlay
                     ;
 
                 console.log('lastWidth: ' + lastWidth);
@@ -397,15 +396,12 @@ directives.directive('thumbAlignment', function($compile){
 
                 // store relative widths of all images (scaled to match estimate height above)
                 $.each(photos, function(key, val) {
-                    var wt = parseInt(val.width, 10),
-                        ht = parseInt(val.height, 10);
-                    photo_sizes.push({
-                        'height' : ht,
-                        'weight' : wt
-                    });
-                    if( ht != h ) {
-                        wt = Math.floor(wt * (h / ht));
-                    }
+
+                    var wt = parseInt(val.naturalWidth, 10),
+                        ht = parseInt(val.naturalHeight, 10);
+
+                    if( ht != h ) { wt = Math.floor(wt * (h / ht)); }
+
                     ws.push(wt);
 
                 });
@@ -427,9 +423,8 @@ directives.directive('thumbAlignment', function($compile){
                     c = 0;
 
                     // total width of images in this row - including margins
-                    var tw = 0;
-
-                    var currIndex = 0;
+                    var tw = 0,
+                        currIndex = 0;
 
                     // calculate width of images and number of images to view in this row.
                     while( tw * 1.1 < w)
@@ -452,13 +447,13 @@ directives.directive('thumbAlignment', function($compile){
                         photo = photos[baseLine + i];
                         // Calculate new width based on ratio
                         if(photo){
-                            var wt = (ht == (h * 1.1))?Math.floor(parseInt(photo.width,10) * (h * 1.1) / parseInt(photo.height, 10)):Math.floor(ws[baseLine + i] * r);
+                            var wt = (ht == (h * 1.1))?Math.floor(parseInt(photos[baseLine + i].width,10) * (h * 1.1) / parseInt(photos[baseLine + i].height, 10)):Math.floor(ws[baseLine + i] * r);
 
                             // add to total width with margins
                             tw += wt + border * 2;
                             // Create image, set src, width, height and margin
-                            (function(photo, i) {
-                                var url = photo.src,
+                            (function(i) {
+                                var url = photos[baseLine + i].src,
                                     token = Math.floor(Math.random() * 10 + 1), // url ? url.substring(url.lastIndexOf("/") + 1) :
                                     cl = "", // image class
                                     img_id = n + "_" + token,
@@ -471,11 +466,24 @@ directives.directive('thumbAlignment', function($compile){
                                 // only first image selected
                                 if (onlyFirstSelected) {
                                     cl = (i == 0 && rowNum == 1) ? "is-selected" : "";
+                                    BroadcastService.prepForBroadcast({
+                                        type: 'savePointSetImage',
+                                        data: {
+                                            imageUrl: photos[baseLine + i].src
+                                        }
+                                    });
                                 } else { // all images larger than 250 pixels selected
-                                    console.log('photo.width ' + photo.width);
-                                    console.log('photo.height ' + photo.height);
-                                    if (photo_sizes[i].width > 250 || photo_sizes[i].height > 250) {
+                                    if (photos[baseLine + i].naturalWidth > 250 || photos[baseLine + i].naturalHeight > 250) {
                                         cl = "is-selected";
+                                        if (!imageSelected) {
+                                            imageSelected = true;
+                                            BroadcastService.prepForBroadcast({
+                                                type: 'savePointSetImage',
+                                                data: {
+                                                    imageUrl: photos[baseLine + i].src
+                                                }
+                                            });
+                                        }
                                     } else {
                                         cl = "";
                                     }
@@ -504,7 +512,7 @@ directives.directive('thumbAlignment', function($compile){
                                     a.append(span);
                                 });
 
-                            })(photos[baseLine + i], i);
+                            })(i);
                         }
                         i++;
                     }
