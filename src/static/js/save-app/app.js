@@ -2126,7 +2126,7 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
 });
 
-SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage, User, Collection) {
+SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage, User, Collection, $http) {
 
     $scope.pointImages = [];
     $scope.selectedPointImages = [];
@@ -2276,13 +2276,18 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
         $event.preventDefault();
         $event.stopPropagation();
 
-        PointResource.update({
-            id: $scope.activeViewPointId,
-            title: $scope.activeViewPoint.title,
-            description: $scope.activeViewPoint.description,
-            type: $scope.activeViewPoint.type,
-            collection: $scope.activeViewPoint.collection
-        }, function(data, headers) {
+        $http({
+            url: '/api/points/' + $scope.activeViewPointId,
+            method: 'PATCH',
+            data: JSON.stringify({
+                id: $scope.activeViewPointId,
+                title: $scope.activeViewPoint.title,
+                description: $scope.activeViewPoint.description,
+                type: $scope.activeViewPoint.type,
+                collection: $scope.activeViewPoint.collection
+            }),
+            headers: { 'Content-Type': 'application/json'}
+        }).success(function(data, headers) {
             $scope.togglePointEditMode($event);
             // google analytics
             if (typeof ga != 'undefined') {
