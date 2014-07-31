@@ -128,6 +128,7 @@ services.factory('CollectionsByUserLoader', ['CollectionsByUserResource', '$stat
 services.factory('PointResource', ['$resource', function($resource) {
 
     return $resource('/api/points/:id', { id: '@id' }, {
+        // not really in use, because of not sending payload as JSON
         update: {
             method: "PUT",
             params: {
