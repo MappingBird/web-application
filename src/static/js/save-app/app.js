@@ -2062,36 +2062,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         }
     }
 
-    function showNoSearchQueryPoint () {
-
-        console.log('showNoSearchQueryPoint');
-
-        // make no search results dialog visible
-
-        /*
-        var title,
-            message,
-            type = 'misc',
-            myLatLng = new google.maps.LatLng(0,0),
-            bounds = new google.maps.LatLngBounds(),
-            srcImage = '';
-
-        google.maps.event.addListener(map, 'idle', function() {
-            if (typeof noSearchQueryOverlay == 'undefined') {
-                bounds.extend(myLatLng);
-                map.setCenter(myLatLng);
-                map.fitBounds(bounds);
-
-                title = "Where were you searching for?";
-                message = "Provide the name or address of a place in the search bar";
-                noSearchQueryOverlay = new BucketListMessageOverlay(bounds, Presets.mapZoom, map, myLatLng, type, title, message);
-            }
-            google.maps.event.clearListeners(map, 'idle');
-        });
-        */
-
-    }
-
     $scope.$on('stateChange', function() {
         console.log ('[[[stateChange mapController]]]');
         console.log (BroadcastService.message.type);
@@ -2126,7 +2096,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 break;
             case 'noSearchQuery':
             case 'noSearchResults':
-                showNoSearchQueryPoint();
                 break;
         }
     });
