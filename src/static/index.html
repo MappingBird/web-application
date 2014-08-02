@@ -14,7 +14,24 @@
   	<section class="intro">
     	<header ng-controller="userController">
             <a href="/" class="logo"></a>
-            <div class="navbar pingismo-navbar pull-right vertical-align">
+            <div class="navbar pingismo-navbar middle-align" ng-show="isLoggedIn">
+                <ul class="nav">
+                    <li class="ver-divider"><span></span></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span ng-bind="user.email" ng-show="isRegisteredUser"></span><span ng-show="!isRegisteredUser">Unregistered user (sign up to access your saved places anywhere)</span>
+                            <b class="caret"></b>                        </a>
+                        <ul class="dropdown-menu pingismo-dropdown-menu">
+                          <li><a href="/static/signup.html"><i class="icon-user"></i> Sign up</a></li>
+                          <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
+                          <li><a href="/static/settings.html"><i class="icon-wrench"></i> Settings</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#" ng-click="logout($event)"><i class="icon-off"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar pingismo-navbar pull-right vertical-align" ng-show="!isLoggedIn">
                 <ul class="nav">
                     <li><a href="/static/login.html" class="signin">SIGN IN</a></li>
                 </ul>
