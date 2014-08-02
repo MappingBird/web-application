@@ -890,11 +890,10 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                 $scope.noSearchResults = true;
             });
 
-
             $scope.lastSearchQuery = $scope.searchQuery;
 
+            // empty places array in case it already had search results
             if ($scope.places.length > 0) {
-                // empty places array in case it already had search results
                 $scope.places.splice(0, $scope.places.length);
             }
 

@@ -234,7 +234,7 @@ directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
 
                 if (typeof BroadcastService.message == 'object') {
                     switch (BroadcastService.message.type) {
-                        case 'noSearchQuery':
+                        case 'noSearchResults':
 
                             p = $('#map').position();
                             t = p.top;
@@ -243,8 +243,6 @@ directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
                             h = $('#map').height();
                             top = t + (h/2) - 26.5;
                             left = l + (w/2) - 320;
-
-                            console.log ('Map motherfuck: ' + t + ' ' + l + ' ' + w + ' ' + h);
 
                             $element.css({
                                 'top': top,
@@ -255,6 +253,7 @@ directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
                             $scope.mapAlertTitle = "Where were you searching for?";
                             $scope.mapAlertMessage = "Provide the name or address of a place in the search bar.";
                             $scope.mapAlertActive = true;
+                            $scope.$apply();
                             break;
                         case 'newSearch':
                             $scope.mapAlertTitle = "";
@@ -341,7 +340,7 @@ directives.directive('massiveAlert', function(BroadcastService) {
             $scope.$on('stateChange', function() {
                 if (typeof BroadcastService.message == 'object') {
                     switch (BroadcastService.message.type) {
-                        case 'noSearchResults':
+                        case 'noSearchQuery':
                             $elem.addClass('visible');
                             break;
                         case 'newSearch':
