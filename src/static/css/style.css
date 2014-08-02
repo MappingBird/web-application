@@ -239,7 +239,7 @@ footer{
 	width: 100%;
 }
 
-@media screen and (max-height: 650px) {
+@media screen and (max-height: 550px) {
 	.static footer {
 		bottom: auto;
 		position: static;
