@@ -66,6 +66,14 @@ section{
 	transform: translateY(-50%);
 }
 
+.middle-align{
+	position: relative;
+	top: 30%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
 /* Module ------------------------------------------------------------------------------------ */
 /* Header */
 header{
