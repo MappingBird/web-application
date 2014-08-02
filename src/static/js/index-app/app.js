@@ -74,7 +74,8 @@ IndexApp.config(function($stateProvider, $urlRouterProvider) {
                 $(document.body).animate({scrollTop: top}, 1000);
 
             }]
-        });
+        })
+        ;
 
     // fallback
     //$urlRouterProvider.otherwise("/");
@@ -120,7 +121,11 @@ IndexApp.controller('userController', function($scope, $cookies, $http, $resourc
             });
 
             // change location
-            $window.location.href = '/static/app.html';
+            // unless there's 'stay' in the query string
+            if (!/stay/.test(location.search)) {
+                $window.location.href = '/static/app.html';
+            }
+
 
         } else {
 
