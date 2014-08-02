@@ -225,16 +225,22 @@ section.map-section{
 	width: calc(100% - 425px);
 }
 
-#map.full {
-	height: -moz-calc(100% - 75px);
-	height: -webkit-calc(100% - 75px);
-	height: calc(100% - 75px);
+#map.full-tall {
+	height: -moz-calc(100% - 45px);
+	height: -webkit-calc(100% - 45px);
+	height: calc(100% - 45px);
 	left: 0;
 	width: 100%;
-	top: 95px;
+	top: 45px;
+}
+
+#map.full {
 	height: -moz-calc(100% - 125px);
 	height: -webkit-calc(100% - 125px);
 	height: calc(100% - 125px);
+	left: 0;
+	width: 100%;
+	top: 95px;
 }
 
 #map.half {
@@ -1004,6 +1010,27 @@ ul.types > li{
 
 .map-alert.visible .pin-popup {
 	opacity: 1;
+}
+
+.map-dialog {
+	background: #ffffff;
+	display: none;
+	padding: 1.0em 1.5em;
+	position: absolute;
+	width: 350px;
+}
+
+.map-dialog.visible {
+	display: block;
+}
+
+.map-dialog .map-dialog-title {
+	font-size: 2.0em;
+	line-height: 1.2em;
+}
+
+.map-dialog .map-dialog-message {
+	margin-bottom: 2.5em;
 }
 
 /* collection list */
