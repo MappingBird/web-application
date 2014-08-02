@@ -33,7 +33,7 @@ class LocationSerializer(serializers.HyperlinkedModelSerializer):
 class LocationShortSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Location
-        fields = ('coordinates', )
+        fields = ('id', 'coordinates', )
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
