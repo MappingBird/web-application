@@ -342,6 +342,23 @@ footer{
 	padding: 25px 0 20px;
 	width: 100%;
 }
+
+@media screen and (max-height: 650px) {
+	.static footer {
+		bottom: auto;
+		position: static;
+		z-index: auto;
+	}
+
+	.static footer .logo-copyright {
+		float: none;
+	}
+
+	section {
+		height: auto;
+	}
+}
+
 footer .logo-copyright{
 	padding-left: 25px;
 	width: 550px;
@@ -352,6 +369,13 @@ footer .lang-contact{
 	width: 250px;
 	text-align: right;
 }
+
+footer:after {
+	content: " ";
+	display: table;
+	clear: both;
+}
+
 footer img{
 	vertical-align: text-bottom;
 }

@@ -214,6 +214,61 @@ directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
     };
 });
 
+// map alert
+directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
+    return {
+        restrict: 'A',
+        controller: function($scope, $element, $attrs, BroadcastService, $sce) {
+
+            $scope.mapAlertActive = false;
+
+            $scope.$on('stateChange', function() {
+
+                var p,
+                    t,
+                    l,
+                    w,
+                    h,
+                    top,
+                    left;
+
+                if (typeof BroadcastService.message == 'object') {
+                    switch (BroadcastService.message.type) {
+                        case 'noSearchQuery':
+
+                            p = $('#map').position();
+                            t = p.top;
+                            l = 425; //p.left;
+                            w = $(window).width(); //$('#map').width();
+                            h = $('#map').height();
+                            top = t + (h/2) - 26.5;
+                            left = l + (w/2) - 320;
+
+                            console.log ('Map motherfuck: ' + t + ' ' + l + ' ' + w + ' ' + h);
+
+                            $element.css({
+                                'top': top,
+                                'left': left
+                            });
+
+                            $scope.mapAlertActive = true;
+                            $scope.mapAlertTitle = "Where were you searching for?";
+                            $scope.mapAlertMessage = "Provide the name or address of a place in the search bar.";
+                            break;
+                        case 'newSearch':
+                            $scope.mapAlertActive = false;
+                            $scope.mapAlertTitle = "";
+                            $scope.mapAlertMessage = "";
+                            break;
+                    }
+                }
+            });
+
+        },
+        replace: false
+    };
+});
+
 // massive alert
 directives.directive('massiveAlert', function(BroadcastService) {
     return {
@@ -331,7 +386,8 @@ directives.directive('thumbAlignment', function($compile){
                     c = 0, // number of images appearing in this row
                     numPhotos = photos.length,
                     d_row,
-                    photo
+                    photo,
+                    imageSelected = false // will define image on map overlay
                     ;
 
                 console.log('lastWidth: ' + lastWidth);
@@ -340,10 +396,14 @@ directives.directive('thumbAlignment', function($compile){
 
                 // store relative widths of all images (scaled to match estimate height above)
                 $.each(photos, function(key, val) {
-                    var wt = parseInt(val.width, 10),
-                        ht = parseInt(val.height, 10);
+
+                    var wt = parseInt(val.naturalWidth, 10),
+                        ht = parseInt(val.naturalHeight, 10);
+
                     if( ht != h ) { wt = Math.floor(wt * (h / ht)); }
+
                     ws.push(wt);
+
                 });
 
                 while (baseLine < numPhotos) {
@@ -363,9 +423,8 @@ directives.directive('thumbAlignment', function($compile){
                     c = 0;
 
                     // total width of images in this row - including margins
-                    var tw = 0;
-
-                    var currIndex = 0;
+                    var tw = 0,
+                        currIndex = 0;
 
                     // calculate width of images and number of images to view in this row.
                     while( tw * 1.1 < w)
@@ -393,8 +452,8 @@ directives.directive('thumbAlignment', function($compile){
                             // add to total width with margins
                             tw += wt + border * 2;
                             // Create image, set src, width, height and margin
-                            (function() {
-                                var url = photo.src,
+                            (function(i) {
+                                var url = photos[baseLine + i].src,
                                     token = Math.floor(Math.random() * 10 + 1), // url ? url.substring(url.lastIndexOf("/") + 1) :
                                     cl = "", // image class
                                     img_id = n + "_" + token,
@@ -407,8 +466,27 @@ directives.directive('thumbAlignment', function($compile){
                                 // only first image selected
                                 if (onlyFirstSelected) {
                                     cl = (i == 0 && rowNum == 1) ? "is-selected" : "";
-                                } else { // all images selected
-                                    cl = "is-selected";
+                                    BroadcastService.prepForBroadcast({
+                                        type: 'savePointSetImage',
+                                        data: {
+                                            imageUrl: photos[baseLine + i].src
+                                        }
+                                    });
+                                } else { // all images larger than 250 pixels selected
+                                    if (photos[baseLine + i].naturalWidth > 250 || photos[baseLine + i].naturalHeight > 250) {
+                                        cl = "is-selected";
+                                        if (!imageSelected) {
+                                            imageSelected = true;
+                                            BroadcastService.prepForBroadcast({
+                                                type: 'savePointSetImage',
+                                                data: {
+                                                    imageUrl: photos[baseLine + i].src
+                                                }
+                                            });
+                                        }
+                                    } else {
+                                        cl = "";
+                                    }
                                 }
 
                                 a = $('<a></a>', {'class': cl, href: "#", id: img_id}).css("margin", border + "px");
@@ -434,7 +512,7 @@ directives.directive('thumbAlignment', function($compile){
                                     a.append(span);
                                 });
 
-                            })();
+                            })(i);
                         }
                         i++;
                     }
@@ -586,7 +664,7 @@ directives.directive('thumbAlignment', function($compile){
                             }).on('load', function(){
                                 console.log('image loaded successfully');
                                 // remove images smaller than 100 on either dimension
-                                if (this.width < 250 || this.height < 250) {
+                                if (this.width < 100 || this.height < 100) {
                                     $(this).remove();
                                 }
 
@@ -624,19 +702,3 @@ directives.directive('thumbAlignment', function($compile){
         }
     };
 });
-
-// http://stackoverflow.com/questions/10931315/how-to-preventdefault-on-anchor-tags-in-angularjs
-/*
-directives.directive('a', function() {
-    return {
-        restrict: 'E',
-        link: function(scope, elem, attrs) {
-            if(attrs.ngClick || attrs.href === '' || attrs.href === '#'){
-                elem.on('click', function(e){
-                    e.preventDefault();
-                });
-            }
-        }
-   };
-});
-*/

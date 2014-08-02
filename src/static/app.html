@@ -17,7 +17,7 @@
         <section class="map-section">
 
             <header ng-controller="userController" class="float-top">
-                <a href="/" class="logo"></a>
+                <a href="/static/index.html" class="logo"></a>
                 <div class="navbar pingismo-navbar" ng-show="isLoggedIn">
                     <ul class="nav">
                         <li class="ver-divider"><span></span></li>
@@ -56,7 +56,7 @@
             <!-- End of content of pins -->
 
             <!-- Alert -->
-            <div class="map-alert" id="place-saved-alert" p-alert ng-class="{ visible: alertActive }">
+            <div class="top-alert" id="place-saved-alert" p-alert ng-class="{ visible: alertActive }">
                 <div class="alert alert-info pingismo-alert">
                     <button type="button" class="close" data-dismiss="alert">x</button>
                         <i class="icon-check" ></i> <span ng-bind-html="message"></span> <a href="" class="alert-action" ng-bind="actionMessage"></a>
@@ -67,6 +67,20 @@
             <!-- Google maps -->
             <div id="map" ng-class="{retracted: mapRetracted, full: fullMap, half: halfMap, 'semi-retracted': semiRetractedMap}" ng-show="mapVisible && !listMode" ng-controller="mapController"></div>
             <!-- End of Google maps -->
+
+            <!-- external map alert -->
+            <div class="map-alert" ng-class="{ visible: mapAlertActive }" map-alert>
+                <div class="pingismo-pin message-overlay">
+                    <a href="#" class="pin-misc"></a>
+                    <div class="message-popup pin-popup">
+                        <p>
+                            <strong ng-bind="mapAlertTitle"></strong>
+                            <span ng-bind="mapAlertMessage"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- End of external map dialog -->
 
             <!-- List view -->
             <div class="collection-list-view" ng-show="listMode" ng-controller="listController" collection-list-view></div>

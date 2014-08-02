@@ -972,7 +972,7 @@ ul.types > li{
 }
 
 /* alert */
-.map-alert{
+.top-alert{
 	position: absolute;
 	top: 0px;
 	left: 50%;
@@ -981,11 +981,29 @@ ul.types > li{
 
 }
 
-.map-alert.visible {
+.top-alert.visible {
 	top: 45px;
 	-moz-transition: top: 0.3s;
 	-webkit-transition: top: 0.3s;
 	transition: top: 0.3s;
+}
+
+.map-alert{
+	position: absolute;
+	display: none;
+}
+
+.map-alert .pin-popup {
+	left: 22px;
+	top: -54px;
+}
+
+.map-alert.visible {
+	display: block;
+}
+
+.map-alert.visible .pin-popup {
+	opacity: 1;
 }
 
 /* collection list */

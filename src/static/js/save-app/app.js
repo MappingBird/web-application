@@ -1930,17 +1930,20 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                     // now check to see if any overlays go off the screen
                     console.log(marker);
                     console.log(projection);
-                    point = projection.fromLatLngToContainerPixel(new google.maps.LatLng(marker.latlng_.A, marker.latlng_.k));
-                    if (point.x > widestPoint || point.y < highestPoint) {
-                        widestPoint = point.x;
+                    if (projection && projection.fromLatLngToContainerPixel) {
+
+                        point = projection.fromLatLngToContainerPixel(new google.maps.LatLng(marker.latlng_.A, marker.latlng_.k));
+                        if (point.x > widestPoint || point.y < highestPoint) {
+                            widestPoint = point.x;
+                        }
+
+                        point = new google.maps.Point(
+                                    $('#map').width() + widestPoint,
+                                    -highestPoint); // middle of map height, since we only want to reposition bounds to the left and not up and down
+
+                        latlng = projection.fromContainerPixelToLatLng(point);
+                        bounds.extend(latlng);
                     }
-
-                    point = new google.maps.Point(
-                                $('#map').width() + widestPoint,
-                                -highestPoint); // middle of map height, since we only want to reposition bounds to the left and not up and down
-
-                    latlng = projection.fromContainerPixelToLatLng(point);
-                    bounds.extend(latlng);
 
                 // else just show points
                 } else {
@@ -2059,32 +2062,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
         }
     }
 
-    function showNoSearchQueryPoint () {
-
-        console.log('showNoSearchQueryPoint');
-
-        var title,
-            message,
-            type = 'misc',
-            myLatLng = new google.maps.LatLng(0,0),
-            bounds = new google.maps.LatLngBounds(),
-            srcImage = '';
-
-        google.maps.event.addListener(map, 'idle', function() {
-            if (typeof noSearchQueryOverlay == 'undefined') {
-                bounds.extend(myLatLng);
-                map.setCenter(myLatLng);
-                map.fitBounds(bounds);
-
-                title = "Where were you searching for?";
-                message = "Provide the name or address of a place in the search bar";
-                noSearchQueryOverlay = new BucketListMessageOverlay(bounds, Presets.mapZoom, map, myLatLng, type, title, message);
-            }
-            google.maps.event.clearListeners(map, 'idle');
-        });
-
-    }
-
     $scope.$on('stateChange', function() {
         console.log ('[[[stateChange mapController]]]');
         console.log (BroadcastService.message.type);
@@ -2119,14 +2096,13 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
                 break;
             case 'noSearchQuery':
             case 'noSearchResults':
-                showNoSearchQueryPoint();
                 break;
         }
     });
 
 });
 
-SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage, User, Collection) {
+SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage, User, Collection, $http) {
 
     $scope.pointImages = [];
     $scope.selectedPointImages = [];
@@ -2276,13 +2252,18 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
         $event.preventDefault();
         $event.stopPropagation();
 
-        PointResource.update({
-            id: $scope.activeViewPointId,
-            title: $scope.activeViewPoint.title,
-            description: $scope.activeViewPoint.description,
-            type: $scope.activeViewPoint.type,
-            collection: $scope.activeViewPoint.collection
-        }, function(data, headers) {
+        $http({
+            url: '/api/points/' + $scope.activeViewPointId,
+            method: 'PATCH',
+            data: JSON.stringify({
+                id: $scope.activeViewPointId,
+                title: $scope.activeViewPoint.title,
+                description: $scope.activeViewPoint.description,
+                type: $scope.activeViewPoint.type,
+                collection: $scope.activeViewPoint.collection
+            }),
+            headers: { 'Content-Type': 'application/json'}
+        }).success(function(data, headers) {
             $scope.togglePointEditMode($event);
             // google analytics
             if (typeof ga != 'undefined') {
