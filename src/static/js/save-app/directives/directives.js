@@ -251,14 +251,78 @@ directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
                                 'left': left
                             });
 
-                            $scope.mapAlertActive = true;
+
                             $scope.mapAlertTitle = "Where were you searching for?";
                             $scope.mapAlertMessage = "Provide the name or address of a place in the search bar.";
+                            $scope.mapAlertActive = true;
                             break;
                         case 'newSearch':
-                            $scope.mapAlertActive = false;
                             $scope.mapAlertTitle = "";
                             $scope.mapAlertMessage = "";
+                            $scope.mapAlertActive = false;
+                            break;
+                    }
+                }
+            });
+
+        },
+        replace: false
+    };
+});
+
+// map dialog
+directives.directive('mapDialog', function(BroadcastService, $window) {
+    return {
+        restrict: 'A',
+        controller: function($scope, $element, $attrs, BroadcastService, $sce) {
+
+            $scope.mapDialogActive = false;
+
+            $scope.$on('stateChange', function() {
+
+                var p,
+                    t,
+                    l,
+                    w,
+                    h,
+                    top,
+                    left;
+
+                if (typeof BroadcastService.message == 'object') {
+                    switch (BroadcastService.message.type) {
+                        case 'noPlacesSaved':
+                        case 'noCollectionsSaved':
+
+                            p = $('#map').position();
+                            t = p.top;
+                            l = p.left;
+                            w = $(window).width();
+                            h = $('#map').height();
+                            top = t + (h/2) - 175;
+                            left = l + (w/2) - 175;
+
+                            $element.css({
+                                'top': top,
+                                'left': left
+                            });
+
+                            $scope.mapDialogTitle = "You haven't saved any places yet";
+                            $scope.mapDialogMessage = "Learn how to save places to MappingBird by following the 'How It Works' tutorial on the homepage.";
+                            $scope.mapDialogButtonLabel = "Back to the homepage";
+                            $scope.mapDialogAction = function() {
+                                $window.location.href = '/?stay=1';
+                            };
+                            $scope.mapDialogActive = true;
+                            break;
+                        default:
+
+                            $scope.mapDialogTitle = "";
+                            $scope.mapDialogMessage = "";
+                            $scope.mapDialogButtonLabel = "";
+                            $scope.mapDialogAction = function() {
+                                return;
+                            };
+                            $scope.mapDialogActive = false;
                             break;
                     }
                 }

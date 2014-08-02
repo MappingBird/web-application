@@ -122,7 +122,7 @@ IndexApp.controller('userController', function($scope, $cookies, $http, $resourc
 
             // change location
             // unless there's 'stay' in the query string
-            if (!/stay/.test(location.search)) {
+            if (!/stay=1/.test(location.search)) {
                 $window.location.href = '/static/app.html';
             }
 
