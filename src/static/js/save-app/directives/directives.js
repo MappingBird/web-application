@@ -315,8 +315,9 @@ directives.directive('mapDialog', function(BroadcastService, $window) {
                             };
                             $scope.mapDialogActive = true;
                             break;
+                        case 'newSearch':
+                        case 'viewSearchResults':
                         default:
-
                             $scope.mapDialogTitle = "";
                             $scope.mapDialogMessage = "";
                             $scope.mapDialogButtonLabel = "";
