@@ -784,10 +784,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
                 // remove duplicates which are being returned by the backend
                 if (data.address && data.address.length > 0) {
-
+                    /*
                     $.each(data.address, function(i, el){
                         if($.inArray(el, $scope.pageAddresses) === -1) $scope.pageAddresses.push(el);
                     });
+*/
 
                 }
 
