@@ -236,6 +236,7 @@ directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
                     switch (BroadcastService.message.type) {
                         case 'noSearchResults':
 
+
                             p = $('#map').position();
                             t = p.top;
                             l = 425; //p.left;
@@ -254,6 +255,7 @@ directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
                             $scope.mapAlertMessage = "Provide the name or address of a place in the search bar.";
                             $scope.mapAlertActive = true;
                             $scope.$apply();
+
                             break;
                         case 'newSearch':
                             $scope.mapAlertTitle = "";
@@ -297,8 +299,8 @@ directives.directive('mapDialog', function(BroadcastService, $window) {
                             l = p.left;
                             w = $(window).width();
                             h = $('#map').height();
-                            top = t + (h/2) - 175;
-                            left = l + (w/2) - 175;
+                            top = (t + (h/2) - 175) + 'px';
+                            left = 'calc(50% - 180px)';
 
                             $element.css({
                                 'top': top,
@@ -344,9 +346,10 @@ directives.directive('massiveAlert', function(BroadcastService) {
                             $elem.addClass('visible');
                             break;
                         case 'newSearch':
+                        case 'noCollectionsSaved':
+                        case 'noPointsSaved':
                             $elem.removeClass('visible');
                             break;
-
                     }
                 }
             });

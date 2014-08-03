@@ -1015,7 +1015,7 @@ ul.types > li{
 .map-dialog {
 	background: #ffffff;
 	display: none;
-	padding: 1.0em 1.5em;
+	padding: 10px 15px;
 	position: absolute;
 	width: 350px;
 }
