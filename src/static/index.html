@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="IndexApp" lang="en">
   <head>
     <title>MappingBird - Remember places for later</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,15 +14,14 @@
   	<section class="intro">
     	<header ng-controller="userController">
             <a href="/" class="logo"></a>
-            <div class="navbar pingismo-navbar middle-align" ng-show="isLoggedIn">
+            <div class="navbar pingismo-navbar middle-align" ng-show="isLoggedIn && isRegisteredUser">
                 <ul class="nav">
                     <li class="ver-divider"><span></span></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span ng-bind="user.email" ng-show="isRegisteredUser"></span><span ng-show="!isRegisteredUser">Unregistered user (sign up to access your saved places anywhere)</span>
+                            <span ng-bind="user.email"></span>
                             <b class="caret"></b>                        </a>
                         <ul class="dropdown-menu pingismo-dropdown-menu">
-                          <li><a href="/static/signup.html"><i class="icon-user"></i> Sign up</a></li>
                           <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
                           <li><a href="/static/settings.html"><i class="icon-wrench"></i> Settings</a></li>
                           <li class="divider"></li>
@@ -31,7 +30,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="navbar pingismo-navbar pull-right vertical-align" ng-show="!isLoggedIn">
+            <div class="navbar pingismo-navbar pull-right vertical-align" ng-show="!isLoggedIn || !isRegisteredUser">
                 <ul class="nav">
                     <li><a href="/static/login.html" class="signin">SIGN IN</a></li>
                 </ul>
@@ -263,7 +262,6 @@ You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show
     <script src="/static/prototype_assets/js/bootstrap.min.js"></script>
     <script src="/static/prototype_assets/js/fancybox/jquery.fancybox.pack.js"></script>
     <script src="/static/prototype_assets/js/fancybox/helpers/jquery.fancybox-media.js"></script>
-    <script src="/static/prototype_assets/js/index.js"></script>
     <script src="/static/js/save-app/utilities.js"></script>
     <script src="/static/js/vendor/angular/angular.min.js"></script>
     <script src="/static/js/vendor/angular/angular-sanitize.min.js"></script>
