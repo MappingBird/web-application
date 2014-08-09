@@ -86,7 +86,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return super(UserViewSet, self).retrieve(request, args, kwargs)
 
-    @action(permission_classes=[IsOwnerOrAdmin])
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', None)
         self.object = self.get_object_or_none()
