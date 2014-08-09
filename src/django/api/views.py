@@ -86,6 +86,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return super(UserViewSet, self).retrieve(request, args, kwargs)
 
+    @csrf_exempt
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', None)
         self.object = self.get_object_or_none()
