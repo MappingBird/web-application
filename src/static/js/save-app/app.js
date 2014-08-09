@@ -399,6 +399,24 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
        // $('#map').data('transitioning', true);
     }
 
+    // full map mode, no collections
+    function fullMapViewingMode () {
+        changeMapParams();
+        $scope.mapMode = true;
+        $scope.saveMode = false;
+        $scope.collectionsMode = false;
+        $scope.showCollectionList = false;
+        $scope.showSavePanel = false;
+        $scope.showPointDetailPanel = false;
+        $scope.fullTallMap = true;
+        $scope.fullMap = false;
+        $scope.mapRetracted = false;
+        $scope.semiRetractedMap = false;
+        $scope.halfMap = false;
+
+        $scope.listMode = false;
+    }
+
     // map viewing mode
     function mapViewingMode () {
         changeMapParams();
@@ -408,6 +426,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.showCollectionList = true;
         $scope.showSavePanel = false;
         $scope.showPointDetailPanel = false;
+        $scope.fullTallMap = false;
         $scope.fullMap = true;
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = false;
@@ -425,6 +444,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.showCollectionList = false;
         $scope.showSavePanel = true;
         $scope.showPointDetailPanel = false;
+        $scope.fullTallMap = false;
         $scope.fullMap = false;
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = true;
@@ -442,6 +462,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.showCollectionList = false;
         $scope.showSavePanel = true;
         $scope.showPointDetailPanel = false;
+        $scope.fullTallMap = false;
         $scope.fullMap = false;
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
@@ -459,6 +480,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.showCollectionList = true;
         $scope.showSavePanel = false;
         $scope.showPointDetailPanel = true;
+        $scope.fullTallMap = false;
         $scope.fullMap = false;
         $scope.mapRetracted = true;
         $scope.semiRetractedMap = false;
@@ -476,6 +498,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.showCollectionList = true;
         $scope.showSavePanel = false;
         $scope.showPointDetailPanel = false;
+        $scope.fullTallMap = false;
         $scope.fullMap = false;
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = true;
@@ -493,6 +516,7 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.showCollectionList = true;
         $scope.showSavePanel = false;
         $scope.showPointDetailPanel = false;
+        $scope.fullTallMap = false;
         $scope.fullMap = true;
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = false;
@@ -505,15 +529,30 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         // collections
         $scope.collectionsByUser = CollectionsByUserResource.get({user_id: User.data.id}, function(data) {
             console.log('reloadCollections');
-            Collections.collections = data.collections;
-            if (typeof data.most_recent_modified_collection != 'undefined') {
-                Collections.mostRecentModifiedCollection = data.most_recent_modified_collection;
-            };
-            console.log(Collections);
-            BroadcastService.prepForBroadcast({
-                type: 'collectionsLoaded',
-                data: { }
-            });
+
+            // if there are collections saved
+            if (data.collections.length > 0) {
+
+                Collections.collections = data.collections;
+                if (typeof data.most_recent_modified_collection != 'undefined') {
+                    Collections.mostRecentModifiedCollection = data.most_recent_modified_collection;
+                };
+
+                console.log(Collections);
+                BroadcastService.prepForBroadcast({
+                    type: 'collectionsLoaded',
+                    data: { }
+                });
+
+            // no collections saved
+            } else {
+
+                BroadcastService.prepForBroadcast({
+                    type: 'noCollectionsSaved',
+                    data: { }
+                });
+
+            }
         });
     }
 
@@ -552,6 +591,9 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
                 break;
             case 'collectionUpdate':
                 reloadCollections();
+                break;
+            case 'noCollectionsSaved':
+                fullMapViewingMode();
                 break;
         }
     });
@@ -742,10 +784,11 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
                 // remove duplicates which are being returned by the backend
                 if (data.address && data.address.length > 0) {
-
+                    /*
                     $.each(data.address, function(i, el){
                         if($.inArray(el, $scope.pageAddresses) === -1) $scope.pageAddresses.push(el);
                     });
+*/
 
                 }
 
@@ -848,11 +891,10 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                 $scope.noSearchResults = true;
             });
 
-
             $scope.lastSearchQuery = $scope.searchQuery;
 
+            // empty places array in case it already had search results
             if ($scope.places.length > 0) {
-                // empty places array in case it already had search results
                 $scope.places.splice(0, $scope.places.length);
             }
 

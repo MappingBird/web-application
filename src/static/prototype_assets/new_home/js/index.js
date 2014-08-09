@@ -160,3 +160,7 @@ function hideStep(vStep){
 	$(".how .step" + vStep + " .screenshot img").addClass("hideme");
 	$(".how .step" + vStep + " .screenshot img").bind("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){ $(".how .step" + vStep + " .screenshot img").addClass('hidden'); });
 }
+function iniSelectTextExample(){
+	$(".how-select-text-ex").height($(document).height());
+	$(".how-select-text-ex .example-page").height($(window).height() - $(".how-select-text-ex .tips-wrapper").height() - 180);
+}

@@ -65,6 +65,10 @@ section{
 	-moz-transform: translateY(-50%);
 	transform: translateY(-50%);
 }
+.middle-align{
+	position: relative;
+	top: 31%;
+}
 
 /* Module ------------------------------------------------------------------------------------ */
 /* Header */

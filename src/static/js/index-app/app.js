@@ -74,7 +74,8 @@ IndexApp.config(function($stateProvider, $urlRouterProvider) {
                 $(document.body).animate({scrollTop: top}, 1000);
 
             }]
-        });
+        })
+        ;
 
     // fallback
     //$urlRouterProvider.otherwise("/");
@@ -90,6 +91,8 @@ IndexApp.run(function($http, $cookies) {
  */
 IndexApp.controller('userController', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogout) {
 
+
+    $scope.isRegisteredUser = true;
     $scope.user = CurrentUser.get(function(data) {
 
         console.log('user data');
@@ -105,12 +108,10 @@ IndexApp.controller('userController', function($scope, $cookies, $http, $resourc
 
             if (typeof data.email !== 'undefined') {
                 User.data.emailAddress = data.email;
-                if (!/@gu.pingismo.com/.test(data.email)) {
-                    User.data.isRegisteredUser = true;
-                } else {
-                    User.data.isRegisteredUser = false;
-                }
+                User.data.isRegisteredUser = !/@gu.mappingbird.com/.test(data.email);
                 User.data.id = data.id;
+
+                $scope.isRegisteredUser = User.data.isRegisteredUser;
             }
 
             // send event
@@ -120,7 +121,11 @@ IndexApp.controller('userController', function($scope, $cookies, $http, $resourc
             });
 
             // change location
-            $window.location.href = '/static/app.html';
+            // unless there's 'stay' in the query string
+            if (!/stay=1/.test(location.search)) {
+                $window.location.href = '/static/app.html';
+            }
+
 
         } else {
 

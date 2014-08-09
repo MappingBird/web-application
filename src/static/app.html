@@ -17,7 +17,7 @@
         <section class="map-section">
 
             <header ng-controller="userController" class="float-top">
-                <a href="/static/index.html" class="logo"></a>
+                <a href="/?stay=1" class="logo"></a>
                 <div class="navbar pingismo-navbar" ng-show="isLoggedIn">
                     <ul class="nav">
                         <li class="ver-divider"><span></span></li>
@@ -65,7 +65,7 @@
             <!-- End of alert -->
 
             <!-- Google maps -->
-            <div id="map" ng-class="{retracted: mapRetracted, full: fullMap, half: halfMap, 'semi-retracted': semiRetractedMap}" ng-show="mapVisible && !listMode" ng-controller="mapController"></div>
+            <div id="map" ng-class="{retracted: mapRetracted, 'full-tall': fullTallMap, full: fullMap, half: halfMap, 'semi-retracted': semiRetractedMap}" ng-show="mapVisible && !listMode" ng-controller="mapController"></div>
             <!-- End of Google maps -->
 
             <!-- external map alert -->
@@ -80,7 +80,19 @@
                     </div>
                 </div>
             </div>
-            <!-- End of external map dialog -->
+            <!-- End of external map alert -->
+
+            <!-- map dialog -->
+            <div class="map-dialog" ng-class="{ visible: mapDialogActive }" map-dialog>
+                <div>
+                    <p ng-bind="mapDialogTitle" class="map-dialog-title"></p>
+                    <p ng-bind="mapDialogMessage" class="map-dialog-message"></p>
+                    <p class="pull-right">
+                        <a href="#" class="btn-highlight pingismo-btn" type="button" ng-click="mapDialogAction()" ng-bind="mapDialogButtonLabel"></a>
+                    </p>
+                </div>
+            </div>
+            <!-- End of map dialog -->
 
             <!-- List view -->
             <div class="collection-list-view" ng-show="listMode" ng-controller="listController" collection-list-view></div>

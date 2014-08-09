@@ -3,10 +3,10 @@
                     <span class="help-block search-static"><span ng-bind="numResults"></span> places found. Pick one you want to save.</span>
                 </form>
 
-                <!-- No search keyword tip -->
-                <div class="no-keyword tip tip-below" ng-show="noSearchQuery">
-                    <h2>Try entering a name or address to get better results</h2>
-                    <p>Before clicking "Remember this place", don't forget to use your mouse to select the name or address of a place in the website you're browsing.<br><br>You can also try entering the name or address of the place in the search bar above and pressing <b>Enter</b>.</p>
+                <!-- No search results tip -->
+                <div class="no-keyword tip tip-below" ng-show="noSearchResults">
+                    <h2>There were no search results.</h2>
+                    <p>We were unable to find search results for the place <b ng-bind="lastSearchQuery"></b> that you selected. Try again by typing in the name of the place you're searching for above.</p>
                 </div>
                 <!-- End of no search keyword tip -->
 
