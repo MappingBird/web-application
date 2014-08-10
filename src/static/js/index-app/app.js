@@ -70,7 +70,6 @@ IndexApp.config(function($stateProvider, $urlRouterProvider) {
             controller: ['$scope', '$location', function($scope, $location) {
 
                 // TODO: dirty hack... :(
-                    console.log('how-it-works');
                 var top = $('#how-it-works').offset().top;
                 $(document.body).animate({scrollTop: top}, 1000);
 
