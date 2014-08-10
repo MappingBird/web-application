@@ -236,7 +236,7 @@ You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show
         <h2>2. Click “Remember This Place” on your bookmarks bar</h2>
         <a href="#" class="close-SelectTextEx"></a>
     </div>
-    <iframe src="http://www.lonelyplanet.com/france/paris/sights/landmarks-monuments/eiffel-tower" class="example-page" id="example-page"></iframe>
+    <iframe src="http://www.lonelyplanet.com/france/paris/sights/landmarks-monuments/eiffel-tower" class="example-page"></iframe>
   </div>
   <!-- End of How It Works - Step 3 Example -->
 
@@ -513,6 +513,7 @@ You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show
     <script>
 
 	$(document).ready(function(){
+
 		//show scroll down hint when banner background is loaded
 		$("<img/>").attr("src", "/static/prototype_assets/new_home/img/intro-bg.jpg").load(function(){
 			$(this).remove(); //prevent memory leaks
@@ -526,6 +527,7 @@ You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show
 		var bottom_of_howitworks = $("section.how").position().top + $("section.how").outerHeight()/2;
 		var bottom_of_whatitfor = $("section.what").position().top + $("section.what").outerHeight()/2;
 		var bottom_of_getstarted = $("section.done").position().top + $("section.done").outerHeight()/2;
+
 		$(window).scroll(function(){
             bottom_of_window = $(window).scrollTop() + $(window).height();
             if(bottom_of_window > bottom_of_howitworks && !show_howitworks){
@@ -616,8 +618,7 @@ You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show
             }
 
             $(window).on("mousemove.bookmarklet", function(e) {
-                console.log(e);
-                if (e.pageY < 1) {
+                if (e.pageY < 10) {
                     window.location.hash = "/how-it-works";
                     $(window).off("mousemove.bookmarklet");
 
