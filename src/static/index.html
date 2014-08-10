@@ -14,9 +14,8 @@
   	<section class="intro">
     	<header ng-controller="userController">
             <a href="/" class="logo"></a>
-            <div class="navbar pingismo-navbar middle-align" ng-show="isLoggedIn && isRegisteredUser">
+            <div class="navbar pingismo-navbar pull-right middle-align" ng-show="isLoggedIn && isRegisteredUser">
                 <ul class="nav">
-                    <li class="ver-divider"><span></span></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <span ng-bind="user.email"></span>
@@ -37,7 +36,7 @@
                             Sign up for a MappingBird account
                             <b class="caret"></b>                        </a>
                         <ul class="dropdown-menu pingismo-dropdown-menu">
-                          <li><a href="/static/signup.html"><i class="icon-user"></i> Settings</a></li>
+                          <li><a href="/static/signup.html"><i class="icon-user"></i> Sign Up</a></li>
                           <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
                         </ul>
                     </li>

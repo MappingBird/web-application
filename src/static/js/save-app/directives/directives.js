@@ -236,7 +236,6 @@ directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
                     switch (BroadcastService.message.type) {
                         case 'noSearchResults':
 
-
                             p = $('#map').position();
                             t = p.top;
                             l = 425; //p.left;
@@ -275,9 +274,12 @@ directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
 directives.directive('mapDialog', function(BroadcastService, $window) {
     return {
         restrict: 'A',
-        controller: function($scope, $element, $attrs, BroadcastService, $sce) {
+        controller: function($scope, $element, $attrs, BroadcastService, $window) {
 
             $scope.mapDialogActive = false;
+            $scope.hasNoSearchQuery = false;
+            $scope.fromHomePage = /(^http:\/\/www.mappingbird.com|^http:\/\/localhost)/.test($window.location.href);
+            $scope.hasCollectionsSaved;
 
             $scope.$on('stateChange', function() {
 
@@ -287,44 +289,75 @@ directives.directive('mapDialog', function(BroadcastService, $window) {
                     w,
                     h,
                     top,
-                    left;
+                    left,
+                    show,
+                    noShow;
+
+                show = function() {
+
+                    /*
+                    p = $('#map').position();
+                    t = p.top;
+                    l = p.left;
+                    w = $(window).width();
+                    h = $('#map').height();
+                    top = (t + (h/2) - 175) + 'px';
+                    left = 'calc(50% - 180px)';
+
+                    $element.css({
+                        'top': top,
+                        'left': left
+                    });
+*/
+
+                    $scope.mapDialogTitle = "You haven't saved any places yet";
+                    $scope.mapDialogMessage = "Learn how to save places to MappingBird by following the 'How It Works' tutorial on the homepage.";
+                    $scope.mapDialogButtonLabel = "Back to the homepage";
+                    $scope.mapDialogAction = function() {
+                        $window.location.href = '/static/index.html#/how-it-works';
+                    };
+                    $scope.mapDialogActive = true;
+                };
+
+                noShow = function() {
+
+                    $scope.mapDialogTitle = "";
+                    $scope.mapDialogMessage = "";
+                    $scope.mapDialogButtonLabel = "";
+                    $scope.mapDialogAction = function() {
+                        return;
+                    };
+                    $scope.mapDialogActive = false;
+                };
 
                 if (typeof BroadcastService.message == 'object') {
                     switch (BroadcastService.message.type) {
-                        case 'noPlacesSaved':
-                        case 'noCollectionsSaved':
-
-                            p = $('#map').position();
-                            t = p.top;
-                            l = p.left;
-                            w = $(window).width();
-                            h = $('#map').height();
-                            top = (t + (h/2) - 175) + 'px';
-                            left = 'calc(50% - 180px)';
-
-                            $element.css({
-                                'top': top,
-                                'left': left
-                            });
-
-                            $scope.mapDialogTitle = "You haven't saved any places yet";
-                            $scope.mapDialogMessage = "Learn how to save places to MappingBird by following the 'How It Works' tutorial on the homepage.";
-                            $scope.mapDialogButtonLabel = "Back to the homepage";
-                            $scope.mapDialogAction = function() {
-                                $window.location.href = '/?stay=1';
-                            };
-                            $scope.mapDialogActive = true;
+                        case 'collectionsLoaded':
+                            if (BroadcastService.message.data.hasCollectionsSaved === false) {
+                                $scope.hasCollectionsSaved = false;
+                                if ($scope.hasNoSearchQuery) {
+                                    console.log('noShow');
+                                    noShow();
+                                } else {
+                                    console.log('show');
+                                    show();
+                                }
+                            } else {
+                                $scope.hasCollectionsSaved = true;
+                            }
+                            break;
+                        case 'noSearchQuery':
+                            $scope.hasNoSearchQuery = true;
+                            if ($scope.hasCollectionsSaved === false) {
+                                show();
+                            } else {
+                                noShow();
+                            }
                             break;
                         case 'newSearch':
                         case 'viewSearchResults':
-                        default:
-                            $scope.mapDialogTitle = "";
-                            $scope.mapDialogMessage = "";
-                            $scope.mapDialogButtonLabel = "";
-                            $scope.mapDialogAction = function() {
-                                return;
-                            };
-                            $scope.mapDialogActive = false;
+                            console.log($scope.hasNoSearchQuery);
+                            noShow();
                             break;
                     }
                 }
@@ -336,20 +369,56 @@ directives.directive('mapDialog', function(BroadcastService, $window) {
 });
 
 // massive alert
-directives.directive('massiveAlert', function(BroadcastService) {
+directives.directive('massiveAlert', function(BroadcastService, $window) {
     return {
         restrict: 'A',
-        link: function($scope, $elem, $attrs) {
+        controller: function($scope, $element, $attrs, BroadcastService, $window) {
+
+            $scope.hasNoSearchQuery;
+            $scope.hasCollectionsSaved;
+
             $scope.$on('stateChange', function() {
                 if (typeof BroadcastService.message == 'object') {
+
                     switch (BroadcastService.message.type) {
                         case 'noSearchQuery':
-                            $elem.addClass('visible');
+                            console.log('noSearchQuery + massiveAlert');
+                            console.log(BroadcastService.message.data);
+                            console.log($scope.hasCollectionsSaved);
+
+                            $scope.hasNoSearchQuery = true;
+
+                            if ($scope.hasCollectionsSaved === true && !/(^http:\/\/www.mappingbird.com|^http:\/\/localhost)/.test(document.referrer)) {
+                                $element.addClass('visible');
+                            } else {
+                                $element.removeClass('visible');
+                            }
+                            break;
+                        case 'collectionsLoaded':
+                            if (BroadcastService.message.data.hasCollectionsSaved === false && !/(^http:\/\/www.mappingbird.com|^http:\/\/localhost)/.test(document.referrer)) {
+                                $scope.hasCollectionsSaved = false;
+                                console.log('noCollectionsSaved + massiveAlert');
+                                console.log(BroadcastService.message.data);
+                                console.log($scope.hasCollectionsSaved);
+
+                                if (!BroadcastService.message.data.isRegisteredUser) {
+                                    if ($scope.hasNoSearchQuery) {
+                                        $element.addClass('visible');
+                                    } else {
+                                        $element.removeClass('visible');
+                                    }
+                                } else {
+                                    $element.addClass('visible');
+                                }
+                            } else {
+                                $scope.hasCollectionsSaved = true;
+                                $element.removeClass('visible');
+                            }
+
                             break;
                         case 'newSearch':
-                        case 'noCollectionsSaved':
-                        case 'noPointsSaved':
-                            $elem.removeClass('visible');
+                        default:
+                            $element.removeClass('visible');
                             break;
                     }
                 }
