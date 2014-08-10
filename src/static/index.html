@@ -30,7 +30,20 @@
                     </li>
                 </ul>
             </div>
-            <div class="navbar pingismo-navbar pull-right vertical-align" ng-show="!isLoggedIn || !isRegisteredUser">
+            <div class="navbar pingismo-navbar pull-right middle-align" ng-show="isLoggedIn && !isRegisteredUser">
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Sign up for a MappingBird account
+                            <b class="caret"></b>                        </a>
+                        <ul class="dropdown-menu pingismo-dropdown-menu">
+                          <li><a href="/static/signup.html"><i class="icon-user"></i> Settings</a></li>
+                          <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar pingismo-navbar pull-right vertical-align" ng-show="!isLoggedIn">
                 <ul class="nav">
                     <li><a href="/static/login.html" class="signin">SIGN IN</a></li>
                 </ul>
@@ -84,7 +97,7 @@
     <!-- End of What It Is -->
 
     <!-- How It Works -->
-    <section class="how">
+    <section class="how" id="how-it-works">
         <div class="how-nav">
             <a href="#" class="prev pull-left"></a>
             <a href="#" class="next pull-right"></a>        </div>
@@ -237,7 +250,8 @@ You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show
                 <a class="btn btn-giant btn-primary pingismo-btn" id="get-started-remember-button" type="button"  href="javascript:
     (function(){var BASE='http://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>            </div>
         </div>
-<footer>
+        <div ui-view></div>
+        <footer>
                 <div class="logo-copyright">
                     <p class="slogan"><img src="/static/prototype_assets/new_home/img/logo-footer.png" /> Remember places for later.</p>
                     <p>Copyright &copy; 2014 MappingBird LLC. All referred posts &copy; their respective owners.</p>

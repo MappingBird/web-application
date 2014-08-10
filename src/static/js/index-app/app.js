@@ -70,6 +70,7 @@ IndexApp.config(function($stateProvider, $urlRouterProvider) {
             controller: ['$scope', '$location', function($scope, $location) {
 
                 // TODO: dirty hack... :(
+                    console.log('how-it-works');
                 var top = $('#how-it-works').offset().top;
                 $(document.body).animate({scrollTop: top}, 1000);
 
@@ -122,7 +123,7 @@ IndexApp.controller('userController', function($scope, $cookies, $http, $resourc
 
             // change location
             // unless there's 'stay' in the query string
-            if (!/stay=1/.test(location.search)) {
+            if (!/(\/stay=1$|\/how-it-works$)/.test(location.href)) {
                 $window.location.href = '/static/app.html';
             }
 
