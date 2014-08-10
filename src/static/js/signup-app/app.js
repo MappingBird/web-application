@@ -61,12 +61,14 @@ var SignupApp = angular.module('SignupApp', ['SignupApp.services', 'ngCookies', 
 
 SignupApp.run(function($http, $cookies) {
     $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+    $http.defaults.headers.put['X-CSRFToken'] = $cookies.csrftoken;
+    $http.defaults.headers.patch['X-CSRFToken'] = $cookies.csrftoken;
 });
 
 /**
     Overall page controller
  */
-SignupApp.controller('mainController', function($scope, $timeout, Presets, BroadcastService, User, UserResource, CurrentUser) {
+SignupApp.controller('mainController', function($scope, $timeout, Presets, BroadcastService, User, UserResource, CurrentUser, $http) {
 
     $scope.id = '';
     $scope.email = '';
@@ -77,8 +79,6 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
     $scope.accountCreated = false;
 
     $scope.checkInput = function($event) {
-
-        console.log('checkInput');
 
         if ($scope.email.length > 0) {
 
@@ -166,6 +166,7 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
     $scope.migrateGeneratedUser = function() {
 
         console.log('migrateGeneratedUser');
+        console.log($http);
 
         var migratedUser = {
             id: $scope.id,
@@ -173,7 +174,11 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
             password: $scope.password
         };
 
-        UserResource.update(migratedUser, function(data, headers) {
+        var request = $http({
+            method: "PUT",
+            url: "/api/users/" + $scope.id,
+            data: JSON.stringify(migratedUser)
+        }).success(function() {
             $scope.accountCreated = true;
 
             // google analytics
