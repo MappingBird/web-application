@@ -166,7 +166,6 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
     $scope.migrateGeneratedUser = function() {
 
         console.log('migrateGeneratedUser');
-        console.log($http);
 
         var migratedUser = {
             id: $scope.id,
