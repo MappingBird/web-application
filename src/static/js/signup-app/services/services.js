@@ -41,18 +41,7 @@ services.factory('StateService', function() {
 
 services.factory('UserResource', ['$resource', function($resource) {
 
-    var UserResource = $resource('/api/users/:id/', { id: '@id' }, {
-        update: {
-            method: "PUT",
-            params: {
-                email: "@email",
-                password: "@password"
-            },
-            headers: {
-                'Content-type': 'application/json'
-            }
-        }
-    });
+    var UserResource = $resource('/api/users/:id/', { id: '@id' });
 
     return UserResource;
 
