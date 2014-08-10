@@ -1013,10 +1013,27 @@ ul.types > li{
 }
 
 .map-dialog {
-	background: #ffffff;
+	background: #B3D1FF;
 	display: none;
+	height: -moz-calc(100% - 75px);
+	height: -webkit-calc(100% - 75px);
+	height: calc(100% - 75px);
+	left: 0;
+	position: absolute;
+	top: 45px;
+	width: 100%;
+}
+
+.map-dialog-background {
+	background: #ffffff;
+	left: -moz-calc(50% - 175px);
+	left: -webkit-calc(50% - 175px);
+	left: calc(50% - 175px);
 	padding: 10px 15px;
 	position: absolute;
+	top: -moz-calc(50% - 175px);
+	top: -webkit-calc(50% - 175px);
+	top: calc(50% - 175px);
 	width: 350px;
 }
 

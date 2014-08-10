@@ -68,7 +68,9 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
         .state('savePoint', {
             url: '/save?url&search',
             template: '<span></span>',
-            controller: ['BroadcastService', 'User', '$stateParams', '$scope', function(BroadcastService, User, $stateParams, $scope) {
+            controller: ['BroadcastService', 'User', '$stateParams', '$scope', function(BroadcastService, User, $stateParams, $scope, $location) {
+
+                var killHandler;
 
                 function b () {
                     BroadcastService.prepForBroadcast({
@@ -78,14 +80,24 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
                             search: $stateParams.search
                         }
                     });
+
+                    if (typeof killHandler === 'function') {
+                        killHandler();
+                    }
                 }
 
                 if (User.data.isLoggedIn == true) {
                     b();
                 } else {
-                    $scope.$on('stateChange', function() {
-                        if (BroadcastService.message.type == 'userLoaded') {
-                            b();
+                    killHandler = $scope.$on('stateChange', function() {
+                        // redirect to map app if come from mappingbird site without
+                        // search text
+                        if (BroadcastService.message.type == 'collectionsLoaded' && BroadcastService.message.data.isFirstTime) {
+                            if (BroadcastService.message.data.hasCollectionsSaved && /(^http:\/\/www.mappingbird.com|^http:\/\/localhost)/.test($stateParams.url) && $stateParams.search.length == 0) {
+                                window.location.href = '/static/app.html#/';
+                            } else {
+                                b();
+                            }
                         }
                     });
                 }
@@ -98,6 +110,8 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
             template: '<span></span>',
             controller: ['BroadcastService', 'User', '$stateParams', '$scope', function(BroadcastService, User, $stateParams, $scope) {
 
+                var killHandler;
+
                 function b () {
                     BroadcastService.prepForBroadcast({
                         type: 'viewingCollection',
@@ -105,13 +119,18 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
                             collectionId: $stateParams.collectionId
                         }
                     });
+
+                    if (typeof killHandler === 'function') {
+                        killHandler();
+                    }
                 }
 
                 if (User.data.isLoggedIn == true) {
                     b();
                 } else {
-                    $scope.$on('stateChange', function() {
-                        if (BroadcastService.message.type == 'userLoaded') {
+                    killHandler = $scope.$on('stateChange', function() {
+                        if (BroadcastService.message.type == 'collectionsLoaded' &&
+                            BroadcastService.message.data.hasCollectionsSaved) {
                             b();
                         }
                     });
@@ -125,6 +144,8 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
             template: '<span></span>',
             controller: ['BroadcastService', 'User', '$stateParams', '$scope', function(BroadcastService, User, $stateParams, $scope) {
 
+                var killHandler;
+
                 function b () {
                     BroadcastService.prepForBroadcast({
                         type: 'viewingCollectionList',
@@ -132,13 +153,18 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
                             collectionId: $stateParams.collectionId
                         }
                     });
+
+                    if (typeof killHandler === 'function') {
+                        killHandler();
+                    }
                 }
 
                 if (User.data.isLoggedIn == true) {
                     b();
                 } else {
-                    $scope.$on('stateChange', function() {
-                        if (BroadcastService.message.type == 'userLoaded') {
+                    killHandler = $scope.$on('stateChange', function() {
+                        if (BroadcastService.message.type == 'collectionsLoaded' &&
+                            BroadcastService.message.data.hasCollectionsSaved) {
                             b();
                         }
                     });
@@ -152,6 +178,8 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
             template: '<span></span>',
             controller: ['BroadcastService', 'Collections', '$stateParams', '$scope', function(BroadcastService, Collections, $stateParams, $scope) {
 
+                var killHandler;
+
                 function b () {
                     // use Collections.mostRecentModifiedCollection) since no activeCollection set
                     BroadcastService.prepForBroadcast({
@@ -160,12 +188,16 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
                             collectionId: Collections.mostRecentModifiedCollection
                         }
                     });
+
+                    if (typeof killHandler === 'function') {
+                        killHandler();
+                    }
                 }
 
                 if (Collections.activeCollectionId !== -1) {
                     b();
                 } else {
-                    $scope.$on('stateChange', function() {
+                    killHandler = $scope.$on('stateChange', function() {
                         if (BroadcastService.message.type == 'collectionsLoaded') {
                             b();
                         }
@@ -201,7 +233,8 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
                     b();
                 } else {
                     killHandler = $scope.$on('stateChange', function() {
-                        if (BroadcastService.message.type == 'collectionsLoaded') {
+                        if (BroadcastService.message.type == 'collectionsLoaded' &&
+                            BroadcastService.message.data.hasCollectionsSaved) {
                             b();
                         }
                     });
@@ -525,7 +558,11 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
         $scope.listMode = true;
     }
 
-    function reloadCollections() {
+    function reloadCollections(isFirstTime) {
+
+        var iFT = isFirstTime ? true : false,
+            hasCollectionsSaved;
+
         // collections
         $scope.collectionsByUser = CollectionsByUserResource.get({user_id: User.data.id}, function(data) {
             console.log('reloadCollections');
@@ -539,20 +576,26 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
                 };
 
                 console.log(Collections);
-                BroadcastService.prepForBroadcast({
-                    type: 'collectionsLoaded',
-                    data: { }
-                });
+
+                hasCollectionsSaved = true;
 
             // no collections saved
             } else {
 
-                BroadcastService.prepForBroadcast({
-                    type: 'noCollectionsSaved',
-                    data: { }
-                });
+                hasCollectionsSaved = false;
 
             }
+
+            // broadcast
+            BroadcastService.prepForBroadcast({
+                type: 'collectionsLoaded',
+                data: {
+                    'isFirstTime': iFT,
+                    'hasCollectionsSaved': hasCollectionsSaved,
+                    'isRegisteredUser' : User.data.isRegisteredUser
+                }
+            });
+
         });
     }
 
@@ -586,14 +629,11 @@ SaveApp.controller('savePageController', function($scope, $timeout, Presets, Bro
                 break;
             case 'userLoaded':
                 if (Collections.collections && Collections.collections.length == 0) {
-                    reloadCollections();
+                    reloadCollections(true);
                 }
                 break;
             case 'collectionUpdate':
                 reloadCollections();
-                break;
-            case 'noCollectionsSaved':
-                fullMapViewingMode();
                 break;
         }
     });
@@ -1279,6 +1319,8 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
             $event.stopPropagation();
         }
 
+        console.log('searchPlaces fffffffffffffffffffffffffffffffffffffffffffffffffff');
+
         // reset the save panel and other messages
         $scope.noSearchResults = false;
         $scope.noSearchQuery = false;
@@ -1290,6 +1332,7 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
 
         if ($scope.searchQuery && $scope.searchQuery.length > 0 && $scope.searchQuery !== 'undefined') {
+            console.log('hasSearchQuery fffffffffffffffffffffffffffffffffffffffffffffffffff');
             $scope.placesApiUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyCixleTjJLXPDQs9AIG6-18Gvx1X6M7If8&sensor=false&query=' + $scope.searchQuery + '&callback=?';
             $scope.noSearchQuery =  false;
 
@@ -1306,11 +1349,14 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
                 ga('send', 'event', 'Search', 'Has search query', 'Save Panel');
             }
         } else {
+            console.log('noSearchQuery fffffffffffffffffffffffffffffffffffffffffffffffffff');
             $scope.noSearchQuery = true;
 
             BroadcastService.prepForBroadcast({
                 type: 'noSearchQuery',
-                data: {}
+                data: {
+                    'isRegisteredUser': User.data.isRegisteredUser
+                }
             });
 
             // google analytics
@@ -1829,7 +1875,6 @@ SaveApp.controller('mapController', function($scope, Presets, MapPoints, Broadca
 
 
             saveOverlay = new BucketListSmallOverlay(bounds, Presets.mapZoom, srcImage, map, myLatLng, type, location.place_name, location.place_address, phone, 'open', 'save');
-            saveMarker = new BucketListPin(bounds, Presets.mapZoom, srcImage, map, myLatLng);
         }
     }
 
