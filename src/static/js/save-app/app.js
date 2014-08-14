@@ -92,8 +92,11 @@ SaveApp.config(function($stateProvider, $urlRouterProvider) {
                     killHandler = $scope.$on('stateChange', function() {
                         // redirect to map app if come from mappingbird site without
                         // search text
-                        if (BroadcastService.message.type == 'collectionsLoaded' && BroadcastService.message.data.isFirstTime) {
-                            if (BroadcastService.message.data.hasCollectionsSaved && /(^http:\/\/www.mappingbird.com|^http:\/\/localhost)/.test($stateParams.url) && $stateParams.search.length == 0) {
+                        if (BroadcastService.message.type == 'collectionsLoaded'
+                            && BroadcastService.message.data.isFirstTime) {
+                            if (BroadcastService.message.data.hasCollectionsSaved
+                                && /(^http:\/\/www.mappingbird.com|^http:\/\/localhost)/.test($stateParams.url)
+                                && $stateParams.search.length == 0) {
                                 window.location.href = '/static/app.html#/';
                             } else {
                                 b();
@@ -2275,13 +2278,15 @@ SaveApp.controller('pointDetailController', function($scope, Presets, MapPoints,
 
         console.log('Collections.activeCollectionId watcher');
 
+        var len = $scope.collections.length;
+
         $scope.activeCollectionId = activeCollectionId;
 
         if ($scope.collections
             && $scope.collections.length > 0) {
-            for (var c in $scope.collections) {
-                if (activeCollectionId == $scope.collections[c].id) {
-                    $scope.activeCollectionName = $scope.collections[c].name;
+            while (len--) {
+                if (activeCollectionId == $scope.collections[len].id) {
+                    $scope.activeCollectionName = $scope.collections[len].name;
                     break;
                 }
             }
