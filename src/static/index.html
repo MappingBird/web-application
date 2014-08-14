@@ -51,7 +51,7 @@
         <div class="container vertical-align">
             <h1>Have you ever forgotten places you were planning to go to?</h1>
             <p>MappingBird is the easiest way for you to remember places for future reference.</p>
-            <a class="fancybox-media video-clip" href="http://vimeo.com/59906822">Watch 1 minute intro</a>        </div>
+            <a class="fancybox-media video-clip" id="video-link" href="https://vimeo.com/103387920">Watch 1 minute intro</a>        </div>
         <div class="scrolldown-hint">
             <img src="/static/prototype_assets/new_home/img/scrolldown-hint.gif" />
             <p>Scroll to learn more</p>
@@ -627,6 +627,15 @@ You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show
                     }
                 }
             });
+        });
+
+        // record video link clicks
+        $('#video-link').on("click", function() {
+
+            // google analytics
+            if (typeof ga != 'undefined') {
+                ga('send', 'event', 'Video', 'Click video link', 'Homepage');
+            }
         });
 
 
