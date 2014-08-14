@@ -668,8 +668,8 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
     $scope.pageData = {};
     $scope.pageImages = [];
     $scope.pageAddresses = [];
-    $scope.selectedPageImages = [];
-    $scope.deselectedPageImages = [];
+    $scope.selectedPageImages = {};
+    $scope.deselectedPageImages = {};
     $scope.noSearchQuery = false;
     $scope.noSearchResults = false;
     $scope.activeSearchResult = -1;
@@ -1259,7 +1259,6 @@ SaveApp.controller('searchResultsController', function($scope, $dialog, $http, $
 
             PointResource.save(pointData, function(data, headers){
                 console.log('save point successful');
-                console.log(data);
 
                 var pointId = data.id,
                     imageData;

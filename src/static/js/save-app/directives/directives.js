@@ -493,8 +493,8 @@ directives.directive('thumbAlignment', function($compile){
 
             var config = $scope.$eval($attrs.thumbAlignment),
                 displayArray = config.displayArray,
-                selectArray = config.selectArray,
-                deselectArray = config.deselectArray,
+                selectImages = config.selectImages,
+                deselectImages = config.deselectImages,
                 onlyFirstSelected = config.onlyFirstSelected,
                 whiteBackground = config.whiteBackground,
                 photo_array = null, //photo.js
@@ -602,6 +602,9 @@ directives.directive('thumbAlignment', function($compile){
                                 // only first image selected
                                 if (onlyFirstSelected) {
                                     cl = (i == 0 && rowNum == 1) ? "is-selected" : "";
+
+                                    $scope[selectImages][img_id] = url;
+
                                     BroadcastService.prepForBroadcast({
                                         type: 'savePointSetImage',
                                         data: {
@@ -620,6 +623,10 @@ directives.directive('thumbAlignment', function($compile){
                                                 }
                                             });
                                         }
+
+                                        // add to $scope
+                                        $scope[selectImages][img_id] = url;
+
                                     } else {
                                         cl = "";
                                     }
@@ -628,11 +635,6 @@ directives.directive('thumbAlignment', function($compile){
                                 a = $('<a></a>', {'class': cl, href: "#", id: img_id}).css("margin", border + "px");
 
                                 n++;
-
-                                // add to $scope
-                                if (i == 0 && rowNum == 1) {
-                                    $scope[selectArray][img_id] = url;
-                                }
 
                                 a.on('click', selectImg);
                                 a.append(img);
@@ -716,8 +718,8 @@ directives.directive('thumbAlignment', function($compile){
 
                         $scope.$apply(function(){
                             console.log('delete selected image');
-                            $scope[deselectArray][imgID] = $scope[selectArray][imgID];
-                            delete $scope[selectArray][imgID];
+                            $scope[deselectImages][imgID] = $scope[selectImages][imgID];
+                            delete $scope[selectImages][imgID];
                         });
 
                         // google analytics
@@ -732,9 +734,9 @@ directives.directive('thumbAlignment', function($compile){
                         $(span).show();
                         $scope.$apply(function(){
                             console.log('add selected image');
-                            $scope[selectArray][imgID] = src;
-                            if ($scope[deselectArray][imgID]) {
-                                delete $scope[deselectArray][imgID];
+                            $scope[selectImages][imgID] = src;
+                            if ($scope[deselectImages][imgID]) {
+                                delete $scope[deselectImages][imgID];
                             }
                         });
 
