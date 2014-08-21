@@ -14,7 +14,7 @@
   	<section class="intro">
     	<header ng-controller="userController">
             <a href="/" class="logo"></a>
-            <div class="navbar pingismo-navbar pull-right middle-align" ng-show="isLoggedIn && isRegisteredUser">
+            <div class="navbar pingismo-navbar pull-right middle-align" ng-show="isLoggedIn && isRegisteredUser" id="registered-user-menu">
                 <ul class="nav">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -29,7 +29,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="navbar pingismo-navbar pull-right middle-align" ng-show="isLoggedIn && !isRegisteredUser">
+            <div class="navbar pingismo-navbar pull-right middle-align" ng-show="isLoggedIn && !isRegisteredUser" id="unregistered-user-menu">
                 <ul class="nav">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -42,7 +42,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="navbar pingismo-navbar pull-right vertical-align" ng-show="!isLoggedIn">
+            <div class="navbar pingismo-navbar pull-right vertical-align" ng-show="!isLoggedIn" id="logged-out-menu">
                 <ul class="nav">
                     <li><a href="/static/login.html" class="signin">SIGN IN</a></li>
                 </ul>

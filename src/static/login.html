@@ -29,14 +29,14 @@
                         <div class="control-group">
                         	<input type="password" placeholder="Password" ng-model="password" />
                         </div>
-                        <div ng-class="{ 'error-message control-group' : true, 'error' : errorInvalidLogin }" ng-show="errorInvalidLogin">
+                        <div class="error-message control-group" ng-class="{'error' : errorInvalidLogin }" ng-show="errorInvalidLogin" id="error">
                         	<p class="help-inline">Invalid ID or password! Please try again.</p>
                         </div>
                         <div>
                         	<a href="#">Forgot your password?</a>
                         </div>
                         <div class="action-button">
-                        	<button class="btn btn-giant btn-primary pingismo-btn" type="submit">Login Your Account</button>
+                        	<button class="btn btn-giant btn-primary pingismo-btn" type="submit" id="login-button">Login to Your Account</button>
                             <p class="button-option">Not a member? <a href="/static/signup.html">Sign up now</a></p>
                         </div>
                     </form>
