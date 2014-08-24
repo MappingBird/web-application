@@ -1,7 +1,8 @@
 // login_spec.js
-describe('MappingBird login page', function() {
+describe('Login page', function() {
 
-    var inputEmail = element(by.model('email')),
+    var baseUrl = 'http://localhost:8000',
+        inputEmail = element(by.model('email')),
         inputPassword = element(by.model('password')),
         loginButton = element(by.id('login-button')),
         loginError = element(by.id('error'));
@@ -20,7 +21,7 @@ describe('MappingBird login page', function() {
 
     it('should be able to load login page', function() {
 
-        browser.get('http://localhost:8000/static/login.html');
+        browser.get(baseUrl + '/static/login.html');
 
     });
 
@@ -59,7 +60,16 @@ describe('MappingBird login page', function() {
 
         attemptLogin('mhpalmer@gmail.com', 'asdfasdf');
         browser.sleep(5000);
-        expect(browser.getCurrentUrl()).toEqual('http://localhost:8000/static/app.html#/');
+        expect(browser.getCurrentUrl()).toEqual(baseUrl + '/static/app.html#/');
+
+    });
+
+    it('should be able to logout correctly', function() {
+
+        element(by.binding('user.email')).click();
+        element(by.id('link-logout')).click();
+        browser.sleep(5000);
+        expect(browser.getCurrentUrl()).toEqual(baseUrl + '/static/index.html');
 
     });
 
