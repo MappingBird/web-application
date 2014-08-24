@@ -1,5 +1,5 @@
 // homepage_spec.js
-describe('MappingBird not logged in homepage', function() {
+describe('Not logged in homepage', function() {
     /*
     var firstNumber = element(by.model('first'));
     var secondNumber = element(by.model('second'));
@@ -7,19 +7,14 @@ describe('MappingBird not logged in homepage', function() {
     var latestResult = element(by.binding('latest'));
     var history = element.all(by.repeater('result in memory'));
     */
-    var loggedOutMenu = element(by.id('logged-out-menu')),
+    var baseUrl = 'http://localhost:8000',
+        loggedOutMenu = element(by.id('logged-out-menu')),
         registeredUserMenu = element(by.id('registered-user-menu')),
         unregisteredUserMenu = element(by.id('unregistered-user-menu'));
 
-    /*
-    beforeEach(function() {
-      browser.get('http://localhost:8000/static/index.html');
-    });
-*/
-
     it('should should open the homepage', function() {
 
-        browser.get('http://localhost:8000/static/index.html');
+        browser.get(baseUrl + '/static/index.html');
 
     });
 
