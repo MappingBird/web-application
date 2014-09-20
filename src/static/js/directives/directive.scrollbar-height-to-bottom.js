@@ -2,11 +2,11 @@
  * MappingBird Directive
  * Scrollbar Height to Bottom
  */
-directives.directive('scrollbarHeightToBottom', function() {
+mappingbird.directives.directive('scrollbarHeightToBottom', function() {
     return {
         restrict: 'A',
         scope: false,
-        controller: function($scope, $element, $attrs, BroadcastService) {
+        controller: ['$scope', '$element', '$attrs', 'BroadcastService', function($scope, $element, $attrs, BroadcastService) {
             // DIRTY HACK
             var height;
 
@@ -16,6 +16,6 @@ directives.directive('scrollbarHeightToBottom', function() {
 
             $element.css('max-height', height + 'px');
 
-        }
+        }]
     };
 });

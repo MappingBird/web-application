@@ -1,4 +1,4 @@
-SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collections', 'MapPoints', 'BroadcastService', '$state', function($scope, Collection, Collections, MapPoints, BroadcastService, $state) {
+mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collections', 'MapPoints', 'BroadcastService', '$state', 'Analytics', function($scope, Collection, Collections, MapPoints, BroadcastService, $state, Analytics) {
 
     $scope.activeCollectionId;
     $scope.activeCollectionPoints = [];
@@ -151,9 +151,7 @@ SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collection
         $scope.activeCollectionId = id;
 
         // google analytics
-        if (typeof ga != 'undefined') {
-            ga('send', 'event', 'Collection', 'Change collection', 'Collection List');
-        }
+        Analytics.registerEvent('Collection', 'Change collection', 'Collection List');
     };
 
     $scope.clickCollection = function($event, id, name) {
@@ -177,9 +175,7 @@ SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collection
 
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Collection', 'Delete collection', 'Collection List');
-            }
+            Analytics.registerEvent('Collection', 'Delete collection', 'Collection List');
         } else {
             console.log('viewCollection ' + id);
             $scope.collectionsListVisible = false;
@@ -190,9 +186,7 @@ SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collection
             });
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Collection', 'Change collection', 'Collection List');
-            }
+            Analytics.registerEvent('Collection', 'Change collection', 'Collection List');
         }
     };
 
@@ -268,9 +262,7 @@ SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collection
         $event.stopPropagation();
         $state.go('viewCollectionList', { collectionId: $scope.activeCollectionId});
         // google analytics
-        if (typeof ga != 'undefined') {
-            ga('send', 'event', 'Collection', 'Change to List View', 'Collection List');
-        }
+        Analytics.registerEvent('Collection', 'Change to List View', 'Collection List');
     };
 
     $scope.gotoMapView = function ($event) {
@@ -278,9 +270,7 @@ SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collection
         $event.stopPropagation();
         $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
         // google analytics
-        if (typeof ga != 'undefined') {
-            ga('send', 'event', 'Collection', 'Change to Map View', 'Collection List');
-        }
+        Analytics.registerEvent('Collection', 'Change to Map View', 'Collection List');
     };
 
 

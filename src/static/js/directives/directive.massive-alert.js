@@ -2,10 +2,10 @@
  * MappingBird Directive
  * Massive Alert
  */
-directives.directive('massiveAlert', function(BroadcastService, $window) {
+mappingbird.directives.directive('massiveAlert', ['BroadcastService', '$window', function(BroadcastService, $window) {
     return {
         restrict: 'A',
-        controller: function($scope, $element, $attrs, BroadcastService, $window) {
+        controller: ['$scope', '$element', '$attrs', 'BroadcastService', '$window', function($scope, $element, $attrs, BroadcastService, $window) {
 
             $scope.hasNoSearchQuery;
             $scope.hasCollectionsSaved;
@@ -56,7 +56,7 @@ directives.directive('massiveAlert', function(BroadcastService, $window) {
                     }
                 }
             });
-        },
+        }],
         replace: false
     };
-});
+}]);

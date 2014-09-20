@@ -1,4 +1,4 @@
-SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q', '$cookieStore', 'Presets', 'MapPoints', 'User', 'UserResource', 'Collection', 'Collections', 'PointResource', 'BroadcastService', 'PointImage', 'Scraper', function($scope, $dialog, $http, $q, $cookieStore, Presets, MapPoints, User, UserResource, Collection, Collections, PointResource, BroadcastService, PointImage, Scraper) {
+mappingbird.SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q', '$cookieStore', 'Presets', 'MapPoints', 'User', 'UserResource', 'Collection', 'Collections', 'PointResource', 'BroadcastService', 'PointImage', 'Scraper', 'Analytics', function($scope, $dialog, $http, $q, $cookieStore, Presets, MapPoints, User, UserResource, Collection, Collections, PointResource, BroadcastService, PointImage, Scraper, Analytics) {
 
     console.log('init searchResultsController');
 
@@ -197,9 +197,7 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
             // TODO: show error?
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Search', 'No URL', 'Save Panel');
-            }
+            Analytics.registerEvent('Search', 'No URL', 'Save Panel');
         }
 
     };
@@ -219,7 +217,7 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
         if (typeof ga != 'undefined') {
             timeToRespond = (placesSearchTimeAfterRequest.getTime() - placesSearchTimeBeforeRequest.getTime())/1000;
             console.log('Google Places Search response time (secs): ' + timeToRespond);
-            ga('send', 'event', 'Performance', 'Google Places Search', 'Save Panel', timeToRespond);
+            Analytics.registerEvent('Performance', 'Google Places Search', 'Save Panel', timeToRespond);
         }
 
         $scope.$apply(function(){
@@ -263,9 +261,8 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
                 console.log($scope.activeSavePoint);
 
                 // google analytics
-                if (typeof ga != 'undefined') {
-                    ga('send', 'event', 'Search', 'One search result', 'Save Panel');
-                }
+                Analytics.registerEvent('Search', 'One search result', 'Save Panel');
+
             } else {
                 // multiple search results, so set the first
                 // as the default but also show the search
@@ -275,9 +272,7 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
                 console.log($scope.activeSavePoint);
 
                 // google analytics
-                if (typeof ga != 'undefined') {
-                    ga('send', 'event', 'Search', 'Multiple search results', 'Save Panel');
-                }
+                Analytics.registerEvent('Search', 'Multiple search results', 'Save Panel');
             }
 
             $scope.$emit("placesLoaded");
@@ -302,9 +297,8 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
             });
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Search', 'No search results', 'Save Panel');
-            }
+            Analytics.registerEvent('Search', 'No search results', 'Save Panel');
+
         }
     }
 
@@ -462,9 +456,8 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
                 });
 
                 // google analytics
-                if (typeof ga != 'undefined') {
-                    ga('send', 'event', 'Collection', 'Saved new', 'Save Panel');
-                }
+                Analytics.registerEvent('Collection', 'Saved new', 'Save Panel');
+
             });
 
         }
@@ -490,15 +483,13 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
                         if (!/@gu.mappingbird.com$/.test(data.email_address)) {
                             User.data.isRegisteredUser = true;
                             // google analytics
-                            if (typeof ga != 'undefined') {
-                                ga('send', 'event', 'User', 'New registered user', 'Save Panel');
-                            }
+                            Analytics.registerEvent('User', 'New registered user', 'Save Panel');
+
                         } else {
                             User.data.isRegisteredUser = false;
                             // google analytics
-                            if (typeof ga != 'undefined') {
-                                ga('send', 'event', 'User', 'New unregistered user', 'Save Panel');
-                            }
+                            Analytics.registerEvent('User', 'New unregistered user', 'Save Panel');
+
                         }
                         User.data.id = data.id;
                     }
@@ -514,9 +505,7 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
             $scope.noCollectionError = true;
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Collection', 'Failed to save - No collection name', 'Save Panel');
-            }
+            Analytics.registerEvent('Collection', 'Failed to save - No collection name', 'Save Panel');
 
         }
 
@@ -549,9 +538,8 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
         });
 
         // google analytics
-        if (typeof ga != 'undefined') {
-            ga('send', 'event', 'Collection', 'Changed collection', 'Save Panel');
-        }
+        Analytics.registerEvent('Collection', 'Changed collection', 'Save Panel');
+
     };
 
     $scope.setPointType = function($e, t){
@@ -562,9 +550,8 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
         $scope.activeSavePoint.type = t;
 
         // google analytics
-        if (typeof ga != 'undefined') {
-            ga('send', 'event', 'Point', 'Changed point type', 'Save Panel');
-        }
+        Analytics.registerEvent('Point', 'Changed point type', 'Save Panel');
+
     };
 
     $scope.savePoint = function($e){
@@ -648,9 +635,7 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
                 });
 
                 // google analytics
-                if (typeof ga != 'undefined') {
-                    ga('send', 'event', 'Point', 'Saved new', 'Save Panel');
-                }
+                Analytics.registerEvent('Point', 'Saved new', 'Save Panel');
 
             });
 
@@ -663,9 +648,7 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
             $scope.noCollectionError = true;
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Point', 'Failed to save - No collection selected', 'Save Panel');
-            }
+            Analytics.registerEvent('Point', 'Failed to save - No collection selected', 'Save Panel');
         }
 
     };
@@ -702,9 +685,8 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
             });
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Search', 'Has search query', 'Save Panel');
-            }
+            Analytics.registerEvent('Search', 'Has search query', 'Save Panel');
+
         } else {
             console.log('noSearchQuery fffffffffffffffffffffffffffffffffffffffffffffffffff');
             $scope.noSearchQuery = true;
@@ -717,9 +699,8 @@ SaveApp.controller('searchResultsController', ['$scope', '$dialog', '$http', '$q
             });
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Search', 'No search query', 'Save Panel');
-            }
+            Analytics.registerEvent('Search', 'No search query', 'Save Panel');
+
         }
 
     };

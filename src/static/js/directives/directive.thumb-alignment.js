@@ -2,13 +2,13 @@
  * MappingBird Directive
  * Thumb Alignment
  */
-directives.directive('thumbAlignment', function($compile){
+mappingbird.directives.directive('thumbAlignment', ['$compile', function($compile){
     return {
         restrict: 'A',
         scope: true,
         replace: false,
         template: '<div class="photo-obj"></div><div id="picstest"></div>',
-        controller: function($scope, $element, $attrs, BroadcastService){
+        controller: ['$scope', '$element', '$attrs', 'BroadcastService', function($scope, $element, $attrs, BroadcastService){
 
             var config = $scope.$eval($attrs.thumbAlignment),
                 displayArray = config.displayArray,
@@ -356,6 +356,6 @@ directives.directive('thumbAlignment', function($compile){
                 }
             });
 
-        }
+        }]
     };
-});
+}]);

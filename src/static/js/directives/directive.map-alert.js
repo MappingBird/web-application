@@ -2,10 +2,10 @@
  * MappingBird Directive
  * Map Alert
  */
-directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
+mappingbird.directives.directive('mapAlert', ['BroadcastService', '$timeout', '$sce', function(BroadcastService, $timeout, $sce) {
     return {
         restrict: 'A',
-        controller: function($scope, $element, $attrs, BroadcastService, $sce) {
+        controller: ['$scope', '$element', '$attrs', 'BroadcastService', '$sce', function($scope, $element, $attrs, BroadcastService, $sce) {
 
             $scope.mapAlertActive = false;
 
@@ -52,7 +52,7 @@ directives.directive('mapAlert', function(BroadcastService, $timeout, $sce) {
                 }
             });
 
-        },
+        }],
         replace: false
     };
-});
+}]);

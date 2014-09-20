@@ -2,7 +2,7 @@
  * MappingBird Service
  * Broadcast Service
  */
-services.factory('BroadcastService', function($rootScope) {
+mappingbird.services.factory('BroadcastService', function($rootScope) {
     var sharedService = {};
 
     sharedService.message = {

@@ -2,7 +2,7 @@
  * MappingBird Directive
  * Point Detail
  */
-directives.directive('pointDetail', function() {
+mappingbird.directives.directive('pointDetail', function() {
     return {
         restrict: 'A',
         scope: false,

@@ -2,7 +2,7 @@
  * MappingBird Directive
  * P Alert
  */
-directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
+mappingbird.directives.directive('pAlert', ['BroadcastService', '$timeout', '$sce', function(BroadcastService, $timeout, $sce) {
     return {
         restrict: 'A',
         link: function($scope, $elem, $attrs) {
@@ -10,7 +10,7 @@ directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
                 $elem.hide();
             });
         },
-        controller: function($scope, $element, $attrs, BroadcastService, $sce) {
+        controller: ['$scope', '$element', '$attrs', 'BroadcastService', '$sce', function($scope, $element, $attrs, BroadcastService, $sce) {
 
             $scope.alertActive = false;
 
@@ -69,7 +69,7 @@ directives.directive('pAlert', function(BroadcastService, $timeout, $sce) {
                 }
             });
 
-        },
+        }],
         replace: false
     };
-});
+}]);

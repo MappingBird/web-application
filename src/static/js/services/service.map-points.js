@@ -2,7 +2,7 @@
  * MappingBird Service
  * Map Points service
  */
-services.factory('MapPoints', function(){
+mappingbird.services.factory('MapPoints', function(){
     return {
         activeSavePoint: {
             icon: '',

@@ -1,4 +1,4 @@
-SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'MapPoints', 'Collections', 'BroadcastService', '$state', 'PointResource', 'PointImage', 'User', 'Collection', '$http', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage, User, Collection, $http) {
+mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'MapPoints', 'Collections', 'BroadcastService', '$state', 'PointResource', 'PointImage', 'User', 'Collection', '$http', 'Analytics', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage, User, Collection, $http, Analytics) {
 
     $scope.pointImages = [];
     $scope.selectedPointImages = [];
@@ -132,9 +132,7 @@ SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'MapPoints', '
         }
         $scope.activeViewPoint.type = t;
         // google analytics
-        if (typeof ga != 'undefined') {
-            ga('send', 'event', 'Point', 'Changed point type', 'Point Detail Panel');
-        }
+        Analytics.registerEvent('Point', 'Changed point type', 'Point Detail Panel');
     };
 
     $scope.togglePointEditMode = function($event) {
@@ -164,9 +162,7 @@ SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'MapPoints', '
         }).success(function(data, headers) {
             $scope.togglePointEditMode($event);
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Point', 'Saved point detail changes', 'Point Detail Panel');
-            }
+            Analytics.registerEvent('Point', 'Saved point detail changes', 'Point Detail Panel');
         });
 
         console.log($scope.deselectedPointImages);
@@ -256,9 +252,7 @@ SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'MapPoints', '
                 });
 
                 // google analytics
-                if (typeof ga != 'undefined') {
-                    ga('send', 'event', 'Collection', 'Saved new', 'Point Detail Panel');
-                }
+                Analytics.registerEvent('Collection', 'Saved new', 'Point Detail Panel');
             });
 
         }
@@ -275,9 +269,7 @@ SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'MapPoints', '
             $scope.noCollectionError = true;
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Collection', 'Failed to save - no collection name', 'Point Detail Panel');
-            }
+            Analytics.registerEvent('Collection', 'Failed to save - no collection name', 'Point Detail Panel');
 
         }
 

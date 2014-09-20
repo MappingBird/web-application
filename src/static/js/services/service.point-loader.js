@@ -2,7 +2,7 @@
  * MappingBird Service
  * Point Loader resource
  */
-services.factory('PointLoader', ['PointResource', '$stateParams', 'StateService', '$q', function(PointResource, $stateParams, StateService, $q) {
+mappingbird.services.factory('PointLoader', ['PointResource', '$stateParams', 'StateService', '$q', function(PointResource, $stateParams, StateService, $q) {
     return function() {
 
         var delay = $q.defer(),

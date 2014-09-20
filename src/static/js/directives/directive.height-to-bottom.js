@@ -2,11 +2,11 @@
  * MappingBird Directive
  * Height to Bottom
  */
-directives.directive('heightToBottom', function() {
+mappingbird.directives.directive('heightToBottom', function() {
     return {
         restrict: 'A',
         scope: false,
-        controller: function($scope, $element, $attrs, BroadcastService) {
+        controller: ['$scope', '$element', '$attrs', 'BroadcastService', function($scope, $element, $attrs, BroadcastService) {
             // DIRTY HACK
             var tolerance = 0, // pixels
                 outer_parent = $element.parent().parent().parent(),
@@ -34,6 +34,6 @@ directives.directive('heightToBottom', function() {
                 }
             } );
             */
-        }
+        }]
     };
 });

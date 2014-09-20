@@ -1,77 +1,9 @@
-// HTTP solution from
-// http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/
-var SignupApp = angular.module('SignupApp', ['SignupApp.services', 'ngCookies', 'ngSanitize', 'ui.bootstrap'], function($httpProvider, $dialogProvider) {
-    // angular bootstrap
-    //$dialogProvider.options({dialogFade: true});
-
-    // Use x-www-form-urlencoded Content-Type
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-
-    // Override $http service's default transformRequest
-    $httpProvider.defaults.transformRequest = [function(data)
-    {
-        /**
-         * The workhorse; converts an object to x-www-form-urlencoded serialization.
-         * @param {Object} obj
-         * @return {String}
-         */
-        var param = function(obj)
-        {
-            var query = '';
-            var name, value, fullSubName, subName, subValue, innerObj, i;
-
-            for(name in obj)
-            {
-                value = obj[name];
-
-                if(value instanceof Array)
-                {
-                    for(i=0; i<value.length; ++i)
-                    {
-                        subValue = value[i];
-                        fullSubName = name + '[' + i + ']';
-                        innerObj = {};
-                        innerObj[fullSubName] = subValue;
-                        query += param(innerObj) + '&';
-                    }
-                }
-                else if(value instanceof Object)
-                {
-                    for(subName in value)
-                    {
-                        subValue = value[subName];
-                        fullSubName = name + '[' + subName + ']';
-                        innerObj = {};
-                        innerObj[fullSubName] = subValue;
-                        query += param(innerObj) + '&';
-                    }
-                }
-                else if(value !== undefined && value !== null)
-                {
-                    query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
-                }
-            }
-
-            return query.length ? query.substr(0, query.length - 1) : query;
-        };
-
-        return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
-    }];
-});
-
-var directives = angular.module('SignupApp.directives', []);
-var services = angular.module('SignupApp.services', ['ngResource']);
-
-SignupApp.run(function($http, $cookies) {
-    $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
-    $http.defaults.headers.put['X-CSRFToken'] = $cookies.csrftoken;
-    $http.defaults.headers.patch['X-CSRFToken'] = $cookies.csrftoken;
-});
+mappingbird.SignupApp = angular.module('SignupApp', ['ngCookies', 'ngSanitize', 'ui.bootstrap', 'Initialization']);
 
 /**
     Overall page controller
  */
-SignupApp.controller('mainController', function($scope, $timeout, Presets, BroadcastService, User, UserResource, CurrentUser, $http) {
+mappingbird.SignupApp.controller('mainController', ['$scope', '$timeout', 'Presets', 'BroadcastService', 'User', 'UserResource', 'CurrentUser', '$http', 'Analytics', function($scope, $timeout, Presets, BroadcastService, User, UserResource, CurrentUser, $http, Analytics) {
 
     $scope.id = '';
     $scope.email = '';
@@ -104,9 +36,7 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
                             // ask Derek about scenario here
 
                             // google analytics
-                            if (typeof ga != 'undefined') {
-                                ga('send', 'event', 'Signup', 'Signup failed - user already exists', 'Signup Page');
-                            }
+                            Analytics.registerEvent('Signup', 'Signup failed - user already exists', 'Signup Page');
 
                         // migrate generated user
                         } else {
@@ -129,9 +59,7 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
                 $scope.errorPasswordTooShort = true;
 
                 // google analytics
-                if (typeof ga != 'undefined') {
-                    ga('send', 'event', 'Signup', 'Signup failed - password too short', 'Signup Page');
-                }
+                Analytics.registerEvent('Signup', 'Signup failed - password too short', 'Signup Page');
             }
 
         } else {
@@ -139,9 +67,7 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
             $scope.errorEmailRequired = true;
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Signup', 'Signup failed - invalid email address', 'Signup Page');
-            }
+            Analytics.registerEvent('Signup', 'Signup failed - invalid email address', 'Signup Page');
 
         }
 
@@ -159,9 +85,7 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
         UserResource.save(newUser, function(data, headers) {
             $scope.accountCreated = true;
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Signup', 'Signup success - new user created', 'Signup Page');
-            }
+            Analytics.registerEvent('Signup', 'Signup success - new user created', 'Signup Page');
         });
 
     };
@@ -184,12 +108,9 @@ SignupApp.controller('mainController', function($scope, $timeout, Presets, Broad
             $scope.accountCreated = true;
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Signup', 'Signup success - migrate generated user', 'Signup Page');
-            }
+            Analytics.registerEvent('Signup', 'Signup success - migrate generated user', 'Signup Page');
         });
 
     };
 
-});
-
+}]);

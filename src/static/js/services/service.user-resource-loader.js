@@ -2,7 +2,7 @@
  * MappingBird Service
  * User Resource Loader resource
  */
-services.factory('UserResourceLoader', ['UserResource', '$cookies', '$q', function(UserResource, $cookies, $q) {
+mappingbird.services.factory('UserResourceLoader', ['UserResource', '$cookies', '$q', function(UserResource, $cookies, $q) {
     return function() {
         if ($cookies.bkl_user) {
             console.log('UserResourceLoader + cookie');

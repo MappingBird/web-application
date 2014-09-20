@@ -2,11 +2,11 @@
  * MappingBird Directive
  * Search Box
  */
-directives.directive('searchBox', function() {
+mappingbird.directives.directive('searchBox', function() {
     return {
         restrict: 'A',
         scope: false,
-        controller: function($scope, $element, $attrs, BroadcastService) {
+        controller: ['$scope', '$element', '$attrs', 'BroadcastService', function($scope, $element, $attrs, BroadcastService) {
 
             $scope.$on('stateChange', function () {
                 if (typeof BroadcastService.message == 'object'
@@ -14,6 +14,6 @@ directives.directive('searchBox', function() {
                     $($element).attr({'placeholder': 'Name or address of a place'});
                 }
             } );
-        }
+        }]
     };
 });

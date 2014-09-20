@@ -1,4 +1,4 @@
-SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints', 'BroadcastService', '$state', '$timeout', function($scope, Presets, MapPoints, BroadcastService, $state, $timeout) {
+mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints', 'BroadcastService', '$state', '$timeout', 'Analytics', function($scope, Presets, MapPoints, BroadcastService, $state, $timeout, Analytics) {
 
     var saveOverlay,
         saveMarker,
@@ -327,9 +327,7 @@ SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints', 'Broadcas
                                 $state.go('viewPoint', { pointId: point.id, collectionId: point.collection});
 
                                 // google analytics
-                                if (typeof ga != 'undefined') {
-                                    ga('send', 'event', 'Point', 'View point detail', 'Map');
-                                }
+                                Analytics.registerEvent('Point', 'View point detail', 'Map');
 
                                 return false;
                             };
@@ -364,9 +362,7 @@ SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints', 'Broadcas
                                 if ($scope.showPointDetailPanel) {
                                     $state.go('viewPoint', { pointId: point.id, collectionId: point.collection});
                                     // google analytics
-                                    if (typeof ga != 'undefined') {
-                                        ga('send', 'event', 'Point', 'View point detail', 'Map');
-                                    }
+                                    Analytics.registerEvent('Point', 'View point detail', 'Map');
                                 }
 
                                 return false;

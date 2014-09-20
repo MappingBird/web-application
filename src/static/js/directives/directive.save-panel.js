@@ -2,7 +2,7 @@
  * MappingBird Directive
  * Save Panel
  */
-directives.directive('savePanel', function() {
+mappingbird.directives.directive('savePanel', function() {
     return {
         restrict: 'A',
         scope: false,

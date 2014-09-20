@@ -2,10 +2,10 @@
  * MappingBird Directive
  * Map Dialog
  */
-directives.directive('mapDialog', function(BroadcastService, $window) {
+mappingbird.directives.directive('mapDialog', ['BroadcastService', '$window', function(BroadcastService, $window) {
     return {
         restrict: 'A',
-        controller: function($scope, $element, $attrs, BroadcastService, $window) {
+        controller: ['$scope', '$element', '$attrs', 'BroadcastService', '$window', function($scope, $element, $attrs, BroadcastService, $window) {
 
             $scope.mapDialogActive = false;
             $scope.hasNoSearchQuery = false;
@@ -94,7 +94,7 @@ directives.directive('mapDialog', function(BroadcastService, $window) {
                 }
             });
 
-        },
+        }],
         replace: false
     };
-});
+}]);

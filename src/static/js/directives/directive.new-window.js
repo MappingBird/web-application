@@ -2,7 +2,7 @@
  * MappingBird Directive
  * New Window
  */
-directives.directive('newWindow', function() {
+mappingbird.directives.directive('newWindow', function() {
     return {
         restrict: 'A',
         link: function($scope, $elem, $attrs) {

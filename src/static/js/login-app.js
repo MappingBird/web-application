@@ -1,76 +1,9 @@
-// HTTP solution from
-// http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/
-var LoginApp = angular.module('LoginApp', ['LoginApp.services', 'ngCookies', 'ngSanitize', 'ui.bootstrap'], function($httpProvider, $dialogProvider) {
-    // angular bootstrap
-    //$dialogProvider.options({dialogFade: true});
-
-    // Use x-www-form-urlencoded Content-Type
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-
-    // Override $http service's default transformRequest
-    $httpProvider.defaults.transformRequest = [function(data)
-    {
-        /**
-         * The workhorse; converts an object to x-www-form-urlencoded serialization.
-         * @param {Object} obj
-         * @return {String}
-         */
-        var param = function(obj)
-        {
-            var query = '';
-            var name, value, fullSubName, subName, subValue, innerObj, i;
-
-            for(name in obj)
-            {
-                value = obj[name];
-
-                if(value instanceof Array)
-                {
-                    for(i=0; i<value.length; ++i)
-                    {
-                        subValue = value[i];
-                        fullSubName = name + '[' + i + ']';
-                        innerObj = {};
-                        innerObj[fullSubName] = subValue;
-                        query += param(innerObj) + '&';
-                    }
-                }
-                else if(value instanceof Object)
-                {
-                    for(subName in value)
-                    {
-                        subValue = value[subName];
-                        fullSubName = name + '[' + subName + ']';
-                        innerObj = {};
-                        innerObj[fullSubName] = subValue;
-                        query += param(innerObj) + '&';
-                    }
-                }
-                else if(value !== undefined && value !== null)
-                {
-                    query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
-                }
-            }
-
-            return query.length ? query.substr(0, query.length - 1) : query;
-        };
-
-        return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
-    }];
-});
-
-var directives = angular.module('LoginApp.directives', []);
-var services = angular.module('LoginApp.services', ['ngResource']);
-
-LoginApp.run(function($http, $cookies) {
-    $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
-});
+mappingbird.LoginApp = angular.module('LoginApp', ['ngCookies', 'ngSanitize', 'ui.bootstrap', 'Initialization']);
 
 /**
     Overall page controller
  */
-LoginApp.controller('mainController', function($scope, $timeout, Presets, BroadcastService, User, UserResource, UserLogin) {
-
+mappingbird.LoginApp.controller('mainController', ['$scope', '$timeout', 'Presets', 'BroadcastService', 'User', 'UserResource', 'UserLogin', 'Analytics', function($scope, $timeout, Presets, BroadcastService, User, UserResource, UserLogin, Analytics) {
     $scope.email = '';
     $scope.password = '';
     $scope.errorInvalidLogin = false;
@@ -89,9 +22,8 @@ LoginApp.controller('mainController', function($scope, $timeout, Presets, Broadc
                 $scope.errorInvalidLogin = true;
 
                 // google analytics
-                if (typeof ga != 'undefined') {
-                    ga('send', 'event', 'Login', 'Login failed - no password', 'Login Page');
-                }
+                Analytics.registerEvent('Login', 'Login failed - password too short', 'Login Page');
+
             }
 
         } else {
@@ -99,9 +31,7 @@ LoginApp.controller('mainController', function($scope, $timeout, Presets, Broadc
             $scope.errorInvalidLogin = true;
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Login', 'Login failed - no email address', 'Login Page');
-            }
+            Analytics.registerEvent('Login', 'Login failed - no email address', 'Login Page');
 
         }
 
@@ -128,13 +58,10 @@ LoginApp.controller('mainController', function($scope, $timeout, Presets, Broadc
                 $scope.errorInvalidLogin = true;
 
                 // google analytics
-                if (typeof ga != 'undefined') {
-                    ga('send', 'event', 'Login', 'Login failed - invalid credentials', 'Login Page');
-                }
+                Analytics.registerEvent('Login', 'Login failed - invalid credentials', 'Login Page');
             }
         });
 
     };
 
-});
-
+}]);

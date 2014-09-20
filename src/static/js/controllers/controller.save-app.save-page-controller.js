@@ -1,7 +1,7 @@
 /**
     Overall page controller
  */
-SaveApp.controller('savePageController',['$scope', '$timeout', 'Presets', 'BroadcastService', 'Collections', 'CollectionsByUserResource', 'User', function($scope, $timeout, Presets, BroadcastService, Collections, CollectionsByUserResource, User) {
+mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Presets', 'BroadcastService', 'Collections', 'CollectionsByUserResource', 'User', function($scope, $timeout, Presets, BroadcastService, Collections, CollectionsByUserResource, User) {
 
     $scope.collectionsByUser = [];
 

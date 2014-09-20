@@ -2,7 +2,7 @@
  * MappingBird Directive
  * On Repeat Done
  */
-directives.directive("onRepeatDone", [ '$compile', function($compile) {
+mappingbird.directives.directive("onRepeatDone", [ '$compile', function($compile) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs ) {

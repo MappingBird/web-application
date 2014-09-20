@@ -2,7 +2,7 @@
  * MappingBird Directive
  * mCustomScrollbar
  */
-directives.directive('mCustomScrollbar', function() {
+mappingbird.directives.directive('mCustomScrollbar', function() {
     return {
         restrict: 'A',
         scope: false,

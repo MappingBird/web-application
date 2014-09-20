@@ -2,7 +2,7 @@
  * MappingBird Service
  * Point resource
  */
-services.factory('PointResource', ['$resource', function($resource) {
+mappingbird.services.factory('PointResource', ['$resource', function($resource) {
 
     return $resource('/api/points/:id', { id: '@id' }, {
         // not really in use, because of not sending payload as JSON

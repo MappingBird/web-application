@@ -2,7 +2,7 @@
  * MappingBird Service
  * State Service
  */
-services.factory('StateService', function() {
+mappingbird.services.factory('StateService', function() {
 
     var incomingParams;
 

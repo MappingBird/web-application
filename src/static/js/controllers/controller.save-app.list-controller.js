@@ -1,4 +1,4 @@
-SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoints', 'BroadcastService', '$state', '$timeout', function($scope, Presets, MapPoints, BroadcastService, $state, $timeout) {
+mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoints', 'BroadcastService', '$state', '$timeout', function($scope, Presets, MapPoints, BroadcastService, $state, $timeout) {
 
     $scope.$watch(function() { return MapPoints.activeViewPoints; }, function(activeViewPoints) {
 

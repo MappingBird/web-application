@@ -2,7 +2,7 @@
  * MappingBird Service
  * Presets
  */
-services.factory('Presets', function(){
+mappingbird.services.factory('Presets', function(){
     return {
         baseUrl: '/',
         parseUrl: '/scraper',

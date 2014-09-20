@@ -2,7 +2,7 @@
  * MappingBird Service
  * Tag resource
  */
-services.factory('TagResource', ['$resource', function($resource) {
+mappingbird.services.factory('TagResource', ['$resource', function($resource) {
 
     return $resource('/api/tags', {}, {
         'getTags' : {

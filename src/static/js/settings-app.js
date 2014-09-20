@@ -1,76 +1,9 @@
-// HTTP solution from
-// http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/
-var SettingsApp = angular.module('SettingsApp', ['SettingsApp.services', 'ngCookies', 'ngSanitize', 'ui.bootstrap'], function($httpProvider, $dialogProvider) {
-    // angular bootstrap
-    //$dialogProvider.options({dialogFade: true});
-
-    // Use x-www-form-urlencoded Content-Type
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-
-    // Override $http service's default transformRequest
-    $httpProvider.defaults.transformRequest = [function(data)
-    {
-        /**
-         * The workhorse; converts an object to x-www-form-urlencoded serialization.
-         * @param {Object} obj
-         * @return {String}
-         */
-        var param = function(obj)
-        {
-            var query = '';
-            var name, value, fullSubName, subName, subValue, innerObj, i;
-
-            for(name in obj)
-            {
-                value = obj[name];
-
-                if(value instanceof Array)
-                {
-                    for(i=0; i<value.length; ++i)
-                    {
-                        subValue = value[i];
-                        fullSubName = name + '[' + i + ']';
-                        innerObj = {};
-                        innerObj[fullSubName] = subValue;
-                        query += param(innerObj) + '&';
-                    }
-                }
-                else if(value instanceof Object)
-                {
-                    for(subName in value)
-                    {
-                        subValue = value[subName];
-                        fullSubName = name + '[' + subName + ']';
-                        innerObj = {};
-                        innerObj[fullSubName] = subValue;
-                        query += param(innerObj) + '&';
-                    }
-                }
-                else if(value !== undefined && value !== null)
-                {
-                    query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
-                }
-            }
-
-            return query.length ? query.substr(0, query.length - 1) : query;
-        };
-
-        return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
-    }];
-});
-
-var directives = angular.module('SettingsApp.directives', []);
-var services = angular.module('SettingsApp.services', ['ngResource']);
-
-SettingsApp.run(function($http, $cookies) {
-    $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
-});
+mappingbird.SettingsApp = angular.module('SettingsApp', ['ngCookies', 'ngSanitize', 'ui.bootstrap', 'Initialization']);
 
 /**
     Overall page controller
  */
-SettingsApp.controller('mainController', function($scope, $timeout, Presets, BroadcastService, User, UserResource, CurrentUser, UserLogin, UserLogout, $http, $cookies, $window) {
-
+mappingbird.SettingsApp.controller('mainController', ['$scope', '$timeout', 'Presets', 'BroadcastService', 'User', 'UserResource', 'CurrentUser', 'UserLogin', 'UserLogout', '$http', '$cookies', '$window', 'Analytics', function($scope, $timeout, Presets, BroadcastService, User, UserResource, CurrentUser, UserLogin, UserLogout, $http, $cookies, $window, Analytics) {
     $scope.id = '';
     $scope.isLoggedIn = false;
     $scope.email = '';
@@ -148,10 +81,13 @@ SettingsApp.controller('mainController', function($scope, $timeout, Presets, Bro
                             } else {
                                 // they match, change password
                                 changePassword();
+                                Analytics.registerEvent('Password', 'Change password success', 'Settings Page');
                             }
 
                         } else {
                             $scope.errorPasswordTooShort = true;
+
+                            Analytics.registerEvent('Password', 'Change password error - password too short', 'Settings Page');
                         }
 
                     // old password and new password are the same
@@ -159,15 +95,21 @@ SettingsApp.controller('mainController', function($scope, $timeout, Presets, Bro
 
                         $scope.errorOldPasswordNewPasswordSame = true;
 
+                        Analytics.registerEvent('Password', 'Change password error - new password same as old password', 'Settings Page');
+
                     }
 
                 } else {
                     $scope.errorOldPasswordIncorrect = true;
+
+                    Analytics.registerEvent('Password', 'Change password error - old password incorrect', 'Settings Page');
                 }
             });
 
         } else {
             $scope.errorOldPasswordIncorrect = true;
+
+            Analytics.registerEvent('Password', 'Change password error - old password incorrect', 'Settings Page');
         }
 
     };
@@ -227,5 +169,4 @@ SettingsApp.controller('mainController', function($scope, $timeout, Presets, Bro
     });
 
 
-});
-
+}]);

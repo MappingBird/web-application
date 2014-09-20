@@ -2,7 +2,7 @@
  * MappingBird Directive
  * Collection List
  */
-directives.directive('collectionList', function() {
+mappingbird.directives.directive('collectionList', function() {
     return {
         restrict: 'A',
         scope: false,

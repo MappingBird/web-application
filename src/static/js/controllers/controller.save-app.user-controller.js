@@ -1,4 +1,4 @@
-SaveApp.controller('userController', ['$scope', '$cookies', '$http', '$resource', '$window', 'User', 'UserResource', 'Presets', 'BroadcastService', 'CurrentUser', 'UserLogin', 'UserLogout', 'Token', 'TagResource', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token, TagResource) {
+mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http', '$resource', '$window', 'User', 'UserResource', 'Presets', 'BroadcastService', 'CurrentUser', 'UserLogin', 'UserLogout', 'Token', 'TagResource', 'Analytics', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token, TagResource, Analytics) {
 
     $scope.user = CurrentUser.get(function(data) {
 
@@ -144,9 +144,7 @@ SaveApp.controller('userController', ['$scope', '$cookies', '$http', '$resource'
         UserLogout.get(function(data, headers) {
 
             // google analytics
-            if (typeof ga != 'undefined') {
-                ga('send', 'event', 'Account', 'Logged Out', 'Account Menu');
-            }
+            Analytics.registerEvent('Account', 'Logged Out', 'Account Menu');
 
             delete $cookies['sessionid'];
             $window.location.href = "/static/index.html";
