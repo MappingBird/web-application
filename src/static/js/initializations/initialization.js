@@ -10,7 +10,14 @@
 
 mappingbird.directives = angular.module('mappingbird.directives', []);
 mappingbird.services = angular.module('mappingbird.services', ['ngResource']);
-mappingbird.initializations = angular.module("Initialization", ['mappingbird.directives', 'mappingbird.services'], ['$httpProvider', '$dialogProvider', function($httpProvider, $dialogProvider) {
+mappingbird.initializations = angular.module("Initialization", [
+    'mappingbird.directives',
+    'mappingbird.services',
+    'mappingbird.utilities',
+    'ngCookies',
+    'ngSanitize',
+    'ui.bootstrap'],
+    ['$httpProvider', '$dialogProvider', function($httpProvider, $dialogProvider) {
     // HTTP solution from
     // http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/
     // angular bootstrap

@@ -1,4 +1,4 @@
-mappingbird.SettingsApp = angular.module('SettingsApp', ['ngCookies', 'ngSanitize', 'ui.bootstrap', 'Initialization']);
+mappingbird.SettingsApp = angular.module('SettingsApp', ['Initialization']);
 
 /**
     Overall page controller

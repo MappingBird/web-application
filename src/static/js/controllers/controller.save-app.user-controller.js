@@ -1,4 +1,4 @@
-mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http', '$resource', '$window', 'User', 'UserResource', 'Presets', 'BroadcastService', 'CurrentUser', 'UserLogin', 'UserLogout', 'Token', 'TagResource', 'Analytics', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token, TagResource, Analytics) {
+mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http', '$resource', '$window', 'User', 'UserResource', 'Presets', 'BroadcastService', 'CurrentUser', 'UserLogin', 'UserLogout', 'Token', 'TagResource', 'Analytics', 'Utility', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token, TagResource, Analytics, Utility) {
 
     $scope.user = CurrentUser.get(function(data) {
 
@@ -51,8 +51,8 @@ mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http',
 
             var time = new Date().getTime(),
                 userCredentials = {
-                    email: getRandomInt(0,100) + time + '@gu.mappingbird.com',
-                    password: 'pword' + getRandomInt(0,1000000000)
+                    email: Utility.getRandomInt(0,100) + time + '@gu.mappingbird.com',
+                    password: 'pword' + Utility.getRandomInt(0,1000000000)
                 };
 
             function generateUser () {

@@ -8,7 +8,7 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
         scope: true,
         replace: false,
         template: '<div class="photo-obj"></div><div id="picstest"></div>',
-        controller: ['$scope', '$element', '$attrs', 'BroadcastService', function($scope, $element, $attrs, BroadcastService){
+        controller: ['$scope', '$element', '$attrs', 'BroadcastService', 'Utility', function($scope, $element, $attrs, BroadcastService, Utility){
 
             var config = $scope.$eval($attrs.thumbAlignment),
                 displayArray = config.displayArray,
@@ -343,7 +343,7 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
             }
 
             $scope.$watch(displayArray, function(newValue, oldValue){
-                if (!arraysAreEqual(newValue, oldValue)) {
+                if (!Utility.arraysAreEqual(newValue, oldValue)) {
                     loadImages(newValue);
                 }
 

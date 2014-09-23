@@ -1,4 +1,4 @@
-mappingbird.IndexApp = angular.module("IndexApp", ['ngCookies', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'Initialization']);
+mappingbird.IndexApp = angular.module('IndexApp', ['Initialization', 'ui.router']);
 
 // Routing
 mappingbird.IndexApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {

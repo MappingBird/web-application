@@ -1,4 +1,4 @@
-mappingbird.LoginApp = angular.module('LoginApp', ['ngCookies', 'ngSanitize', 'ui.bootstrap', 'Initialization']);
+mappingbird.LoginApp = angular.module('LoginApp', ['Initialization']);
 
 /**
     Overall page controller

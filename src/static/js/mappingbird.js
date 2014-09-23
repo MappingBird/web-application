@@ -4,6 +4,7 @@
         initializations: null,
         services: null,
         directives: null,
+        utilities: null,
         SignupApp: null,
         SettingsApp: null,
         SaveApp: null,

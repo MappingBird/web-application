@@ -1,71 +1,69 @@
-// http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values/901144
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+(function () {
+    mappingbird.utilities = angular.module('mappingbird.utilities', [])
+        .provider('Utility', function Utility() {
 
-    var regexS = "[\\?&]" + name + "=([^&#]*)",
-        regex = new RegExp(regexS),
-        results = regex.exec(window.location.search);
+            var $injector;
 
-    return (results === null) ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+            this.setupUtilities = function (injector) {
+                $injector = injector;
+            };
 
-// http://stackoverflow.com/questions/18082/validate-numbers-in-javascript-isnumeric
-function isNumber(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
+            // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values/901144
+            this.getParameterByName = function (name) {
+                name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
 
-// http://stackoverflow.com/questions/7837456/comparing-two-arrays-in-javascript
-function arraysAreEqual (array1, array2) {
-    // if the other array is a falsy value, return
-    if (!array1 || !array2)
-        return false;
+                var regexS = "[\\?&]" + name + "=([^&#]*)",
+                    regex = new RegExp(regexS),
+                    results = regex.exec(window.location.search);
 
-    // compare lengths - can save a lot of time
-    if (array1.length != array2.length)
-        return false;
+                return (results === null) ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            };
 
-    for (var i = 0; i < array1.length; i++) {
-        // Check if we have nested arrays
-        if (array1[i] instanceof Array && array2[i] instanceof Array) {
-            // recurse into the nested arrays
-            if (!arraysAreEqual(array1[i], array2[i]))
-                return false;
-        }
-        else if (array1[i] != array2[i]) {
-            // Warning - two different object instances will never be equal: {x:20} != {x:20}
-            return false;
-        }
-    }
-    return true;
-}
+            // http://stackoverflow.com/questions/18082/validate-numbers-in-javascript-isnumeric
+            this.isNumber = function (n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            };
 
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+            this.getRandomInt = function (min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            };
 
-/*
-Array.prototype.compare = function (array) {
-    // if the other array is a falsy value, return
-    if (!array)
-        return false;
+            // http://stackoverflow.com/questions/7837456/comparing-two-arrays-in-javascript
+            this.arraysAreEqual = function (array1, array2) {
+                // if the other array is a falsy value, return
+                if (!array1 || !array2)
+                    return false;
 
-    // compare lengths - can save a lot of time
-    if (this.length != array.length)
-        return false;
+                // compare lengths - can save a lot of time
+                if (array1.length != array2.length)
+                    return false;
 
-    for (var i = 0; i < this.length; i++) {
-        // Check if we have nested arrays
-        if (this[i] instanceof Array && array[i] instanceof Array) {
-            // recurse into the nested arrays
-            if (!this[i].compare(array[i]))
-                return false;
-        }
-        else if (this[i] != array[i]) {
-            // Warning - two different object instances will never be equal: {x:20} != {x:20}
-            return false;
-        }
-    }
-    return true;
-}
-*/
+                for (var i = 0; i < array1.length; i++) {
+                    // Check if we have nested arrays
+                    if (array1[i] instanceof Array && array2[i] instanceof Array) {
+                        // recurse into the nested arrays
+                        if (!this.arraysAreEqual(array1[i], array2[i]))
+                            return false;
+                    }
+                    else if (array1[i] != array2[i]) {
+                        // Warning - two different object instances will never be equal: {x:20} != {x:20}
+                        return false;
+                    }
+                }
+                return true;
+            };
+
+            this.$get = ["$injector", function (injector) {
+
+                this.setupUtilities(injector);
+
+                return {
+                    getParameterByName: this.getParameterByName,
+                    isNumber: this.isNumber,
+                    getRandomInt: this.getRandomInt,
+                    arraysAreEqual: this.arraysAreEqual
+                };
+            }];
+        });
+})();
