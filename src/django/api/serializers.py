@@ -33,7 +33,7 @@ class LocationSerializer(serializers.HyperlinkedModelSerializer):
 class LocationShortSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Location
-        fields = ('id', 'coordinates', )
+        fields = ('id', 'coordinates', 'place_address', )
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
@@ -58,10 +58,11 @@ class PointShortSerializer(serializers.HyperlinkedModelSerializer):
     # location = LocationSerializer(read_only=True)
     location = LocationShortSerializer(read_only=True)
     images = ImageShortSerializer(many=True, read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Point
-        fields = ('id', 'title', 'coordinates', 'type', 'images', 'location', )
+        fields = ('id', 'title', 'coordinates', 'type', 'images', 'location', 'tags', )
 
 
 class PointWriteSerializer(serializers.HyperlinkedModelSerializer):
