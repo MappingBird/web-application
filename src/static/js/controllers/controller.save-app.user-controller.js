@@ -147,7 +147,7 @@ mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http',
             Analytics.registerEvent('Account', 'Logged Out', 'Account Menu');
 
             delete $cookies['sessionid'];
-            $window.location.href = "/index";
+            $window.location.href = "/";
 
         });
 
