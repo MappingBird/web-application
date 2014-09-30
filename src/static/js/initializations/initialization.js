@@ -9,11 +9,14 @@
 (function () {
 
 mappingbird.directives = angular.module('mappingbird.directives', []);
-mappingbird.services = angular.module('mappingbird.services', ['ngResource']);
-mappingbird.initializations = angular.module("Initialization", [
+mappingbird.services = angular.module('mappingbird.services', []);
+mappingbird.resources = angular.module('mappingbird.resources', ['ngResource']);
+mappingbird.initializations = angular.module('Initialization', [
     'mappingbird.directives',
     'mappingbird.services',
+    'mappingbird.resources',
     'mappingbird.utilities',
+    'mappingbird.analytics',
     'ngCookies',
     'ngSanitize',
     'ui.bootstrap'],

@@ -3,7 +3,9 @@
     window.mappingbird = {
         initializations: null,
         services: null,
+        resources: null,
         directives: null,
+        analytics: null,
         utilities: null,
         SignupApp: null,
         SettingsApp: null,
