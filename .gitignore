@@ -2,3 +2,4 @@
 *.swp
 build/*
 src/django/media/*
+bower_components

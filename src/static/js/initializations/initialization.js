@@ -18,7 +18,6 @@ mappingbird.initializations = angular.module('Initialization', [
     'mappingbird.utilities',
     'mappingbird.analytics',
     'ngCookies',
-    'ngSanitize',
     'ui.bootstrap'],
     ['$httpProvider', '$dialogProvider', function($httpProvider, $dialogProvider) {
     // HTTP solution from
