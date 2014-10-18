@@ -43,6 +43,7 @@ def deploy():
     restart_pingismo()
 
 def stage():
+    copy_db()
     get_code(stage=True)
     collect_static(stage=True)
     restart_pingismo(stage=True)
