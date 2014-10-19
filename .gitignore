@@ -3,3 +3,4 @@
 build/*
 src/django/media/*
 bower_components
+node_modules
