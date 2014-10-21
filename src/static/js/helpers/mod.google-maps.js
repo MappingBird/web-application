@@ -1,3 +1,8 @@
+(function (window) {
+
+if (window.google === undefined) {
+    return;
+}
 // Get Bounds for Google Maps API V3
 // http://stackoverflow.com/questions/3774579/calculate-bounds-from-center-and-zoom-google-maps-api-v3
 /**
@@ -28,3 +33,4 @@ if (typeof google.maps.Map !== 'undefined') {
             p.fromPointToLatLng(new google.maps.Point(cpx.x + dw, cpx.y - dh)));
     };
 }
+})(window);

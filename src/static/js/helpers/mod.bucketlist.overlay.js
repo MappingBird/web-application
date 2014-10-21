@@ -1,3 +1,7 @@
+(function (window) {
+if (window.google === undefined) {
+    return;
+}
 /**
  * Bucketlist Overlay prototype
  */
@@ -517,3 +521,10 @@ BucketListLargeOverlay.prototype.draw = function() {
     div.style.top = (lf.y - $(div).height() - 49) + 'px';
 
 };
+
+    window.BucketListOverlay = BucketListOverlay;
+    window.BucketListPin = BucketListPin;
+    window.BucketListSmallOverlay = BucketListSmallOverlay;
+    window.BucketListMessageOverlay = BucketListMessageOverlay;
+    window.BucketListLargeOverlay = BucketListLargeOverlay;
+})(window);

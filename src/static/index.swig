@@ -1,23 +1,18 @@
-<!DOCTYPE html>
-<html ng-app="IndexApp">
-<head>
-    <title>MappingBird - Remember places for later</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "./share/_layout.swig" %}
 
-    
+{% block ngApp %}IndexApp{% endblock %}
+
+{% block css %}
 <!-- xxbuild:css /static/css/style-index.css -->
 <link href="/static/prototype_assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/static/prototype_assets/new_home/css/style.css" rel="stylesheet" media="screen">
 <link href="/static/prototype_assets/new_home/css/index.css" rel="stylesheet" media="screen">
 <link href="/static/prototype_assets/js/fancybox/jquery.fancybox.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- endbuild -->
+{% endblock %}
 
-
-
-</head>
-<body>
-
+{% block content %}
 <section class="intro">
     <header ng-controller="userController">
         <a href="/" class="logo"> Staging blablabla</a>
@@ -275,11 +270,9 @@
         </div>
     </footer>
 </section>
+{% endblock %}
 
-
-
-<script src="/static/js/mappingbird-b13064e8.js"></script>
-
+{% block postjs %}
     <script>
         // JavaScript Document
         function showScrollHint(){ //Display the hint to encourage users to scroll down
@@ -582,7 +575,4 @@
 	});
 
 	</script>
-
-
-</body>
-</html>
+{% endblock %}
