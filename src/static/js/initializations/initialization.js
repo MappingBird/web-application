@@ -4,6 +4,7 @@
  * 1. Load the Initialization/Directives/Services module for angular
  * 2. Load UserVoice Service
  * 3. Angular Run state - settings default http header
+ * 4. interpolate - {{ }} => [[ ]] (because of using swig template language)
  *
  */
 (function () {
@@ -19,7 +20,7 @@ mappingbird.initializations = angular.module('Initialization', [
     'mappingbird.analytics',
     'ngCookies',
     'ui.bootstrap'],
-    ['$httpProvider', '$dialogProvider', function($httpProvider, $dialogProvider) {
+    ['$httpProvider', '$dialogProvider', '$interpolateProvider', function($httpProvider, $dialogProvider, $interpolateProvider) {
     // HTTP solution from
     // http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/
     // angular bootstrap
@@ -78,6 +79,11 @@ mappingbird.initializations = angular.module('Initialization', [
 
         return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
     }];
+
+    // interpolate
+    // https://gist.github.com/angelochen960/4188293
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
 }]);
 
     mappingbird.initializations

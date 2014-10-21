@@ -1,347 +1,285 @@
 <!DOCTYPE html>
-<html ng-app="IndexApp" lang="en">
-  <head>
+<html ng-app="IndexApp">
+<head>
     <title>MappingBird - Remember places for later</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- build:css /static/css/style-index.css -->
-    <link href="./prototype_assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="./prototype_assets/new_home/css/style.css" rel="stylesheet" media="screen">
-    <link href="./prototype_assets/new_home/css/index.css" rel="stylesheet" media="screen">
-    <link href="./prototype_assets/js/fancybox/jquery.fancybox.css" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- endbuild -->
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <body>
-  	<section class="intro">
-    	<header ng-controller="userController">
-            <a href="/" class="logo"> Staging blablabla</a>
-            <div class="navbar pingismo-navbar pull-right middle-align" ng-show="isLoggedIn && isRegisteredUser" id="registered-user-menu">
-                <ul class="nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span ng-bind="user.email"></span>
-                            <b class="caret"></b>                        </a>
-                        <ul class="dropdown-menu pingismo-dropdown-menu">
-                          <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
-                          <li><a href="/static/settings.html"><i class="icon-wrench"></i> Settings</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#" ng-click="logout($event)"><i class="icon-off"></i> Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="navbar pingismo-navbar pull-right middle-align" ng-show="isLoggedIn && !isRegisteredUser" id="unregistered-user-menu">
-                <ul class="nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Sign up for a MappingBird account
-                            <b class="caret"></b>                        </a>
-                        <ul class="dropdown-menu pingismo-dropdown-menu">
-                          <li><a href="/static/signup.html"><i class="icon-user"></i> Sign Up</a></li>
-                          <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="navbar pingismo-navbar pull-right vertical-align" ng-show="!isLoggedIn" id="logged-out-menu">
-                <ul class="nav">
-                    <li><a href="/static/login.html" class="signin">SIGN IN</a></li>
-                </ul>
-            </div>
-        </header>
-        <div class="container vertical-align">
-            <h1>Have you ever forgotten places you were planning to go to?</h1>
-            <p>MappingBird is the easiest way for you to remember places for future reference.</p>
-            <a class="fancybox-media video-clip" id="video-link" href="https://vimeo.com/103387920">Watch 1 minute intro</a>        </div>
-        <div class="scrolldown-hint">
-            <img src="/static/prototype_assets/new_home/img/scrolldown-hint.gif" />
-            <p>Scroll to learn more</p>
-        </div>
-  </section>
+    
+<!-- xxbuild:css /static/css/style-index.css -->
+<link href="/static/prototype_assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="/static/prototype_assets/new_home/css/style.css" rel="stylesheet" media="screen">
+<link href="/static/prototype_assets/new_home/css/index.css" rel="stylesheet" media="screen">
+<link href="/static/prototype_assets/js/fancybox/jquery.fancybox.css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-  <!-- What It Is -->
-    <section class="what">
-    	<div class="row-fluid nav-what">
-        	<div class="span3"></div>
-            <div class="span2 save is-selected"><a href="#" class="what_btn" data-target="save"></a></div>
-            <div class="span2 organize"><a href="#" class="what_btn" data-target="organize"></a></div>
-            <div class="span2 access"><a href="#" class="what_btn" data-target="access"></a></div>
-            <div class="span3"></div>
-        </div>
-        <div class="what-text save-text" data-target="save">
-        	<h2>Remember Places With Just a Few Clicks</h2>
-            <p class="container">Just add our free “Remember This Place” bookmark to your bookmarks bar and you can save interesting places while surfing the web with just a few clicks.</p>
-        </div>
-        <div class="what-text organize-text" data-target="organize">
-        	<h2>Organize Places Any Way You Like</h2>
-            <p class="container">MappingBird offers you a flexible way to group your saved places. You can group places based by a trip you're planning or topics like "My Favorite Bars" and you can even tag them.</p>
-        </div>
-        <div class="what-text access-text" data-target="access">
-        	<h2>Easy Lookup Wherever You Are</h2>
-            <p class="container">MappingBird has a free Android app, so you can access your saved places whenever you need them.</p>
-        </div>
-        <div class="row-fluid">
-        	<div class="span2"></div>
-            <div class="span8 text-center what-screenshot">
-            	<img src="/static/prototype_assets/new_home/img/save-screenshot.jpg" class="save-img" />
-                <img src="/static/prototype_assets/new_home/img/organize-screenshot.jpg" class="organize-img" />
-                <div class="access-img">
-                	<img src="/static/prototype_assets/new_home/img/access-screenshot.jpg" class="img-andriod" />
-                    <a href="#" target="_blank" class="btn-googleplay"></a>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <div class="span2"></div>
-        </div>
-    </section>
-    <!-- End of What It Is -->
 
-    <!-- How It Works -->
-    <section class="how" id="how-it-works">
-        <div class="how-nav">
-            <a href="#" class="prev pull-left"></a>
-            <a href="#" class="next pull-right"></a>        </div>
-   	  	<h1>How It Works</h1>
-        <ul class="how-nav-indicator">
-        	<li class="active jump-step1"><a href="javascript:HowItWorks(1);"></a></li>
-            <li class="jump-step2"><a href="javascript:HowItWorks(2);"></a></li>
-            <li class="jump-step3"><a href="javascript:HowItWorks(3);"></a></li>
-            <li class="jump-step4"><a href="javascript:HowItWorks(4);"></a></li>
-            <li class="jump-step5"><a href="javascript:HowItWorks(5);"></a></li>
-        </ul>
-        <div class="container pingismo-container">
-        	<!-- How It Works - Chrome -->
-            <div class="how-chrome">
-            	<div class="how-step step1">
-                    <h2>1. Display the Bookmarks bar</h2>
-                    <p>Click the menu icon at the top-right of your Chrome browser and hover the mouse over Bookmarks. Make sure the <i>Show Bookmarks Bar</i> is checked.
-You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show the Bookmarks bar.</p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-bookmarkbar.gif" /></div>
-                </div>
-          <div class="how-step step2">
-                    <h2 class="hide">2. Drag the giant button up</h2>
-                    <p class="hide">
-                    	Drag the big "Remember This Place" button below to your Bookmarks Bar. Once you see a "+" icon, you can release the mouse.<br/><br/>
-                    	<a class="btn btn-giant btn-primary pingismo-btn" id="how-it-works-remember-button-chrome" type="button" href="javascript:
+
+</head>
+<body>
+
+<section class="intro">
+    <header ng-controller="userController">
+        <a href="/" class="logo"> Staging blablabla</a>
+        <div class="navbar pingismo-navbar pull-right middle-align" ng-show="isLoggedIn && isRegisteredUser" id="registered-user-menu">
+            <ul class="nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span ng-bind="user.email"></span>
+                        <b class="caret"></b>                        </a>
+                    <ul class="dropdown-menu pingismo-dropdown-menu">
+                        <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
+                        <li><a href="/static/settings.html"><i class="icon-wrench"></i> Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" ng-click="logout($event)"><i class="icon-off"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar pingismo-navbar pull-right middle-align" ng-show="isLoggedIn && !isRegisteredUser" id="unregistered-user-menu">
+            <ul class="nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Sign up for a MappingBird account
+                        <b class="caret"></b>                        </a>
+                    <ul class="dropdown-menu pingismo-dropdown-menu">
+                        <li><a href="/static/signup.html"><i class="icon-user"></i> Sign Up</a></li>
+                        <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar pingismo-navbar pull-right vertical-align" ng-show="!isLoggedIn" id="logged-out-menu">
+            <ul class="nav">
+                <li><a href="/static/login.html" class="signin">SIGN IN</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="container vertical-align">
+        <h1>Have you ever forgotten places you were planning to go to?</h1>
+        <p>MappingBird is the easiest way for you to remember places for future reference.</p>
+        <a class="fancybox-media video-clip" id="video-link" href="https://vimeo.com/103387920">Watch 1 minute intro</a>        </div>
+    <div class="scrolldown-hint">
+        <img src="/static/prototype_assets/new_home/img/scrolldown-hint.gif" />
+        <p>Scroll to learn more</p>
+    </div>
+</section>
+
+<!-- What It Is -->
+<section class="what">
+    <div class="row-fluid nav-what">
+        <div class="span3"></div>
+        <div class="span2 save is-selected"><a href="#" class="what_btn" data-target="save"></a></div>
+        <div class="span2 organize"><a href="#" class="what_btn" data-target="organize"></a></div>
+        <div class="span2 access"><a href="#" class="what_btn" data-target="access"></a></div>
+        <div class="span3"></div>
+    </div>
+    <div class="what-text save-text" data-target="save">
+        <h2>Remember Places With Just a Few Clicks</h2>
+        <p class="container">Just add our free “Remember This Place” bookmark to your bookmarks bar and you can save interesting places while surfing the web with just a few clicks.</p>
+    </div>
+    <div class="what-text organize-text" data-target="organize">
+        <h2>Organize Places Any Way You Like</h2>
+        <p class="container">MappingBird offers you a flexible way to group your saved places. You can group places based by a trip you're planning or topics like "My Favorite Bars" and you can even tag them.</p>
+    </div>
+    <div class="what-text access-text" data-target="access">
+        <h2>Easy Lookup Wherever You Are</h2>
+        <p class="container">MappingBird has a free Android app, so you can access your saved places whenever you need them.</p>
+    </div>
+    <div class="row-fluid">
+        <div class="span2"></div>
+        <div class="span8 text-center what-screenshot">
+            <img src="/static/prototype_assets/new_home/img/save-screenshot.jpg" class="save-img" />
+            <img src="/static/prototype_assets/new_home/img/organize-screenshot.jpg" class="organize-img" />
+            <div class="access-img">
+                <img src="/static/prototype_assets/new_home/img/access-screenshot.jpg" class="img-andriod" />
+                <a href="#" target="_blank" class="btn-googleplay"></a>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="span2"></div>
+    </div>
+</section>
+<!-- End of What It Is -->
+
+<!-- How It Works -->
+<section class="how" id="how-it-works">
+    <div class="how-nav">
+        <a href="#" class="prev pull-left"></a>
+        <a href="#" class="next pull-right"></a>        </div>
+    <h1>How It Works</h1>
+    <ul class="how-nav-indicator">
+        <li class="active jump-step1"><a href="javascript:HowItWorks(1);"></a></li>
+        <li class="jump-step2"><a href="javascript:HowItWorks(2);"></a></li>
+        <li class="jump-step3"><a href="javascript:HowItWorks(3);"></a></li>
+        <li class="jump-step4"><a href="javascript:HowItWorks(4);"></a></li>
+        <li class="jump-step5"><a href="javascript:HowItWorks(5);"></a></li>
+    </ul>
+    <div class="container pingismo-container">
+        <!-- How It Works - Chrome -->
+        <div class="how-chrome">
+            <div class="how-step step1">
+                <h2>1. Display the Bookmarks bar</h2>
+                <p>Click the menu icon at the top-right of your Chrome browser and hover the mouse over Bookmarks. Make sure the <i>Show Bookmarks Bar</i> is checked.
+                    You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show the Bookmarks bar.</p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-bookmarkbar.gif" /></div>
+            </div>
+            <div class="how-step step2">
+                <h2 class="hide">2. Drag the giant button up</h2>
+                <p class="hide">
+                    Drag the big "Remember This Place" button below to your Bookmarks Bar. Once you see a "+" icon, you can release the mouse.<br/><br/>
+                    <a class="btn btn-giant btn-primary pingismo-btn" id="how-it-works-remember-button-chrome" type="button" href="javascript:
     (function(){var BASE='https://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>                    </p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-drag.gif" class="hide" /></div>
-                </div>
-          <div class="how-step step3">
-                    <h2 class="hide">3. Select a place name or address</h2>
-                    <p class="hide">
-                    	Whenever you see an interesting place on a website, text-select name of the place or its address, and click the "<b>Remember This Place</b>" bookmark on the Bookmarks Bar.<br/><br/>
-                        <!--
-                        <a href="#" class="btn-highlight pingismo-btn Try-Select-Text">Try It</a>
-                        -->
-                    </p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-website.gif" class="hide" /></div>
-                </div>
-          <div class="how-step step4">
-                    <h2 class="hide">4. Save to your map</h2>
-                    <p class="hide">After clicking the "Remember This Place" bookmark, add any commends you like and click off any images you don't want to save and click "<b>Save to Map</b>."</p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-save.png" class="hide" /></div>
-                </div>
-          <div class="how-step step5">
-                    <h2 class="hide">5. Start your collections</h2>
-                    <p class="hide">Fantastic! Now you know how to save a place to Mappingbird. Now start collecting awesome places!</p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-map.png" class="hide" /></div>
-                </div>
-          </div>
-            <!-- End of How It Works - Chrome -->
-
-            <!-- How It Works - Firefox -->
-            <div class="how-firefox">
-            	<div class="how-step step1">
-                    <h2>1. Display the Bookmarks bar</h2>
-                    <p>Click the menu icon at the top-right of your Firefox browser and hover the mouse over Bookmarks. Make sure the <i>Show Bookmarks Bar</i> is checked.</p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/firefox-bookmarkbar.gif" /></div>
-                </div>
-          		<div class="how-step step2">
-                    <h2 class="hide">2. Drag the giant button up</h2>
-                    <p class="hide">
-                    	Drag the big "Remember This Place" button below to your Bookmarks Bar. Once you see a "+" icon, you can release the mouse.<br/><br/>
-                    	<a class="btn btn-giant btn-primary pingismo-btn" id="how-it-works-remember-button-firefox" type="button" href="javascript:
-    (function(){var BASE='https://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
-                    </p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/firefox-drag.gif" /></div>
-                </div>
-          		<div class="how-step step3">
-                    <h2 class="hide">3. Select a place name or address</h2>
-                    <p class="hide">Whenever you see an interesting place on a website, text-select name of the place or its address, and click the "<b>Remember This Place</b>" bookmark on the Bookmarks Bar.<br/><br/>
-                        <!--
-                        <a href="#" class="btn-highlight pingismo-btn Try-Select-Text">Try It</a>
-                        -->
-                        </p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/firefox-website.gif" /></div>
-                </div>
-          		<div class="how-step step4">
-                    <h2 class="hide">4. Save to your map</h2>
-                    <p class="hide">After clicking the "Remember This Place" bookmark, add any commends you like and click off any images you don't want to save and click "<b>Save to Map</b>.</p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-save.png" /></div>
-                </div>
-          		<div class="how-step step5">
-                    <h2 class="hide">5. Start your collections</h2>
-                    <p class="hide">Fantastic! Now you know how to save a place to Mappingbird. Now start collecting awesome places!</p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-map.png" /></div>
-                </div>
-          </div>
-            <!-- End of How It Works - Firefox -->
-
-            <!-- How It Works - Safari -->
-            <div class="how-safari">
-            	<div class="how-step step1">
-                    <h2>1. Display the Bookmarks bar</h2>
-                    <p>Click the menu icon at the top-right of your Safari browser and hover the mouse over Bookmarks. Make sure the <i>Show Bookmarks Bar</i> is checked.
-You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show the Bookmarks bar.</p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/safari-bookmarkbar.gif" /></div>
-                </div>
-          <div class="how-step step2">
-                    <h2 class="hide">2. Drag the giant button up</h2>
-                    <p class="hide">
-                    	Drag the big "Remember This Place" button below to your Bookmarks Bar. Once you see a "+" icon, you can release the mouse.<br/><br/>
-                    	<a class="btn btn-giant btn-primary pingismo-btn" id="how-it-works-remember-button-safari" type="button" href="javascript:
-    (function(){var BASE='https://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
-                    </p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/safari-drag.gif" /></div>
-                </div>
-          <div class="how-step step3">
-                    <h2 class="hide">3. Select a place name or address</h2>
-                    <p class="hide">Whenever you see an interesting place on a website, text-select name of the place or its address, and click the "<b>Remember This Place</b>" bookmark on the Bookmarks Bar.<br/><br/>
-                        <!--
-                        <a href="#" class="btn-highlight pingismo-btn Try-Select-Text">Try It</a>
-                        -->
-                        </p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/safari-website.gif" /></div>
-                </div>
-          <div class="how-step step4">
-                    <h2 class="hide">4. Save to your map</h2>
-                    <p class="hide">After clicking the "Remember This Place" bookmark, add any commends you like and click off any images you don't want to save and click "<b>Save to Map</b>."</p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-save.png" /></div>
-                </div>
-          <div class="how-step step5">
-                    <h2 class="hide">5. Start your collections</h2>
-                    <p class="hide">Fantastic! Now you know how to save a place to Mappingbird. Now start collecting awesome places!</p>
-                    <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-map.png" /></div>
-                </div>
-          </div>
-            <!-- End of How It Works - Safari -->
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-drag.gif" class="hide" /></div>
+            </div>
+            <div class="how-step step3">
+                <h2 class="hide">3. Select a place name or address</h2>
+                <p class="hide">
+                    Whenever you see an interesting place on a website, text-select name of the place or its address, and click the "<b>Remember This Place</b>" bookmark on the Bookmarks Bar.<br/><br/>
+                    <!--
+                    <a href="#" class="btn-highlight pingismo-btn Try-Select-Text">Try It</a>
+                    -->
+                </p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-website.gif" class="hide" /></div>
+            </div>
+            <div class="how-step step4">
+                <h2 class="hide">4. Save to your map</h2>
+                <p class="hide">After clicking the "Remember This Place" bookmark, add any commends you like and click off any images you don't want to save and click "<b>Save to Map</b>."</p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-save.png" class="hide" /></div>
+            </div>
+            <div class="how-step step5">
+                <h2 class="hide">5. Start your collections</h2>
+                <p class="hide">Fantastic! Now you know how to save a place to Mappingbird. Now start collecting awesome places!</p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-map.png" class="hide" /></div>
+            </div>
         </div>
-  </section>
-  <!-- End of How It Works -->
+        <!-- End of How It Works - Chrome -->
 
-  <!-- How It Works - Step 3 Example -->
-  <div class="how-select-text-ex">
-  	<div class="tips-wrapper">
-    	<h2>1. Select “Eiffel Tower” or its address at website below</h2>
+        <!-- How It Works - Firefox -->
+        <div class="how-firefox">
+            <div class="how-step step1">
+                <h2>1. Display the Bookmarks bar</h2>
+                <p>Click the menu icon at the top-right of your Firefox browser and hover the mouse over Bookmarks. Make sure the <i>Show Bookmarks Bar</i> is checked.</p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/firefox-bookmarkbar.gif" /></div>
+            </div>
+            <div class="how-step step2">
+                <h2 class="hide">2. Drag the giant button up</h2>
+                <p class="hide">
+                    Drag the big "Remember This Place" button below to your Bookmarks Bar. Once you see a "+" icon, you can release the mouse.<br/><br/>
+                    <a class="btn btn-giant btn-primary pingismo-btn" id="how-it-works-remember-button-firefox" type="button" href="javascript:
+    (function(){var BASE='https://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
+                </p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/firefox-drag.gif" /></div>
+            </div>
+            <div class="how-step step3">
+                <h2 class="hide">3. Select a place name or address</h2>
+                <p class="hide">Whenever you see an interesting place on a website, text-select name of the place or its address, and click the "<b>Remember This Place</b>" bookmark on the Bookmarks Bar.<br/><br/>
+                    <!--
+                    <a href="#" class="btn-highlight pingismo-btn Try-Select-Text">Try It</a>
+                    -->
+                </p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/firefox-website.gif" /></div>
+            </div>
+            <div class="how-step step4">
+                <h2 class="hide">4. Save to your map</h2>
+                <p class="hide">After clicking the "Remember This Place" bookmark, add any commends you like and click off any images you don't want to save and click "<b>Save to Map</b>.</p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-save.png" /></div>
+            </div>
+            <div class="how-step step5">
+                <h2 class="hide">5. Start your collections</h2>
+                <p class="hide">Fantastic! Now you know how to save a place to Mappingbird. Now start collecting awesome places!</p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-map.png" /></div>
+            </div>
+        </div>
+        <!-- End of How It Works - Firefox -->
+
+        <!-- How It Works - Safari -->
+        <div class="how-safari">
+            <div class="how-step step1">
+                <h2>1. Display the Bookmarks bar</h2>
+                <p>Click the menu icon at the top-right of your Safari browser and hover the mouse over Bookmarks. Make sure the <i>Show Bookmarks Bar</i> is checked.
+                    You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show the Bookmarks bar.</p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/safari-bookmarkbar.gif" /></div>
+            </div>
+            <div class="how-step step2">
+                <h2 class="hide">2. Drag the giant button up</h2>
+                <p class="hide">
+                    Drag the big "Remember This Place" button below to your Bookmarks Bar. Once you see a "+" icon, you can release the mouse.<br/><br/>
+                    <a class="btn btn-giant btn-primary pingismo-btn" id="how-it-works-remember-button-safari" type="button" href="javascript:
+    (function(){var BASE='https://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
+                </p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/safari-drag.gif" /></div>
+            </div>
+            <div class="how-step step3">
+                <h2 class="hide">3. Select a place name or address</h2>
+                <p class="hide">Whenever you see an interesting place on a website, text-select name of the place or its address, and click the "<b>Remember This Place</b>" bookmark on the Bookmarks Bar.<br/><br/>
+                    <!--
+                    <a href="#" class="btn-highlight pingismo-btn Try-Select-Text">Try It</a>
+                    -->
+                </p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/safari-website.gif" /></div>
+            </div>
+            <div class="how-step step4">
+                <h2 class="hide">4. Save to your map</h2>
+                <p class="hide">After clicking the "Remember This Place" bookmark, add any commends you like and click off any images you don't want to save and click "<b>Save to Map</b>."</p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-save.png" /></div>
+            </div>
+            <div class="how-step step5">
+                <h2 class="hide">5. Start your collections</h2>
+                <p class="hide">Fantastic! Now you know how to save a place to Mappingbird. Now start collecting awesome places!</p>
+                <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-map.png" /></div>
+            </div>
+        </div>
+        <!-- End of How It Works - Safari -->
+    </div>
+</section>
+<!-- End of How It Works -->
+
+<!-- How It Works - Step 3 Example -->
+<div class="how-select-text-ex">
+    <div class="tips-wrapper">
+        <h2>1. Select “Eiffel Tower” or its address at website below</h2>
         <h2>2. Click “Remember This Place” on your bookmarks bar</h2>
         <a href="#" class="close-SelectTextEx"></a>
     </div>
     <iframe src="http://www.lonelyplanet.com/france/paris/sights/landmarks-monuments/eiffel-tower" class="example-page"></iframe>
-  </div>
-  <!-- End of How It Works - Step 3 Example -->
+</div>
+<!-- End of How It Works - Step 3 Example -->
 
-    <!-- Get Started -->
-    <section class="done">
-    	<div class="container pingismo-container">
-        	<img class="getstarted-img" src="/static/prototype_assets/new_home/img/macbook-air-zoom.png" />
-        	<div class="getstarted-btn-wrapper pull-right">
-            	<h1>Start creating your collections</h1>
-                <p>Drag "Remember This Place" button below up to your bookmark bar to get started.</p>
-                <a class="btn btn-giant btn-primary pingismo-btn" id="get-started-remember-button" type="button"  href="javascript:
+<!-- Get Started -->
+<section class="done">
+    <div class="container pingismo-container">
+        <img class="getstarted-img" src="/static/prototype_assets/new_home/img/macbook-air-zoom.png" />
+        <div class="getstarted-btn-wrapper pull-right">
+            <h1>Start creating your collections</h1>
+            <p>Drag "Remember This Place" button below up to your bookmark bar to get started.</p>
+            <a class="btn btn-giant btn-primary pingismo-btn" id="get-started-remember-button" type="button"  href="javascript:
     (function(){var BASE='https://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>            </div>
+    </div>
+    <div ui-view></div>
+    <footer>
+        <div class="logo-copyright">
+            <p class="slogan"><img src="/static/prototype_assets/new_home/img/logo-footer.png" /> Remember places for later.</p>
+            <p>Copyright &copy; 2014 MappingBird LLC. All referred posts &copy; their respective owners.</p>
         </div>
-        <div ui-view></div>
-        <footer>
-                <div class="logo-copyright">
-                    <p class="slogan"><img src="/static/prototype_assets/new_home/img/logo-footer.png" /> Remember places for later.</p>
-                    <p>Copyright &copy; 2014 MappingBird LLC. All referred posts &copy; their respective owners.</p>
-                </div>
-                <div class="lang-contact pull-right">
-                    <ul class="nav nav-pills">
-                         <li><a href="#">繁體中文</a></li>
-                         <li class="divider-vertical pingismo-divider-vertical"></li>
-                         <li class="active"><a href="#">English</a></li>
-                    </ul>
-                    <p>
-                    	<a href="#" class="footer-contact">Contact Us</a>
-                        <a href="#" class="footer-follow">Follow Us</a>
-                    </p>
-                </div>
-        </footer>
-    </section>
-    <!-- End of Get Started -->
-    <!-- build:js /static/js/mappingbird.js -->
-    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="./bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="./bower_components/fancybox/source/jquery.fancybox.pack.js"></script>
-    <script src="./bower_components/angular/angular.min.js"></script>
-    <script src="./bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="./bower_components/angular-resource/angular-resource.min.js"></script>
-    <script src="./bower_components/angular-cookies/angular-cookies.min.js"></script>
-    <script src="./bower_components/ng-tags-input/ng-tags-input.min.js"></script>
-    <script src="./bower_components/moment/min/moment.min.js"></script>
-    <script src="./bower_components/angular-moment/angular-moment.min.js"></script>
-    <script src="./js/mappingbird.js"></script>
-    <script src="./js/helpers/mod.noconsole.js"></script>
-    <script src="./js/helpers/mod.prototype.js"></script>
-    <script src="./js/helpers/mod.google-maps.js"></script>
-    <script src="./js/helpers/mod.bucketlist.overlay.js"></script>
-    <script src="./js/helpers/utilities.js"></script>
-    <script src="./js/initializations/initialization.js"></script>
-    <script src="./js/vendor/slimbox2/slimbox2.js"></script>
-    <script src="./js/controllers/controller.save-app.user-controller.js"></script>
-    <script src="./js/controllers/controller.save-app.save-page-controller.js"></script>
-    <script src="./js/controllers/controller.save-app.search-results-controller.js"></script>
-    <script src="./js/controllers/controller.save-app.collections-controller.js"></script>
-    <script src="./js/controllers/controller.save-app.map-controller.js"></script>
-    <script src="./js/controllers/controller.save-app.point-detail-controller.js"></script>
-    <script src="./js/controllers/controller.save-app.list-controller.js"></script>
-    <script src="./js/services/service.presets.js"></script>
-    <script src="./js/services/service.map-points.js"></script>
-    <script src="./js/services/service.user.js"></script>
-    <script src="./js/services/service.collections.js"></script>
-    <script src="./js/services/service.state-service.js"></script>
-    <script src="./js/services/service.collections-by-user-loader.js"></script>
-    <script src="./js/services/service.point-loader.js"></script>
-    <script src="./js/services/service.user-resource-loader.js"></script>
-    <script src="./js/services/service.broadcast-service.js"></script>
-    <script src="./js/services/service.analytics.js"></script>
-    <script src="./js/resources/resource.token.js"></script>
-    <script src="./js/resources/resource.user-login.js"></script>
-    <script src="./js/resources/resource.user-logout.js"></script>
-    <script src="./js/resources/resource.scraper.js"></script>
-    <script src="./js/resources/resource.collection.js"></script>
-    <script src="./js/resources/resource.collections-by-user-resource.js"></script>
-    <script src="./js/resources/resource.point-resource.js"></script>
-    <script src="./js/resources/resource.point-image.js"></script>
-    <script src="./js/resources/resource.current-user.js"></script>
-    <script src="./js/resources/resource.user-resource.js"></script>
-    <script src="./js/resources/resource.tag-resource.js"></script>
-    <script src="./js/directives/directive.collection-list.js"></script>
-    <script src="./js/directives/directive.collection-list-view.js"></script>
-    <script src="./js/directives/directive.height-to-bottom.js"></script>
-    <script src="./js/directives/directive.left-outer-height.js"></script>
-    <script src="./js/directives/directive.map-alert.js"></script>
-    <script src="./js/directives/directive.map-dialog.js"></script>
-    <script src="./js/directives/directive.massive-alert.js"></script>
-    <script src="./js/directives/directive.mcustomscrollbar.js"></script>
-    <script src="./js/directives/directive.mcustomscrollbar-parent.js"></script>
-    <script src="./js/directives/directive.new-window.js"></script>
-    <script src="./js/directives/directive.on-repeat-done.js"></script>
-    <script src="./js/directives/directive.p-alert.js"></script>
-    <script src="./js/directives/directive.point-detail.js"></script>
-    <script src="./js/directives/directive.save-panel.js"></script>
-    <script src="./js/directives/directive.scrollbar-height-to-bottom.js"></script>
-    <script src="./js/directives/directive.search-box.js"></script>
-    <script src="./js/directives/directive.thumb-alignment.js"></script>
-    <script src="./js/index-app.js"></script>
-    <script src="./js/login-app.js"></script>
-    <script src="./js/save-app.js"></script>
-    <script src="./js/settings-app.js"></script>
-    <script src="./js/signup-app.js"></script>
-    <!-- endbuild -->
+        <div class="lang-contact pull-right">
+            <ul class="nav nav-pills">
+                <li><a href="#">繁體中文</a></li>
+                <li class="divider-vertical pingismo-divider-vertical"></li>
+                <li class="active"><a href="#">English</a></li>
+            </ul>
+            <p>
+                <a href="#" class="footer-contact">Contact Us</a>
+                <a href="#" class="footer-follow">Follow Us</a>
+            </p>
+        </div>
+    </footer>
+</section>
+
+
+
+<script src="/static/js/mappingbird-b13064e8.js"></script>
+
     <script>
         // JavaScript Document
         function showScrollHint(){ //Display the hint to encourage users to scroll down
@@ -644,5 +582,7 @@ You can also click <i>Ctrl+Shift+B</i> (or <i>Command+Shit+B</i> on Mac) to show
 	});
 
 	</script>
-  </body>
+
+
+</body>
 </html>

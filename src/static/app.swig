@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html ng-app="SaveApp">
-<head>
-    <title>MappingBird - Remember places for later</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "./share/_layout.swig" %}
 
-    
+{% block ngApp %}SaveApp{% endblock %}
+
+{% block css %}
 <!-- xxbuild:css /static/css/style-app.css -->
 <link type="text/css" rel="stylesheet" href="/static/css/jquery-ui-themes-1.10.0/base/jquery-ui.css" media="screen">
 <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.min.css" media="screen">
@@ -15,12 +12,10 @@
 <link type="text/css" rel="stylesheet" href="/static/css/jquery.mCustomScrollbar.css" media="screen">
 <link type="text/css" rel="stylesheet" href="/static/css/ng-tags-input.min.css" media="screen">
 <link type="text/css" rel="stylesheet" href="/static/css/slimbox2/slimbox2.css" media="screen">
+<!-- endbuild -->
+{% endblock %}
 
-
-
-</head>
-<body>
-
+{% block content %}
 <section ng-controller="savePageController" class="map-section">
 
     <header ng-controller="userController" class="float-top">
@@ -129,12 +124,5 @@
         </div>
     </footer>
 </section>
-<script src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
-
-
-
-<script src="/static/js/mappingbird-b13064e8.js"></script>
-
-
-</body>
-</html>
+{% block prejs %}<script src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>{% endblock %}
+{% endblock %}

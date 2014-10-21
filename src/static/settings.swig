@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html ng-app="SettingsApp">
-<head>
-    <title>MappingBird - Remember places for later</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "./share/_layout.swig" %}
 
-    
+{% block ngApp %}SettingsApp{% endblock %}
+
+{% block css %}
 <!-- xxbuild:css /static/css/style-settings.css -->
 <link href="/static/prototype_assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/static/prototype_assets/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 <link href="/static/prototype_assets/css/style.css" rel="stylesheet" media="screen">
 <link href="/static/css/account.css" rel="stylesheet" media="screen">
+<!-- endbuild -->
+{% endblock %}
 
-
-
-</head>
-<body>
-
+{% block content %}
 <section class="main" ng-controller="mainController">
     <header>
         <a href="/" class="logo"></a>
@@ -41,7 +36,7 @@
         <div class="row-fluid">
             <div class="span2"></div>
             <div class="span8">
-                <p class="title"></p>
+                <p class="title">{{email}}</p>
                 <h1>Settings</h1>
                 <hr>
                 <p class="title">Change Password</p>
@@ -107,11 +102,4 @@
         </div>
     </footer>
 </section>
-
-
-
-<script src="/static/js/mappingbird-b13064e8.js"></script>
-
-
-</body>
-</html>
+{% endblock %}

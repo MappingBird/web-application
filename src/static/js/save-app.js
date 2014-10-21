@@ -8,7 +8,7 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
         .state('savePoint', {
             url: '/save?url&search',
             template: '<span></span>',
-            controller: ['BroadcastService', 'User', '$stateParams', '$scope', function(BroadcastService, User, $stateParams, $scope, $location) {
+            controller: ['BroadcastService', 'User', '$stateParams', '$scope', '$location', function(BroadcastService, User, $stateParams, $scope, $location) {
 
                 var killHandler;
 
