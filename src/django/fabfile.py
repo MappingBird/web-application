@@ -22,11 +22,13 @@ def copy_db():
  
 def collect_static(stage=False):
     directory = 'pingismo'
+    venv = 'pingismo'
 
     if stage:
         directory = 'stage/pingismo'
+        venv = 'stage'
 
-    with prefix('workon pingismo'), cd('%s/src/django' % directory):
+    with prefix('workon %s' % venv), cd('%s/src/django' % directory):
         run('python manage.py collectstatic')
  
 def restart_pingismo(stage=False):
