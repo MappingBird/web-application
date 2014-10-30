@@ -12,7 +12,7 @@
 {% block content %}{% endblock %}
 
 {% block prejs %}{% endblock %}
-{% include "./_js.swig" %}
+{% include "share/_js.swig" %}
 {% block postjs %}{% endblock %}
 
 </body>

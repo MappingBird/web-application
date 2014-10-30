@@ -1,5 +1,5 @@
 # Create your views here.
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib.staticfiles.views import serve
 
 def home(request):
@@ -9,4 +9,8 @@ def home(request):
         return redirect('/static/app.html')
     '''
 
-    return serve(request, path='/index.html')
+    # return serve(request, path='/index.html')
+    return render(request, 'index.swig')
+
+def page(request, page=None):
+    return render(request, '%s.swig' % page)
