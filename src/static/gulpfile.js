@@ -34,14 +34,14 @@ gulp.task('swig', function() {
         .pipe(gulp.dest('./partials/'));
 });
 
-gulp.task('usemin', ['swig', 'images', 'copy'],function () {
-    return gulp.src('./*.html')
+gulp.task('usemin', ['images', 'copy'],function () {
+    return gulp.src('./**/*.swig')
         .pipe(usemin({
             outputRelativePath: '../',
             // css: [minifyCss(), 'concat', rev()],
             // html: [minifyHtml({empty: true})],
             js: [uglify(), rev()]
         }))
-        .pipe(gulp.dest('./'));
-        //.pipe(gulp.dest('../'+ stageFile + '/'));
+        //.pipe(gulp.dest('./'));
+        .pipe(gulp.dest('../'+ stageFile + '/'));
 });
