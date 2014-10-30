@@ -53,7 +53,7 @@ mappingbird.LoginApp.controller('mainController', ['$scope', '$timeout', 'Preset
                 && typeof data.user.email !== 'undefined'
                 && typeof data.user.id !==  'undefined') {
 
-                window.location.href="/static/app.html";
+                window.location.href="/app";
             } else {
                 $scope.errorInvalidLogin = true;
 

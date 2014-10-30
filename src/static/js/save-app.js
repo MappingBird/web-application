@@ -37,7 +37,7 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
                             if (BroadcastService.message.data.hasCollectionsSaved
                                 && /(^http:\/\/www.mappingbird.com|^http:\/\/localhost)/.test($stateParams.url)
                                 && $stateParams.search.length == 0) {
-                                window.location.href = '/static/app.html#/';
+                                window.location.href = '/app#/';
                             } else {
                                 b();
                             }

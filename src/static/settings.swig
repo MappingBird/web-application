@@ -23,8 +23,8 @@
                         <span ng-bind="email"></span>
                         <b class="caret"></b>                        </a>
                     <ul class="dropdown-menu pingismo-dropdown-menu">
-                        <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
-                        <li><a href="/static/settings.html"><i class="icon-wrench"></i> Settings</a></li>
+                        <li><a href="/app#/"><i class="icon-globe"></i> View map</a></li>
+                        <li><a href="/settings"><i class="icon-wrench"></i> Settings</a></li>
                         <li class="divider"></li>
                         <li><a href="#" ng-click="logout($event)"><i class="icon-off"></i> Logout</a></li>
                     </ul>

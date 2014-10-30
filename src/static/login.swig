@@ -38,7 +38,7 @@
                     </div>
                     <div class="action-button">
                         <button class="btn btn-giant btn-primary pingismo-btn" type="submit" id="login-button">Login to Your Account</button>
-                        <p class="button-option">Not a member? <a href="/static/signup.html">Sign up now</a></p>
+                        <p class="button-option">Not a member? <a href="/signup">Sign up now</a></p>
                     </div>
                 </form>
             </div>

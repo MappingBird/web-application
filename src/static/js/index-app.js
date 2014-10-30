@@ -60,7 +60,7 @@ mappingbird.IndexApp.controller('userController', ['$scope', '$cookies', '$http'
             // change location
             // unless there's 'stay' in the query string
             if (!/(\?stay=1$|\/how-it-works$)/.test(location.href)) {
-                $window.location.href = '/static/app.html';
+                $window.location.href = '/app';
             }
 
 
@@ -79,7 +79,7 @@ mappingbird.IndexApp.controller('userController', ['$scope', '$cookies', '$http'
         UserLogout.get(function(data, headers) {
 
             delete $cookies['sessionid'];
-            $window.location.href = "/static/index.html";
+            $window.location.href = "/index";
 
         });
 

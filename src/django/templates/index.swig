@@ -23,8 +23,8 @@
                         <span ng-bind="user.email"></span>
                         <b class="caret"></b>                        </a>
                     <ul class="dropdown-menu pingismo-dropdown-menu">
-                        <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
-                        <li><a href="/static/settings.html"><i class="icon-wrench"></i> Settings</a></li>
+                        <li><a href="/app#/"><i class="icon-globe"></i> View map</a></li>
+                        <li><a href="/settings"><i class="icon-wrench"></i> Settings</a></li>
                         <li class="divider"></li>
                         <li><a href="#" ng-click="logout($event)"><i class="icon-off"></i> Logout</a></li>
                     </ul>
@@ -38,15 +38,15 @@
                         Sign up for a MappingBird account
                         <b class="caret"></b>                        </a>
                     <ul class="dropdown-menu pingismo-dropdown-menu">
-                        <li><a href="/static/signup.html"><i class="icon-user"></i> Sign Up</a></li>
-                        <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
+                        <li><a href="/signup"><i class="icon-user"></i> Sign Up</a></li>
+                        <li><a href="/app#/"><i class="icon-globe"></i> View map</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
         <div class="navbar pingismo-navbar pull-right vertical-align" ng-show="!isLoggedIn" id="logged-out-menu">
             <ul class="nav">
-                <li><a href="/static/login.html" class="signin">SIGN IN</a></li>
+                <li><a href="/login" class="signin">SIGN IN</a></li>
             </ul>
         </div>
     </header>
@@ -124,7 +124,7 @@
                 <p class="hide">
                     Drag the big "Remember This Place" button below to your Bookmarks Bar. Once you see a "+" icon, you can release the mouse.<br/><br/>
                     <a class="btn btn-giant btn-primary pingismo-btn" id="how-it-works-remember-button-chrome" type="button" href="javascript:
-    (function(){var BASE='https://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>                    </p>
+    (function(){var BASE='https://www.mappingbird.com/',MAP_SAVE_URL=BASE+'app#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>                    </p>
                 <div class="screenshot"><img src="/static/prototype_assets/new_home/img/chrome-drag.gif" class="hide" /></div>
             </div>
             <div class="how-step step3">
@@ -162,7 +162,7 @@
                 <p class="hide">
                     Drag the big "Remember This Place" button below to your Bookmarks Bar. Once you see a "+" icon, you can release the mouse.<br/><br/>
                     <a class="btn btn-giant btn-primary pingismo-btn" id="how-it-works-remember-button-firefox" type="button" href="javascript:
-    (function(){var BASE='https://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
+    (function(){var BASE='https://www.mappingbird.com/',MAP_SAVE_URL=BASE+'app#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
                 </p>
                 <div class="screenshot"><img src="/static/prototype_assets/new_home/img/firefox-drag.gif" /></div>
             </div>
@@ -201,7 +201,7 @@
                 <p class="hide">
                     Drag the big "Remember This Place" button below to your Bookmarks Bar. Once you see a "+" icon, you can release the mouse.<br/><br/>
                     <a class="btn btn-giant btn-primary pingismo-btn" id="how-it-works-remember-button-safari" type="button" href="javascript:
-    (function(){var BASE='https://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
+    (function(){var BASE='https://www.mappingbird.com/',MAP_SAVE_URL=BASE+'app#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>
                 </p>
                 <div class="screenshot"><img src="/static/prototype_assets/new_home/img/safari-drag.gif" /></div>
             </div>
@@ -249,7 +249,7 @@
             <h1>Start creating your collections</h1>
             <p>Drag "Remember This Place" button below up to your bookmark bar to get started.</p>
             <a class="btn btn-giant btn-primary pingismo-btn" id="get-started-remember-button" type="button"  href="javascript:
-    (function(){var BASE='https://www.mappingbird.com/static/',MAP_SAVE_URL=BASE+'app.html#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>            </div>
+    (function(){var BASE='https://www.mappingbird.com/',MAP_SAVE_URL=BASE+'app#/save',search=encodeURIComponent(getSelectionHtml()),url=encodeURIComponent(window.location.href),body,listener;function strip(html){if(html.length===0){return''}var tmp=document.createElement('DIV');tmp.innerHTML=html.replace(/[\t\r\s\n]/g,' ');return tmp.textContent||tmp.innerText}function getSelectionHtml(){var html='';if(typeof window.getSelection!='undefined'){var sel=window.getSelection();if(sel.rangeCount){var container=document.createElement('div');for(var i=0,len=sel.rangeCount;i<len;++i){container.appendChild(sel.getRangeAt(i).cloneContents())}html=container.innerHTML}}else{if(typeof document.selection!='undefined'){if(document.selection.type=='Text'){html=document.selection.createRange().htmlText}}}return strip(html)}window.open(MAP_SAVE_URL+'?url='+url+'&search='+search);return})();">Remember This Place</a>            </div>
     </div>
     <div ui-view></div>
     <footer>
