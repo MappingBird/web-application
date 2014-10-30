@@ -133,7 +133,7 @@ mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http',
     });
 
     $scope.goToSignUpPage = function() {
-        $window.location.href = '/static/signup.html';
+        $window.location.href = '/signup';
     };
 
     $scope.logout = function($event) {
@@ -147,7 +147,7 @@ mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http',
             Analytics.registerEvent('Account', 'Logged Out', 'Account Menu');
 
             delete $cookies['sessionid'];
-            $window.location.href = "/static/index.html";
+            $window.location.href = "/index";
 
         });
 

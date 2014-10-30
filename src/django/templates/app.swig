@@ -15,6 +15,8 @@
 
 {% endblock %}
 
+{% block prejs %}<script src="//maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>{% endblock %}
+
 {% block content %}
 <section ng-controller="savePageController" class="map-section">
 
@@ -28,8 +30,8 @@
                         <span ng-bind="user.email"></span>
                         <b class="caret"></b>                        </a>
                     <ul class="dropdown-menu pingismo-dropdown-menu">
-                        <li><a href="/static/app.html#/"><i class="icon-globe"></i> View map</a></li>
-                        <li><a href="/static/settings.html"><i class="icon-wrench"></i> Settings</a></li>
+                        <li><a href="/app#/"><i class="icon-globe"></i> View map</a></li>
+                        <li><a href="/settings"><i class="icon-wrench"></i> Settings</a></li>
                         <li class="divider"></li>
                         <li><a id="link-logout" href="#" ng-click="logout($event)"><i class="icon-off"></i> Logout</a></li>
                     </ul>
@@ -40,7 +42,7 @@
             <ul class="nav">
                 <li class="signup-button"><button class="btn btn-large btn-primary pingismo-btn" type="button" ng-click="goToSignUpPage()">Sign up</button></li>
                 <li class="ver-divider"><span></span></li>
-                <li><a href="/static/login.html">Login To Your Account</a></li>
+                <li><a href="/login">Login To Your Account</a></li>
             </ul>
         </div>
     </header>
@@ -124,5 +126,5 @@
         </div>
     </footer>
 </section>
-{% block prejs %}<script src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>{% endblock %}
+
 {% endblock %}
