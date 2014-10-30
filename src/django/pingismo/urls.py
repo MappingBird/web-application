@@ -24,6 +24,7 @@ urlpatterns = patterns('',
 
     # home
     url(r'^$', 'base.views.home', name='home'),
+    url(r'^(?P<page>login|signup|settings|app)$', 'base.views.page', name='page'),
 )
 
 urlpatterns += patterns('django.contrib.staticfiles.views',
