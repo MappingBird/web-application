@@ -15,7 +15,7 @@
 {% block content %}
 <section class="intro">
     <header ng-controller="userController">
-        <a href="/" class="logo"> Staging blablabla</a>
+        <a href="/" class="logo"></a>
         <div class="navbar pingismo-navbar pull-right middle-align" ng-show="isLoggedIn && isRegisteredUser" id="registered-user-menu">
             <ul class="nav">
                 <li class="dropdown">
