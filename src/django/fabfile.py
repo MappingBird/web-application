@@ -4,6 +4,7 @@ from fabric.contrib.console import confirm
 from fabric.contrib.files import exists
 
 import requests
+import json
 
 env.hosts = ['django@mappingbird.com']
 TOKEN = 'UukVO7JB1xFFOdsCNapq8GAPqkvvTRlg4UIWmgEj'
@@ -34,9 +35,9 @@ def get_code(stage=False):
         head_hash = run("git ls-remote git@github.com:mariachimike/pingismo.git refs/heads/%s | awk -F' ' '{print $1}'" % branch)
         previous_hash = run("git rev-parse HEAD")
         run('git pull origin %s' % branch)
-        logs_output = run("git log --pretty=format:'<a href=\"https://github.com/mariachimike/pingismo/commit/%H\">%h</a> - %an, %ar: %s' --graph %s^..HEAD" % previous_hash)
+        logs_output = run("git --no-pager log --pretty=format:'<a href=\"https://github.com/mariachimike/pingismo/commit/%%H\">%%h</a> - %%an, %%ar: %%s' --graph %s..HEAD" % previous_hash)
         _logs = logs_output.split('\n')
-        logs = '<br>'.join(_logs)
+        logs = 'Deploying to %s, here\'s the detail:<br>%s' % (branch, '<br>'.join(_logs))
         notify(logs)
 
 def copy_db():
@@ -61,12 +62,6 @@ def restart_pingismo(stage=False):
         service = 'mappingbird-stage'
 
     sudo('service %s restart' % service)
-
-def gittags(stage=False):
-    directory = 'pingismo'
-
-    if stage:
-        directory = 'stage/pingismo'
 
 def deploy():
     get_code()
