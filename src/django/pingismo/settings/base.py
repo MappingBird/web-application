@@ -29,7 +29,7 @@ TIME_ZONE = 'Asia/Taipei'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-# SITE_ID = 1
+SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -54,11 +54,11 @@ STATICFILES_FINDERS = (
 SECRET_KEY = 'badcm@4e2rx5m6sq910n9slkdn8#1p!q&mmtz0l1@noxtd38o^'
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
+#TEMPLATE_LOADERS = (
+#    'django.template.loaders.filesystem.Loader',
+#    'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
-)
+#)
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
