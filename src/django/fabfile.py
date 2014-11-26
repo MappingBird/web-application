@@ -55,8 +55,8 @@ def collect_static(stage=False):
     with prefix('workon %s' % venv), cd('%s/src/django' % directory):
         run('python manage.py collectstatic')
  
-def restart_pingismo(stage=False):
-    service = 'pingismo'
+def restart_mappingbird(stage=False):
+    service = 'mappingbird'
 
     if stage:
         service = 'mappingbird-stage'
@@ -66,13 +66,10 @@ def restart_pingismo(stage=False):
 def deploy():
     get_code()
     collect_static()
-    restart_pingismo()
+    restart_mappingbird()
 
 def stage():
     copy_db()
     get_code(stage=True)
     collect_static(stage=True)
-    restart_pingismo(stage=True)
-
-def testgit():
-    get_code(stage=True)
+    restart_mappingbird(stage=True)

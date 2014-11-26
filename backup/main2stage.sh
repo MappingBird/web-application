@@ -1,8 +1,8 @@
 #!/bin/bash
 DATE=`date +'%Y-%m%d-%H%M%S'`
-FILENAME=pingismo-$DATE-main.sql
+FILENAME=mappingbird-$DATE-main.sql
 
-DB_PRODUCTION='pingismo'
+DB_PRODUCTION='mappingbird'
 DB_STAGE='mappingbird-stage'
 
 # Copy database
