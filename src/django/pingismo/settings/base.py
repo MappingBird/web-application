@@ -9,11 +9,11 @@ TEMPLATE_DEBUG = DEBUG
 
 AUTH_USER_MODEL = 'base.User'
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
-
-MANAGERS = ADMINS
+# ADMINS = (
+#     # ('Your Name', 'your_email@example.com'),
+# )
+# 
+# MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -29,7 +29,7 @@ TIME_ZONE = 'Asia/Taipei'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-SITE_ID = 1
+# SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -121,7 +121,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
 
-    'south',
+    # 'south',
     'rest_framework',
     'rest_framework.authtoken',
 
