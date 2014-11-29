@@ -410,7 +410,7 @@ def places(request):
     out = {}
     if request.GET.get('q'):
         gp = GooglePlaces(settings.GOOGLE_API_KEY)
-        result = gp.text_search(query=request.GET.get('q').encode('utf-8'))
+        result = gp.text_search(query=request.GET.get('q'))
         out['places'] = []
 
         for place in result.places:
