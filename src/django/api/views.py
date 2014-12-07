@@ -69,6 +69,14 @@ class UserViewSet(viewsets.ModelViewSet):
     @link(permission_classes=[IsOwnerOrAdmin])
     def collections(self, request, pk=None):
         user = self.get_object()
+
+        # Try to create default if it does not exist
+        try:
+            default_collection = Collection.objects.get(user=user, name='default')
+        except Collection.DoesNotExist:
+            default_collection = Collection(user=user, name='default')
+            default_collection.save()
+
         queryset = user.collection_set.all()
         serializer = CollectionByUserSerializer(queryset, many=True)
 
@@ -78,6 +86,16 @@ class UserViewSet(viewsets.ModelViewSet):
         except Exception, e:
             data['most_recent_modified_collection'] = None
 
+        return Response(data)
+
+    @link(permission_classes=[IsOwnerOrAdmin])
+    def points(self, request, pk=None):
+        user = self.get_object()
+
+        queryset = Point.objects.filter(collection__user=user)
+        serializer = PointSerializer(queryset, many=True)
+
+        data = {'points': serializer.data, }
         return Response(data)
 
     def retrieve(self, request, *args, **kwargs):
@@ -191,6 +209,14 @@ class PointViewSet(APIViewSet):
         del data['place_phone']
         del data['coordinates']
         del data['category']
+
+        if 'collection' not in data:
+            try:
+                collection = Collection.objects.get(user=request.user, name='default')
+            except Collection.DoesNotExist:
+                collection = Collection(user=request.user, name='default')
+                collection.save()
+            data['collection'] = collection.id
 
         # Need to use Write Serializer for related field (location)
         serializer = PointWriteSerializer(data=data, files=request.FILES)
