@@ -2,6 +2,7 @@
 *.swp
 build/*
 src/django/media/*
+src/temp/*
 bower_components
 node_modules
 # ignore html file (swig)
