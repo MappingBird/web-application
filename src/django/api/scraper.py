@@ -81,8 +81,8 @@ def scraper(request):
     text = ''
 
     # pixnet
-    if len(html.xpath('.//div[@class="article-content"]//text()')) > 0:
-        text = ' '.join(html.xpath('.//div[@class="article-content"]//text()'))[:100]
+    if len(html.xpath('//div[@class="article-content"]//text()')) > 0:
+        text = ' '.join(html.xpath('//div[@class="article-content"]//text()'))[:100]
     elif len(html.xpath('.//p')) > 0:
         text = ' '.join(html.xpath('.//p//text()'))[:100]
 
@@ -92,6 +92,9 @@ def scraper(request):
     elif len(html.xpath('.//div[@class="post"]')) > 0:
         # wordpress
         images = html.xpath('.//div[@class="post"]//img/@src')
+    elif len(html.xpath('//div[@class="article-content"]//text()')) > 0:
+        # pixnet
+        images = html.xpath('//div[@class="article-content"]//img/@src')
     else:
         images = html.xpath('.//img/@src')
 
