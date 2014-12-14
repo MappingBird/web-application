@@ -15,7 +15,7 @@
 
 {% endblock %}
 
-{% block prejs %}<script src="//maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>{% endblock %}
+{% block prejs %}<script src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>{% endblock %}
 
 {% block content %}
 <section ng-controller="savePageController" class="map-section">
