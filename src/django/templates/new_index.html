@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html ng-app="IndexApp">
+	<head>
+		<title>MappingBird - Remember places for later</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ STATIC_URL }}new_index/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:,b,300|Cinzel">
+        <link href="{{ STATIC_URL }}new_index/css/materialdesignicons.css" media="all" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}new_index/css/mb-style.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}new_index/css/index.css">
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/fancybox/jquery.fancybox.css">
+	</head>
+	<body ng-controller="ModalDemoCtrl">
+		<script type="text/ng-template" id="myModalContent.html">
+	        <div class="modal-header">
+                <img src="{{ STATIC_URL }}new_index/images/coming_soon_pic.jpg" />
+	            <h2 class="modal-title">Interested in MappingBird?</h2>
+	        </div>
+	        <div class="modal-body">
+	        	<p>
+	        		We're busy putting on the final touches. Join our waiting list and you will be the first to know when it is ready.
+	        	</p> 
+	        </div>
+	        <div class="modal-footer">
+	        	<form class="form-inline">
+	        		<div class="form-group">
+	        			<label for="WaitingEmail" class="sr-only">Email address</label>
+	        			<input type="email" class="form-control waiting-email" id="WaitingEmail" placeholder="Your email address">
+	        		</div>
+	            	<button type="submit" class="btn btn-primary" onclick="sendEmailtoGoogleForm()" ng-click="ok()">Let me know when it's done.</button>
+	        	</form>
+	        </div>
+	    </script>
+		<section class="intro">
+			<nav class="navbar navbar-default mb-navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+                        <a class="navbar-brand" href="#"><img src="{{ STATIC_URL }}new_index/images/white_logo.png" /></a>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+                            <!--
+							<button class="btn btn-default navbar-btn text-uppercase mb-signin" type="submit">
+								<i class="mdi mdi-account"></i> Sign In
+							</button>
+                            -->
+                            <button class="btn btn-default navbar-btn text-uppercase mb-signin" data-href="/login">
+								<i class="mdi mdi-account"></i> Sign In
+							</button>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<div class="container vertical-align mb-hero">
+				<div class="jumbotron">
+					<h1>Have you ever tried to remember places that you came across?</h1>
+					<p>MappingBird lets you bookmark places from any website in just 3 clicks.</p>
+				</div>
+				<span class="text-uppercase">watch <a type="button" class="btn btn-primary mb-play fancybox-media track-click" id="watch-video-button" href="http://youtu.be/Dv4XbUO7n6I"><i class="mdi mdi-play"></i></a> 1 min intro</span>
+				<p class="mb-intro-actions">
+					<a id="learnmore-btn" href="#whatitis" class="btn btn-default btn-lg text-uppercase track-click">learn more</a>
+  					<button type="button" class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button" ng-click="open()">ready to go</button>
+				</p>
+			</div>
+		</section>
+		<section class="what">
+			<a name="whatitis"></a>
+			<!--nav class="navbar navbar-default mb-navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a href="#" class="navbar-brand"><img src="images/dark_logo.png" /></a>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="#" class="text-uppercase">what it is</a></li>
+						<li><a href="#" class="text-uppercase">how it works</a></li>
+						<li><a href="#" class="text-uppercase">follow us</a></li>
+					</ul>
+				</div>
+			</nav-->
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h2>Map Places From Any Website</h2>
+						<p>With the free Save to MappingBird browser button, you can bookmark interesting and intriguing places with just a few clicks while browsing.</p>
+					</div>
+					<div class="col-md-6">
+                        <img src="{{ STATIC_URL }}new_index/images/what_screenshot_bookmark.jpg" width="90%" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+                        <img src="{{ STATIC_URL }}new_index/images/what_screenshot_organize.jpg" width="90%" />
+					</div>
+					<div class="col-md-6">
+						<h2>Get A Bird’s-eye View of All Your Saved Places</h2>
+						<p>Mappingbird offers ways to group your places by collections and/or tags. View groups of places on the map by selecting a collection.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<h2>Access Saved Places From Any Device</h2>
+						<p>Install the free Mappingbird app on your Android phone so you can access your saved places whenever and wherever you need them. (iOS app coming soon!)</p>
+						<ul class="list-inline">
+                            <li><img src="{{ STATIC_URL }}new_index/images/googleplay_icon.png" id="google-play-icon" class="track-click" /></li>
+                            <li><img src="{{ STATIC_URL }}new_index/images/appstore_icon.png" id="app-store-icon" class="track-click" /></li>
+						</ul>
+					</div>
+					<div class="col-md-6">
+                        <img src="{{ STATIC_URL }}new_index/images/what_screenshot_mobile.jpg" width="90%" />
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="how">
+            {% verbatim %}
+			<h1>How It Works</h1>
+			<div ng-controller="CarouselDemoCtrl" class="carousel-wrapper container">
+				<div>
+					<carousel interval="myInterval">
+				    	<slide ng-repeat="slide in slides" active="slide.active">
+				        	<img ng-src="{{slide.image}}" style="margin:auto;">
+				        	<div class="carousel-caption">
+				          		<h4>{{slide.title[$index]}}</h4>
+				          		<p>{{slide.text[$index]}}</p>
+				        	</div>
+				      	</slide>
+				    </carousel>
+				</div>
+		  	</div>
+            {% endverbatim %}
+		</section>
+		<section class="follow-us">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-2 col-md-offset-2">
+                        <img src="{{ STATIC_URL }}new_index/images/index_facebook_icon.png" />
+					</div>
+					<div class="col-md-6">
+						<h2>Like our Facebook page</h2>
+						<p>Help us help you by sharing your likes and dislikes about MappingBird on our Facebook page.</p>
+                        <a class="btn btn-primary text-uppercase track-click" href="https://www.facebook.com/MappingBird" id="facebook-button"><img src="{{ STATIC_URL }}new_index/images/facebook_like_thumb.png" /> Like us now</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer class="mb-footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+                        <img class="brand-logo" src="{{ STATIC_URL }}new_index/images/footer_logo.png" /> Remember places for later.
+					</div>
+					<div class="col-md-6">
+						<!--ul class="nav navbar-nav navbar-right mb-lang-switch">
+							<li class="active"><a href="#">English</a></li>
+							<li>|</li>
+							<li><a href="#">繁體中文</a></li>
+						</ul-->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<small>Copyright &copy; 2015 Mappingbird LLC. All referred posts © their respective owners.</small>
+					</div>
+					<div class="col-md-6">
+						<!--ul class="nav navbar-nav navbar-right">
+							<li><a href="#" class="small"><i class="mdi mdi-email"></i>Feedback</a></li>
+							<li><a href="#" class="small"><i class="mdi mdi-facebook-box"></i>Follow Us</a></li>
+						</ul-->
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}new_index/js/ui-bootstrap-tpls-0.12.0.min.js"></script>
+        <script src="{{ STATIC_URL }}new_index/js/index.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}new_index/js/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}new_index/js/jquery.fancybox-media.js?v=1.0.6"></script>
+		<script>
+			$(document).ready(function(){
+				//fancybox for showing video
+				$('.fancybox-media').fancybox({
+					openEffect  : 'none',
+					closeEffect : 'none',
+					helpers : {
+						media : {}
+					}
+				});
+
+				//jquery for smooth scrolling
+				$(function() {
+				  $('a[href*=#]:not([href=#])').click(function() {
+				    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+				      var target = $(this.hash);
+				      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+				      if (target.length) {
+				        $('html,body').animate({
+				          scrollTop: target.offset().top
+				        }, 1000);
+				        return false;
+				      }
+				    }
+				  });
+				});	
+			});
+
+			$('.track-click').on('click', function() {
+				sga($(this).attr('id'), 'click', 'fb-landing');
+			});
+
+            $('.mb-signin').on('click', function() {
+                window.location.href = $(this).attr('data-href');
+            });
+
+			function sendEmailtoGoogleForm(){
+				var email = $('#WaitingEmail').val();
+				sga('email', 'save attempt', 'fb-landing');
+				$.ajax({
+		            url: "https://docs.google.com/forms/d/1uQ52cC3YmmFiJhx0pQIH7Kct965SeHBnAERUmhOlidA/formResponse",
+		            data: { "entry_1147463210": email},
+		            type: "POST",
+		            dataType: "xml",
+		            success: function (data, textStatus, jqXHR) {
+		            	sga('email', 'save success', 'fb-landing');
+		            }
+		        });
+			}
+
+			// send custom GA event
+			function sga (category, action, label, value) {
+				if (typeof ga != 'undefined') {
+
+		            if (typeof value !== 'undefined') {
+		                ga('send', 'event', category, action, label, value);
+		            } else {
+		                ga('send', 'event', category, action, label);
+		            }
+
+		        }
+			}
+			</script>
+
+			<script>
+				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+				})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+				ga('create', 'UA-48784866-1', 'auto');
+				ga('send', 'pageview');
+
+			</script>
+	</body>
+</html>
