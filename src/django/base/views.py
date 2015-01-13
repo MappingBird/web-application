@@ -10,7 +10,10 @@ def home(request):
     '''
 
     # return serve(request, path='/index.html')
-    return render(request, 'index.swig')
+    if request.user.is_authenticated():
+        return redirect('/app')
+
+    return render(request, 'new_index.html')
 
 def page(request, page=None):
     return render(request, '%s.swig' % page)

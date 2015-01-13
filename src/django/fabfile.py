@@ -3,7 +3,24 @@ from fabric.api import *
 from fabric.contrib.console import confirm
 from fabric.contrib.files import exists
 
+import requests
+import json
+
 env.hosts = ['django@mappingbird.com']
+TOKEN = 'UukVO7JB1xFFOdsCNapq8GAPqkvvTRlg4UIWmgEj'
+ROOM = 'PinGismo'
+
+def notify(message):
+    headers = {'content-type': 'application/json'}
+    url = 'https://api.hipchat.com/v2/room/%s/notification?auth_token=%s' % (ROOM, TOKEN)
+
+    payload = {
+        'color': 'green',
+        'message_format': 'html',
+        'message': message,
+    }
+
+    r = requests.post(url, data=json.dumps(payload), headers=headers)
  
 def get_code(stage=False):
     directory = 'pingismo'
@@ -14,7 +31,14 @@ def get_code(stage=False):
         branch = 'stage'
 
     with cd(directory):
+        # Get remote HEAD hash
+        head_hash = run("git ls-remote git@github.com:mariachimike/pingismo.git refs/heads/%s | awk -F' ' '{print $1}'" % branch)
+        previous_hash = run("git rev-parse HEAD")
         run('git pull origin %s' % branch)
+        logs_output = run("git --no-pager log --pretty=format:'<a href=\"https://github.com/mariachimike/pingismo/commit/%%H\">%%h</a> - %%an, %%ar: %%s' --graph %s..HEAD" % previous_hash)
+        _logs = logs_output.split('\n')
+        logs = 'Deploying to %s, here\'s the detail:<br>%s' % (branch, '<br>'.join(_logs))
+        notify(logs)
 
 def copy_db():
     with cd('pingismo/backup'):

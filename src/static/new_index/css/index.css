@@ -1,0 +1,207 @@
+@charset "utf-8";
+/* CSS Document */
+/* Base -------------------------------------------------------------------------------------- */
+h1, h2{
+	font-family: Cinzel;
+	font-weight: normal;
+}
+.intro h1{font-size: 52px;}
+.what h2{font-size: 24px;}
+
+/* Layout -------------------------------------------------------------------------------------- */
+section.intro{
+	background: url('../images/index_banner.jpg') center center no-repeat;
+	background-size: cover;
+	height: 100%;
+}
+section.what .row{
+	margin: 0;
+	padding: 25px 0;
+	border-bottom: 1px solid #ddd;
+}
+section.how{
+	background: url('../images/how_bg.jpg') center center no-repeat;
+	background-size: cover;
+	height: 700px;
+	overflow: hidden;
+}
+section.follow-us .container-fluid{
+	margin: 60px 0;
+}
+footer.mb-footer{
+	background-color: #181818;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	color: #707070;
+}
+footer.mb-footer .brand-logo{
+	vertical-align: bottom;
+}
+
+/* State -------------------------------------------------------------------------------------- */
+
+/* Module -------------------------------------------------------------------------------------- */
+
+/* default navigation bar */
+.navbar.navbar-default.mb-navbar-default{
+	background-color: transparent;
+	border: none;
+}
+.navbar.navbar-default.mb-navbar-default .navbar-right{ margin-right: 0;}
+.navbar.navbar-default.mb-navbar-default a.navbar-brand{height: auto;}
+.navbar.navbar-default.mb-navbar-default button.mb-signin{
+	background-color: #f6892a;
+	color: #fff;
+	margin: 25px 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border: none;
+}
+.navbar.navbar-default.mb-navbar-default button.mb-signin:hover{
+	background-color: #d1711e;
+}
+button.mb-signin .mdi{margin-bottom: 2px;}
+button.mb-signin .mdi:before{font-size: 18px!important;}
+
+/* inverse navigation bar */
+.navbar.navbar-default.mb-navbar-inverse{
+	background-color: transparent;
+	background: url('../images/index_navbar_bg.png') 0 0;
+	border: none;
+}
+.navbar.navbar-default.mb-navbar-inverse .navbar-right{ margin-right: 0; margin-top: 10px;}
+.navbar.navbar-default.mb-navbar-inverse a.navbar-brand{height: auto;}
+.mb-navbar-inverse .navbar-nav>.active>a:hover, .mb-navbar-inverse .navbar-nav>.active>a, .mb-navbar-inverse .navbar-nav>li>a:hover{
+	background-color: transparent;
+	color: #f6892a;
+}
+
+
+.mb-hero{
+	color: #fff;
+	text-align: center;
+	font-weight: 300;
+}
+.jumbotron {
+	background-color: transparent;
+	margin: 0;
+}
+
+a.btn-primary.mb-play{
+	border-radius: 20px;
+	padding: 8px;
+	margin: 0 6px;
+}
+
+/* Intro */
+.mb-intro-actions{
+	margin-top: 28px;
+}
+.mb-intro-actions .btn{
+	margin: 0 5px;
+}
+.mb-intro-actions .btn-default{
+	background-color: transparent;
+	color: #fff;
+	border-color: #fff;
+}
+.mb-intro-actions .btn-default:hover{
+	color: #01a9e7;
+	border-color: #01a9e7;
+}
+
+/* What It Is */
+section.what h2{margin-top: 80px;}
+
+/* How It Works */
+section.how h1{
+	margin: 0;
+	text-align: center;
+	color: #fff;
+	padding: 20px 0;
+	font-size: 48px;
+}
+section.how .carousel-wrapper{
+	height: 100%;
+	background: url('../images/mac.png') bottom right no-repeat;
+	margin-top: -70px;
+}
+section.how .carousel-wrapper>div{
+	padding: 0;
+	margin: 0 auto; 
+	height: 100%;
+}
+section.how .carousel{
+	height: 100%;
+}
+section.how a.carousel-control{
+	background: none;
+}
+section.how .carousel-inner{
+	position: absolute;
+	bottom: 140px;
+}
+section.how .item img.ng-scope{
+	margin-right: 13px!important;
+}
+section.how .carousel-caption{
+	text-align: left;
+	left: 5%;
+	bottom: auto;
+	top: 0px;
+	width: 300px;
+}
+section.how .carousel-indicators{
+	bottom: 600px;
+}
+section.how .carousel-indicators li{
+	margin: 1px 6px;
+	width: 12px;
+	height: 12px;
+}
+section.how .carousel-caption h4{
+	font-family: Cinzel;
+	font-weight: normal;
+	font-size: 30px;
+	text-shadow: none;
+}
+section.how .carousel-caption p{
+	text-shadow: none;
+}
+section.how .carousel-control{width: 60px; opacity: 0.75; cursor: pointer;}
+section.how .carousel-control:hover{opacity: 1;}
+section.how .left.carousel-control{background: url('../images/carousel_control_bg.png') 0 center no-repeat; margin-left: -50px;}
+section.how .left.carousel-control>span{margin-left: -16px;}
+section.how .right.carousel-control{background: url('../images/carousel_control_bg.png') 0 center no-repeat; margin-right: -50px;}
+section.how .right.carousel-control>span{right: 12px;}
+
+/* Footer */
+.mb-footer .nav.navbar-nav.mb-lang-switch{
+	margin-top: 10px;
+}
+.mb-footer .nav.navbar-nav a{
+	padding: 0 15px;
+	color: #707070;
+}
+.mb-footer .nav.navbar-nav li.active a, .mb-footer .nav.navbar-nav a:hover{
+	background: transparent;
+	color: #fff;
+}
+.mb-footer .mdi{margin-bottom: 2px; margin-right: 3px;}
+.mb-footer .mdi:before{font-size: 16px!important;}
+
+/* Modal */
+.modal-dialog{margin: 20px auto;}
+.modal-header{text-align: center; border-bottom: none; padding: 25px 15px 0;}
+.modal-header h2{margin-top: 20px;}
+.modal-body{padding: 20px 20px;}
+.modal-footer{
+	text-align: left;
+	border-top: none;
+	margin-top: 0;
+	padding: 0 20px 40px;
+}
+.modal-footer .waiting-email{
+	width: 325px;
+	margin-right: 6px;
+}

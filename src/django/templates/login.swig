@@ -38,7 +38,7 @@
                     </div>
                     <div class="action-button">
                         <button class="btn btn-giant btn-primary pingismo-btn" type="submit" id="login-button">Login to Your Account</button>
-                        <p class="button-option">Not a member? <a href="/signup">Sign up now</a></p>
+                        {% comment %}<p class="button-option">Not a member? <a href="/signup">Sign up now</a></p>{% endcomment %}
                     </div>
                 </form>
             </div>
@@ -50,6 +50,7 @@
             <p class="slogan"><img src="/static/img/logo-footer.png" /> Remember places for later.</p>
             <p>Copyright &copy; 2014 MappinBird LLC. All referred posts &copy; their respective owners.</p>
         </div>
+        {% comment %}
         <div class="lang-contact pull-right">
             <ul class="nav nav-pills">
                 <li><a href="#">繁體中文</a></li>
@@ -61,6 +62,7 @@
                 <a href="#" class="footer-follow">Follow Us</a>
             </p>
         </div>
+        {% endcomment %}
     </footer>
 </section>
 {% endblock %}

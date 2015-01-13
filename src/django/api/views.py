@@ -397,7 +397,7 @@ def logout(request):
 
 @api_view(['GET'])
 def geocode(request):
-    geolocator = GoogleV3()
+    geolocator = GoogleV3(api_key=settings.GOOGLE_API_KEY)
     out = {}
     if request.GET.get('q'):
         out['results'] = []
