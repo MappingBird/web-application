@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^geocode$', 'api.views.geocode', name='geocode'),
     url(r'^upload$', 'api.views.upload_media', name='upload'),
     url(r'^places$', 'api.views.places', name='places'),
+    url(r'^feedback$', 'api.uv.feedback', name='feedback'),
 )
 
 
