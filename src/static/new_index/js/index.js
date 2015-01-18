@@ -60,6 +60,13 @@ angular.module('IndexApp').controller('ModalInstanceCtrl', function ($scope, $mo
   };
 
   $scope.ok = function () {
+    var email = $('#WaitingEmail').val();
+    // test email regular expression
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(email)) {
+      return false;
+    }
+
     $modalInstance.close($scope.selected.item);
   };
 
