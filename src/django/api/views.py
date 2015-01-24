@@ -70,15 +70,26 @@ class UserViewSet(viewsets.ModelViewSet):
     def collections(self, request, pk=None):
         user = self.get_object()
 
+        # Legacy issue orz
+        try:
+            original_default = Collection.objects.get(user=user, name='default')
+            original_default.name = 'Uncategorized'
+            original_default.save()
+        except Collection.DoesNotExist:
+            pass
+
         # Try to create default if it does not exist
         try:
-            default_collection = Collection.objects.get(user=user, name='default')
+            default_collection = Collection.objects.get(user=user, name='Uncategorized')
         except Collection.DoesNotExist:
-            default_collection = Collection(user=user, name='default')
+            default_collection = Collection(user=user, name='Uncategorized')
             default_collection.save()
+        except Collection.MultipleObjectsReturned:
+            pass
 
         queryset = user.collection_set.all()
-        serializer = CollectionByUserSerializer(queryset, many=True)
+        collections = user.collection_set.exclude(name='Uncategorized')
+        serializer = CollectionByUserSerializer([default_collection] + list(collections.order_by('name')), many=True)
 
         data = {'collections': serializer.data, }
         try:
@@ -211,10 +222,18 @@ class PointViewSet(APIViewSet):
         del data['category']
 
         if 'collection' not in data:
+            # Legacy issue orz
             try:
-                collection = Collection.objects.get(user=request.user, name='default')
+                original_default = Collection.objects.get(user=user, name='default')
+                original_default.name = 'Uncategorized'
+                original_default.save()
             except Collection.DoesNotExist:
-                collection = Collection(user=request.user, name='default')
+                pass
+
+            try:
+                collection = Collection.objects.get(user=request.user, name='Uncategorized')
+            except Collection.DoesNotExist:
+                collection = Collection(user=request.user, name='Uncategorized')
                 collection.save()
             data['collection'] = collection.id
 
