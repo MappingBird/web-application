@@ -224,7 +224,7 @@ class PointViewSet(APIViewSet):
         if 'collection' not in data:
             # Legacy issue orz
             try:
-                original_default = Collection.objects.get(user=user, name='default')
+                original_default = Collection.objects.get(user=request.user, name='default')
                 original_default.name = 'Uncategorized'
                 original_default.save()
             except Collection.DoesNotExist:
