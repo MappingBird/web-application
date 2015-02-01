@@ -3,13 +3,35 @@
 	<head>
 		<title>MappingBird - Remember places for later</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
         <link href="{{ STATIC_URL }}new_index/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:,b,300|Cinzel">
         <link href="{{ STATIC_URL }}new_index/css/materialdesignicons.css" media="all" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}new_index/css/mb-style.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}new_index/css/index.css">
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/fancybox/jquery.fancybox.css">
+
+		<meta name="title" content="MappingBird - Remember places for later"/>
+		<meta name="description" content="MappingBird - The easiest tool for bookmarking places you find when browsing the web or chatting with friends. View your saved places later on your smartphone when you need them."/>
+		<meta name="keywords" content="MappingBird, Mapping Bird, travel, travels, planning, travel planning, save for later, bookmark, bookmarks, bookmarking, bookmark place, bookmark places, review, reviews, popular, plan, map, maps, attractions, advice, restaurants, iphone, app, offline, ipad, android, kindle, firefox, extension, note taking, note taking software, notes, remember, memory assistant, personal memory assistant"/>
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"/> -->
+
+		<meta property="og:title" content="MappingBird - Remember places for later" />
+		<meta property="og:url" content="http://www.mappingbird.com/" />
+		<meta property="og:description" content="MappingBird - The easiest tool for bookmarking places you find when browsing the web or chatting with friends. View your saved places later on your smartphone when you need them." />
+		<meta property="og:image" content="http://www.mappingbird.com/static/new_index/images/share_images.jpg" />
+
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="@MappingBird">
+		<meta name="twitter:title" content="MappingBird - Remember places for later">
+		<meta name="twitter:description" content="MappingBird - The easiest tool for bookmarking places you find when browsing the web or chatting with friends. View your saved places later on your smartphone when you need them.">
+		<meta name="twitter:image:src" content="http://www.mappingbird.com/static/new_index/images/twitter_share_images.jpg">
+
+		<meta itemprop="name" content="MappingBird - Remember places for later"/>
+		<meta itemprop="description" content="MappingBird - The easiest tool for bookmarking places you find when browsing the web or chatting with friends. View your saved places later on your smartphone when you need them."/>
+		<meta itemprop="image" content="http://www.mappingbird.com/static/new_index/images/share_images.jpg"/>
+
 	</head>
 	<body ng-controller="ModalDemoCtrl">
 		<script type="text/ng-template" id="myModalContent.html">
@@ -210,6 +232,15 @@
 
 			function sendEmailtoGoogleForm(){
 				var email = $('#WaitingEmail').val();
+
+				// test email regular expression
+				var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				if (!re.test(email)) {
+					window.alert('Invalid Email!');
+					return;
+				}
+
+				// send email to google form
 				sga('email', 'save attempt', 'fb-landing');
 				$.ajax({
 		            url: "https://docs.google.com/forms/d/1uQ52cC3YmmFiJhx0pQIH7Kct965SeHBnAERUmhOlidA/formResponse",

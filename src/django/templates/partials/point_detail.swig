@@ -19,7 +19,7 @@
                             <ul>
                                 <li class="collection" ng-bind="activeCollectionName"></li>
                                 <li class="btn-group pingismo-btn-group">
-                                    <a class="btn exist" href="#" ng-click="showSelectCollection = true" ng-show="!showSelectCollection"><span ng-bind="activeCollectionName"></span> <span class="caret"></span></a>
+                                    <a class="btn exist" href="javascript:void(0);" ng-click="showSelectCollection = true" ng-show="!showSelectCollection"><span ng-bind="activeCollectionName"></span> <span class="caret"></span></a>
                                     <ul class="collections-menu thin-menu" ng-show="showSelectCollection" scrollbar-height-to-bottom>
                                         <li ng-repeat="collection in collections"><a href="#" ng-click="selectPointCollection($event, collection.id)" title="[[collection.name]]" ng-bind="collection.name"></a></li>
                                         <li class="input-append">

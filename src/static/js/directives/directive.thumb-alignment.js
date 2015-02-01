@@ -23,6 +23,7 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                 editMode = config.editMode || false,
                 enableLightbox = config.enableLightbox || false,
                 loadingAnimation = $('<div class="loading">Loading...<img src="/static/img/loading-circle.png"></div>'),
+                loadingAnimationElement = $('.loading');
                 picRow //photo.js
                 ;
 
@@ -210,7 +211,7 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                 }
 
                 // images loaded
-                loadingAnimation.remove();
+                loadingAnimationElement.remove();
                 $scope.$emit('placeImagesLoaded');
             }
 
@@ -336,7 +337,7 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                 } else {
                     console.log('no images - empty photo');
                     resetImages();
-                    loadingAnimation.remove();
+                    loadingAnimationElement.remove();
                     $scope.$emit('placeImagesLoaded');
                 }
 

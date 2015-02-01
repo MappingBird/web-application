@@ -336,7 +336,7 @@ footer{
 	background-color: #181818;
 	color: #707070;
 	font-size: 11px;
-	position: absolute;
+	position: relative;
 	bottom: 0;
 	z-index: 1;
 	padding: 25px 0 20px;
@@ -431,7 +431,10 @@ footer .nav>li>a:focus{
 	background-position: 0 -16px;
 }
 
-footer.narrow { padding: 5px 0 0; }
+footer.narrow { 
+	padding: 5px 0 0; 
+	position: absolute;
+}
 
 /* tips */
 .tips-below{
