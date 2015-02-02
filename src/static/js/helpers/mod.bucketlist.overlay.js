@@ -165,7 +165,7 @@ BucketListSmallOverlay.prototype.onAdd = function() {
 
     var div = $('<div class="pingismo-pin" />'),
         icon = $('<a href="#" class="pin-' + this.type_ + '" title="' + this.placeName_ + '"></a>'),
-        tip = $('<a href="#" class="pin-popup-img show-details-btn"></a>'),
+        tip = $('<a href="javascript:void(0);" class="pin-popup-img show-details-btn"></a>'),
         popup = $('<div class="pin-popup" />'),
         detail = $('<p><strong>' + this.placeName_ + '</strong>' + this.placeAddress_ + ' ' + this.placePhone_ + '</p>'),
         checkmark = $('<i class="icon-check pull-right"></i>'),
