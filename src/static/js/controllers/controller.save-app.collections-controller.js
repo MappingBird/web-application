@@ -6,6 +6,12 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.activeCollectionName = '';
     $scope.collectionsListVisible = false;
     $scope.editMode = false;
+    
+    // delete collection use
+    $scope.deleteCollectionId = null;
+    $scope.deleteCollectionName = null;
+    $scope.showDeleteCollectionDialog = false;
+    
 
     // watchers
     $scope.$watch(function(){return Collections.activeCollectionId;}, function(activeCollectionId, oldActiveCollectionId) {
@@ -162,20 +168,12 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
 
         // edit mode - delete collection
         if ($scope.editMode) {
-            console.log('delete collection: ' + id);
-            BroadcastService.prepForBroadcast({
-                type: 'requestDeleteCollection',
-                data: {
-                    collectionToBeDeletedId: id,
-                    collectionToBeDeletedName: name
-                }
-            });
 
-            $scope.editMode = false;
-
-
-            // google analytics
-            Analytics.registerEvent('Collection', 'Delete collection', 'Collection List');
+            // confirm dialog
+            $scope.deleteCollectionId = id;
+            $scope.deleteCollectionName = name;
+            $scope.showDeleteCollectionDialog = true;
+            
         } else {
             console.log('viewCollection ' + id);
             $scope.collectionsListVisible = false;
@@ -190,6 +188,36 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         }
     };
 
+    $scope.deleteCollection = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        console.log('delete collection: ' + $scope.deleteCollectionId);
+            BroadcastService.prepForBroadcast({
+                type: 'requestDeleteCollection',
+                data: {
+                    collectionToBeDeletedId: $scope.deleteCollectionId,
+                    collectionToBeDeletedName: $scope.deleteCollectionName
+                }
+            });
+
+            $scope.editMode = false;
+            $scope.showDeleteCollectionDialog = false;
+            
+            // google analytics
+            Analytics.registerEvent('Collection', 'Delete collection', 'Collection List');
+    };
+
+    $scope.unselectCollectionForDelete = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.editMode = false;
+        $scope.showDeleteCollectionDialog = false;
+        
+        console.log('unselect delete collection: ' + $scope.deleteCollectionId);
+    };
+    
     $scope.showCollections = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
