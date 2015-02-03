@@ -1176,6 +1176,44 @@ ul.types > li{
 	background-color: #01a9e7;
 }
 
+/* confirm to delete collection */
+.delete-collection-wrapper{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 425px;
+	overflow: hidden;
+	padding: 95px 20px 30px 40px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	color: #707070;
+	-moz-transition: top 0.3s ease 0.3s, opacity 0.3s ease 0.3s;
+	-webkit-transition: top 0.3s ease 0.3s, opacity 0.3s ease 0.3s;
+	transition: top 0.3s ease 0.3s, opacity 0.3s ease 0.3s;
+	visibility: hidden;
+	opacity: 0;
+	top: 300px;
+}
+
+.delete-collection-wrapper.visible {
+	opacity: 1.0;
+	top: 0;
+	visibility: visible;
+}
+
+.delete-collection-wrapper hr{
+	margin-top: 10px;
+}
+.delete-collection-wrapper h4{
+	color: #fff;
+}
+.delete-collection-wrapper .pin-content-footer{
+	height: 60px;
+	width: 100%;
+	background-color: #2c2c2c;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
 /* pin content */
 .pin-content-wrapper,
 .delete-pin-wrapper{
