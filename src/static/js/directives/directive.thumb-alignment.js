@@ -12,8 +12,8 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
 
             var config = $scope.$eval($attrs.thumbAlignment),
                 displayArray = config.displayArray,
-                selectImages = config.selectImages,
-                deselectImages = config.deselectImages,
+                selectImages = config.selectImages || {},
+                deselectImages = config.deselectImages || {},
                 onlyFirstSelected = config.onlyFirstSelected,
                 whiteBackground = config.whiteBackground,
                 photo_array = null, //photo.js
@@ -23,7 +23,6 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                 editMode = config.editMode || false,
                 enableLightbox = config.enableLightbox || false,
                 loadingAnimation = $('<div class="loading">Loading...<img src="/static/img/loading-circle.png"></div>'),
-                loadingAnimationElement = $('.loading');
                 picRow //photo.js
                 ;
 
@@ -123,7 +122,7 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                                 if (onlyFirstSelected) {
                                     cl = (i == 0 && rowNum == 1) ? "is-selected" : "";
 
-                                    $scope[selectImages][img_id] = url;
+                                    selectImages[img_id] = url;
 
                                     BroadcastService.prepForBroadcast({
                                         type: 'savePointSetImage',
@@ -145,7 +144,7 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                                         }
 
                                         // add to $scope
-                                        $scope[selectImages][img_id] = url;
+                                        selectImages[img_id] = url;
 
                                     } else {
                                         cl = "";
@@ -211,7 +210,7 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                 }
 
                 // images loaded
-                loadingAnimationElement.remove();
+                loadingAnimation.remove();
                 $scope.$emit('placeImagesLoaded');
             }
 
@@ -238,8 +237,8 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
 
                         $scope.$apply(function(){
                             console.log('delete selected image');
-                            $scope[deselectImages][imgID] = $scope[selectImages][imgID];
-                            delete $scope[selectImages][imgID];
+                            deselectImages[imgID] = selectImages[imgID];
+                            delete selectImages[imgID];
                         });
 
                         // google analytics
@@ -254,9 +253,9 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                         $(span).show();
                         $scope.$apply(function(){
                             console.log('add selected image');
-                            $scope[selectImages][imgID] = src;
-                            if ($scope[deselectImages][imgID]) {
-                                delete $scope[deselectImages][imgID];
+                            selectImages[imgID] = src;
+                            if (deselectImages[imgID]) {
+                                delete deselectImages[imgID];
                             }
                         });
 
@@ -337,7 +336,7 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                 } else {
                     console.log('no images - empty photo');
                     resetImages();
-                    loadingAnimationElement.remove();
+                    loadingAnimation.remove();
                     $scope.$emit('placeImagesLoaded');
                 }
 
