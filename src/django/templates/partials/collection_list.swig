@@ -1,4 +1,4 @@
-<div class="collection-header">
+<div class="collection-header" ng-show="!showDeleteCollectionDialog">
     <a href="#" class="collection-name" ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="showCollections($event)">
         <i class="icon-expand-collapse"></i>
         <span ng-bind="activeCollectionName"></span>
@@ -17,7 +17,7 @@
 
 <!-- Delete a collection -->
 <div class="delete-collection-wrapper" ng-class="{visible: showDeleteCollectionDialog}">
-    <h4 ng-bind="deleteCollectionName"></h4>
+    <h4>Delete "<i>[[deleteCollectionName]]</i>" permanently?</h4>
     Do you really want to delete this collection? Once you delete it, all places saved under this collection will be removed from your map forever.
     <div class="pin-content-footer">
         <hr />

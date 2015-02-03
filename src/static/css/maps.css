@@ -1183,7 +1183,7 @@ ul.types > li{
 	top: 0;
 	width: 425px;
 	overflow: hidden;
-	padding: 95px 20px 30px 40px;
+	padding: 50px 40px 30px 20px;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	color: #707070;
@@ -1202,7 +1202,9 @@ ul.types > li{
 }
 
 .delete-collection-wrapper hr{
-	margin-top: 10px;
+	margin: 10px 0 13px 0;
+	border-bottom: solid 1px #373737;
+	border-top: solid 1px #222;
 }
 .delete-collection-wrapper h4{
 	color: #fff;
