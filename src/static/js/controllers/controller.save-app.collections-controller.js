@@ -192,20 +192,23 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         $event.preventDefault();
         $event.stopPropagation();
 
-        console.log('delete collection: ' + $scope.deleteCollectionId);
-            BroadcastService.prepForBroadcast({
-                type: 'requestDeleteCollection',
-                data: {
-                    collectionToBeDeletedId: $scope.deleteCollectionId,
-                    collectionToBeDeletedName: $scope.deleteCollectionName
-                }
-            });
+        // hide collection list before deletion
+        hideCollections();
 
-            $scope.editMode = false;
-            $scope.showDeleteCollectionDialog = false;
-            
-            // google analytics
-            Analytics.registerEvent('Collection', 'Delete collection', 'Collection List');
+        console.log('delete collection: ' + $scope.deleteCollectionId);
+        BroadcastService.prepForBroadcast({
+            type: 'requestDeleteCollection',
+            data: {
+                collectionToBeDeletedId: $scope.deleteCollectionId,
+                collectionToBeDeletedName: $scope.deleteCollectionName
+            }
+        });
+
+        $scope.editMode = false;
+        $scope.showDeleteCollectionDialog = false;
+        
+        // google analytics
+        Analytics.registerEvent('Collection', 'Delete collection', 'Collection List');
     };
 
     $scope.unselectCollectionForDelete = function ($event) {
@@ -234,17 +237,21 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         // hide collections list
         // show full map
         } else {
-            $scope.collectionsListVisible = false;
-            $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
-            BroadcastService.prepForBroadcast({
-                type: 'viewingCollection',
-                data: {}
-            });
+            hideCollections();
         }
 
-    }
+    };
 
     // functions
+    function hideCollections () {
+        $scope.collectionsListVisible = false;
+        $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
+        BroadcastService.prepForBroadcast({
+            type: 'viewingCollection',
+            data: {}
+        });
+    }
+
     function refreshCollectionPoints (collectionId) {
         console.log('refreshCollectionPoints');
         console.log(collectionId);
