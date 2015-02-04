@@ -45,12 +45,15 @@ mappingbird.directives.directive('pAlert', ['BroadcastService', '$timeout', '$sc
                             $scope.message = $sce.trustAsHtml('<strong>' + BroadcastService.message.data.collectionToBeDeletedName + '</strong> is being deleted.');
                             $scope.actionMessage = 'Undo';
 
+                            var deleteCollectionId = BroadcastService.message.data.collectionToBeDeletedId;
+
+                            console.log('requestDelectCollection countdown ID: ' + deleteCollectionId);
                             var timer = $timeout(function(){
                                 $element.hide();
                                 BroadcastService.prepForBroadcast({
                                     type: 'deleteCollection',
                                     data: {
-                                        id: BroadcastService.message.data.collectionToBeDeletedId
+                                        id: deleteCollectionId
                                     }
                                 });
                             }, 4000);
