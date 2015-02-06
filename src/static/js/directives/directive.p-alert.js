@@ -7,12 +7,13 @@ mappingbird.directives.directive('pAlert', ['BroadcastService', '$timeout', '$sc
         restrict: 'A',
         link: function($scope, $elem, $attrs) {
             $elem.find('.close').on('click', function(e) {
-                $elem.hide();
+                $scope.alertActive = false;
             });
         },
         controller: ['$scope', '$element', '$attrs', 'BroadcastService', '$sce', function($scope, $element, $attrs, BroadcastService, $sce) {
 
-            $scope.alertActive = false;
+            $scope.alertActive = false; // hide alert
+            // $scope.alertActive = true; // show alert
 
             $scope.$on('stateChange', function() {
                 if (typeof BroadcastService.message == 'object') {
@@ -24,7 +25,7 @@ mappingbird.directives.directive('pAlert', ['BroadcastService', '$timeout', '$sc
                             $scope.actionMessage = '';
 
                             $timeout(function(){
-                                $element.hide();
+                                $scope.alertActive = false;
                             }, 3000);
                             break;
 
@@ -35,7 +36,7 @@ mappingbird.directives.directive('pAlert', ['BroadcastService', '$timeout', '$sc
                             $scope.actionMessage = '';
 
                             $timeout(function(){
-                                $element.hide();
+                                $scope.alertActive = false;
                             }, 3000);
                             break;
 
@@ -49,7 +50,7 @@ mappingbird.directives.directive('pAlert', ['BroadcastService', '$timeout', '$sc
 
                             console.log('requestDelectCollection countdown ID: ' + deleteCollectionId);
                             var timer = $timeout(function(){
-                                $element.hide();
+                                $scope.alertActive = false;
                                 BroadcastService.prepForBroadcast({
                                     type: 'deleteCollection',
                                     data: {
@@ -63,7 +64,7 @@ mappingbird.directives.directive('pAlert', ['BroadcastService', '$timeout', '$sc
                                 e.stopPropagation();
                                 $timeout.cancel(timer);
                                 $(this).off('click');
-                                $element.hide();
+                                $scope.alertActive = false;
                             });
 
                             break;
