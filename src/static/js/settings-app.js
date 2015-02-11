@@ -24,7 +24,7 @@ mappingbird.SettingsApp.controller('mainController', ['$scope', '$timeout', 'Pre
         UserLogout.get(function(data, headers) {
 
             delete $cookies['sessionid'];
-            $window.location.href = "/index";
+            $window.location.href = '/';
 
         });
 

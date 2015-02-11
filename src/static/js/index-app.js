@@ -79,7 +79,7 @@ mappingbird.IndexApp.controller('userController', ['$scope', '$cookies', '$http'
         UserLogout.get(function(data, headers) {
 
             delete $cookies['sessionid'];
-            $window.location.href = "/index";
+            $window.location.href = '/';
 
         });
 
