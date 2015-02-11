@@ -429,6 +429,11 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                 displayActiveViewPoints();
                 break;
             case 'pointDeleted':
+                // delete point from collection
+                removeActiveViewPoint(BroadcastService.message.data.id);
+                break;
+            case 'pointRemoved':
+                // remove point view only (point still exist in one of the collection)
                 removeActiveViewPoint(BroadcastService.message.data.id);
                 break;
             case 'savePointSelected':

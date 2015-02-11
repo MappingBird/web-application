@@ -146,6 +146,9 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
                     refreshCollectionPoints($scope.activeCollectionId);
                 }
                 break;
+            case 'pointChangeCollection':
+                reduceCollectionPointLength();
+                break;
         }
 
     });
@@ -286,6 +289,13 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         }
     }
 
+    function reduceCollectionPointLength () {
+        console.log('reduceCollectionPointLength');
+        if ($scope.activeCollectionPointLength) {
+            var temp = parseInt($scope.activeCollectionPointLength);
+            $scope.activeCollectionPointLength = temp - 1;
+        }
+    }
     $scope.toggleEditMode = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
