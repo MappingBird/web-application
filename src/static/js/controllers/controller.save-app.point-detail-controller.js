@@ -363,6 +363,12 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
                 }
             });
 
+            // rather than get the data again, -1 directly is faster
+            BroadcastService.prepForBroadcast({
+                type: 'pointChangeCollection',
+                data: { }
+            });  
+
             // google analytics
             if (typeof ga != 'undefined') {
                 ga('send', 'event', 'Point', 'Deleted point', 'Point Detail Panel');
