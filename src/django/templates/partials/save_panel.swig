@@ -47,8 +47,8 @@
                         <div class="primary-content">
                             <input type="text" ng-model="pageData.title" class="content-title" />
                             <textarea rows="8" ng-model="pageData.text"></textarea>
-                            <tags-input ng-model="pageData.tags" placeholder="Tags (optional)">
-                                <auto-complete min-length="1" source="loadTags($query)"></auto-complete>
+                            <tags-input ng-model="pageData.tags" placeholder="Tags (optional)" min-length="1">
+                                <auto-complete source="loadTags($query)"></auto-complete>
                             </tags-input>
                         </div>
                         <div ng-class="{'input-append' : true, 'control-group' : true, error: noCollectionError}" ng-show="collections.length == 0">
