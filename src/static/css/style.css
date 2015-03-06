@@ -64,12 +64,12 @@ header{
 	background-color: #f6892a; /* brand orange */
 	height: 45px;
 	vertical-align: middle;
-	box-shadow: 0 1px 5px #888;
+	box-shadow: 0 2px 5px #000;
 }
 header > .logo{
 	display: block;
-	background: url(../img/logo-bright.png) left center no-repeat;
-	width: 172px;
+	background: url(/static/new_index/images/white_logo.png) left center no-repeat;
+	width: 227px;
 	height: 100%;
 	float: left;
 	margin: 0 15px 0 25px;;

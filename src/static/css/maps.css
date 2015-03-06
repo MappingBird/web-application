@@ -219,10 +219,11 @@ section.map-section{
 	height: -moz-calc(100% - 75px);
 	height: -webkit-calc(100% - 75px);
 	height: calc(100% - 75px);
-	left: 425px;
-	width: -moz-calc(100% - 425px);
-	width: -webkit-calc(100% - 425px);
-	width: calc(100% - 425px);
+	left: 380px;
+	width: -moz-calc(100% - 380px);
+	width: -webkit-calc(100% - 380px);
+	width: calc(100% - 380px);
+	top: 95px;
 }
 
 #map.full-tall {
@@ -249,9 +250,9 @@ section.map-section{
 	height: calc(100% - 125px);
 	left: 0;
 	top: 95px;
-	width: -moz-calc(100% - 655px);
-	width: -webkit-calc(100% - 655px);
-	width: calc(100% - 655px);
+	width: -moz-calc(100% - 440px);
+	width: -webkit-calc(100% - 440px);
+	width: calc(100% - 440px);
 }
 
 /* Save Panel */
@@ -704,7 +705,7 @@ a.show-on-map i.icon-show{
 }
 
 .collections-menu.thin-menu {
-	width: 200px;
+	width: 338px;
 }
 
 .collections-menu.upward-menu {
@@ -734,7 +735,7 @@ a.show-on-map i.icon-show{
 }
 
 .collections-menu.thin-menu input[type="text"] {
-	width: 120px;
+	width: 260px;
 }
 
 .collections-menu .error input[type="text"]{
@@ -761,8 +762,8 @@ a.show-on-map i.icon-show{
 	margin: 0px;
 }
 ul.types{
+	display: inline-block;
 	margin: 0;
-	padding: 0;
 	list-style: none;
 }
 ul.types > li{
@@ -787,8 +788,8 @@ ul.types > li{
 .types-misc{
 	display: block;
 	width: 38px;
-	height: 45px;
-	margin: 0 9px;
+	height: 32px;
+	margin: 0;
 }
 .types-scenicspot{
 	background: url(../img/type-scenicspot.png) 0 0 no-repeat;
@@ -820,7 +821,7 @@ ul.types > li{
 .active .types-restaurant,
 .active .types-bar,
 .active .types-misc{
- background-position: 0 -45px;
+ background-position: 0 -30px;
 }
 
 /* Pin */
@@ -1075,6 +1076,9 @@ ul.types > li{
 	text-decoration: none;
 	color: #01a9e7;
 }
+.collection-header .collection-name:focus{
+	text-decoration: none;
+}
 .collection-header .collection-name:hover .icon-expand-collapse{
 	background-position: 0 -20px;
 }
@@ -1222,7 +1226,7 @@ ul.types > li{
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 655px;
+	width: 440px;
 	overflow: hidden;
 	padding: 95px 0 30px;
 	box-sizing: border-box;
@@ -1232,8 +1236,11 @@ ul.types > li{
 	height: 100%;
 }
 .pin-content-wrapper .pin-content{
-	padding: 0 0 60px 55px;
+	padding: 5px 0 60px 55px;
 	color: #707070;
+}
+.pin-content-wrapper .pin-content .collection{
+	color: #ffffff;
 }
 .pin-content-wrapper .pin-content .pin-details{
 	width: 380px;
@@ -1244,6 +1251,19 @@ ul.types > li{
 }
 .pin-content-wrapper .pin-content .ref-url{
 	font-size: 12px;
+}
+.pin-content ul.types li{
+	padding-top: 5px;
+	display:none;
+}
+.pin-content ul.types li .collectionName {
+	padding-top: 10px;
+}
+.pin-content-wrapper.editable .pin-content ul.types li {
+	display: inline-block;
+}
+.pin-content ul.types li.active{
+	display: block;
 }
 .pin-content-wrapper .pin-cover{
 	width: 200px;
@@ -1257,13 +1277,6 @@ ul.types > li{
 .pin-content-wrapper .pin-cover>ul{
 	margin: 10px 0px 0px;
 	list-style: none;
-}
-.pin-cover ul.types li{
-	padding-top: 5px;
-	display:none;
-}
-.pin-cover ul.types li.active{
-	display: block;
 }
 .pin-content-wrapper .pin-content-footer{
 	height: 60px;
@@ -1293,7 +1306,7 @@ ul.types > li{
 .pin-content-wrapper.editable .pin-details p.ref-context,
 .pin-content-wrapper .cover-img p,
 .pin-content-wrapper .pingismo-btn-group.btn-group,
-.pin-content-wrapper.editable .pin-cover .collection{
+.pin-content-wrapper.editable .pin-content .types .collectionName{
 	display: none;
 }
 
@@ -1302,10 +1315,12 @@ ul.types > li{
 .pin-content-wrapper.editable select,
 .pin-content-wrapper.editable textarea,
 .pin-content-wrapper.editable input[type="text"],
-.pin-content-wrapper.editable .pingismo-btn-group.btn-group,
-.pin-content-wrapper.editable .pingismo-btn-group.btn-group .exist,
-.pin-content-wrapper.editable .pin-cover ul.types li{
+.pin-content-wrapper .pin-content .types .collectionName{
 	display: inline-block;
+}
+
+.pin-content-wrapper.editable .pingismo-btn-group.btn-group{
+	display: block;
 }
 .pin-content-wrapper input.content-title{
 	margin-top: 10px;
@@ -1327,7 +1342,7 @@ ul.types > li{
 	margin: -20px 15px 0;
 }
 .pin-content-wrapper .pingismo-btn-group.btn-group .exist{
-	width: 174px;
+	width: 314px;
 }
 
 /* confirm to delete pin */
