@@ -48,7 +48,7 @@
     <footer>
         <div class="logo-copyright">
             <p class="slogan"><img src="/static/img/logo-footer.png" /> Remember places for later.</p>
-            <p>Copyright &copy; 2014 MappinBird LLC. All referred posts &copy; their respective owners.</p>
+            <p>Copyright &copy; 2015 MappinBird LLC. All referred posts &copy; their respective owners.</p>
         </div>
         <div class="lang-contact pull-right">
             <ul class="nav nav-pills">

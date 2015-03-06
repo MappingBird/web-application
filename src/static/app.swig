@@ -116,7 +116,7 @@
 
     <footer class="narrow">
         <div class="logo-copyright">
-            <p>Copyright &copy; 2014 MappingBird LLC. All referred posts &copy; their respective owners.</p>
+            <p>Copyright &copy; 2015 MappingBird LLC. All referred posts &copy; their respective owners.</p>
         </div>
         <div class="lang-contact pull-right">
             <p>
