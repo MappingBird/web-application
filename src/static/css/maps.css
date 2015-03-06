@@ -1256,7 +1256,7 @@ ul.types > li{
 	padding-top: 5px;
 	display:none;
 }
-.pin-content ul.types li .collectionName {
+.pin-content ul.types li.collectionName {
 	padding-top: 10px;
 }
 .pin-content-wrapper.editable .pin-content ul.types li {
