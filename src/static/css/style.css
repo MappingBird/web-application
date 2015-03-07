@@ -68,8 +68,8 @@ header{
 }
 header > .logo{
 	display: block;
-	background: url(/static/new_index/images/white_logo.png) left center no-repeat;
-	width: 227px;
+	background: url(/static/new_index/images/logo-bright.png) left center no-repeat;
+	width: 190px;
 	height: 100%;
 	float: left;
 	margin: 0 15px 0 25px;;
@@ -98,7 +98,7 @@ header.float-top{
 	margin: 0px;
 }
 .navbar.pingismo-navbar .nav{
-	margin-top: 5px;
+	margin-top: 1px;
 }
 .navbar.pingismo-navbar .nav>li>a{
 	color: #ffdecb;
