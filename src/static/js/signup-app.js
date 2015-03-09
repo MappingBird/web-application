@@ -123,4 +123,19 @@ mappingbird.SignupApp.controller('mainController', ['$scope', '$timeout', 'Prese
 
     };
 
+    $scope.installExtension = function() {
+        $scope.dark = true;
+        $scope.extensionTooltip = true;
+        chrome.webstore.install('https://chrome.google.com/webstore/detail/ipjijcfmgfehpiiigjgjdgkldeligkfo', function() {
+            $scope.dark = true;
+            $scope.extensionTooltip = false;
+            $scope.extensionModal = true;
+            $scope.$digest();
+        }, function(reason) {
+            $scope.dark = false;
+            $scope.extensionTooltip = false;
+            $scope.extensionModal = false;
+            $scope.$digest();
+        });
+    };
 }]);
