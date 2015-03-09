@@ -16,7 +16,7 @@
 
     <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/static/favicon.ico" />
-
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ipjijcfmgfehpiiigjgjdgkldeligkfo">
     {% block css %}{% endblock %}
 
 </head>

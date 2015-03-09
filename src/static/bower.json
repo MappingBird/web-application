@@ -23,5 +23,8 @@
     "angular-resource": "~1.2.26",
     "angular-cookies": "~1.2.26",
     "bootstrap": "2.3.2"
+  },
+  "resolutions": {
+    "angular": "1.2.26"
   }
 }
