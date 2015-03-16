@@ -6,6 +6,7 @@ var minifyCss = require('gulp-minify-css');
 var imagemin = require('gulp-imagemin');
 var rev = require('gulp-rev');
 var swig = require('gulp-swig');
+var del = require('del');
 var stageFile = 'temp';
 
 // Copy all static images
@@ -45,3 +46,26 @@ gulp.task('usemin', ['images', 'copy'],function () {
         //.pipe(gulp.dest('./'));
         .pipe(gulp.dest('../'+ stageFile + '/'));
 });
+
+gulp.task('copy:swig:regular', ['usemin'], function() {
+    return gulp.src('../' + stageFile + '/!(_)*.swig')
+        .pipe(gulp.dest('../django/templates/'));
+});
+
+gulp.task('copy:swig:share', ['usemin'], function() {
+    return gulp.src('../' + stageFile + '/_*.swig')
+        .pipe(gulp.dest('../django/templates/share/'));
+});
+
+gulp.task('copy:swig', ['copy:swig:regular', 'copy:swig:share']);
+
+gulp.task('clean:js', function(cb) {
+    del(['js/mappingbird-*.js'], cb);
+});
+
+gulp.task('copy:js', ['usemin', 'clean:js'], function() {
+    return gulp.src('../' + stageFile + '/static/js/*.js')
+        .pipe(gulp.dest('js/'));
+});
+
+gulp.task('build', ['copy:js', 'copy:swig']);
