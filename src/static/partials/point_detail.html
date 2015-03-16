@@ -24,9 +24,10 @@
                 <li ng-class="{active : activeViewPoint.type == 'misc'}"><a href="#" class="types-misc" ng-click="setPointType($event, 'misc')"></a></li>
                 <li class="collectionName">Under <span class="collection" ng-bind="activeCollectionName"></span></li>
             </ul>
-            <a ng-href="[[activeViewPoint.url]]" class="ref-url ellipsis" title="[[activeViewPoint.url]]" new-window ng-bind="activeViewPoint.url"></a>
             <p class="ref-context editable" ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.description"></p>
             <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
+            <p class="ref-address ng-binding" ng-bind="activeViewPoint.location.place_address"></p>
+            <a ng-href="[[activeViewPoint.url]]" class="ref-url ellipsis" title="[[activeViewPoint.url]]" new-window ng-bind="activeViewPoint.url"></a>
             <div height-to-bottom m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
                 <div class="ref-context-img" thumb-alignment="{displayArray: 'pointImages', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages', enableLightbox: true, editMode: pointEditMode, onlyFirstSelected: false, whiteBackground: false}"></div>
             </div>
