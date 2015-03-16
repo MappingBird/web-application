@@ -32,6 +32,7 @@ from base.mail import send_mail
 from bucketlist.models import Collection, Point, Image, Location, Tag
 from permissions import IsOwner, IsOwnerOrAdmin
 
+import owl
 
 class APIViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
@@ -452,11 +453,35 @@ def geocode(request):
 
 @api_view(['GET'])
 def places(request):
-    out = {}
+    out = {}    
+    out['places'] = []
+
+    if request.GET.get('url'):
+        url = request.GET.get('url')
+        #url = "http://www.ipeen.com.tw/comment/652034"
+        print url
+        b = owl.BarnOwl()
+        points = b.getPointByUrl(url)
+        try:
+            for p in points:
+                entry = {
+                    'name': p['article_name'],
+                    'address': p['address'],
+                    'coordinates': { 
+                        'lat': float(p['latlng'].split(',')[0]),
+                        'lng': float(p['latlng'].split(',')[1])
+                    }
+                }
+
+                out['places'].append(entry)
+                break   
+        except Exception, e:
+            print e
+
     if request.GET.get('q'):
         gp = GooglePlaces(settings.GOOGLE_API_KEY)
         result = gp.text_search(query=request.GET.get('q'))
-        out['places'] = []
+###        out['places'] = []
 
         for place in result.places:
             place.get_details()

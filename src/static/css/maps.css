@@ -763,7 +763,7 @@ a.show-on-map i.icon-show{
 }
 ul.types{
 	display: inline-block;
-	margin: 0;
+	margin: 0px 0 20px;
 	list-style: none;
 }
 ul.types > li{
@@ -1168,7 +1168,7 @@ ul.types > li{
 }
 .collection-list-wrapper .nav .divider{
 	height: 1px;
-	margin: 9px 1px 15px;
+	margin: 20px 0;
 	overflow: hidden;
 	background-color: #181818;
 	border-bottom: 1px solid #373737;
@@ -1245,12 +1245,20 @@ ul.types > li{
 .pin-content-wrapper .pin-content .pin-details{
 	width: 380px;
 }
+.pin-content-wrapper .pin-content .pin-address{
+	background: url('../img/icon-address.png') no-repeat;
+	padding-left: 30px;
+	width: 85%;
+}
 .pin-content-wrapper h4,
 .delete-pin-wrapper h4{
 	color: #fff;
 }
 .pin-content-wrapper .pin-content .ref-url{
 	font-size: 12px;
+	background: url('../img/icon-link.png') no-repeat;
+	padding-left: 30px;
+	width: 85%;
 }
 .pin-content ul.types li{
 	padding-top: 5px;
