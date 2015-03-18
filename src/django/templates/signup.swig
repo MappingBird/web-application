@@ -8,7 +8,7 @@
 <link href="/static/prototype_assets/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 <link href="/static/prototype_assets/css/style.css" rel="stylesheet" media="screen">
 <link href="/static/css/account.css" rel="stylesheet" media="screen">
-
+<!-- endbuild -->
 {% endblock %}
 
 {% block content %}
@@ -26,7 +26,7 @@
                 <p class="title">Sign up</p>
                 <form ng-submit="checkInput()">
                     <div class="control-group">
-                        <input type="text" placeholder="Email address" name="email" ng-model="email" required autofocus />
+                        <input type="email" placeholder="Email address" name="email" ng-model="email" required autofocus />
                     </div>
                     <div class="error-message control-group" ng-show="errorEmailAlreadyRegistered">
                         <p class="help-inline">The email has been registered.</p>
@@ -37,6 +37,10 @@
                     <div class="error-message control-group" ng-class="{ 'error-message' : 1, 'control-group' : 1, 'error' : errorPasswordTooShort }" ng-show="errorPasswordTooShort">
                         <p class="help-inline">Password is too short.</p>
                     </div>
+                    <div class="error-message control-group" ng-class="{ 'error-message' : 1, 'control-group' : 1, 'error' : errorEmailAlreadyRegistered }" ng-show="errorEmailAlreadyRegistered">
+                        <p class="help-inline">The email has been used. <a href="/login" target="_self">Already has account?</a></p>
+                    </div>
+
                     <div>
                         By creating an account, I accept MappingBird's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
                     </div>

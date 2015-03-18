@@ -15,6 +15,7 @@ mappingbird.SignupApp.controller('mainController', ['$scope', '$timeout', 'Prese
 
     $scope.checkInput = function($event) {
 
+      $scope.errorEmailAlreadyRegistered = false;
         if ($scope.email.length > 0) {
 
             if ($scope.password.length >= 6) {
@@ -87,7 +88,11 @@ mappingbird.SignupApp.controller('mainController', ['$scope', '$timeout', 'Prese
             // google analytics
             Analytics.registerEvent('Signup', 'Signup success - new user created', 'Signup Page');
         }, function (res) {
-            console.log('Signup error:', res);
+            if (res.data) {
+              console.log('Signup error:', res);
+              // res.data.email[0] message
+              $scope.errorEmailAlreadyRegistered = true;
+            }
         });
 
     };
