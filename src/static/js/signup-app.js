@@ -86,6 +86,8 @@ mappingbird.SignupApp.controller('mainController', ['$scope', '$timeout', 'Prese
             $scope.accountCreated = true;
             // google analytics
             Analytics.registerEvent('Signup', 'Signup success - new user created', 'Signup Page');
+        }, function (res) {
+            console.log('Signup error:', res);
         });
 
     };

@@ -1245,7 +1245,7 @@ ul.types > li{
 .pin-content-wrapper .pin-content .pin-details{
 	width: 380px;
 }
-.pin-content-wrapper .pin-content .pin-address{
+.pin-content-wrapper .pin-content .ref-address{
 	background: url('../img/icon-address.png') no-repeat;
 	padding-left: 30px;
 	width: 85%;
