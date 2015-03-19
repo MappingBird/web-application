@@ -28,9 +28,6 @@
                     <div class="control-group">
                         <input type="email" placeholder="Email address" name="email" ng-model="email" required autofocus />
                     </div>
-                    <div class="error-message control-group" ng-show="errorEmailAlreadyRegistered">
-                        <p class="help-inline">The email has been registered.</p>
-                    </div>
                     <div class="control-group" ng-class="{ 'control-group' : 1, 'error' : errorPasswordTooShort }">
                         <input type="password" placeholder="Password" name="password" ng-model="password" required />
                     </div>

@@ -16,6 +16,9 @@ mappingbird.SignupApp.controller('mainController', ['$scope', '$timeout', 'Prese
     $scope.checkInput = function($event) {
 
       $scope.errorEmailAlreadyRegistered = false;
+      $scope.errorEmailRequired = false;
+      $scope.errorPasswordTooShort = false;
+      
         if ($scope.email.length > 0) {
 
             if ($scope.password.length >= 6) {
