@@ -77,7 +77,9 @@ def scraper(request):
     page.encoding = 'utf-8'
     html = etree.HTML(page.text)
 
-    title = html.xpath('.//title/text()')[0]
+    titles = html.xpath('.//title/text()')
+    title = titles[0] if titles is not None and 0 < len(titles) else ''
+
     text = ''
 
     # pixnet

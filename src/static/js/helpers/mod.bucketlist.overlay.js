@@ -167,14 +167,22 @@ BucketListSmallOverlay.prototype.onAdd = function() {
         icon = $('<a href="#" class="pin-' + this.type_ + '" title="' + this.placeName_ + '"></a>'),
         tip = $('<a href="javascript:void(0);" class="pin-popup-img show-details-btn"></a>'),
         popup = $('<div class="pin-popup" />'),
-        detail = $('<p><strong>' + this.placeName_ + '</strong>' + this.placeAddress_ + ' ' + this.placePhone_ + '</p>'),
+
+        // detail = $('<p><strong>' + this.placeName_ + '</strong>' + this.placeAddress_ + ' ' + this.placePhone_ + '</p>'),
+        detail = $('<p><strong>' + this.placeName_ + '</strong>' + '</p>'),
+        settings = $('<p class="pin-popup-settings">View Details</p>'),
+        triangle = $('<p class="pin-popup-triangle"></p>'),
+
         checkmark = $('<i class="icon-check pull-right"></i>'),
         self = this;
 
     div.append(icon);
     div.append(checkmark);
+    popup.append(tip);
     popup.append(detail);
-    tip.append('<i></i>');
+    popup.append(settings);
+    popup.append(triangle);
+    // tip.append('<i></i>');
 
     this.div_ = div[0];
     this.checkmark_ = checkmark;
@@ -193,8 +201,8 @@ BucketListSmallOverlay.prototype.onAdd = function() {
 
     // click event for top-right
     if (true) {
-        $(popup).append(tip);
-        tip.children('i').on('click', function(e){
+      // tip.children('i')
+        $(settings).on('click', function(e){
             e.preventDefault();
             e.stopPropagation();
             self.callback_();
@@ -211,12 +219,27 @@ BucketListSmallOverlay.prototype.onAdd = function() {
                 self.popupClickCallback_(posX, posY);
             }
             $(popup).toggle();
+
+            // remove animation showme class
+            $(this).removeClass('showme');
+            
+            // change icon to highlight or toggle remove
+            // $(this).parent() is one of the $('.pingismo-pin')
+            if ($(this).parent().hasClass('active')) {
+              $(this).parent().removeClass('active');
+            } else {
+              $('.pingismo-pin').removeClass('active');
+              $(this).parent().addClass('active');
+            }
         });
     }
 
     // image
     if (this.image_) {
         this.tip_.css({backgroundImage: 'url(' + this.image_ + ')'});
+    } else {
+      // default
+        this.tip_.css({backgroundImage: 'url("../static/img/default_noimages.png")'});
     }
 
     // default state

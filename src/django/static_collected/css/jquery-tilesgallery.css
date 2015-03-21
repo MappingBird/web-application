@@ -1,0 +1,19 @@
+.loading {
+	display: block;
+	background:#fff url(../img/loading.gif);
+	width:32px;
+	height:32px;
+	margin-left:-16px;
+	margin-top:-16px;
+	border-radius:16px;
+	border:2px solid #333;
+}
+.tiles-item .caption {
+	background:transparent url(../img/caption.png);
+	color:#fff;
+	font-size:12px;		
+}
+.tiles-item .caption .text {
+	margin:2px 5px;
+	display: block;
+}

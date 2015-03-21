@@ -763,7 +763,7 @@ a.show-on-map i.icon-show{
 }
 ul.types{
 	display: inline-block;
-	margin: 0;
+	margin: 0px 0 20px;
 	list-style: none;
 }
 ul.types > li{
@@ -846,22 +846,39 @@ ul.types > li{
 .pingismo-pin .pin-scenicspot{
 	background: url(../img/pin-scenicspot-anim-10.png) 0 0 no-repeat;
 }
+.pingismo-pin.active .pin-scenicspot{
+	background: url(../img/pin-scenicspot-highlight.png) 0 0 no-repeat;
+}
 .pingismo-pin .pin-hotel{
-	background: url(../img/pin-hotel.png) 0 0 no-repeat;
+	background: url(../img/pin-hotel-anim-10.png) 0 0 no-repeat;
+}
+.pingismo-pin.active .pin-hotel{
+	background: url(../img/pin-hotel-highlight.png) 0 0 no-repeat;
 }
 .pingismo-pin .pin-mall{
-	background: url(../img/pin-mall.png) 0 0 no-repeat;
+	background: url(../img/pin-mall-anim-10.png) 0 0 no-repeat;
+}
+.pingismo-pin.active .pin-mall{
+	background: url(../img/pin-mall-highlight.png) 0 0 no-repeat;
 }
 .pingismo-pin .pin-restaurant{
-	background: url(../img/pin-restaurant.png) 0 0 no-repeat;
+	background: url(../img/pin-restaurant-anim-10.png) 0 0 no-repeat;
+}
+.pingismo-pin.active .pin-restaurant{
+	background: url(../img/pin-restaurant-highlight.png) 0 0 no-repeat;
 }
 .pingismo-pin .pin-bar{
-	background: url(../img/pin-bar.png) 0 0 no-repeat;
+	background: url(../img/pin-bar-anim-10.png) 0 0 no-repeat;
+}
+.pingismo-pin.active .pin-bar{
+	background: url(../img/pin-bar-highlight.png) 0 0 no-repeat;
 }
 .pingismo-pin .pin-misc{
-	background: url(../img/pin-misc.png) 0 0 no-repeat;
+	background: url(../img/pin-misc-anim-10.png) 0 0 no-repeat;
 }
-
+.pingismo-pin.active .pin-misc{
+	background: url(../img/pin-misc-highlight.png) 0 0 no-repeat;
+}
 .pingismo-pin .icon-check{
 	background: url(../img/icon-checked.png) 0 0 no-repeat;
 	width: 21px;
@@ -871,20 +888,21 @@ ul.types > li{
 }
 
 .pin-popup{
-	width: 310px;
-	height: 100px;
-	background: url(../img/popup-background.png) 0 0 no-repeat;
+	width: 200px;
+	height: 140px;
+	/* change popup layout background: url(../img/popup-background.png) 0 0 no-repeat;*/
 	position: absolute;
-	margin-top: -24px;
-	margin-left: 0px;
+	margin-top: -50px;
+	margin-left: -105px;
 	color: #707070;
 	line-height: 16px;
 	overflow: hidden;
 	opacity: 0;
 }
 .pin-popup p{
-	width: 165px;
-	padding: 10px 15px 10px 30px;
+	width: 200px;
+	margin: -20px 0 0 0;
+	padding: 0 5px;
 	float: left;
 }
 
@@ -894,7 +912,7 @@ ul.types > li{
 }
 
 .pin-popup strong{
-	font-size: 18px;
+	font-size: 15px;
 	font-weight: normal;
 	color: #fff;
 	display: block;
@@ -904,13 +922,36 @@ ul.types > li{
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
+
+.pin-popup .pin-popup-settings{
+	margin: -3px 0 0 0;
+	font-size: 12px;
+	color: #01A9E7;
+	text-align: center;
+	padding: 7px 0 7px 0;
+	background-color: white;
+}
+.pin-popup .pin-popup-settings:hover{
+	cursor: pointer;
+}
+.pin-popup .pin-popup-triangle {
+	width: 0;
+  height: 0;
+  margin: 0 0 0 86px;
+  padding: 0;
+  float: left;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 20px solid #fff;
+}
 .pin-popup .pin-popup-img{
+	background-color: #fff;
 	background-image: url();
 	background-repeat: no-repeat;
 	background-size: cover;
 	display: block;
-	width: 100px;
-    height: 100px;
+	width: 200px;
+    height: 90px;
     overflow: hidden;
 	float: right;
 }
@@ -1168,7 +1209,7 @@ ul.types > li{
 }
 .collection-list-wrapper .nav .divider{
 	height: 1px;
-	margin: 9px 1px 15px;
+	margin: 20px 0;
 	overflow: hidden;
 	background-color: #181818;
 	border-bottom: 1px solid #373737;
@@ -1245,12 +1286,33 @@ ul.types > li{
 .pin-content-wrapper .pin-content .pin-details{
 	width: 380px;
 }
+.pin-content-wrapper .pin-content .ref-address{
+	background: url('../img/icon-address.png') no-repeat;
+	padding-left: 30px;
+	width: 85%;
+}
 .pin-content-wrapper h4,
 .delete-pin-wrapper h4{
 	color: #fff;
 }
 .pin-content-wrapper .pin-content .ref-url{
 	font-size: 12px;
+	background: url('../img/icon-link.png') no-repeat;
+	padding-left: 30px;
+	width: 85%;
+}
+.pin-content ul.types li{
+	padding-top: 5px;
+	display:none;
+}
+.pin-content ul.types li.collectionName {
+	padding-top: 10px;
+}
+.pin-content-wrapper.editable .pin-content ul.types li {
+	display: inline-block;
+}
+.pin-content ul.types li.active{
+	display: block;
 }
 .pin-content ul.types li{
 	padding-top: 5px;

@@ -13,6 +13,12 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.showDeleteCollectionDialog = false;
     
 
+    // delete collection use
+    $scope.deleteCollectionId = null;
+    $scope.deleteCollectionName = null;
+    $scope.showDeleteCollectionDialog = false;
+
+
     // watchers
     $scope.$watch(function(){return Collections.activeCollectionId;}, function(activeCollectionId, oldActiveCollectionId) {
         console.log('Collections.activeCollectionId watcher: ' + activeCollectionId);
@@ -172,11 +178,22 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         // edit mode - delete collection
         if ($scope.editMode) {
 
+<<<<<<< HEAD
+=======
+            // Uncategorized catelog can't be deleted
+            if (name === 'Uncategorized') {
+              return;
+            }
+>>>>>>> stage
             // confirm dialog
             $scope.deleteCollectionId = id;
             $scope.deleteCollectionName = name;
             $scope.showDeleteCollectionDialog = true;
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> stage
         } else {
             console.log('viewCollection ' + id);
             $scope.collectionsListVisible = false;
@@ -209,7 +226,11 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
 
         $scope.editMode = false;
         $scope.showDeleteCollectionDialog = false;
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> stage
         // google analytics
         Analytics.registerEvent('Collection', 'Delete collection', 'Collection List');
     };
@@ -220,10 +241,17 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
 
         $scope.editMode = false;
         $scope.showDeleteCollectionDialog = false;
+<<<<<<< HEAD
         
         console.log('unselect delete collection: ' + $scope.deleteCollectionId);
     };
     
+=======
+
+        console.log('unselect delete collection: ' + $scope.deleteCollectionId);
+    };
+
+>>>>>>> stage
     $scope.showCollections = function($event) {
         $event.preventDefault();
         $event.stopPropagation();

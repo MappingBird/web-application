@@ -19,6 +19,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
             zoomControlOptions: {
                 style: google.maps.ZoomControlStyle.LARGE
             },
+            styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#efefef"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#e3eed3"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#83a5b0"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#bdcdd3"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#b5cbe4"}]}],
             scaleControl: false
         },
         map = new google.maps.Map($('#map')[0], mapOptions),
@@ -318,7 +319,8 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                         if ($scope.fullMap) {
                                             map.panTo(new google.maps.LatLng(point.lat, point.lng));
                                         } else {
-                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
+                                            // offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
+                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/4));
                                         }
 
                                     $('#map').off('transitionend.' + point.id);
@@ -354,7 +356,8 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                     if ($scope.fullMap) {
                                             map.panTo(new google.maps.LatLng(point.lat, point.lng));
                                         } else {
-                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
+                                            // offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
+                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/4));
                                         }
                                 }
 
