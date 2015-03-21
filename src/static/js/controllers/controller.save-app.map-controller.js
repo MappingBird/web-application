@@ -320,7 +320,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                             map.panTo(new google.maps.LatLng(point.lat, point.lng));
                                         } else {
                                             // offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
-                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng));
+                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/4));
                                         }
 
                                     $('#map').off('transitionend.' + point.id);
@@ -357,7 +357,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                             map.panTo(new google.maps.LatLng(point.lat, point.lng));
                                         } else {
                                             // offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
-                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng));
+                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/4));
                                         }
                                 }
 

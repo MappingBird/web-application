@@ -221,11 +221,12 @@ BucketListSmallOverlay.prototype.onAdd = function() {
             $(popup).toggle();
 
             // change icon to highlight or toggle remove
-            if ($(this).hasClass('active')) {
-              $(this).removeClass('active');
+            // $(this).parent() is one of the $('.pingismo-pin')
+            if ($(this).parent().hasClass('active')) {
+              $(this).parent().removeClass('active');
             } else {
               $('.pingismo-pin').removeClass('active');
-              $(this).addClass('active');
+              $(this).parent().addClass('active');
             }
         });
     }
