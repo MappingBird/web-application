@@ -220,6 +220,9 @@ BucketListSmallOverlay.prototype.onAdd = function() {
             }
             $(popup).toggle();
 
+            // remove animation showme class
+            $(this).removeClass('showme');
+            
             // change icon to highlight or toggle remove
             // $(this).parent() is one of the $('.pingismo-pin')
             if ($(this).parent().hasClass('active')) {
