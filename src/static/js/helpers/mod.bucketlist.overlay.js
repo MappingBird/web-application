@@ -219,12 +219,23 @@ BucketListSmallOverlay.prototype.onAdd = function() {
                 self.popupClickCallback_(posX, posY);
             }
             $(popup).toggle();
+
+            // change icon to highlight or toggle remove
+            if ($(this).hasClass('active')) {
+              $(this).removeClass('active');
+            } else {
+              $('.pingismo-pin').removeClass('active');
+              $(this).addClass('active');
+            }
         });
     }
 
     // image
     if (this.image_) {
         this.tip_.css({backgroundImage: 'url(' + this.image_ + ')'});
+    } else {
+      // default
+        this.tip_.css({backgroundImage: 'url("../static/img/default_noimages.png")'});
     }
 
     // default state
