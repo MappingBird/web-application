@@ -167,14 +167,22 @@ BucketListSmallOverlay.prototype.onAdd = function() {
         icon = $('<a href="#" class="pin-' + this.type_ + '" title="' + this.placeName_ + '"></a>'),
         tip = $('<a href="javascript:void(0);" class="pin-popup-img show-details-btn"></a>'),
         popup = $('<div class="pin-popup" />'),
-        detail = $('<p><strong>' + this.placeName_ + '</strong>' + this.placeAddress_ + ' ' + this.placePhone_ + '</p>'),
+
+        // detail = $('<p><strong>' + this.placeName_ + '</strong>' + this.placeAddress_ + ' ' + this.placePhone_ + '</p>'),
+        detail = $('<p><strong>' + this.placeName_ + '</strong>' + '</p>'),
+        settings = $('<p class="pin-popup-settings">View Details</p>'),
+        triangle = $('<p class="pin-popup-triangle"></p>'),
+
         checkmark = $('<i class="icon-check pull-right"></i>'),
         self = this;
 
     div.append(icon);
     div.append(checkmark);
+    popup.append(tip);
     popup.append(detail);
-    tip.append('<i></i>');
+    popup.append(settings);
+    popup.append(triangle);
+    // tip.append('<i></i>');
 
     this.div_ = div[0];
     this.checkmark_ = checkmark;
@@ -193,8 +201,8 @@ BucketListSmallOverlay.prototype.onAdd = function() {
 
     // click event for top-right
     if (true) {
-        $(popup).append(tip);
-        tip.children('i').on('click', function(e){
+      // tip.children('i')
+        $(settings).on('click', function(e){
             e.preventDefault();
             e.stopPropagation();
             self.callback_();
