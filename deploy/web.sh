@@ -4,7 +4,7 @@ DIR=$(dirname $0)
 BASEDIR=$DIR/../
 
 # virtualenv
-VENV=/home/django/venvs/pingismo
+VENV=/home/django/venvs/stage
 source $VENV/bin/activate
 source $VENV/bin/postactivate
 

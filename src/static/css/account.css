@@ -44,7 +44,8 @@ section.main form .action-button{
 }
 
 input[type="text"],
-input[type="password"]{
+input[type="password"],
+input[type="email"]{
 	border-radius: 0;
 	background-color: #FFF;
 	width: 360px;

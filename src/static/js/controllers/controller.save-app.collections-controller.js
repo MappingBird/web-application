@@ -6,12 +6,12 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.activeCollectionName = '';
     $scope.collectionsListVisible = false;
     $scope.editMode = false;
-    
+
     // delete collection use
     $scope.deleteCollectionId = null;
     $scope.deleteCollectionName = null;
     $scope.showDeleteCollectionDialog = false;
-    
+
 
     // watchers
     $scope.$watch(function(){return Collections.activeCollectionId;}, function(activeCollectionId, oldActiveCollectionId) {
@@ -172,11 +172,15 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         // edit mode - delete collection
         if ($scope.editMode) {
 
+            // Uncategorized catelog can't be deleted
+            if (name === 'Uncategorized') {
+              return;
+            }
             // confirm dialog
             $scope.deleteCollectionId = id;
             $scope.deleteCollectionName = name;
             $scope.showDeleteCollectionDialog = true;
-            
+
         } else {
             console.log('viewCollection ' + id);
             $scope.collectionsListVisible = false;
@@ -209,7 +213,7 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
 
         $scope.editMode = false;
         $scope.showDeleteCollectionDialog = false;
-        
+
         // google analytics
         Analytics.registerEvent('Collection', 'Delete collection', 'Collection List');
     };
@@ -220,10 +224,10 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
 
         $scope.editMode = false;
         $scope.showDeleteCollectionDialog = false;
-        
+
         console.log('unselect delete collection: ' + $scope.deleteCollectionId);
     };
-    
+
     $scope.showCollections = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
