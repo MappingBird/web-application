@@ -12,10 +12,11 @@
     <meta name="description" content="Remember places for later"/>
     <meta name="keywords" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <meta name="google-site-verification" content="2jDqeNwDYc2gLlaivjMppxDcIXBQ2UIM4UxhVGkDAkY" />
 
     <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/static/favicon.ico" />
-
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ipjijcfmgfehpiiigjgjdgkldeligkfo">
     {% block css %}{% endblock %}
 
 </head>
