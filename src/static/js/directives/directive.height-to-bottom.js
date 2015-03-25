@@ -17,7 +17,7 @@ mappingbird.directives.directive('heightToBottom', function() {
 
             // DIRTY DIRTY HACK
             // but in the interest of time...
-            height = $('body').height() - 305;
+            height = $('body').height() - 189;
 
             $element.css('height', height + 'px');
 
