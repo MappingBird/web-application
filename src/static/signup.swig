@@ -61,11 +61,12 @@
                 </p>
                 <form>
                     <div>
-                        <p class="fresh">Congratulations! You are now able to create your own map and save places you love. Click "<strong>Get Started</strong>" to learn how it works.</p>
+                        <p class="fresh">Great! Now, click "<strong>Get MappingBird for Chrome</strong>" below to install Chrome extension.</p>
                         <p class="saved">Congratulations! Your account has been created. Click "<strong>View Map</strong>" to see your own map and the places you just saved.</p>
                     </div>
                     <div class="action-button">
-                        <a class="btn-highlight pingismo-btn" href="/index#/how-it-works">Get Started</a>
+                        <a class="btn-highlight pingismo-btn btn-block" ng-click="installExtension()">Get MappingBird for Chrome</a>
+                        <a class="btn-grey pingismo-btn btn-block" href="http://lonelyplanet.com/france/paris/sights/landmarks-monuments/eiffel-tower">I've done it, Take me a tour</a>
                     </div>
                 </form>
             </div>
@@ -89,5 +90,19 @@
             </p>
         </div>
     </footer>
+    <div ng-show="dark" class="dark-overlay">
+        <div ng-show="extensionTooltip" class="extension-tooltip">
+            <div class="arrow"><img src="/static/img/extension_tip_pointer.png"></div>
+            <h1>Click "Add" to install MappingBird button</h1>
+            <p>MappingBird does not track your browsing behavior or save your personal information.</p>
+        </div>
+        <div ng-show="extensionModal" class="extension-modal">
+            <h1>Hooray! You are all set.</h1>
+            <div>
+                <img src="/static/img/tips_hooray.jpg">
+                <a href="http://www.lonelyplanet.com/france/paris/sights/landmarks-monuments/eiffel-tower" class="btn-highlight pingismo-btn btn-block btn-hooray">Let's take a tour together</a>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
