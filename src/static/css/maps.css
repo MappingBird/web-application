@@ -2,160 +2,160 @@
 /* CSS Document */
 /* Animation --------------------------------------------------------------------------------- */
 @keyframes pingismo-pin-scenicspot-anim{
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-scenicspot-anim-1.png);}
-	20%{background-image: url(../img/pin-scenicspot-anim-2.png);}
-	30%{background-image: url(../img/pin-scenicspot-anim-3.png);}
-	40%{background-image: url(../img/pin-scenicspot-anim-4.png);}
-	50%{background-image: url(../img/pin-scenicspot-anim-5.png);}
-	60%{background-image: url(../img/pin-scenicspot-anim-6.png);}
-	70%{background-image: url(../img/pin-scenicspot-anim-7.png);}
-	80%{background-image: url(../img/pin-scenicspot-anim-8.png);}
-	90%{background-image: url(../img/pin-scenicspot-anim-9.png);}
-	100%{background-image: url(../img/pin-scenicspot-anim-10.png);}
+	0%{background-image:  url(../img/pin-scenicspot-anim-1.png);}
+	10%{background-image: url(../img/pin-scenicspot-anim-2.png);}
+	20%{background-image: url(../img/pin-scenicspot-anim-3.png);}
+	30%{background-image: url(../img/pin-scenicspot-anim-4.png);}
+	40%{background-image: url(../img/pin-scenicspot-anim-5.png);}
+	50%{background-image: url(../img/pin-scenicspot-anim-6.png);}
+	60%{background-image: url(../img/pin-scenicspot-anim-7.png);}
+	70%{background-image: url(../img/pin-scenicspot-anim-8.png);}
+	80%{background-image: url(../img/pin-scenicspot-anim-9.png);}
+	90%{background-image: url(../img/pin-scenicspot-anim-10.png);}
+	100%{background-image: url(../img/pin-scenicspot.png);}
 }
 @-webkit-keyframes pingismo-pin-scenicspot-anim{ /* Safari and Chrome */
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-scenicspot-anim-1.png);}
-	20%{background-image: url(../img/pin-scenicspot-anim-2.png);}
-	30%{background-image: url(../img/pin-scenicspot-anim-3.png);}
-	40%{background-image: url(../img/pin-scenicspot-anim-4.png);}
-	50%{background-image: url(../img/pin-scenicspot-anim-5.png);}
-	60%{background-image: url(../img/pin-scenicspot-anim-6.png);}
-	70%{background-image: url(../img/pin-scenicspot-anim-7.png);}
-	80%{background-image: url(../img/pin-scenicspot-anim-8.png);}
-	90%{background-image: url(../img/pin-scenicspot-anim-9.png);}
-	100%{background-image: url(../img/pin-scenicspot-anim-10.png);}
+	0%{background-image:  url(../img/pin-scenicspot-anim-1.png);}
+	10%{background-image: url(../img/pin-scenicspot-anim-2.png);}
+	20%{background-image: url(../img/pin-scenicspot-anim-3.png);}
+	30%{background-image: url(../img/pin-scenicspot-anim-4.png);}
+	40%{background-image: url(../img/pin-scenicspot-anim-5.png);}
+	50%{background-image: url(../img/pin-scenicspot-anim-6.png);}
+	60%{background-image: url(../img/pin-scenicspot-anim-7.png);}
+	70%{background-image: url(../img/pin-scenicspot-anim-8.png);}
+	80%{background-image: url(../img/pin-scenicspot-anim-9.png);}
+	90%{background-image: url(../img/pin-scenicspot-anim-10.png);}
+	100%{background-image: url(../img/pin-scenicspot.png);}
 }
 @keyframes pingismo-pin-bar-anim{
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-bar-anim-1.png);}
-	20%{background-image: url(../img/pin-bar-anim-2.png);}
-	30%{background-image: url(../img/pin-bar-anim-3.png);}
-	40%{background-image: url(../img/pin-bar-anim-4.png);}
-	50%{background-image: url(../img/pin-bar-anim-5.png);}
-	60%{background-image: url(../img/pin-bar-anim-6.png);}
-	70%{background-image: url(../img/pin-bar-anim-7.png);}
-	80%{background-image: url(../img/pin-bar-anim-8.png);}
-	90%{background-image: url(../img/pin-bar-anim-9.png);}
-	100%{background-image: url(../img/pin-bar-anim-10.png);}
+	0%{background-image:  url(../img/pin-bar-anim-1.png);}
+	10%{background-image: url(../img/pin-bar-anim-2.png);}
+	20%{background-image: url(../img/pin-bar-anim-3.png);}
+	30%{background-image: url(../img/pin-bar-anim-4.png);}
+	40%{background-image: url(../img/pin-bar-anim-5.png);}
+	50%{background-image: url(../img/pin-bar-anim-6.png);}
+	60%{background-image: url(../img/pin-bar-anim-7.png);}
+	70%{background-image: url(../img/pin-bar-anim-8.png);}
+	80%{background-image: url(../img/pin-bar-anim-9.png);}
+	90%{background-image: url(../img/pin-bar-anim-10.png);}
+	100%{background-image: url(../img/pin-bar.png);}
 }
 @-webkit-keyframes pingismo-pin-bar-anim{ /* Safari and Chrome */
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-bar-anim-1.png);}
-	20%{background-image: url(../img/pin-bar-anim-2.png);}
-	30%{background-image: url(../img/pin-bar-anim-3.png);}
-	40%{background-image: url(../img/pin-bar-anim-4.png);}
-	50%{background-image: url(../img/pin-bar-anim-5.png);}
-	60%{background-image: url(../img/pin-bar-anim-6.png);}
-	70%{background-image: url(../img/pin-bar-anim-7.png);}
-	80%{background-image: url(../img/pin-bar-anim-8.png);}
-	90%{background-image: url(../img/pin-bar-anim-9.png);}
-	100%{background-image: url(../img/pin-bar-anim-10.png);}
+	0%{background-image:  url(../img/pin-bar-anim-1.png);}
+	10%{background-image: url(../img/pin-bar-anim-2.png);}
+	20%{background-image: url(../img/pin-bar-anim-3.png);}
+	30%{background-image: url(../img/pin-bar-anim-4.png);}
+	40%{background-image: url(../img/pin-bar-anim-5.png);}
+	50%{background-image: url(../img/pin-bar-anim-6.png);}
+	60%{background-image: url(../img/pin-bar-anim-7.png);}
+	70%{background-image: url(../img/pin-bar-anim-8.png);}
+	80%{background-image: url(../img/pin-bar-anim-9.png);}
+	90%{background-image: url(../img/pin-bar-anim-10.png);}
+	100%{background-image: url(../img/pin-bar.png);}
 }
 @keyframes pingismo-pin-hotel-anim{
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-hotel-anim-1.png);}
-	20%{background-image: url(../img/pin-hotel-anim-2.png);}
-	30%{background-image: url(../img/pin-hotel-anim-3.png);}
-	40%{background-image: url(../img/pin-hotel-anim-4.png);}
-	50%{background-image: url(../img/pin-hotel-anim-5.png);}
-	60%{background-image: url(../img/pin-hotel-anim-6.png);}
-	70%{background-image: url(../img/pin-hotel-anim-7.png);}
-	80%{background-image: url(../img/pin-hotel-anim-8.png);}
-	90%{background-image: url(../img/pin-hotel-anim-9.png);}
-	100%{background-image: url(../img/pin-hotel-anim-10.png);}
+	0%{background-image:  url(../img/pin-hotel-anim-1.png);}
+	10%{background-image: url(../img/pin-hotel-anim-2.png);}
+	20%{background-image: url(../img/pin-hotel-anim-3.png);}
+	30%{background-image: url(../img/pin-hotel-anim-4.png);}
+	40%{background-image: url(../img/pin-hotel-anim-5.png);}
+	50%{background-image: url(../img/pin-hotel-anim-6.png);}
+	60%{background-image: url(../img/pin-hotel-anim-7.png);}
+	70%{background-image: url(../img/pin-hotel-anim-8.png);}
+	80%{background-image: url(../img/pin-hotel-anim-9.png);}
+	90%{background-image: url(../img/pin-hotel-anim-10.png);}
+	100%{background-image: url(../img/pin-hotel.png);}
 }
 @-webkit-keyframes pingismo-pin-hotel-anim{ /* Safari and Chrome */
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-hotel-anim-1.png);}
-	20%{background-image: url(../img/pin-hotel-anim-2.png);}
-	30%{background-image: url(../img/pin-hotel-anim-3.png);}
-	40%{background-image: url(../img/pin-hotel-anim-4.png);}
-	50%{background-image: url(../img/pin-hotel-anim-5.png);}
-	60%{background-image: url(../img/pin-hotel-anim-6.png);}
-	70%{background-image: url(../img/pin-hotel-anim-7.png);}
-	80%{background-image: url(../img/pin-hotel-anim-8.png);}
-	90%{background-image: url(../img/pin-hotel-anim-9.png);}
-	100%{background-image: url(../img/pin-hotel-anim-10.png);}
+	0%{background-image:  url(../img/pin-hotel-anim-1.png);}
+	10%{background-image: url(../img/pin-hotel-anim-2.png);}
+	20%{background-image: url(../img/pin-hotel-anim-3.png);}
+	30%{background-image: url(../img/pin-hotel-anim-4.png);}
+	40%{background-image: url(../img/pin-hotel-anim-5.png);}
+	50%{background-image: url(../img/pin-hotel-anim-6.png);}
+	60%{background-image: url(../img/pin-hotel-anim-7.png);}
+	70%{background-image: url(../img/pin-hotel-anim-8.png);}
+	80%{background-image: url(../img/pin-hotel-anim-9.png);}
+	90%{background-image: url(../img/pin-hotel-anim-10.png);}
+	100%{background-image: url(../img/pin-hotel.png);}
 }
 @keyframes pingismo-pin-mall-anim{
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-mall-anim-1.png);}
-	20%{background-image: url(../img/pin-mall-anim-2.png);}
-	30%{background-image: url(../img/pin-mall-anim-3.png);}
-	40%{background-image: url(../img/pin-mall-anim-4.png);}
-	50%{background-image: url(../img/pin-mall-anim-5.png);}
-	60%{background-image: url(../img/pin-mall-anim-6.png);}
-	70%{background-image: url(../img/pin-mall-anim-7.png);}
-	80%{background-image: url(../img/pin-mall-anim-8.png);}
-	90%{background-image: url(../img/pin-mall-anim-9.png);}
-	100%{background-image: url(../img/pin-mall-anim-10.png);}
+	0%{background-image: url(../img/pin-mall-anim-1.png);}
+	10%{background-image: url(../img/pin-mall-anim-2.png);}
+	20%{background-image: url(../img/pin-mall-anim-3.png);}
+	30%{background-image: url(../img/pin-mall-anim-4.png);}
+	40%{background-image: url(../img/pin-mall-anim-5.png);}
+	50%{background-image: url(../img/pin-mall-anim-6.png);}
+	60%{background-image: url(../img/pin-mall-anim-7.png);}
+	70%{background-image: url(../img/pin-mall-anim-8.png);}
+	80%{background-image: url(../img/pin-mall-anim-9.png);}
+	90%{background-image: url(../img/pin-mall-anim-10.png);}
+	100%{background-image: url(../img/pin-mall.png);}
 }
 @-webkit-keyframes pingismo-pin-mall-anim{ /* Safari and Chrome */
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-mall-anim-1.png);}
-	20%{background-image: url(../img/pin-mall-anim-2.png);}
-	30%{background-image: url(../img/pin-mall-anim-3.png);}
-	40%{background-image: url(../img/pin-mall-anim-4.png);}
-	50%{background-image: url(../img/pin-mall-anim-5.png);}
-	60%{background-image: url(../img/pin-mall-anim-6.png);}
-	70%{background-image: url(../img/pin-mall-anim-7.png);}
-	80%{background-image: url(../img/pin-mall-anim-8.png);}
-	90%{background-image: url(../img/pin-mall-anim-9.png);}
-	100%{background-image: url(../img/pin-mall-anim-10.png);}
+	0%{background-image: url(../img/pin-mall-anim-1.png);}
+	10%{background-image: url(../img/pin-mall-anim-2.png);}
+	20%{background-image: url(../img/pin-mall-anim-3.png);}
+	30%{background-image: url(../img/pin-mall-anim-4.png);}
+	40%{background-image: url(../img/pin-mall-anim-5.png);}
+	50%{background-image: url(../img/pin-mall-anim-6.png);}
+	60%{background-image: url(../img/pin-mall-anim-7.png);}
+	70%{background-image: url(../img/pin-mall-anim-8.png);}
+	80%{background-image: url(../img/pin-mall-anim-9.png);}
+	90%{background-image: url(../img/pin-mall-anim-10.png);}
+	100%{background-image: url(../img/pin-mall.png);}
 }
 @keyframes pingismo-pin-misc-anim{
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-misc-anim-1.png);}
-	20%{background-image: url(../img/pin-misc-anim-2.png);}
-	30%{background-image: url(../img/pin-misc-anim-3.png);}
-	40%{background-image: url(../img/pin-misc-anim-4.png);}
-	50%{background-image: url(../img/pin-misc-anim-5.png);}
-	60%{background-image: url(../img/pin-misc-anim-6.png);}
-	70%{background-image: url(../img/pin-misc-anim-7.png);}
-	80%{background-image: url(../img/pin-misc-anim-8.png);}
-	90%{background-image: url(../img/pin-misc-anim-9.png);}
-	100%{background-image: url(../img/pin-misc-anim-10.png);}
+	0%{background-image: url(../img/pin-misc-anim-1.png);}
+	10%{background-image: url(../img/pin-misc-anim-2.png);}
+	20%{background-image: url(../img/pin-misc-anim-3.png);}
+	30%{background-image: url(../img/pin-misc-anim-4.png);}
+	40%{background-image: url(../img/pin-misc-anim-5.png);}
+	50%{background-image: url(../img/pin-misc-anim-6.png);}
+	60%{background-image: url(../img/pin-misc-anim-7.png);}
+	70%{background-image: url(../img/pin-misc-anim-8.png);}
+	80%{background-image: url(../img/pin-misc-anim-9.png);}
+	90%{background-image: url(../img/pin-misc-anim-10.png);}
+	100%{background-image: url(../img/pin-misc.png);}
 }
 @-webkit-keyframes pingismo-pin-misc-anim{ /* Safari and Chrome */
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-misc-anim-1.png);}
-	20%{background-image: url(../img/pin-misc-anim-2.png);}
-	30%{background-image: url(../img/pin-misc-anim-3.png);}
-	40%{background-image: url(../img/pin-misc-anim-4.png);}
-	50%{background-image: url(../img/pin-misc-anim-5.png);}
-	60%{background-image: url(../img/pin-misc-anim-6.png);}
-	70%{background-image: url(../img/pin-misc-anim-7.png);}
-	80%{background-image: url(../img/pin-misc-anim-8.png);}
-	90%{background-image: url(../img/pin-misc-anim-9.png);}
-	100%{background-image: url(../img/pin-misc-anim-10.png);}
+	0%{background-image: url(../img/pin-misc-anim-1.png);}
+	10%{background-image: url(../img/pin-misc-anim-2.png);}
+	20%{background-image: url(../img/pin-misc-anim-3.png);}
+	30%{background-image: url(../img/pin-misc-anim-4.png);}
+	40%{background-image: url(../img/pin-misc-anim-5.png);}
+	50%{background-image: url(../img/pin-misc-anim-6.png);}
+	60%{background-image: url(../img/pin-misc-anim-7.png);}
+	70%{background-image: url(../img/pin-misc-anim-8.png);}
+	80%{background-image: url(../img/pin-misc-anim-9.png);}
+	90%{background-image: url(../img/pin-misc-anim-10.png);}
+	100%{background-image: url(../img/pin-misc.png);}
 }
 @keyframes pingismo-pin-restaurant-anim{
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-restaurant-anim-1.png);}
-	20%{background-image: url(../img/pin-restaurant-anim-2.png);}
-	30%{background-image: url(../img/pin-restaurant-anim-3.png);}
-	40%{background-image: url(../img/pin-restaurant-anim-4.png);}
-	50%{background-image: url(../img/pin-restaurant-anim-5.png);}
-	60%{background-image: url(../img/pin-restaurant-anim-6.png);}
-	70%{background-image: url(../img/pin-restaurant-anim-7.png);}
-	80%{background-image: url(../img/pin-restaurant-anim-8.png);}
-	90%{background-image: url(../img/pin-restaurant-anim-9.png);}
-	100%{background-image: url(../img/pin-restaurant-anim-10.png);}
+	0%{background-image: url(../img/pin-restaurant-anim-1.png);}
+	10%{background-image: url(../img/pin-restaurant-anim-2.png);}
+	20%{background-image: url(../img/pin-restaurant-anim-3.png);}
+	30%{background-image: url(../img/pin-restaurant-anim-4.png);}
+	40%{background-image: url(../img/pin-restaurant-anim-5.png);}
+	50%{background-image: url(../img/pin-restaurant-anim-6.png);}
+	60%{background-image: url(../img/pin-restaurant-anim-7.png);}
+	70%{background-image: url(../img/pin-restaurant-anim-8.png);}
+	80%{background-image: url(../img/pin-restaurant-anim-9.png);}
+	90%{background-image: url(../img/pin-restaurant-anim-10.png);}
+	100%{background-image: url(../img/pin-restaurant.png);}
 }
 @-webkit-keyframes pingismo-pin-restaurant-anim{ /* Safari and Chrome */
-	0%{background-image:  none;}
-	10%{background-image: url(../img/pin-restaurant-anim-1.png);}
-	20%{background-image: url(../img/pin-restaurant-anim-2.png);}
-	30%{background-image: url(../img/pin-restaurant-anim-3.png);}
-	40%{background-image: url(../img/pin-restaurant-anim-4.png);}
-	50%{background-image: url(../img/pin-restaurant-anim-5.png);}
-	60%{background-image: url(../img/pin-restaurant-anim-6.png);}
-	70%{background-image: url(../img/pin-restaurant-anim-7.png);}
-	80%{background-image: url(../img/pin-restaurant-anim-8.png);}
-	90%{background-image: url(../img/pin-restaurant-anim-9.png);}
-	100%{background-image: url(../img/pin-restaurant-anim-10.png);}
+	0%{background-image: url(../img/pin-restaurant-anim-1.png);}
+	10%{background-image: url(../img/pin-restaurant-anim-2.png);}
+	20%{background-image: url(../img/pin-restaurant-anim-3.png);}
+	30%{background-image: url(../img/pin-restaurant-anim-4.png);}
+	40%{background-image: url(../img/pin-restaurant-anim-5.png);}
+	50%{background-image: url(../img/pin-restaurant-anim-6.png);}
+	60%{background-image: url(../img/pin-restaurant-anim-7.png);}
+	70%{background-image: url(../img/pin-restaurant-anim-8.png);}
+	80%{background-image: url(../img/pin-restaurant-anim-9.png);}
+	90%{background-image: url(../img/pin-restaurant-anim-10.png);}
+	100%{background-image: url(../img/pin-restaurant.png);}
 }
 
 @-webkit-keyframes rotate {
@@ -844,37 +844,37 @@ ul.types > li{
 	height: 60px;
 }
 .pingismo-pin .pin-scenicspot{
-	background: url(../img/pin-scenicspot-anim-10.png) 0 0 no-repeat;
+	background: url(../img/pin-scenicspot.png) 0 0 no-repeat;
 }
 .pingismo-pin.active .pin-scenicspot{
 	background: url(../img/pin-scenicspot-highlight.png) 0 0 no-repeat;
 }
 .pingismo-pin .pin-hotel{
-	background: url(../img/pin-hotel-anim-10.png) 0 0 no-repeat;
+	background: url(../img/pin-hotel.png) 0 0 no-repeat;
 }
 .pingismo-pin.active .pin-hotel{
 	background: url(../img/pin-hotel-highlight.png) 0 0 no-repeat;
 }
 .pingismo-pin .pin-mall{
-	background: url(../img/pin-mall-anim-10.png) 0 0 no-repeat;
+	background: url(../img/pin-mall.png) 0 0 no-repeat;
 }
 .pingismo-pin.active .pin-mall{
 	background: url(../img/pin-mall-highlight.png) 0 0 no-repeat;
 }
 .pingismo-pin .pin-restaurant{
-	background: url(../img/pin-restaurant-anim-10.png) 0 0 no-repeat;
+	background: url(../img/pin-restaurant.png) 0 0 no-repeat;
 }
 .pingismo-pin.active .pin-restaurant{
 	background: url(../img/pin-restaurant-highlight.png) 0 0 no-repeat;
 }
 .pingismo-pin .pin-bar{
-	background: url(../img/pin-bar-anim-10.png) 0 0 no-repeat;
+	background: url(../img/pin-bar.png) 0 0 no-repeat;
 }
 .pingismo-pin.active .pin-bar{
 	background: url(../img/pin-bar-highlight.png) 0 0 no-repeat;
 }
 .pingismo-pin .pin-misc{
-	background: url(../img/pin-misc-anim-10.png) 0 0 no-repeat;
+	background: url(../img/pin-misc.png) 0 0 no-repeat;
 }
 .pingismo-pin.active .pin-misc{
 	background: url(../img/pin-misc-highlight.png) 0 0 no-repeat;
@@ -898,6 +898,7 @@ ul.types > li{
 	line-height: 16px;
 	overflow: hidden;
 	opacity: 0;
+	border-radius: 6px;
 }
 .pin-popup p{
 	width: 200px;
@@ -930,6 +931,8 @@ ul.types > li{
 	text-align: center;
 	padding: 7px 0 7px 0;
 	background-color: white;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
 }
 .pin-popup .pin-popup-settings:hover{
 	cursor: pointer;
@@ -954,6 +957,7 @@ ul.types > li{
     height: 90px;
     overflow: hidden;
 	float: right;
+	box-shadow: 0px -12px 36px #000 inset;
 }
 .pin-popup .pin-popup-img img {
    max-width: none;
@@ -1188,7 +1192,8 @@ ul.types > li{
 	text-decoration: none;
 }
 .collection-list-wrapper .nav{
-	width: 280px;
+	width: 350px;
+	/*overflow: scroll;*/
 }
 .collection-list-wrapper a{
 	line-height: 30px;

@@ -9,7 +9,7 @@
     <div class="clearfix"></div>
 </div>
 
-<ul class="nav nav-stacked" ng-show="!showDeleteCollectionDialog">
+<ul class="nav nav-stacked" ng-show="!showDeleteCollectionDialog" height-to-bottom m-custom-scrollbar="{scrollInertia: 0}">
     <!-- show collections[0] uncategorized collection -->
     <li ng-class="{active: collections[0].id == activeCollectionId}">
         <a href="#" class="collection" ng-click="clickCollection($event, collections[0].id, collections[0].name)">

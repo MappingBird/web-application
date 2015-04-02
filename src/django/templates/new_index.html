@@ -38,7 +38,7 @@
 		<script type="text/ng-template" id="myModalContent.html">
 	        <div class="modal-header">
                 <img src="{{ STATIC_URL }}new_index/images/coming_soon_pic.jpg" />
-	            <h2 class="modal-title">Interested in MappingBird?</h2>
+	            <h2 class="modal-title">Need IPhone version?</h2>
 	        </div>
 	        <div class="modal-body">
 	        	<p>
@@ -78,7 +78,7 @@
 				<span class="text-uppercase">watch <a type="button" class="btn btn-primary mb-play fancybox-media track-click" id="watch-video-button" href="http://youtu.be/he1-il8poWY"><i class="mdi mdi-play"></i></a> 1 min intro</span>
 				<p class="mb-intro-actions">
 					<a id="learnmore-btn" href="#whatitis" class="btn btn-default btn-lg text-uppercase track-click">learn more</a>
-  					<button type="button" class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button" ng-click="open()">ready to go</button>
+  					<a href="/signup" class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button">ready to go</a>
 				</p>
 			</div>
 		</section>
@@ -121,7 +121,7 @@
 						<p>Install the free Mappingbird app on your Android phone so you can access your saved places whenever and wherever you need them. (iOS app coming soon!)</p>
 						<ul class="list-inline">
                             <li><img src="{{ STATIC_URL }}new_index/images/googleplay_icon.png" id="google-play-icon" class="track-click" /></li>
-                            <li><img src="{{ STATIC_URL }}new_index/images/appstore_icon.png" id="app-store-icon" class="track-click" /></li>
+                            <li><a href="javascript:void(0);" ng-click="open()"><img src="{{ STATIC_URL }}new_index/images/appstore_icon.png" id="app-store-icon" class="track-click" /></a></li>
 						</ul>
 					</div>
 					<div class="col-md-6">

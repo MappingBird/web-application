@@ -56,7 +56,7 @@ class UserViewSet(viewsets.ModelViewSet):
         if form.is_valid():
             user = form.save()
 
-            send_mail([user.email], 'welcome.html', {}, 'Welcome to Mappingbird')
+            send_mail([user.email], 'welcome.html', {}, 'Welcome to MappingBird')
             return Response(request.DATA, status=status.HTTP_201_CREATED)
 
         return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -453,7 +453,7 @@ def geocode(request):
 
 @api_view(['GET'])
 def places(request):
-    out = {}    
+    out = {}
     out['places'] = []
 
     if request.GET.get('url'):
@@ -467,14 +467,14 @@ def places(request):
                 entry = {
                     'name': p['article_name'],
                     'address': p['address'],
-                    'coordinates': { 
+                    'coordinates': {
                         'lat': float(p['latlng'].split(',')[0]),
                         'lng': float(p['latlng'].split(',')[1])
                     }
                 }
 
                 out['places'].append(entry)
-                break   
+                break
         except Exception, e:
             print e
 

@@ -1,7 +1,7 @@
 <div class="pin-content-wrapper" ng-show="showPointDetailPanel" ng-class="{ editable: pointEditMode}">
     <a href="#" ng-click="closePoint($event)" class="pingismo-proceed"><img src="/static/img/icon-proceed.png" /></a>
     <div class="pin-content">
-        <div class="pin-details pull-left">
+        <div class="pin-details pull-left" height-to-bottom m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
             Added: <span ng-bind="activeViewPoint.date_created"></span>
             <h4 ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.title" class="editable"></h4>
             <input type="text" ng-model="activeViewPoint.title" class="content-title" />
@@ -28,7 +28,7 @@
             <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
             <p class="ref-address ng-binding" ng-bind="activeViewPoint.location.place_address"></p>
             <a ng-href="[[activeViewPoint.url]]" class="ref-url ellipsis" title="[[activeViewPoint.url]]" new-window ng-bind="activeViewPoint.url"></a>
-            <div height-to-bottom m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
+            <div>
                 <div class="ref-context-img" thumb-alignment="{displayArray: 'pointImages', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages', enableLightbox: true, editMode: pointEditMode, onlyFirstSelected: false, whiteBackground: false}"></div>
             </div>
         </div>
