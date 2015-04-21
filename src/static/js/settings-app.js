@@ -141,22 +141,26 @@ mappingbird.SettingsApp.controller('mainController', ['$scope', '$timeout', 'Pre
             && typeof data.email !== 'undefined') {
 
 
+            $scope.isLoggedIn = true;
+            $scope.id = data.id;
+            $scope.email = data.email;
+
             // is registered "legit" user
             // show error?
-            if (!/@gu.mappingbird.com/.test(data.email)) {
-
-                $scope.isLoggedIn = true;
-                // user exists
-                $scope.id = data.id;
-                $scope.email = data.email;
-
-            // migrate generated user
-            } else {
-
-                // generated email - redirect to app page
-                $window.location.href = '/app';
-
-            }
+            // if (!/@gu.mappingbird.com/.test(data.email)) {
+            //
+            //     $scope.isLoggedIn = true;
+            //     // user exists
+            //     $scope.id = data.id;
+            //     $scope.email = data.email;
+            //
+            // // migrate generated user
+            // } else {
+            //
+            //     // generated email - redirect to app page
+            //     $window.location.href = '/app';
+            //
+            // }
 
 
         } else {

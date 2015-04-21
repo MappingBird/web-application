@@ -18,7 +18,7 @@ mappingbird.SignupApp.controller('mainController', ['$scope', '$timeout', 'Prese
       $scope.errorEmailAlreadyRegistered = false;
       $scope.errorEmailRequired = false;
       $scope.errorPasswordTooShort = false;
-      
+
         if ($scope.email.length > 0) {
 
             if ($scope.password.length >= 6) {
@@ -34,20 +34,20 @@ mappingbird.SignupApp.controller('mainController', ['$scope', '$timeout', 'Prese
 
                         // is registered "legit" user
                         // show error?
-                        if (!/@gu.mappingbird.com/.test(data.email)) {
-
-                            // TODO: email
-                            // ask Derek about scenario here
-
-                            // google analytics
-                            Analytics.registerEvent('Signup', 'Signup failed - user already exists', 'Signup Page');
-
-                        // migrate generated user
-                        } else {
-
-                            $scope.migrateGeneratedUser();
-
-                        }
+                        // if (!/@gu.mappingbird.com/.test(data.email)) {
+                        //
+                        //     // TODO: email
+                        //     // ask Derek about scenario here
+                        //
+                        //     // google analytics
+                        //     Analytics.registerEvent('Signup', 'Signup failed - user already exists', 'Signup Page');
+                        //
+                        // // migrate generated user
+                        // } else {
+                        //
+                        //     $scope.migrateGeneratedUser();
+                        //
+                        // }
 
 
                     } else {
@@ -100,28 +100,28 @@ mappingbird.SignupApp.controller('mainController', ['$scope', '$timeout', 'Prese
 
     };
 
-    $scope.migrateGeneratedUser = function() {
-
-        console.log('migrateGeneratedUser');
-
-        var migratedUser = {
-            id: $scope.id,
-            email: $scope.email,
-            password: $scope.password
-        };
-
-        var request = $http({
-            method: "PUT",
-            url: "/api/users/" + $scope.id,
-            data: JSON.stringify(migratedUser)
-        }).success(function() {
-            $scope.accountCreated = true;
-
-            // google analytics
-            Analytics.registerEvent('Signup', 'Signup success - migrate generated user', 'Signup Page');
-        });
-
-    };
+    // $scope.migrateGeneratedUser = function() {
+    //
+    //     console.log('migrateGeneratedUser');
+    //
+    //     var migratedUser = {
+    //         id: $scope.id,
+    //         email: $scope.email,
+    //         password: $scope.password
+    //     };
+    //
+    //     var request = $http({
+    //         method: "PUT",
+    //         url: "/api/users/" + $scope.id,
+    //         data: JSON.stringify(migratedUser)
+    //     }).success(function() {
+    //         $scope.accountCreated = true;
+    //
+    //         // google analytics
+    //         Analytics.registerEvent('Signup', 'Signup success - migrate generated user', 'Signup Page');
+    //     });
+    //
+    // };
 
     $scope.installExtension = function() {
         $scope.dark = true;

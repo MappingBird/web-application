@@ -19,7 +19,6 @@
 <script src="../js/helpers/mod.bucketlist.overlay.js"></script>
 <script src="../js/helpers/utilities.js"></script>
 <script src="../js/initializations/initialization.js"></script>
-<script src="../js/index-app.js"></script>
 <script src="../js/login-app.js"></script>
 <script src="../js/save-app.js"></script>
 <script src="../js/settings-app.js"></script>
