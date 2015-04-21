@@ -10,7 +10,7 @@
     <meta name="author" content="MappingBird"/>
     <meta name="title" content="MappingBird"/>
     <meta name="description" content="Remember places for later"/>
-    <meta name="keywords" content=""/>
+    <meta name="keywords" content="MappingBird, Mapping Bird, travel, travels, planning, travel planning, save for later, bookmark, bookmarks, bookmarking, bookmark place, bookmark places, review, reviews, popular, plan, map, maps, attractions, advice, restaurants, iphone, app, offline, ipad, android, kindle, firefox, extension, note taking, note taking software, notes, remember, memory assistant, personal memory assistant"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
     <meta name="google-site-verification" content="2jDqeNwDYc2gLlaivjMppxDcIXBQ2UIM4UxhVGkDAkY" />
 
