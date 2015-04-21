@@ -52,8 +52,8 @@
         </div>
         <div class="lang-contact pull-right">
             <ul class="nav nav-pills">
-                <li><a href="#">繁體中文</a></li>
-                <li class="divider-vertical pingismo-divider-vertical"></li>
+                <!-- <li><a href="#">繁體中文</a></li>
+                <li class="divider-vertical pingismo-divider-vertical"></li> -->
                 <li class="active"><a href="#">English</a></li>
             </ul>
             <p>
