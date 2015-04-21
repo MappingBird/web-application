@@ -264,8 +264,8 @@
                 <li class="active"><a href="#">English</a></li>
             </ul>
             <p>
-                <a href="#" class="footer-contact">Contact Us</a>
-                <a href="#" class="footer-follow">Follow Us</a>
+                <a href="mailto:feedback@mappingbird.com" class="footer-contact">Contact Us</a>
+                <a href="//www.facebook.com/MappingBird" class="footer-follow" target="_blank">Follow Us</a>
             </p>
         </div>
     </footer>
