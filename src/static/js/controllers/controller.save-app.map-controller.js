@@ -71,7 +71,6 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                 google.maps.event.trigger(map, "resize");
                 $('#map').off('transitionend.resize');
                 $('#map').data('transitioning', false);
-                //recenterMap();
             });
         }
 
@@ -81,29 +80,6 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                 $('#map').off('transitionend');
             });
         }
-    }
-
-    function recenterMap() {
-
-        var len2 = $scope.activeViewPoints.length,
-            bounds = new google.maps.LatLngBounds(),
-            centerPoint = $scope.activeViewPoints[0];
-
-        while (len2--) {
-            split = $scope.activeViewPoints[len2].location.coordinates.split(',');
-            $scope.activeViewPoints[len2].lat = Number(split[0]);
-            $scope.activeViewPoints[len2].lng = Number(split[1]);
-
-            // set bounds
-            bounds.extend(new google.maps.LatLng($scope.activeViewPoints[len2].lat, $scope.activeViewPoints[len2].lng));
-        }
-
-        myLatLng = new google.maps.LatLng(centerPoint.lat, centerPoint.lng);
-        mapOptions.center = myLatLng;
-        map = map || new google.maps.Map($('#map')[0], mapOptions);
-        map.fitBounds(bounds);
-        map.panTo(myLatLng)
-
     }
 
     function displayActiveSavePoint () {
@@ -376,6 +352,11 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
 
                 viewOverlays[$scope.activeViewPoints[len].id] = marker;
 
+            }
+
+            if ($scope.activeViewPoints && $scope.activeViewPoints.length == 1) {
+                console.log('ActiveViewPoint only one, zoom to 16');
+                map.setZoom(16);
             }
 
             console.log('viewOverlays post marker');
