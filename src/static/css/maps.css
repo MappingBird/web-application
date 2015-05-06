@@ -216,9 +216,9 @@ section.map-section{
 }
 
 #map.semi-retracted {
-	height: -moz-calc(100% - 125px);
-	height: -webkit-calc(100% - 125px);
-	height: calc(100% - 125px);
+	height: -moz-calc(100% - 75px);
+	height: -webkit-calc(100% - 75px);
+	height: calc(100% - 75px);
 	left: 380px;
 	width: -moz-calc(100% - 380px);
 	width: -webkit-calc(100% - 380px);
@@ -689,6 +689,19 @@ a.show-on-map i.icon-show{
 .pingismo-btn-group.btn-group .exist .caret{
 	float: right;
 }
+
+.collections-newCollection{
+	margin: 0 0 -11px 0;
+}
+
+.collections-newCollection input[type="text"] {
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	margin-bottom: 0px;
+	width: 261px;
+}
+
 .collections-menu{
 	font-size: 14px;
 	list-style: none;
@@ -708,6 +721,11 @@ a.show-on-map i.icon-show{
 	width: 338px;
 }
 
+.collections-menu.thin-menu li.selected a{
+	text-decoration: none;
+  background-color: #01a9e7;
+  color: #fff;
+}
 .collections-menu.upward-menu {
 	bottom: 39px;
 	max-height: 310px;
@@ -726,7 +744,7 @@ a.show-on-map i.icon-show{
 	background-color: #01a9e7;
 	color: #fff;
 }
-.collections-menu input[type="text"]{
+/*.collections-menu input[type="text"]{
 	border-bottom: none;
 	border-left: none;
 	border-right: none;
@@ -760,7 +778,7 @@ a.show-on-map i.icon-show{
 	border-left: 1px solid #ccc;
 	border-right: none;
 	margin: 0px;
-}
+}*/
 ul.types{
 	display: inline-block;
 	margin: 0px 0 20px;
@@ -1305,6 +1323,19 @@ ul.types > li{
 	background: url('../img/icon-link.png') no-repeat;
 	padding-left: 30px;
 	width: 85%;
+}
+.pin-content ul.types li{
+	padding-top: 5px;
+	display:none;
+}
+.pin-content ul.types li.collectionName {
+	padding-top: 10px;
+}
+.pin-content-wrapper.editable .pin-content ul.types li {
+	display: inline-block;
+}
+.pin-content ul.types li.active{
+	display: block;
 }
 .pin-content ul.types li{
 	padding-top: 5px;
