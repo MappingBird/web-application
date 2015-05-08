@@ -13,7 +13,6 @@
     <meta name="keywords" content="MappingBird, Mapping Bird, travel, travels, planning, travel planning, save for later, bookmark, bookmarks, bookmarking, bookmark place, bookmark places, review, reviews, popular, plan, map, maps, attractions, advice, restaurants, iphone, app, offline, ipad, android, kindle, firefox, extension, note taking, note taking software, notes, remember, memory assistant, personal memory assistant"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
     <meta name="google-site-verification" content="2jDqeNwDYc2gLlaivjMppxDcIXBQ2UIM4UxhVGkDAkY" />
-    <meta name="google-site-verification" content="ErXr9MhG9VBmYbFr042r2wLOWXfXEii_p8IC6VbgxbE" />
 
     <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/static/favicon.ico" />

@@ -7,12 +7,14 @@
             <input type="text" ng-model="activeViewPoint.title" class="content-title" />
             <li class="btn-group pingismo-btn-group">
                 <a class="btn exist" href="javascript:void(0);" ng-click="showSelectCollection = true" ng-show="!showSelectCollection"><span ng-bind="changeCollectionName"></span> <span class="caret"></span></a>
+                <ul ng-show="showSelectCollection" class="collections-newCollection">
+                  <li class="input-append">
+                      <input type="text" class="span2" id="appendedInputButton" ng-model="newCollectionName" placeholder="Create a new collection" />
+                      <button class="btn" type="button" ng-click="saveNewCollection($event)">Create</button>
+                  </li>
+                </ul>
                 <ul class="collections-menu thin-menu" ng-show="showSelectCollection" scrollbar-height-to-bottom>
-                    <li ng-repeat="collection in collections"><a href="#" ng-click="selectPointCollection($event, collection.id)" title="[[collection.name]]" ng-bind="collection.name"></a></li>
-                    <li class="input-append">
-                        <input type="text" class="span2" id="appendedInputButton" ng-model="newCollectionName" placeholder="Create a new collection" />
-                        <button class="btn" type="button" ng-click="saveNewCollection($event)">Create</button>
-                    </li>
+                    <li ng-repeat="collection in collections" ng-class="{'selected': changeCollectionName == collection.name }"><a href="#" ng-click="selectPointCollection($event, collection.id)" title="[[collection.name]]" ng-bind="collection.name"></a></li>
                 </ul>
             </li>
             <ul class="types">
