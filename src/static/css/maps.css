@@ -216,9 +216,9 @@ section.map-section{
 }
 
 #map.semi-retracted {
-	height: -moz-calc(100% - 75px);
-	height: -webkit-calc(100% - 75px);
-	height: calc(100% - 75px);
+	height: -moz-calc(100% - 125px);
+	height: -webkit-calc(100% - 125px);
+	height: calc(100% - 125px);
 	left: 380px;
 	width: -moz-calc(100% - 380px);
 	width: -webkit-calc(100% - 380px);
