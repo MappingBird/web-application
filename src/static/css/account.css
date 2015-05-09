@@ -13,7 +13,8 @@ hr{
 
 /* Layout ------------------------------------------------------------------------------------ */
 section.main{
-	background: url(../img/white_wall.png) 0 0;
+	/*background: url(../img/white_wall.png) 0 0;*/
+	background: #ebebeb;
 }
 section.main .container{
 	margin-top: 60px;
