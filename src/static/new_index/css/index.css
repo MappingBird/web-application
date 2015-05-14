@@ -202,6 +202,147 @@ section.how .right.carousel-control>span{right: 12px;}
 	padding: 0 20px 40px;
 }
 .modal-footer .waiting-email{
-	width: 325px;
+	width: 336px;
 	margin-right: 6px;
+}
+
+/* Responsive */
+@media only screen and (min-width: 801px) and (max-width: 1200px){
+	section.how {height: 540px;}
+	section.how .carousel-wrapper{background-size: 520px; margin-top: -80px;}
+	section.how .carousel-indicators { bottom: 420px; }
+	section.how .carousel-inner{bottom: 90px;}
+	section.how .item img.ng-scope{ width: 480px; margin-right: 4px!important;}
+	section.how .carousel-caption{width: 375px;}
+}
+@media only screen and (min-width: 500px) and (max-width: 800px){
+	body{ font-size: 14px;}
+	section.intro{
+		height: 360px;
+	}
+	.navbar-header{
+		width: 75%;
+		float: left;
+	}
+	.navbar-brand img{
+		width: 100%;
+		height: auto;
+	}
+	.navbar.navbar-default.mb-navbar-default button.mb-signin{
+		font-size: 0px;
+		margin: 12px 0px;
+		float: right;
+		padding: 2px 5px;
+	}
+	.jumbotron{
+		padding: 0px;
+	}
+	section.intro h1, section.how h1{font-size: 32px;}
+	.jumbotron p{font-size: 12px;}
+	.mb-intro-actions{display: none;}
+	.vertical-align.mb-hero{top: 30%;}
+	section.what h2, section.follow-us h2{
+		margin-top: 10px;
+		font-size: 25px;
+		text-align: center;
+	}
+	section.what .container .col-md-6 img{
+		width: 75%;
+  		margin: 20px auto;
+  		display: block;
+	}
+	section.what .container .col-md-6 .list-inline{text-align: center;}
+	section.what .container .col-md-6 .list-inline img{width: 100%;}
+	section.how {height: 520px;}
+	section.how .carousel-wrapper{background-image: none;}
+	section.how .carousel-indicators { bottom: 420px; }
+	section.how .carousel-inner {
+		top:110px;
+		height: 434px;
+	}
+	section.how .carousel-caption {width: 90%; padding-top: 0px;}
+	section.how .carousel-caption h4{font-size: 20px;}
+	section.how .item img.ng-scope{
+		position: relative;
+  		top: 110px;
+  		width: 95%;
+  		margin-right: auto!important;
+  		margin-left: auto!important;
+	}
+	.carousel-control{
+		top: 70px;
+		bottom: auto;
+	}
+	section.how .left.carousel-control{background-image: none; margin-left: 0px;}
+	section.how .right.carousel-control{background-image: none; margin-right: 0px;}
+	section.follow-us .container-fluid {text-align: center;}
+	section.follow-us .container-fluid .row .col-md-2 img{width: 16%;}
+	footer.mb-footer {text-align: center;}
+	footer.mb-footer .brand-logo{display: block; margin: 0 auto;}
+	footer.mb-footer .container-fluid .row:first-child{margin-bottom: 12px;}
+}
+
+@media only screen and (max-width: 500px){
+	body{ font-size: 12px;}
+	section.intro{
+		height: 300px;
+	}
+	.navbar-header{
+		width: 75%;
+		float: left;
+	}
+	.navbar-brand img{
+		width: 100%;
+		height: auto;
+	}
+	.navbar.navbar-default.mb-navbar-default button.mb-signin{
+		font-size: 0px;
+		margin: 12px 0px;
+		float: right;
+		padding: 2px 5px;
+	}
+	.jumbotron{
+		padding: 0px;
+	}
+	section.intro h1, section.how h1{font-size: 24px;}
+	.jumbotron p{font-size: 12px;}
+	.mb-intro-actions{display: none;}
+	.vertical-align.mb-hero{top: 30%;}
+	section.what h2, section.follow-us h2{
+		margin-top: 10px;
+		font-size: 20px;
+		text-align: center;
+	}
+	section.what .container .col-md-6 img{margin-bottom: 10px;}
+	section.what .container .col-md-6 .list-inline{text-align: center;}
+	section.what .container .col-md-6 .list-inline img{width: 120px;}
+	section.how {height: 410px;}
+	section.how .carousel-wrapper{background-image: none;}
+	section.how .carousel-indicators {
+  		bottom: 310px;
+	}
+	section.how .carousel-inner {
+		top:110px;
+		height: 324px;
+	}
+	section.how .carousel-caption {width: 90%; padding-top: 0px;}
+	section.how .carousel-caption h4{font-size: 20px;}
+	section.how .item img.ng-scope{
+		position: relative;
+  		top: 151px;
+  		width: 95%;
+  		margin-right: auto!important;
+  		margin-left: auto!important;
+	}
+	.carousel-control{
+		top: 70px;
+		bottom: auto;
+	}
+	section.how .left.carousel-control{background-image: none; margin-left: 0px;}
+	section.how .right.carousel-control{background-image: none; margin-right: 0px;}
+	section.follow-us .container-fluid {text-align: center;}
+	section.follow-us .container-fluid .row .col-md-2 img{width: 28%;}
+	footer.mb-footer {text-align: center;}
+	footer.mb-footer .brand-logo{display: block; margin: 0 auto;}
+	footer.mb-footer .container-fluid .row:first-child{margin-bottom: 12px;}
 }

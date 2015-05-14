@@ -126,7 +126,8 @@ section.what{
 }
 
 section.done{
-	background: url(../img/white_wall.png) 0 0;
+	/*background: url(../img/white_wall.png) 0 0;*/
+	background: #ebebeb;
 	height: 780px;
 	padding-top: 100px;
 	box-sizing: border-box;
