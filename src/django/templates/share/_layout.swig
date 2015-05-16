@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="{% block ngApp %}{% endblock %}">
+<html>
 <head>
 
     <title>MappingBird - Remember places for later</title>
@@ -20,7 +20,7 @@
     {% block css %}{% endblock %}
 
 </head>
-<body>
+<body ng-app="{% block ngApp %}{% endblock %}">
 {% block content %}{% endblock %}
 
 {% block prejs %}{% endblock %}
