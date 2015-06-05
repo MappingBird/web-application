@@ -1210,7 +1210,7 @@ ul.types > li{
 }
 .collection-list-wrapper .nav{
 	width: 350px;
-	overflow: scroll;
+	overflow: hidden;
 }
 .collection-list-wrapper a{
 	line-height: 30px;
