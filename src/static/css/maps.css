@@ -1148,20 +1148,22 @@ ul.types > li{
 .collection-header .collection-name.active{
 	background-position: 0 -40px;
 }
-
+.collection-header .collection-name.active:hover{
+	background-position: 0 -60px;
+}
 .collection-header .collection-name.active i{
-	-webkit-animation:spindown 0.25s linear 0;
-    -moz-animation:spindown 0.25s linear 0;
-    animation:spindown 0.25s linear 0;
+	-webkit-animation:spinup 0.25s linear 0;
+    -moz-animation:spinup 0.25s linear 0;
+    animation:spinup 0.25s linear 0;
     -moz-animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
 
 .collection-header .collection-name i{
-	-webkit-animation:spinup 0.25s linear 0;
-    -moz-animation:spinup 0.25s linear 0;
-    animation:spinup 0.25s linear 0;
+	-webkit-animation:spindown 0.25s linear 0;
+    -moz-animation:spindown 0.25s linear 0;
+    animation:spindown 0.25s linear 0;
     -moz-animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
@@ -1175,9 +1177,6 @@ ul.types > li{
 @-webkit-keyframes spinup { 0% { -webkit-transform: rotate(90deg); } 100% { -webkit-transform: rotate(0deg); } }
 @keyframes spinup { 0% { transform:rotate(90deg); } 100% { transform:rotate(0deg); } }
 
-.collection-header .collection-name.active:hover{
-	background-position: 0 -60px;
-}
 .collection-header .description{
 	color: #707070;
 	font-size: 12px;
