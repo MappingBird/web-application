@@ -267,6 +267,8 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                     }
                     // hack for image delete
                     $scope.$emit('HackforDeleteImage', deselectImages);
+                    // restore deselectImages
+                    deselectImages = {};
                 }
 
             }
