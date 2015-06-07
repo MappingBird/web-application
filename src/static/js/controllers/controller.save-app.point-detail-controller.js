@@ -239,8 +239,6 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
                         delete $scope.activeViewPoint.images[len2];
 
                     });
-
-                    break;
                 }
 
             }
