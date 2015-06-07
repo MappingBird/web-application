@@ -11,16 +11,24 @@ mappingbird.directives.directive('mCustomScrollbar', function() {
             var scrollbarAttrs = scope.$eval(attrs.mCustomScrollbar),
                 triggerEvent = scrollbarAttrs.triggerEvent;
 
-            scope.$on(triggerEvent, function () {
-                console.log('trigger mCustomScrollbar');
-                if (element.attr('parent-height')) {
-                    element.css('height', element.attr('parent-height') + 'px');
-                }
+            if (triggerEvent) {
+              scope.$on(triggerEvent, function () {
+                  console.log('trigger mCustomScrollbar');
+                  if (element.attr('parent-height')) {
+                      element.css('height', element.attr('parent-height') + 'px');
+                  }
 
-                if (!$(element).hasClass('mCustomScrollbar')) {
-                    $(element).mCustomScrollbar(scrollbarAttrs);
-                }
-            } );
+                  if (!$(element).hasClass('mCustomScrollbar')) {
+                      $(element).mCustomScrollbar(scrollbarAttrs);
+                  }
+              } );
+            } else {
+              // trigger mCustomScrollbar directly
+              if (!$(element).hasClass('mCustomScrollbar')) {
+                  $(element).mCustomScrollbar(scrollbarAttrs);
+              }
+            }
+
         }
     };
 });
