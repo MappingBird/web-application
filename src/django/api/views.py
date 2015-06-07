@@ -3,6 +3,8 @@ import json
 import os
 import os.path
 import time
+import uuid
+from urlparse import urlparse
 
 from django.middleware import csrf
 from django.views.decorators.csrf import csrf_exempt
@@ -543,5 +545,61 @@ def upload_media(request):
 
         except Point.DoesNotExist:
             pass
+
+    return Response(out)
+
+@api_view(['GET'])
+def gen_temp (request):
+    #-- gen random Account and Password
+    id4 = uuid.uuid4()
+    acc = "{0}@mb.tempacc".format(str(id4.time_low))
+    pwd = str(id4.node)
+
+    url = urlparse(request.build_absolute_uri())
+    apiRoot = "{0}://{1}".format(url[0], url[1])
+
+    #-- sign-up to valid this account
+    payload = {'email' : acc, 'password' : pwd} 
+    r = requests.post("{0}/api/users".format(apiRoot), data=payload)
+    if 201 == r.status_code :
+       out = {
+           'email' : acc, 
+           'password' : pwd,
+       }
+       return Response(out)
+
+    return Response('please retry', status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
+@api_view(['POST'])
+def mig_temp2real (request):
+    out = {}
+
+    try :
+        o = json.loads(request.body)
+        if 'temp_email' not in o or 'email' not in o or 'temp_password' not in o or 'password' not in o:
+            raise ValueError('request parses error, e.g. {"temp_email":"...", "temp_password":"...", "email":"...", "password":"..."}')
+
+        acc = o['email'].strip()
+        pwd = o['password'].strip()
+        if len(pwd) <= 0 or len(acc) <= 0:
+            raise ValueError('invalid Email or Password')
+
+        #-- sign-up new account
+        payload = {'email' : acc, 'password' : pwd} 
+        url = urlparse(request.build_absolute_uri())
+        apiRoot = "{0}://{1}".format(url[0], url[1])
+        r = requests.post("{0}/api/users".format(apiRoot), data=payload)
+        if 201 != r.status_code :
+            raise ValueError('password error or {0} has already been used'.format(acc))
+ 
+        ######TODO... migrate Collection and Point from temp_email to email
+       
+        out = {
+            'email' : acc,
+            'password' : pwd,
+            'status' : 'migration ok'
+        }
+    except ValueError, e:
+        return Response(str(e), status=status.HTTP_400_BAD_REQUEST) 
 
     return Response(out)
