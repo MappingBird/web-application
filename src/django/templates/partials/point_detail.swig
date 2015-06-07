@@ -31,7 +31,7 @@
             <p class="ref-address ng-binding" ng-bind="activeViewPoint.location.place_address"></p>
             <a ng-href="[[activeViewPoint.url]]" class="ref-url ellipsis" title="[[activeViewPoint.url]]" new-window ng-bind="activeViewPoint.url"></a>
             <div>
-                <div class="ref-context-img" thumb-alignment="{displayArray: 'pointImages', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages', enableLightbox: true, editMode: pointEditMode, onlyFirstSelected: false, whiteBackground: false}"></div>
+                <div class="ref-context-img" thumb-alignment="{displayArray: 'pointImages', selectImages: 'selectedPointImages', deselectImages: 'deselectedPointImages', enableLightbox: true, editMode: pointEditMode, onlyFirstSelected: false, whiteBackground: false}"></div>
             </div>
         </div>
         <!--
