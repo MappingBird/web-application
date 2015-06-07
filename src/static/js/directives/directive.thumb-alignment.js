@@ -12,8 +12,8 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
 
             var config = $scope.$eval($attrs.thumbAlignment),
                 displayArray = config.displayArray,
-                selectImages = config.selectImages || {},
-                deselectImages = config.deselectImages || {},
+                selectImages = config.selectImages,
+                deselectImages = config.deselectImages,
                 onlyFirstSelected = config.onlyFirstSelected,
                 whiteBackground = config.whiteBackground,
                 photo_array = null, //photo.js
