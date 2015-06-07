@@ -224,15 +224,14 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
 
                     PointImage.delete({id: $scope.activeViewPoint.images[len2].id}, function(){
 
+                        console.log('delete images ', $scope.activeViewPoint.images[len2].id, deletedImageUrl, $scope.pointImages);
                         var lenImages = $scope.pointImages.length;
 
                         // remove deleted image from pointImages
-                        if (lenImages) {
-                            while (lenImages--) {
-                                if ($scope.pointImages[lenImages] == deletedImageUrl) {
-                                    $scope.pointImages.splice(lenImages, 1);
-                                    break;
-                                }
+                        while (lenImages--) {
+                            if ($scope.pointImages[lenImages] == deletedImageUrl) {
+                                $scope.pointImages.splice(lenImages, 1);
+                                break;
                             }
                         }
 
