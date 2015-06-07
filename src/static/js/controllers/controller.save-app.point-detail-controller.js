@@ -222,23 +222,21 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
 
                     deletedImageUrl = $scope.activeViewPoint.images[len2].url;
 
-                    PointImage.delete({id: $scope.activeViewPoint.images[len2].id}, function(){
+                    PointImage.delete({id: $scope.activeViewPoint.images[len2].id}, function(){});
 
-                        console.log('delete images ', $scope.activeViewPoint.images[len2].id, deletedImageUrl, $scope.pointImages);
-                        var lenImages = $scope.pointImages.length;
+                    console.log('delete images ', $scope.activeViewPoint.images[len2].id, deletedImageUrl, $scope.pointImages);
 
-                        // remove deleted image from pointImages
-                        while (lenImages--) {
-                            if ($scope.pointImages[lenImages] == deletedImageUrl) {
-                                $scope.pointImages.splice(lenImages, 1);
-                                break;
-                            }
+                    // remove deleted image from pointImages
+                    var lenImages = $scope.pointImages.length;
+                    while (lenImages--) {
+                        if ($scope.pointImages[lenImages] == deletedImageUrl) {
+                            $scope.pointImages.splice(lenImages, 1);
+                            break;
                         }
+                    }
 
-                        // delete $scope.activeViewPoint.images[len2];
-                        $scope.activeViewPoint.images.splice(len2, 1);
-
-                    });
+                    // delete $scope.activeViewPoint.images[len2];
+                    $scope.activeViewPoint.images.splice(len2, 1);
 
                     break;
                 }
