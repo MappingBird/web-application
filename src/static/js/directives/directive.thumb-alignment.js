@@ -267,8 +267,6 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                     }
                     // hack for image delete
                     $scope.$emit('HackforDeleteImage', deselectImages);
-                    // restore deselectImages
-                    deselectImages = {};
                 }
 
             }
@@ -288,6 +286,9 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                 $element.find('.picrow').remove();
                 $element.append(loadingAnimation);
                 $element.append('<div class="picrow" />');
+
+                // restore deselectImages
+                deselectImages = {};
             }
 
             function loadImages (newValue) {
