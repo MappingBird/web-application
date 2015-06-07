@@ -26,6 +26,8 @@ urlpatterns = patterns('',
     url(r'^upload$', 'api.views.upload_media', name='upload'),
     url(r'^places$', 'api.views.places', name='places'),
     url(r'^feedback$', 'api.uv.feedback', name='feedback'),
+    url(r'^user/temp$', 'api.views.gen_temp', name='temp'),
+    url(r'^user/temp2real$', 'api.views.mig_temp2real', name='temp2real'),
 )
 
 
