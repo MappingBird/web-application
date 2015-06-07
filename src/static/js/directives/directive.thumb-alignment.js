@@ -123,6 +123,7 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                                     cl = (i == 0 && rowNum == 1) ? "is-selected" : "";
 
                                     selectImages[img_id] = url;
+                                    $scope[selectImages][img_id] = url;
 
                                     BroadcastService.prepForBroadcast({
                                         type: 'savePointSetImage',
@@ -145,6 +146,7 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
 
                                         // add to $scope
                                         selectImages[img_id] = url;
+                                        $scope[selectImages][img_id] = url;
 
                                     } else {
                                         cl = "";
@@ -238,7 +240,9 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                         $scope.$apply(function(){
                             console.log('delete selected image');
                             deselectImages[imgID] = selectImages[imgID];
+                            $scope[deselectImages][imgID] = $scope[selectImages][imgID];
                             delete selectImages[imgID];
+                            delete $scope[selectImages][imgID];
                         });
 
                         // google analytics
@@ -254,8 +258,12 @@ mappingbird.directives.directive('thumbAlignment', ['$compile', function($compil
                         $scope.$apply(function(){
                             console.log('add selected image');
                             selectImages[imgID] = src;
+                            $scope[selectImages][imgID] = src;
                             if (deselectImages[imgID]) {
                                 delete deselectImages[imgID];
+                            }
+                            if ($scope[deselectImages][imgID]) {
+                              delete $scope[deselectImages][imgID];
                             }
                         });
 
