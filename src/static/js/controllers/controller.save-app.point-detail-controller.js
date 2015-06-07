@@ -148,6 +148,10 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
 
     };
 
+    // hack for image delete
+    $scope.$on('HackforDeleteImage', function (event, images) {
+        $scope.deselectedPointImages = images;
+    });
     $scope.savePointChanges = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -164,7 +168,7 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
             }),
             headers: { 'Content-Type': 'application/json'}
         }).success(function(data, headers) {
-            
+
             // if change collection exist, refresh the viewCollection
             if ($scope.changeCollectionId != $scope.activeCollectionId) {
                 console.log('[Point Collection change] from ' + $scope.activeCollectionName + ' to ', $scope.changeCollectionName);
@@ -184,7 +188,7 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
                 BroadcastService.prepForBroadcast({
                     type: 'pointChangeCollection',
                     data: { }
-                });    
+                });
                 // show p-alert
                 BroadcastService.prepForBroadcast({
                     type: 'pointChangeCollectionComplete',
@@ -194,9 +198,9 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
                 });
                 $scope.closePoint($event);
             }
-            
+
             $scope.togglePointEditMode($event);
-            
+
             // google analytics
             Analytics.registerEvent('Point', 'Saved point detail changes', 'Point Detail Panel');
         });
@@ -255,13 +259,13 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
         console.log('selectCollection');
         console.log('saveCollectionId: ' + id);
         $scope.activeViewPoint.collection = id;
-        
+
         // https://github.com/MappingBird/web-application/issues/167
         // don't change collection view
         // $scope.activeCollectionId = id;
         $scope.changeCollectionId = id;
         // change the changeCollectionName
-        var len = $scope.collections.length;        
+        var len = $scope.collections.length;
         while (len--) {
             if (id == $scope.collections[len].id) {
                 $scope.changeCollectionName = $scope.collections[len].name;
@@ -367,7 +371,7 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
             BroadcastService.prepForBroadcast({
                 type: 'pointChangeCollection',
                 data: { }
-            });  
+            });
 
             // google analytics
             if (typeof ga != 'undefined') {
