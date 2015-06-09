@@ -1222,12 +1222,14 @@ ul.types > li{
 	background-color: transparent;
 	color: #fff;
 }
-.collection-list-wrapper .nav-stacked>li>a.edit{
-	background: url(../img/icon-delete-collection.png) 0 6px no-repeat;
+.collection-list-wrapper a.edit{
+	background: url(../img/icon-delete-collection.png) 0 0 no-repeat;
 	padding-left: 30px;
+	padding-bottom: 5px;
 }
-.collection-list-wrapper .nav-stacked>li>a.edit:hover{
+.collection-list-wrapper a.edit:hover{
 	color: #ff0000;
+	text-decoration: none;
 }
 .collection-list-wrapper .nav .divider{
 	height: 1px;
