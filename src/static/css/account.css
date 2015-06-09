@@ -114,3 +114,8 @@ form .help-inline{
 form p.saved{
 	display: none;
 }
+
+/* Angular ------------------------------------------------------------------------------------ */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}

@@ -49,7 +49,7 @@
             <div class="span2"></div>
         </div>
     </div>
-    <div id="container-account-created" class="container" ng-show="accountCreated">
+     <div id="container-account-created" class="container" ng-show="accountCreated" ng-cloak>
         <div class="row-fluid">
             <div class="span2"></div>
             <div class="span8">
@@ -90,7 +90,7 @@
             </p>
         </div>
     </footer>
-    <div ng-show="dark" class="dark-overlay">
+    <div ng-show="dark" class="dark-overlay" ng-cloak>
         <div ng-show="extensionTooltip" class="extension-tooltip">
             <div class="arrow"><img src="/static/img/extension_tip_pointer.png"></div>
             <h1>Click "Add" to install MappingBird button</h1>

@@ -8,3 +8,4 @@ node_modules
 # ignore html file (swig)
 # src/static/*.html
 # src/static/partials/*.html
+.DS_Store
