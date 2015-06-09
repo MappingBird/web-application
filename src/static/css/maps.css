@@ -1223,8 +1223,9 @@ ul.types > li{
 	color: #fff;
 }
 .collection-list-wrapper a.edit{
-	background: url(../img/icon-delete-collection.png) 0 6px no-repeat;
+	background: url(../img/icon-delete-collection.png) 0 0 no-repeat;
 	padding-left: 30px;
+	padding-bottom: 5px;
 }
 .collection-list-wrapper a.edit:hover{
 	color: #ff0000;
