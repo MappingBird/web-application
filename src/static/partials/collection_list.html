@@ -5,7 +5,7 @@
     </a>
     <span class="description"><span ng-bind="activeCollectionPointLength"></span> places saved</span>
     <a href="#" class="list-view pull-right" ng-class="{ 'active' : listMode }" ng-click="gotoListView($event)">List</a>
-    <!--<a href="#" class="map-view pull-right" ng-class="{ 'active' : !listMode }" ng-click="gotoMapView($event)">Map</a>-->
+    <a href="#" class="map-view pull-right" ng-class="{ 'active' : !listMode }" ng-click="gotoMapView($event)">Map</a>
     <div class="clearfix"></div>
 </div>
 

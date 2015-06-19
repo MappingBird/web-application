@@ -1482,7 +1482,7 @@ ul.types > li{
 	height: calc(100% - 125px);
 	position: absolute;
 	top: 95px;
-	width: 100%;
+	/*width: 100%;*/ /* toggle this, can move maps while on the listview mode */
 	-webkit-flex-wrap: wrap;
 	-moz-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
@@ -1493,7 +1493,7 @@ ul.types > li{
   background-color: rgba(0,0,0,0.1);
   margin: 0;
   height: 100% !important; /* hack for css style */
-  width: 360px;
+  width: 390px;
   list-style: none;
 }
 
@@ -1525,7 +1525,7 @@ ul.types > li{
 
 .collection-listview li .context{
 	float: right;
-	width: 240px;
+	width: 260px;
 	font-weight: 200;
 }
 
