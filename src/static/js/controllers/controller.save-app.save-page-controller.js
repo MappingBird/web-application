@@ -135,9 +135,9 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.showSavePanel = false;
         $scope.showPointDetailPanel = false;
         $scope.fullTallMap = false;
-        $scope.fullMap = true;
+        $scope.fullMap = false;
         $scope.mapRetracted = false;
-        $scope.semiRetractedMap = false;
+        $scope.semiRetractedMap = true;
         $scope.halfMap = false;
 
         $scope.listMode = true;

@@ -1453,7 +1453,23 @@ ul.types > li{
 	margin-top: 10px;
 }
 
+.icon-clock {
+	background: transparent url(../img/icon-clock.png) 0 -32px no-repeat;
+	display: inline-block;
+	height: 16px;
+	margin-top: 0;
+	margin-bottom: 0;
+	width: 16px;
+}
 
+.item-pin.scenicspot { background-image: url(../img/pin-scenicspot.png); }
+.item-pin.restaurant { background-image: url(../img/pin-restaurant.png); }
+.item-pin.hotel { background-image: url(../img/pin-hotel.png); }
+.item-pin.mall { background-image: url(../img/pin-mall.png); }
+.item-pin.bar { background-image: url(../img/pin-bar.png); }
+.item-pin.misc { background-image: url(../img/pin-misc.png); }
+
+/* New collection list view template style */
 .collection-list-view {
 	align-content: flex-start;
 	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
@@ -1473,94 +1489,73 @@ ul.types > li{
 	flex-wrap: wrap;
 }
 
-.collection-list-view .list-item {
-	background: white;
-	border-right: solid 1px gray;
-	-webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
-	-moz-box-flex: 1;         /* OLD - Firefox 19- */
-	-webkit-flex: 1;          /* Chrome */
-	-ms-flex: 1;              /* IE 10 */
-	flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
-	height: 280px;
-	position: relative;
-	width: 25%;
-	-webkit-box-flex-basis: 250px;      /* OLD - iOS 6-, Safari 3.1-6 */
-	-moz-box-flex-basis: 250px;         /* OLD - Firefox 19- */
-	-webkit-flex-basis: 250px;          /* Chrome */
-	-ms-flex-basis: 250px;              /* IE 10 */
-	flex-basis: 250px;
+.collection-listview{
+  background-color: rgba(0,0,0,0.1);
+  margin: 0;
+  height: 121%; /* hack for css style */
+  width: 360px;
+  list-style: none;
 }
 
-.collection-list-view .item-header {
-	margin: 19px 9px 0;
+.collection-listview > li{
+	background-color: #fff;
+	border-bottom: 1px solid #dddddd;
+	padding: 10px;
+	font-size: 18px;
+	color: #181818;
+	cursor: pointer;
+	/*margin: 0 0 3px;*/
 }
 
-.collection-list-view .item-title {
-	font-size: 1.5em;
-	font-weight: bold;
-	margin-bottom: 0.1em;
-	margin-top: 0.4em;
-	overflow: hidden;
-	padding-left: 4px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	width: calc(100% - 52px);
-}
-
-.collection-list-view .item-time-added {
-	color: #777777;
-	padding-left: 48px;
-	width: calc(100% - 52px);
-}
-
-.collection-list-view .item-body {
-	bottom: 0;
-	position: absolute;
-	width: 100%;
-}
-
-.collection-list-view img {
-	position: relative;
-	height: 200px;
-}
-
-.collection-list-view .item-body .item-description {
-	background: transparent url(../img/list_description_background.png) center bottom repeat-x;
-	bottom: 0;
-	color: white;
-	margin-bottom: 0;
-	height: 50px;
-	overflow: hidden;
-	padding: 0.5em 5px;
-	position: absolute;
-	text-overflow: ellipsis;
-	/* white-space: nowrap; */
-	width: calc(100% - 10px);
-}
-
-.icon-clock {
-	background: transparent url(../img/icon-clock.png) 0 -32px no-repeat;
-	display: inline-block;
-	height: 16px;
-	margin-top: 0;
-	margin-bottom: 0;
-	width: 16px;
-}
-
-.collection-list-view .item-pin {
-	background-color: transparent;
-	background-position: 0 0;
-	background-repeat: no-repeat;
-	display: block;
+.collection-listview > li .thumbnail{
+	background-position: center center;
+	width: 90px;
+	height: 90px;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
 	float: left;
-	height: 60px;
-	width: 44px;
-	text-indent: -10000em;
 }
 
-.item-pin.scenicspot { background-image: url(../img/pin-scenicspot.png); }
-.item-pin.restaurant { background-image: url(../img/pin-restaurant.png); }
-.item-pin.hotel { background-image: url(../img/pin-hotel.png); }
-.item-pin.mall { background-image: url(../img/pin-mall.png); }
-.item-pin.bar { background-image: url(../img/pin-bar.png); }
-.item-pin.misc { background-image: url(../img/pin-misc.png); }
+.collection-listview > li .context{
+	float: right;
+	width: 240px;
+	font-weight: 200;
+}
+
+.collection-listview > li .context span{
+	display: block;
+	font-size: 10px;
+	color: #707070;
+}
+
+.collection-listview .tags{
+	margin: 6px 0 0;
+	list-style: none;
+	font-size: 10px;
+	color: #707070;
+}
+
+.collection-listview .tags li{
+	float: left;
+	background-color: rgba(0,0,0,0.1);
+	padding: 0px 8px;
+	margin: 5px 5px 0 0;
+}
+
+.collection-listview > li.isSelected, .collection-listview > li:hover{
+	background-color: #01A9E7;
+	color: #fff;
+}
+
+.collection-listview > li.isSelected .context span,
+.collection-listview > li:hover .context span{
+	color: #fff;
+}
+
+.collection-listview > li.isSelected .tags,
+.collection-listview > li:hover .tags{
+	color: #fff;
+}
