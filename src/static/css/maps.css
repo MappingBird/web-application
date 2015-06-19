@@ -1492,12 +1492,16 @@ ul.types > li{
 .collection-listview{
   background-color: rgba(0,0,0,0.1);
   margin: 0;
-  height: 121%; /* hack for css style */
+  height: 100% !important; /* hack for css style */
   width: 360px;
   list-style: none;
 }
 
-.collection-listview > li{
+.collection-listview .mCSB_container {
+	margin-right:10px !important; /* it's bad I know */
+}
+
+.collection-listview li{
 	background-color: #fff;
 	border-bottom: 1px solid #dddddd;
 	padding: 10px;
@@ -1507,7 +1511,7 @@ ul.types > li{
 	/*margin: 0 0 3px;*/
 }
 
-.collection-listview > li .thumbnail{
+.collection-listview li .thumbnail{
 	background-position: center center;
 	width: 90px;
 	height: 90px;
@@ -1519,13 +1523,13 @@ ul.types > li{
 	float: left;
 }
 
-.collection-listview > li .context{
+.collection-listview li .context{
 	float: right;
 	width: 240px;
 	font-weight: 200;
 }
 
-.collection-listview > li .context span{
+.collection-listview li .context span{
 	display: block;
 	font-size: 10px;
 	color: #707070;
@@ -1545,17 +1549,17 @@ ul.types > li{
 	margin: 5px 5px 0 0;
 }
 
-.collection-listview > li.isSelected, .collection-listview > li:hover{
+.collection-listview li.isSelected, .collection-listview li:hover{
 	background-color: #01A9E7;
 	color: #fff;
 }
 
-.collection-listview > li.isSelected .context span,
-.collection-listview > li:hover .context span{
+.collection-listview li.isSelected .context span,
+.collection-listview li:hover .context span{
 	color: #fff;
 }
 
-.collection-listview > li.isSelected .tags,
-.collection-listview > li:hover .tags{
+.collection-listview li.isSelected .tags,
+.collection-listview li:hover .tags{
 	color: #fff;
 }
