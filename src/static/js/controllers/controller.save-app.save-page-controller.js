@@ -131,7 +131,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.mapMode = true;
         $scope.saveMode = false;
         $scope.collectionsMode = false;
-        $scope.showCollectionList = false;
+        $scope.showCollectionList = true;
         $scope.showSavePanel = false;
         $scope.showPointDetailPanel = false;
         $scope.fullTallMap = false;

@@ -15,7 +15,7 @@
 <ul class="collection-listview" height-to-bottom m-custom-scrollbar="{scrollInertia: 0}">
 	<li ng-class="{'isSelected': isSelected }" class="list-item" ng-repeat="point in activeViewPoints">
 		<div class="item-wrapper">
-			<div class="thumbnail" id="item-001" ng-style="{'background-image': 'url(" + point.images[0].url + ")'"></div>
+			<img class="thumbnail" ng-src="[[point.images[0].url]]"/>
 			<div class="context"><span>Added: [[point.create_time | amCalendar]]</span>[[point.title]]
 				<!-- <ul class="tags">
 					<li>Free-WIFI</li>
