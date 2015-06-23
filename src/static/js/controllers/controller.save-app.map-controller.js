@@ -443,8 +443,13 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                 $('.pingismo-pin').removeClass('active');
                 $('#pin-' + idName + '> a').removeClass('showme');
                 $('#pin-' + idName).addClass('active');
-                map.panTo(new google.maps.LatLng(BroadcastService.message.data.lat, BroadcastService.message.data.lng));
-                // offsetCenter(new google.maps.LatLng(BroadcastService.message.data.lat, BroadcastService.message.data.lng), -($('#map').width()*4));
+
+                if ($scope.fullMap) {
+                    map.panTo(new google.maps.LatLng(BroadcastService.message.lat, BroadcastService.message.lng));
+                } else {
+                    offsetCenter(new google.maps.LatLng(BroadcastService.message.lat, BroadcastService.message.lng), -($('#map').width()/4));
+                }
+                
                 break;
         }
     });
