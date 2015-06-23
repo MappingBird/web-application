@@ -128,7 +128,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     // list viewing mode
     function listViewingMode() {
         changeMapParams();
-        $scope.mapMode = true;
+        $scope.mapMode = false;
         $scope.saveMode = false;
         $scope.collectionsMode = false;
         $scope.showCollectionList = true;
