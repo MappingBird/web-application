@@ -23,8 +23,9 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
 
     $scope.popupPin = function (e, id) {
       e.preventDefault();
-      var idName = 'pin-' + id;
+      $('.pingismo-pin').removeClass('active'); // remove popup style first
 
+      var idName = 'pin-' + id;
       $('#' + idName + ' > a').trigger('click');
     };
 
@@ -40,5 +41,5 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
           }
       });
     };
-    
+
 }]);
