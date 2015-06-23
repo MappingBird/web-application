@@ -25,6 +25,20 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
       e.preventDefault();
       var idName = 'pin-' + id;
 
-      $('#' + idName).trigger('click');
+      $('#' + idName + ' > a').trigger('click');
     };
+
+    $scope.offsetMapWhenHover = function (e, id, lat, lng) {
+      e.preventDefault();
+
+      BroadcastService.prepForBroadcast({
+          type: 'offsetCenterWhenListview',
+          data: {
+            id: id,
+            lat: lat,
+            lng: lng
+          }
+      });
+    };
+    
 }]);
