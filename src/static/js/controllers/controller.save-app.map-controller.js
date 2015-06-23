@@ -441,6 +441,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
             case 'offsetCenterWhenListview':
                 var idName = BroadcastService.message.data.id;
                 $('.pingismo-pin').removeClass('active');
+                $('#pin-' + idName + '> a').removeClass('showme');
                 $('#pin-' + idName).addClass('active');
                 offsetCenter(new google.maps.LatLng(BroadcastService.message.data.lat, BroadcastService.message.data.lng), -($('#map').width()*4));
                 break;
