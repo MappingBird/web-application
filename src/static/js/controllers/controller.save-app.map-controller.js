@@ -5,6 +5,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
         overlay,
         noSearchQueryOverlay,
         marker,
+        id,
         lat = 0,
         lng = 0,
         type = '',
@@ -95,6 +96,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
             location = $scope.activeSavePoint.location;
             coords = $scope.activeSavePoint.location.coordinates.split(',');
 
+            id = $scope.activeSavePoint.id;
             lat = coords[0];
             lng = coords[1];
             type = $scope.activeSavePoint.type || 'scenicspot';
@@ -115,7 +117,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
             }
 
 
-            saveOverlay = new BucketListSmallOverlay(bounds, Presets.mapZoom, srcImage, map, myLatLng, type, location.place_name, location.place_address, phone, 'open', 'save');
+            saveOverlay = new BucketListSmallOverlay(bounds, Presets.mapZoom, srcImage, map, id, myLatLng, type, location.place_name, location.place_address, phone, 'open', 'save');
         }
     }
 
@@ -225,6 +227,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
 
             // place markers
             while (len--) {
+                id = $scope.activeViewPoints[len].id;
                 lat = $scope.activeViewPoints[len].lat;
                 lng = $scope.activeViewPoints[len].lng;
                 type = $scope.activeViewPoints[len].type || 'scenicspot';
@@ -245,6 +248,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                         Presets.mapZoom,
                         srcImage,
                         map,
+                        id,
                         new google.maps.LatLng(lat, lng),
                         type,
                         name,
@@ -280,6 +284,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                         Presets.mapZoom,
                         srcImage,
                         map,
+                        id,
                         new google.maps.LatLng(lat, lng),
                         type,
                         name,
@@ -432,6 +437,9 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                 break;
             case 'noSearchQuery':
             case 'noSearchResults':
+                break;
+            case 'offsetCenterWhenListview':
+                offsetCenter(new google.maps.LatLng(BroadcastService.message.data.lat, BroadcastService.message.data.lng), -($('#map').width()*4));
                 break;
         }
     });

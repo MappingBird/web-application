@@ -21,4 +21,10 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
         }
     });
 
+    $scope.popupPin = function (e, id) {
+      e.preventDefault();
+      var idName = 'pin-' + id;
+
+      $('#' + idName).trigger('click');
+    };
 }]);

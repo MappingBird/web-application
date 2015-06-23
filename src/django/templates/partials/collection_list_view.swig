@@ -13,7 +13,7 @@
 
 <!-- New Listview Template -->
 <ul class="collection-listview" height-to-bottom m-custom-scrollbar="{scrollInertia: 0}">
-	<li ng-class="{'isSelected': isSelected }" class="list-item" ng-repeat="point in activeViewPoints">
+	<li ng-class="{'isSelected': isSelected }" class="list-item" ng-repeat="point in activeViewPoints" ng-click="popupPin($event, [[point.id]])">
 		<div class="item-wrapper">
 			<img class="thumbnail" ng-src="[[point.images[0].url]]"/>
 			<div class="context"><span>Added: [[point.create_time | amCalendar]]</span>[[point.title]]
