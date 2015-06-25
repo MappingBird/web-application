@@ -13,7 +13,7 @@
 
 <!-- New Listview Template -->
 <ul class="collection-listview" height-to-bottom m-custom-scrollbar="{scrollInertia: 0}">
-	<li ng-class="{'isSelected': isSelected }" class="list-item" ng-repeat="point in activeViewPoints | orderBy: '-point.update_time'" ng-click="popupPin($event, [[point.id]])" ng-mouseover="offsetMapWhenHover($event, [[point.id]], [[point.lat]], [[point.lng]])">
+	<li ng-class="{'isSelected': isSelected }" class="list-item" ng-repeat="point in activeViewPoints | orderBy: 'point.created_time'" ng-click="popupPin($event, [[point.id]])" ng-mouseover="offsetMapWhenHover($event, [[point.id]], [[point.lat]], [[point.lng]])">
 		<div class="item-wrapper">
 			<img class="thumbnail" ng-src="[[point.images[0].url]]"/>
 			<div class="context"><span>Added: [[point.update_time | amTimeAgo]]</span>[[point.title]]
