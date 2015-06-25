@@ -23,6 +23,9 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
 
     $scope.popupPin = function (e, id) {
       e.preventDefault();
+
+      $scope.isSelected = id; // toggle isSelected class
+
       $('.pingismo-pin').removeClass('active'); // remove popup style first
 
       var idName = 'pin-' + id;

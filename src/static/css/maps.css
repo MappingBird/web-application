@@ -1544,13 +1544,15 @@ ul.types > li{
 	margin: 5px 5px 0 0;
 }
 
-.collection-listview li.isSelected, .collection-listview li:hover{
-	background-color: #01A9E7;
-	color: #fff;
+.collection-listview li:hover, .collection-listview li:hover .context span{
+	border-color: #01A9E7;
+	color: #01A9E7;
 }
-
+.collection-listview li.isSelected,
+.collection-listview li.isSelected:hover,
 .collection-listview li.isSelected .context span,
-.collection-listview li:hover .context span{
+.collection-listview li.isSelected:hover .context span{
+	background-color: #01A9E7;
 	color: #fff;
 }
 
