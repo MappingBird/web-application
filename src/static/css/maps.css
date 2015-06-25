@@ -1182,31 +1182,29 @@ ul.types > li{
 	font-size: 12px;
 	margin-left: 5px;
 }
-.collection-header .list-view,
-.collection-header .map-view{
+.collection-header .list-view{
 	font-size: 12px;
 	display: inline-block;
 	height: 14px;
-	padding-left: 18px;
+	padding: 5px 15px 5px 35px;
+	border-radius: 3px;
 	color: #fff;
 	opacity: .3;
 	filter: alpha(opacity=30);
-	margin: 10px 0 0 15px;
-	line-height: 14px;
+	margin: 3px 0 0 0;
+	line-height: 16px;
 }
 .collection-header .list-view{
-	background: url(../img/icon-list-view.png) 0 0 no-repeat;
+	background: url(../img/icon-list-view.png) 14px 5px no-repeat;
+	background-size: 14px 14px;
+	background-color: #707070;
 }
-.collection-header .map-view{
-	background: url(../img/icon-map-view.png) 0 0 no-repeat;
-}
-.collection-header .list-view:hover,
-.collection-header .map-view:hover,
-.collection-header .list-view.active,
-.collection-header .map-view.active{
+
+.collection-header .list-view.active{
 	opacity: 1;
 	filter: alpha(opacity=100);
 	text-decoration: none;
+	background-color: #01A9E7;
 }
 .collection-list-wrapper .nav{
 	width: 350px;
