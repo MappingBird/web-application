@@ -29,7 +29,7 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
       console.log('popupPin', id, clickId);
       e.preventDefault();
 
-      if (id == clickId) {
+      if (clickId && id[0][0] == clickId[0][0]) { // don't know why [0][0]
         console.log('repeated click');
         return;
       }
@@ -42,6 +42,9 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
 
       // prepare for next time click popup
       clickId = id;
+      if (hoverId && clickId[0][0] == hoverId[0][0]) {
+        hoverId = null;
+      }
     };
 
     var hoverId = null;
@@ -59,7 +62,7 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
       });
 
       // prepare for next time
-      if (id == clickId) {
+      if (clickId && id[0][0] == clickId[0][0]) {
         hoverId = null;
       } else {
         hoverId = id;
