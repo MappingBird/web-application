@@ -1492,14 +1492,10 @@ ul.types > li{
   list-style: none;
 }
 
-.collection-listview .mCSB_container {
-	margin-right:10px !important; /* it's bad I know */
-}
-
 .collection-listview li{
 	background-color: #fff;
 	border: 1px solid #dddddd;
-	padding: 10px;
+	padding: 9px;
 	font-size: 18px;
 	color: #181818;
 	cursor: pointer;
@@ -1559,4 +1555,18 @@ ul.types > li{
 .collection-listview li.isSelected .tags,
 .collection-listview li:hover .tags{
 	color: #fff;
+}
+/* collection-listview m-custom-scrollbar*/
+.collection-listview .mCSB_dragger_bar {
+	background-color: #707070 !important;
+}
+.collection-listview .mCSB_scrollTools {
+	opacity: 1;
+	width: 6px;
+}
+.collection-listview .mCSB_draggerRail {
+	background-color: #dddddd !important;
+}
+.collection-listview .mCSB_container {
+	margin-right:2px !important; /* it's bad I know */
 }
