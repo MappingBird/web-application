@@ -16,7 +16,7 @@
 	<li ng-class="{'isSelected': isSelected==point.id }" class="list-item" ng-repeat="point in activeViewPoints | orderBy: '-point.created_time'" ng-click="popupPin($event, [[point.id]])" ng-mouseover="offsetMapWhenHover($event, [[point.id]], [[point.lat]], [[point.lng]])">
 		<div class="item-wrapper">
 			<img class="thumbnail" ng-src="[[point.images[0].url]]"/>
-			<div class="context"><span>Added: [[point.created_time | amTimeAgo]]</span>[[point.title]]
+			<div class="context"><span>Added: [[point.created_time]] [[point.date_created]]</span>[[point.title]]
 				<!-- <ul class="tags">
 					<li>Free-WIFI</li>
 					<li>Coffee-shop</li>
