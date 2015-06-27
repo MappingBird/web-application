@@ -6,6 +6,9 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
         console.log($scope.activeViewPoints);
         console.log(activeViewPoints);
 
+        // list create time descending
+        activeViewPoints.sort(function (a,b) { return a.create_time > b.create_time ? 0 : 1 });
+
         if (!angular.equals($scope.activeViewPoints, activeViewPoints)) {
             $scope.activeViewPoints = activeViewPoints;
         }
