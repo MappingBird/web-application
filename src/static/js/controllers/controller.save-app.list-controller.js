@@ -26,7 +26,7 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
 
     var clickId = null;
     $scope.popupPin = function (e, id) {
-      console.log(popupPin, id, clickId);
+      console.log('popupPin', id, clickId);
       e.preventDefault();
 
       if (id == clickId) {
@@ -64,7 +64,7 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
       } else {
         hoverId = id;
       }
-      
+
     };
 
 }]);
