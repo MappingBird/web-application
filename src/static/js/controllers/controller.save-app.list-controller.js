@@ -30,7 +30,7 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
       }
       $scope.isSelected = id; // toggle isSelected class
 
-      $('#pin-' + clickId).removeClass('active'); // remove popup style first
+      $('#pin-' + id).removeClass('active'); // remove popup style first
 
       var idName = 'pin-' + id;
       $('#' + idName + ' > a').trigger('click');
