@@ -26,9 +26,11 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
 
     var clickId = null;
     $scope.popupPin = function (e, id) {
+      console.log(popupPin, id, clickId);
       e.preventDefault();
 
       if (id == clickId) {
+        console.log('repeated click');
         return;
       }
       $scope.isSelected = id; // toggle isSelected class
@@ -57,7 +59,12 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
       });
 
       // prepare for next time
-      hoverId = id;
+      if (id == clickId) {
+        hoverId = null;
+      } else {
+        hoverId = id;
+      }
+      
     };
 
 }]);
