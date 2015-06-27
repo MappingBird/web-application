@@ -439,8 +439,9 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
             case 'noSearchResults':
                 break;
             case 'offsetCenterWhenListview':
+                var oldIdName = BroadcastService.message.data.oldId
                 var idName = BroadcastService.message.data.id;
-                $('.pingismo-pin').removeClass('active');
+                $('#pin-' + oldIdName).removeClass('active');
                 $('#pin-' + idName + '> a').removeClass('showme');
                 $('#pin-' + idName).addClass('active');
 
@@ -450,7 +451,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                     // offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
                     offsetCenter(new google.maps.LatLng(BroadcastService.message.data.lat, BroadcastService.message.data.lng), -($('#map').width()/4));
                 }
-                
+
                 break;
         }
     });

@@ -21,28 +21,40 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
         }
     });
 
+    var clickId = null;
     $scope.popupPin = function (e, id) {
       e.preventDefault();
 
+      if (id == clickId) {
+        return;
+      }
       $scope.isSelected = id; // toggle isSelected class
 
-      $('.pingismo-pin').removeClass('active'); // remove popup style first
+      $('#pin-' + clickId).removeClass('active'); // remove popup style first
 
       var idName = 'pin-' + id;
       $('#' + idName + ' > a').trigger('click');
+
+      // prepare for next time click popup
+      clickId = id;
     };
 
+    var hoverId = null;
     $scope.offsetMapWhenHover = function (e, id, lat, lng) {
       e.preventDefault();
 
       BroadcastService.prepForBroadcast({
           type: 'offsetCenterWhenListview',
           data: {
+            oldId: hoverId,
             id: id,
             lat: lat,
             lng: lng
           }
       });
+
+      // prepare for next time
+      hoverId = id;
     };
 
 }]);
