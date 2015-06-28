@@ -99,7 +99,7 @@
     <!-- End of map dialog -->
 
     <!-- List view -->
-    <div class="collection-list-view" ng-show="listMode" ng-controller="listController" collection-list-view></div>
+    <div class="collection-list-view" ng-show="listMode" ng-class="{ withCollectionList: showCollectionList}" ng-controller="listController" collection-list-view></div>
     <!-- End of List view -->
 
     <!-- Massive Alert -->

@@ -1483,7 +1483,7 @@ ul.types > li{
 	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
 }
-.collection-list-view.widthCollectionList {
+.collection-list-view.withCollectionList {
 	left: 360px;
 }
 .collection-listview{
