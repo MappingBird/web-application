@@ -578,21 +578,24 @@ def mig_temp2real (request):
         o = json.loads(request.body)
         if 'temp_email' not in o or 'email' not in o or 'temp_password' not in o or 'password' not in o:
             raise ValueError('request parses error, e.g. {"temp_email":"...", "temp_password":"...", "email":"...", "password":"..."}')
-
+        
         acc = o['email'].strip()
         pwd = o['password'].strip()
         if len(pwd) <= 0 or len(acc) <= 0:
             raise ValueError('invalid Email or Password')
-
-        #-- sign-up new account
+        #-- sign-up the new account
         payload = {'email' : acc, 'password' : pwd} 
         url = urlparse(request.build_absolute_uri())
         apiRoot = "{0}://{1}".format(url[0], url[1])
         r = requests.post("{0}/api/users".format(apiRoot), data=payload)
         if 201 != r.status_code :
             raise ValueError('password error or {0} has already been used'.format(acc))
- 
-        ######TODO... migrate Collection and Point from temp_email to email
+
+        #-- move collections from temp to real account
+        tmp_acc = o['temp_email'].strip()
+        u = User.objects.get(email=acc)
+        u_tmp = User.objects.get(email=tmp_acc)
+        u.collection_set = u_tmp.collection_set.all()
        
         out = {
             'email' : acc,
@@ -600,6 +603,19 @@ def mig_temp2real (request):
             'status' : 'migration ok'
         }
     except ValueError, e:
-        return Response(str(e), status=status.HTTP_400_BAD_REQUEST) 
+        err_out = {
+            'error' : str(e)
+        }
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
+    except User.DoesNotExist, e:
+        err_out = {
+            'error' : str(e)
+        }
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
+    except:
+        err_out = {
+            'error' : str("unexpected error")
+        }
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
 
     return Response(out)
