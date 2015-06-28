@@ -13,27 +13,27 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     $scope.pointMode = false;
     $scope.listMode = false;
 
-    // function changeMapParams () {
-    //    // $('#map').data('transitioning', true);
-    // }
+    function changeMapParams () {
+       // $('#map').data('transitioning', true);
+    }
 
     // full map mode, no collections
-    // function fullMapViewingMode () {
-    //     changeMapParams();
-    //     $scope.mapMode = true;
-    //     $scope.saveMode = false;
-    //     $scope.collectionsMode = false;
-    //     $scope.showCollectionList = false;
-    //     $scope.showSavePanel = false;
-    //     $scope.showPointDetailPanel = false;
-    //     $scope.fullTallMap = true;
-    //     $scope.fullMap = false;
-    //     $scope.mapRetracted = false;
-    //     $scope.semiRetractedMap = false;
-    //     $scope.halfMap = false;
-    //
-    //     $scope.listMode = $scope.listMode;
-    // }
+    function fullMapViewingMode () {
+        changeMapParams();
+        $scope.mapMode = true;
+        $scope.saveMode = false;
+        $scope.collectionsMode = false;
+        $scope.showCollectionList = false;
+        $scope.showSavePanel = false;
+        $scope.showPointDetailPanel = false;
+        $scope.fullTallMap = true;
+        $scope.fullMap = false;
+        $scope.mapRetracted = false;
+        $scope.semiRetractedMap = false;
+        $scope.halfMap = false;
+
+        $scope.listMode = false;
+    }
 
     // map viewing mode
     function mapViewingMode () {
@@ -47,10 +47,10 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.fullTallMap = false;
         $scope.fullMap = true;
         $scope.mapRetracted = false;
-        $scope.semiRetractedMap = $scope.listMode ? true : false;
+        $scope.semiRetractedMap = false;
         $scope.halfMap = false;
 
-        // $scope.listMode = false;
+        $scope.listMode = false;
     }
 
     // search results mode
