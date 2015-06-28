@@ -122,7 +122,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.semiRetractedMap = true;
         $scope.halfMap = false;
 
-        $scope.listMode = false;
+        // $scope.listMode = false; remain the same
     }
 
     // list viewing mode
@@ -131,7 +131,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.mapMode = false;
         $scope.saveMode = false;
         $scope.collectionsMode = false;
-        $scope.showCollectionList = true;
+        // $scope.showCollectionList = true; remain the same
         $scope.showSavePanel = false;
         $scope.showPointDetailPanel = false;
         $scope.fullTallMap = false;
