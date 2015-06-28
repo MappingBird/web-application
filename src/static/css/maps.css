@@ -1483,7 +1483,9 @@ ul.types > li{
 	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
 }
-
+.collection-list-view.widthCollectionList {
+	left: 360px;
+}
 .collection-listview{
   background-color: rgba(0,0,0,0.1);
   margin: 0;
