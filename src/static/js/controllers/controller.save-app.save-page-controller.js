@@ -128,6 +128,12 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     // close collection View
     function closeCollectionView () {
         $scope.collectionsMode = false;
+        if ($scope.listMode) {
+          $scope.semiRetractedMap = true;
+        } else {
+          $scope.semiRetractedMap = false;
+          $scope.fullMap = true;
+        }
     }
 
     // list viewing mode
@@ -135,8 +141,8 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         changeMapParams();
         $scope.mapMode = false;
         $scope.saveMode = false;
-        $scope.collectionsMode = false;
-        // $scope.showCollectionList = true; remain the same
+        // $scope.collectionsMode = false; remain
+        $scope.showCollectionList = true;
         $scope.showSavePanel = false;
         $scope.showPointDetailPanel = false;
         $scope.fullTallMap = false;
@@ -151,6 +157,13 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     // close list View
     function closeListView () {
         $scope.listMode = false;
+
+        if ($scope.collectionsMode) {
+          $scope.semiRetractedMap = true;
+        } else {
+          $scope.semiRetractedMap = false;
+          $scope.fullMap = true;
+        }
     }
 
     function reloadCollections(isFirstTime) {
