@@ -69,7 +69,7 @@
     <!-- End of alert -->
 
     <!-- Google maps -->
-    <div id="map" ng-class="{retracted: mapRetracted, 'full-tall': fullTallMap, full: fullMap, half: halfMap, 'semi-retracted': semiRetractedMap}" ng-show="mapVisible" ng-controller="mapController"></div>
+    <div id="map" ng-class="{retracted: mapRetracted, 'full-tall': fullTallMap, full: fullMap, half: halfMap, 'semi-retracted': semiRetractedMap, 'collectionAndListView': collectionsMode && listMode}" ng-show="mapVisible" ng-controller="mapController"></div>
     <!-- End of Google maps -->
 
     <!-- external map alert -->
