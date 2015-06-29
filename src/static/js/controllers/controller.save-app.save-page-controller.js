@@ -157,7 +157,6 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     // close list View
     function closeListView () {
         $scope.listMode = false;
-        console.log('[closeListView]', 'collectionsMode=', $scope.collectionsMode);
         if ($scope.collectionsMode) {
           $scope.semiRetractedMap = true;
         } else {

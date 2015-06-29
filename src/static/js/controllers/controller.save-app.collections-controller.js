@@ -321,11 +321,12 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.closeListView = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
-        $state.go('viewCollectionSimple', { collectionId: $scope.activeCollectionId});
         BroadcastService.prepForBroadcast({
             type: 'closeCollectionListView',
             data: {}
         });
+        $state.go('viewCollectionSimple', { collectionId: $scope.activeCollectionId});
+
         // google analytics
         Analytics.registerEvent('Collection', 'Close List View', 'Collection List');
     };
