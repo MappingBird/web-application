@@ -244,7 +244,11 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         // hide collections list
         // show full map
         } else {
-            hideCollections();
+            $scope.collectionsListVisible = false;
+            BroadcastService.prepForBroadcast({
+              type: 'closeCollections',
+              data: {}
+            });
         }
 
     };
@@ -312,6 +316,17 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         $state.go('viewCollectionList', { collectionId: $scope.activeCollectionId});
         // google analytics
         Analytics.registerEvent('Collection', 'Change to List View', 'Collection List');
+    };
+
+    $scope.closeListView = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        BroadcastService.prepForBroadcast({
+            type: 'closeCollectionListView',
+            data: {}
+        });
+        // google analytics
+        Analytics.registerEvent('Collection', 'Close List View', 'Collection List');
     };
 
     $scope.gotoMapView = function ($event) {

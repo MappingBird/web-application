@@ -18,22 +18,22 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     }
 
     // full map mode, no collections
-    function fullMapViewingMode () {
-        changeMapParams();
-        $scope.mapMode = true;
-        $scope.saveMode = false;
-        $scope.collectionsMode = false;
-        $scope.showCollectionList = false;
-        $scope.showSavePanel = false;
-        $scope.showPointDetailPanel = false;
-        $scope.fullTallMap = true;
-        $scope.fullMap = false;
-        $scope.mapRetracted = false;
-        $scope.semiRetractedMap = false;
-        $scope.halfMap = false;
-
-        $scope.listMode = false;
-    }
+    // function fullMapViewingMode () {
+    //     changeMapParams();
+    //     $scope.mapMode = true;
+    //     $scope.saveMode = false;
+    //     $scope.collectionsMode = false;
+    //     $scope.showCollectionList = false;
+    //     $scope.showSavePanel = false;
+    //     $scope.showPointDetailPanel = false;
+    //     $scope.fullTallMap = true;
+    //     $scope.fullMap = false;
+    //     $scope.mapRetracted = false;
+    //     $scope.semiRetractedMap = false;
+    //     $scope.halfMap = false;
+    //
+    //     $scope.listMode = false;
+    // }
 
     // map viewing mode
     function mapViewingMode () {
@@ -125,6 +125,11 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         // $scope.listMode = false; remain the same
     }
 
+    // close collection View
+    function closeCollectionView () {
+        $scope.collectionsMode = false;
+    }
+
     // list viewing mode
     function listViewingMode() {
         changeMapParams();
@@ -141,6 +146,11 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.halfMap = false;
 
         $scope.listMode = true;
+    }
+
+    // close list View
+    function closeListView () {
+        $scope.listMode = false;
     }
 
     function reloadCollections(isFirstTime) {
@@ -199,6 +209,9 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
             case 'viewingCollectionList':
                 listViewingMode();
                 break;
+            case 'closeCollectionListView':
+                closeListView();
+                break;
             case 'viewSearchResults':
             case 'pointViewingMode':
                 searchResultsMode();
@@ -211,6 +224,9 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
                 break;
             case 'viewingCollections':
                 collectionViewingMode();
+                break;
+            case 'closeCollections':
+                closeCollectionView();
                 break;
             case 'userLoaded':
                 if (Collections.collections && Collections.collections.length == 0) {
