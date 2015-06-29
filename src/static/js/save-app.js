@@ -69,10 +69,7 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
                 }
 
                 if (User.data.isLoggedIn == true) {
-                    if ($stateParams.toggleBroadcast != false) {
-                        b();
-                    }
-
+                    b();
                 } else {
                     killHandler = $scope.$on('stateChange', function() {
                         if (BroadcastService.message.type == 'collectionsLoaded' &&
@@ -83,6 +80,13 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
                 }
 
 
+            }]
+        })
+        .state('viewCollectionSimple', {
+            url: '/collection/:collectionId',
+            template: '<span></span>',
+            controller: ['BroadcastService', 'User', '$stateParams', '$scope', function(BroadcastService, User, $stateParams, $scope) {
+                console.log('[viewCollectionSimple]');
             }]
         })
         .state('viewCollectionList', {

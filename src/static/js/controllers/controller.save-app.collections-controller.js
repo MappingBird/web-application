@@ -321,7 +321,7 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.closeListView = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
-        $state.go('viewCollection', { collectionId: $scope.activeCollectionId, toggleBroadcast: false});
+        $state.go('viewCollectionSimple', { collectionId: $scope.activeCollectionId});
         BroadcastService.prepForBroadcast({
             type: 'closeCollectionListView',
             data: {}
