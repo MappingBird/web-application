@@ -321,6 +321,7 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.closeListView = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
+
         BroadcastService.prepForBroadcast({
             type: 'closeCollectionListView',
             data: {}
@@ -332,7 +333,7 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.gotoMapView = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
-        $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
+        $state.go('viewCollection', { collectionId: $scope.activeCollectionId, toggleBroadcast: false});
         // google analytics
         Analytics.registerEvent('Collection', 'Change to Map View', 'Collection List');
     };

@@ -69,7 +69,10 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
                 }
 
                 if (User.data.isLoggedIn == true) {
-                    b();
+                    if ($stateParams.toggleBroadcast != false) {
+                        b();
+                    }
+
                 } else {
                     killHandler = $scope.$on('stateChange', function() {
                         if (BroadcastService.message.type == 'collectionsLoaded' &&
