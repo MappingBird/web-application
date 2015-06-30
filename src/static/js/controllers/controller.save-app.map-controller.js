@@ -338,7 +338,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                             map.panTo(new google.maps.LatLng(point.lat, point.lng));
                                         } else {
                                             // offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
-                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/8));
+                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/4));
                                         }
                                 }
 
@@ -448,7 +448,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                 if ($scope.fullMap) {
                     map.panTo(new google.maps.LatLng(BroadcastService.message.data.lat, BroadcastService.message.data.lng));
                 } else {
-                    offsetCenter(new google.maps.LatLng(BroadcastService.message.data.lat, BroadcastService.message.data.lng), -($('#map').width()/8));
+                    offsetCenter(new google.maps.LatLng(BroadcastService.message.data.lat, BroadcastService.message.data.lng), -($('#map').width()/2));
                 }
 
                 break;
