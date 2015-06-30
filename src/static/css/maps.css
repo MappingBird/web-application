@@ -1483,13 +1483,13 @@ ul.types > li{
 	flex-wrap: wrap;
 }
 .collection-list-view.withCollectionList {
-	left: 360px;
+	left: 380px;
 }
 .collection-listview{
   background-color: rgba(0,0,0,0.1);
   margin: 0;
   height: 100% !important; /* hack for css style */
-  width: 390px;
+  width: 360px;
   list-style: none;
 }
 
@@ -1517,7 +1517,7 @@ ul.types > li{
 
 .collection-listview li .context{
 	float: right;
-	width: 260px;
+	width: 240px;
 	font-weight: 200;
 }
 
@@ -1567,6 +1567,7 @@ ul.types > li{
 }
 .collection-listview .mCSB_draggerRail {
 	background-color: #dddddd !important;
+	width: 6px !important;
 }
 .collection-listview .mCSB_container {
 	margin-right:2px !important; /* it's bad I know */
