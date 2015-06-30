@@ -441,9 +441,9 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
             case 'offsetCenterWhenListview':
                 var oldIdName = BroadcastService.message.data.oldId
                 var idName = BroadcastService.message.data.id;
-                $('#pin-' + oldIdName).removeClass('active');
+                $('#pin-' + oldIdName).removeClass('active').css('zIndex', 999);
                 $('#pin-' + idName + '> a').removeClass('showme');
-                $('#pin-' + idName).addClass('active');
+                $('#pin-' + idName).addClass('active').css('zIndex', google.maps.Marker.MAX_ZINDEX + 1);
 
                 if ($scope.fullMap) {
                     map.panTo(new google.maps.LatLng(BroadcastService.message.data.lat, BroadcastService.message.data.lng));
