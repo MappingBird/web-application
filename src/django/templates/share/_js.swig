@@ -1,1 +1,1 @@
-<script src="/static/js/mappingbird-2b476d9f.js"></script>
+<script src="/static/js/mappingbird-919c59ee.js"></script>
