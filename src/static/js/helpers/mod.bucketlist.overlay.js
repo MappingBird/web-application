@@ -219,19 +219,20 @@ BucketListSmallOverlay.prototype.onAdd = function() {
             if (typeof self.popupClickCallback_ === 'function') {
                 self.popupClickCallback_(posX, posY);
             }
-            $(popup).toggle();
 
             // remove animation showme class
             $(this).removeClass('showme');
 
             // change icon to highlight or toggle remove
             // $(this).parent() is one of the $('.pingismo-pin')
-            if ($(this).parent().hasClass('active')) {
+            if ($(this).parent().hasClass('active') && $(popup).css('display') == 'block') {
               $(this).parent().removeClass('active');
-            } else {
+            } else if (!$(this).parent().hasClass('active')){
               $('.pingismo-pin').removeClass('active');
               $(this).parent().addClass('active');
             }
+
+            $(popup).toggle();
         });
     }
 
