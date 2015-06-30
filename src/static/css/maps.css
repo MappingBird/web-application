@@ -225,9 +225,6 @@ section.map-section{
 	width: calc(100% - 380px);
 	top: 95px;
 }
-#map.collectionAndListView {
-	left: 748px;
-}
 #map.full-tall {
 	height: -moz-calc(100% - 45px);
 	height: -webkit-calc(100% - 45px);

@@ -128,12 +128,8 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     // close collection View
     function closeCollectionView () {
         $scope.collectionsMode = false;
-        if ($scope.listMode) {
-          $scope.semiRetractedMap = true;
-        } else {
-          $scope.semiRetractedMap = false;
-          $scope.fullMap = true;
-        }
+        $scope.semiRetractedMap = false;
+        $scope.fullMap = true;
     }
 
     // list viewing mode
@@ -146,9 +142,9 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.showSavePanel = false;
         $scope.showPointDetailPanel = false;
         $scope.fullTallMap = false;
-        $scope.fullMap = false;
+        // $scope.fullMap = false;
         $scope.mapRetracted = false;
-        $scope.semiRetractedMap = true;
+        // $scope.semiRetractedMap = true; remain
         $scope.halfMap = false;
 
         $scope.listMode = true;
