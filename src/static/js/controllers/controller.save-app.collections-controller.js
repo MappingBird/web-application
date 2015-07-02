@@ -131,6 +131,14 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
                     refreshCollectionPoints($scope.activeCollectionId);
                 }
                 break;
+            case 'viewingCollectionList':
+                if (typeof BroadcastService.message.data.collectionId != 'undefined'
+                    && BroadcastService.message.data.collectionId != -1
+                    && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
+                    $scope.activeCollectionId = BroadcastService.message.data.collectionId;
+                    refreshCollectionPoints($scope.activeCollectionId);
+                }
+                break;
             case 'setSaveCollection':
                 if (typeof BroadcastService.message.data.collectionId != 'undefined'
                     && BroadcastService.message.data.collectionId != -1) {
