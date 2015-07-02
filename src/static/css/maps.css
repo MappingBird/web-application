@@ -1120,6 +1120,7 @@ ul.types > li{
 .collection-list-wrapper .collection-header{
 	position: relative;
 	margin-bottom: 15px;
+	z-index: 99999999; /* no one can cover this header */
 }
 .collection-header .collection-name{
 	line-height: 20px;
