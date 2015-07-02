@@ -104,7 +104,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.semiRetractedMap = false;
         $scope.halfMap = true;
 
-        $scope.listMode = false;
+        // $scope.listMode = false; remain but close collectionsMode
     }
 
     // collection viewing mode
