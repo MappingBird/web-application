@@ -181,7 +181,14 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
             $scope.deleteCollectionName = name;
             $scope.showDeleteCollectionDialog = true;
 
-        } else {
+        } else if ($scope.listMode) {
+          // collection + list view - change collection
+          console.log('viewCollection&List ' + id);
+          $scope.collectionsListVisible = true;
+          $state.go('viewCollectionList', { collectionId: id});
+        }
+        else {
+          // collection view - change collection
             console.log('viewCollection ' + id);
             $scope.collectionsListVisible = false;
             $state.go('viewCollection', { collectionId: id});
