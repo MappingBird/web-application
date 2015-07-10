@@ -619,3 +619,23 @@ def mig_temp2real (request):
         return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
 
     return Response(out)
+
+@api_view(['GET'])
+def is_email_used (request):
+    email = request.GET.get('email')
+    resp = None
+
+    try:
+        u = User.objects.get(email=email)
+        out = {
+            'msg' : "{0} is used".format(email)
+        }
+        resp = Response(out, status=status.HTTP_400_BAD_REQUEST) 
+    except User.DoesNotExist, e:
+        out = {
+            'msg' : str(e) + '({0})'.format(email)
+        }
+        resp =  Response(out, status=status.HTTP_200_OK) 
+    
+
+    return resp
