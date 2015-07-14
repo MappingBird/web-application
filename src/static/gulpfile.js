@@ -26,15 +26,6 @@ gulp.task('copy', function () {
         // .pipe(gulp.dest('../' + stageFile + '/partials'));
 });
 
-gulp.task('swig', function() {
-    gulp.src('./*.swig')
-        .pipe(swig())
-        .pipe(gulp.dest('./'));
-    gulp.src('./partials/*.swig')
-        .pipe(swig())
-        .pipe(gulp.dest('./partials/'));
-});
-
 gulp.task('usemin', [],function () {
     return gulp.src('./**/*.swig')
         .pipe(usemin({
@@ -47,20 +38,17 @@ gulp.task('usemin', [],function () {
         .pipe(gulp.dest('../'+ stageFile + '/'));
 });
 
-gulp.task('copy:swig:regular', ['usemin'], function() {
-    return gulp.src('../' + stageFile + '/!(_)*.swig')
-        .pipe(gulp.dest('../django/templates/'));
-});
-
 gulp.task('copy:swig:share', ['usemin'], function() {
     return gulp.src('../' + stageFile + '/_*.swig')
         .pipe(gulp.dest('../django/templates/share/'));
 });
 
-gulp.task('copy:swig', ['copy:swig:regular', 'copy:swig:share']);
+gulp.task('clean:temp', function (cb) {
+  del(['../' + stageFile], {force: 1}, cb);
+});
 
 gulp.task('clean:js', function(cb) {
-    del(['js/mappingbird-*.js'], cb);
+    del(['js/mappingbird-*.js'],cb);
 });
 
 gulp.task('copy:js', ['usemin', 'clean:js'], function() {
@@ -68,4 +56,4 @@ gulp.task('copy:js', ['usemin', 'clean:js'], function() {
         .pipe(gulp.dest('js/'));
 });
 
-gulp.task('build', ['copy:js', 'copy:swig']);
+gulp.task('build', ['usemin', 'copy:swig:share', 'clean:temp', 'clean:js', 'copy:js']);
