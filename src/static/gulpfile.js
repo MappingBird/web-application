@@ -29,13 +29,13 @@ gulp.task('copy', function () {
 gulp.task('swig', function() {
     gulp.src('./*.swig')
         .pipe(swig())
-        .pipe(gulp.dest('./'))
+        .pipe(gulp.dest('./'));
     gulp.src('./partials/*.swig')
         .pipe(swig())
         .pipe(gulp.dest('./partials/'));
 });
 
-gulp.task('usemin', ['images', 'copy'],function () {
+gulp.task('usemin', [],function () {
     return gulp.src('./**/*.swig')
         .pipe(usemin({
             outputRelativePath: '../',
