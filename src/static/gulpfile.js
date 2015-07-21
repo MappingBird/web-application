@@ -7,6 +7,7 @@ var imagemin = require('gulp-imagemin');
 var rev = require('gulp-rev');
 var swig = require('gulp-swig');
 var del = require('del');
+var runSequence = require('run-sequence');
 var stageFile = 'temp';
 
 // Copy all static images
@@ -38,7 +39,7 @@ gulp.task('usemin', [],function () {
         .pipe(gulp.dest('../'+ stageFile + '/'));
 });
 
-gulp.task('copy:swig:share', ['usemin'], function() {
+gulp.task('copy:swig:share', function() {
     return gulp.src('../' + stageFile + '/_*.swig')
         .pipe(gulp.dest('../django/templates/share/'));
 });
@@ -51,9 +52,11 @@ gulp.task('clean:js', function(cb) {
     del(['js/mappingbird-*.js'],cb);
 });
 
-gulp.task('copy:js', ['usemin', 'clean:js'], function() {
+gulp.task('copy:js', function() {
     return gulp.src('../' + stageFile + '/static/js/*.js')
         .pipe(gulp.dest('js/'));
 });
 
-gulp.task('build', ['clean:temp', 'clean:js', 'usemin', 'copy:swig:share', 'copy:js']);
+gulp.task('build', function () {
+  runSequence('clean:temp', 'clean:js', 'usemin', 'copy:swig:share', 'copy:js');
+});
