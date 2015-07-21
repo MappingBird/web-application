@@ -56,4 +56,4 @@ gulp.task('copy:js', ['usemin', 'clean:js'], function() {
         .pipe(gulp.dest('js/'));
 });
 
-gulp.task('build', ['usemin', 'copy:swig:share', 'clean:temp', 'clean:js', 'copy:js']);
+gulp.task('build', ['clean:temp', 'clean:js', 'usemin', 'copy:swig:share', 'copy:js']);
