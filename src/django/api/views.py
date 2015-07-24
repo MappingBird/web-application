@@ -458,10 +458,40 @@ def places(request):
     out = {}    
     out['places'] = []
 
+    #-- query placeDB only
+    onlyPlaceDB = request.GET.get('onlyPlaceDB')
+    if onlyPlaceDB and 'true' == onlyPlaceDB.lower():
+        q_str = request.GET.get('q')
+#        q_str = "coffee"
+#        print q_str
+        if q_str:
+            b = owl.BarnOwl()
+            points = b.getPointByKeyword(q_str)
+            try:
+                for p in points:
+                    entry = {
+                        'name': p['article_name'],
+                        'address': p['address'],
+                        'coordinates': { 
+                            'lat': float(p['latlng'].split(',')[0]),
+                            'lng': float(p['latlng'].split(',')[1])
+                        },
+                        'url': p['url'],
+                        'image_url': p['image_url'][:5],
+                        'isKnowUrl': True
+                    }
+
+                    out['places'].append(entry)
+            except Exception, e:
+                print e
+
+            return Response(out)
+
     if request.GET.get('url'):
         url = request.GET.get('url')
-        #url = "http://www.ipeen.com.tw/comment/652034"
-        print url
+#        url = 'http://www.ipeen.com.tw/comment/652034'
+#        print url
+
         b = owl.BarnOwl()
         points = b.getPointByUrl(url)
         try:
@@ -471,19 +501,28 @@ def places(request):
                     'address': p['address'],
                     'coordinates': { 
                         'lat': float(p['latlng'].split(',')[0]),
-                        'lng': float(p['latlng'].split(',')[1])
-                    }
+                        'lng': float(p['latlng'].split(',')[1])                        
+                    },
+                    'url': p['url'],
+                    'image_url': p['image_url'][:5],
+                    'isKnowUrl': True
                 }
 
                 out['places'].append(entry)
-                break   
+                break
         except Exception, e:
             print e
 
     if request.GET.get('q'):
         gp = GooglePlaces(settings.GOOGLE_API_KEY)
-        result = gp.text_search(query=request.GET.get('q'))
-###        out['places'] = []
+
+        result = None
+        lang = request.GET.get('language')
+#        print lang
+        if lang:
+            result = gp.text_search(query=request.GET.get('q'), language=lang)
+        else:
+            result = gp.text_search(query=request.GET.get('q'))
 
         for place in result.places:
             place.get_details()
@@ -497,7 +536,9 @@ def places(request):
 
         return Response(out)
 
-    out['error'] = 'No q is provided'
+    if len(out['places']) <= 0:
+        out['error'] = 'No q is provided'
+
     return Response(out)
 
 @api_view(['POST'])
