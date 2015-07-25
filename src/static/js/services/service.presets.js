@@ -8,6 +8,7 @@ mappingbird.services.factory('Presets', function(){
         parseUrl: '/scraper',
         userUrl: '/api/users',
         savePanelVisible: true,
-        mapZoom: 13
+        mapZoom: 13,
+        minZoom: 2
     };
 });

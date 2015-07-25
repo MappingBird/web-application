@@ -12,6 +12,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
         myLatLng = new google.maps.LatLng(lat, lng),
         mapOptions = {
             zoom: Presets.mapZoom,
+            minZoom: Presets.minZoom,
             center: myLatLng,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             panControl: false,
