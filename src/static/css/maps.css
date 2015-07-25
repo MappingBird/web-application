@@ -187,7 +187,7 @@ section.map-section{
 #map {
 	height: 100%;
 	position: absolute;
-	top: 45px;
+	top: 95px;
 	width: 100%;
 	box-shadow: -8px 0 15px rgba(0,0,0,0.6), 8px 0 15px rgba(0,0,0,0.6);
 	background:
