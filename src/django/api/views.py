@@ -470,7 +470,7 @@ def places(request):
             try:
                 for p in points:
                     entry = {
-                        'name': p['article_name'],
+                        'name': p['place_name'][0],
                         'address': p['address'],
                         'coordinates': { 
                             'lat': float(p['latlng'].split(',')[0]),
@@ -497,7 +497,7 @@ def places(request):
         try:
             for p in points:
                 entry = {
-                    'name': p['article_name'],
+                    'name': p['place_name'][0],
                     'address': p['address'],
                     'coordinates': { 
                         'lat': float(p['latlng'].split(',')[0]),
