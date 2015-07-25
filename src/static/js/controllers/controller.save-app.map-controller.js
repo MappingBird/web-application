@@ -345,8 +345,8 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                 // listview mode
                                 if ($scope.listMode) {
                                   // trigger listview
-                                  $('list-' + point.id).trigger('mouseover');
-                                  $('list-' + point.id).trigger('click');
+                                  $('#list-' + point.id).trigger('mouseover');
+                                  $('#list-' + point.id).trigger('click');
                                 }
 
                                 // show point information if point detail panel is already open
