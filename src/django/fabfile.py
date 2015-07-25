@@ -35,10 +35,13 @@ def get_code(stage=False):
         head_hash = run("git ls-remote git@github.com:mariachimike/pingismo.git refs/heads/%s | awk -F' ' '{print $1}'" % branch)
         previous_hash = run("git rev-parse HEAD")
         run('git pull origin %s' % branch)
+        # Ouput Commit Log (no longer use on hipchat)
+        """
         logs_output = run("git --no-pager log --pretty=format:'<a href=\"https://github.com/mariachimike/pingismo/commit/%%H\">%%h</a> - %%an, %%ar: %%s' --graph %s..HEAD" % previous_hash)
         _logs = logs_output.split('\n')
         logs = 'Deploying to %s, here\'s the detail:<br>%s' % (branch, '<br>'.join(_logs))
         notify(logs)
+        """
 
 def copy_db():
     with cd('pingismo/backup'):
