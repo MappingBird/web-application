@@ -343,13 +343,6 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                         }
                                 }
 
-                                // listview mode
-                                if ($scope.listMode) {
-                                  // trigger listview
-                                  $('#list-' + point.id).trigger('mouseover');
-                                  $('#list-' + point.id).trigger('click');
-                                }
-
                                 // show point information if point detail panel is already open
                                 if ($scope.showPointDetailPanel) {
                                     $state.go('viewPoint', { pointId: point.id, collectionId: point.collection});
