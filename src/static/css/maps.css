@@ -1509,6 +1509,8 @@ ul.types > li{
 }
 
 .collection-listview li .thumbnail{
+	background: url('/static/img/apple-touch-icon.png');
+	background-size: 90px;
 	background-position: center center;
 	width: 90px;
 	height: 90px;
