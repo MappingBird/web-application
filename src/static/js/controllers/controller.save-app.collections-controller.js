@@ -193,6 +193,7 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
           // collection + list view - change collection
           console.log('viewCollection&List ' + id);
           $scope.collectionsListVisible = true;
+          $('.collection-name.active').trigger('click'); // trigger - close collection list
           $state.go('viewCollectionList', { collectionId: id});
         }
         else {
