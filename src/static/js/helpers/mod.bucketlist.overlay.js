@@ -238,7 +238,7 @@ BucketListSmallOverlay.prototype.onAdd = function() {
 
     // image
     if (this.image_) {
-        this.tip_.css({backgroundImage: 'url(' + this.image_ + ')'});
+        this.tip_.css({backgroundImage: 'url("' + this.image_ + '")'});
     } else {
       // default
         this.tip_.css({backgroundImage: 'url("../static/img/default_noimages.png")'});
@@ -278,7 +278,7 @@ BucketListSmallOverlay.prototype.setImage = function(imageUrl) {
     // Have to add another attribute in order to get bImage to work
     // TODO: check why
     if (this.tip_ && imageUrl) {
-        this.tip_.css({'backgroundImage': 'url(' + imageUrl + ')'});
+        this.tip_.css({'backgroundImage': 'url("' + imageUrl + '")'});
     }
 
 };
