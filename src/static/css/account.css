@@ -120,6 +120,7 @@ form p.saved{
     font-size: 16px;
     line-height: 1.33;
     border-radius: 6px;
+    margin: 0 2px;
 }
 .signup-action-button{
     margin-bottom: 25px;
@@ -131,6 +132,7 @@ form p.saved{
 .signup-action-button .btn-highlight.pingismo-btn:hover,
 .signup-action-button .btn-mute.pingismo-btn:hover{
     border: 1px solid #33ccff;
+    color: #fff;
 }
 
 /* Angular ------------------------------------------------------------------------------------ */
