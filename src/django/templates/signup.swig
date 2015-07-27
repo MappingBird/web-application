@@ -21,9 +21,9 @@
         <div class="row-fluid">
             <div class="span2"></div>
             <div class="span8">
-                <h1>MappingBird</h1>
+                <h1>Sign Up</h1>
                 <hr>
-                <p class="title">Sign up</p>
+                <!--p class="title">Sign up</p-->
                 <form ng-submit="checkInput()">
                     <div class="control-group">
                         <input type="email" placeholder="Email address" name="email" ng-model="email" required autofocus />
@@ -39,7 +39,7 @@
                     </div>
 
                     <div>
-                        By creating an account, I accept MappingBird's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+                        By creating an account, I accept MappingBird's <a href="#">Terms of Service</a>. Don’t worry. <i>We don’t spam you or make your email public</i>.
                     </div>
                     <div class="action-button">
                         <input class="btn btn-giant btn-primary pingismo-btn" type="submit" value="Create Your Account">
@@ -53,20 +53,19 @@
         <div class="row-fluid">
             <div class="span2"></div>
             <div class="span8">
-                <h1>MappingBird</h1>
+                <h1>Account created!</h1>
                 <hr>
                 <p class="title">
                     <span><img src="/static/img/smile.png" /></span>
-                    Account created!
                 </p>
                 <form>
                     <div>
-                        <p class="fresh">Great! Now, click "<strong>Get MappingBird for Chrome</strong>" below to install Chrome extension.</p>
+                        <p class="fresh">Great! Now, click "<strong>Get MappingBird for Chrome</strong>" below to connect MappingBird with your browser.</p>
                         <p class="saved">Congratulations! Your account has been created. Click "<strong>View Map</strong>" to see your own map and the places you just saved.</p>
                     </div>
                     <div class="action-button">
-                        <a class="btn-highlight pingismo-btn btn-block" ng-click="installExtension()">Get MappingBird for Chrome</a>
                         <a class="btn-grey pingismo-btn btn-block" href="http://lonelyplanet.com/france/paris/sights/landmarks-monuments/eiffel-tower?ref=mptutorial">I've done it, Take me a tour</a>
+                        <a class="btn-highlight pingismo-btn btn-block" ng-click="installExtension()">Get MappingBird for Chrome</a>
                     </div>
                 </form>
             </div>
