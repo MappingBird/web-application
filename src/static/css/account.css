@@ -115,6 +115,24 @@ form p.saved{
 	display: none;
 }
 
+.signup-action-button.pingismo-btn{
+    padding: 10px 16px;
+    font-size: 16px;
+    line-height: 1.33;
+    border-radius: 6px;
+}
+.signup-action-button{
+    margin-bottom: 25px;
+}
+.signup-action-button.btn-highlight.pingismo-btn,
+.signup-action-button.btn-mute.pingismo-btn{
+    border: 1px solid #01a9e7;
+}
+.signup-action-button.btn-highlight.pingismo-btn:hover,
+.signup-action-button.btn-mute.pingismo-btn:hover{
+    border: 1px solid #33ccff;
+}
+
 /* Angular ------------------------------------------------------------------------------------ */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
