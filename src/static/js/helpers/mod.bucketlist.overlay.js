@@ -217,7 +217,7 @@ BucketListSmallOverlay.prototype.onAdd = function() {
                 posY = $(this).offset().top;
 
             if (typeof self.popupClickCallback_ === 'function') {
-                self.popupClickCallback_(posX, posY);
+                self.popupClickCallback_(e, posX, posY);
             }
 
             // remove animation showme class

@@ -317,7 +317,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                             };
                         })($scope.activeViewPoints[len]),
                         (function(point) {
-                            return function(x, y) {
+                            return function(e, x, y) {
                                 if (activePoint && activePoint !== point.id && viewOverlays[activePoint]) {
                                     viewOverlays[activePoint].hidePopup();
                                 }
@@ -349,6 +349,14 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                     // google analytics
                                     Analytics.registerEvent('Point', 'View point detail', 'Map');
                                 }
+
+                                // human click trigger listview change
+                                if (e.originalEvent !== undefined) {
+                                  BroadcastService.prepForBroadcast({
+                                      type: 'selectListByPoint',
+                                      data: { id: point.id }
+                                  });
+                                };
 
                                 return false;
                             };

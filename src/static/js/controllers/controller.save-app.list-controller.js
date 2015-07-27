@@ -21,6 +21,11 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
         switch (BroadcastService.message.type) {
             case 'listMode':
                 break;
+            case 'selectListByPoint':
+              $timeout(function () {
+                selectListByPoint(BroadcastService.message.data.id);
+              });
+              break;
         }
     });
 
@@ -29,20 +34,19 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
       console.log('popupPin', id, clickId);
       e.preventDefault();
 
-      if (clickId && id[0][0] == clickId[0][0]) { // don't know why [0][0]
+      if (clickId && id == clickId) {
         console.log('repeated click');
         return;
       }
       $scope.isSelected = id; // toggle isSelected class
 
-      $('#pin-' + id).removeClass('active'); // remove popup style first
-
       var idName = 'pin-' + id;
+      $('#' + idName).removeClass('active'); // remove popup style first
       $('#' + idName + ' > a').trigger('click');
 
       // prepare for next time click popup
       clickId = id;
-      if (hoverId && clickId[0][0] == hoverId[0][0]) {
+      if (hoverId && clickId == hoverId) {
         hoverId = null;
       }
     };
@@ -62,10 +66,33 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
       });
 
       // prepare for next time
-      if (clickId && id[0][0] == clickId[0][0]) {
+      if (clickId && id == clickId) {
         hoverId = null;
       } else {
         hoverId = id;
+      }
+
+    };
+
+    /*
+     In listview mode,
+     when user select the point,
+     trigger the listview change
+    */
+    var selectListByPoint = function (id) {
+      // unselect
+      if (id == $scope.isSelected) {
+        hoverId = null;
+        clickId = null;
+        $scope.isSelected = null;
+      } else {
+        // select
+        $scope.isSelected = id;
+        clickId = id;
+        hoverId = id;
+
+        // scroll listview
+        $('.collection-listview').mCustomScrollbar('scrollTo', '#list-' + id,{scrollInertia: 300});
       }
 
     };
