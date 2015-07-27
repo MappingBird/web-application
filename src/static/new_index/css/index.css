@@ -99,6 +99,7 @@ a.btn-primary.mb-play{
 }
 .mb-intro-actions .btn{
 	margin: 0 5px;
+	width: 240px;
 }
 .mb-intro-actions .btn-default{
 	background-color: transparent;
