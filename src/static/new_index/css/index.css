@@ -13,6 +13,7 @@ section.intro{
 	background: url('../images/index_banner.jpg') center center no-repeat;
 	background-size: cover;
 	height: 100%;
+	position: relative;
 }
 section.what .row{
 	margin: 0;
@@ -81,6 +82,10 @@ button.mb-signin .mdi:before{font-size: 18px!important;}
 	color: #fff;
 	text-align: center;
 	font-weight: 300;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 0 120px;
 }
 .jumbotron {
 	background-color: transparent;
@@ -95,7 +100,7 @@ a.btn-primary.mb-play{
 
 /* Intro */
 .mb-intro-actions{
-	margin-top: 28px;
+	margin-top: 0;
 }
 .mb-intro-actions .btn{
 	margin: 0 5px;
@@ -110,6 +115,11 @@ a.btn-primary.mb-play{
 	color: #01a9e7;
 	border-color: #01a9e7;
 }
+#watch-video-button:hover{
+	background-color: #3276b1;
+	color: #fff;
+	border: #3276b1;
+}
 #watch-video-button span{
 	background-color: #01a9e7;
 	border-radius: 15px;
@@ -122,9 +132,12 @@ a.btn-primary.mb-play{
 #watch-video-button span i{
 	line-height: 0;
 }
+#watch-video-button:hover span i{
+	color: #3276b1;
+}
 .learnmore_wrapper{
 	color: #fff;
-	margin-top: 60px;
+	margin-top: 80px;
 	display: block;
 }
 .learnmore_wrapper:hover{
@@ -132,7 +145,7 @@ a.btn-primary.mb-play{
 }
 .learnmore_wrapper .learnmore_arrow{
 	background: url('../images/learnmore_arrow.png') 0 0 no-repeat;
-	width: 45px;
+	width: 60px;
 	height: 31px;
 	margin: 0 auto;
 }
