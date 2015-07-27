@@ -140,7 +140,7 @@ a.btn-primary.mb-play{
 	margin-top: 60px;
 	display: block;
 }
-.learnmore_wrapper:hover{
+.learnmore_wrapper:hover, .learnmore_wrapper:active{
 	color: #fff;
 }
 .learnmore_wrapper .learnmore_arrow{
