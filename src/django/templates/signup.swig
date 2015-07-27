@@ -63,11 +63,11 @@
                         <p class="fresh">Great! Now, click "<strong>Get MappingBird for Chrome</strong>" below to connect MappingBird with your browser.</p>
                         <p class="saved">Congratulations! Your account has been created. Click "<strong>View Map</strong>" to see your own map and the places you just saved.</p>
                     </div>
-                    <div class="action-button">
-                        <a class="btn-grey pingismo-btn btn-block" href="http://lonelyplanet.com/france/paris/sights/landmarks-monuments/eiffel-tower?ref=mptutorial">I've done it, Take me a tour</a>
-                        <a class="btn-highlight pingismo-btn btn-block" ng-click="installExtension()">Get MappingBird for Chrome</a>
-                    </div>
                 </form>
+                <div class="signup-action-button">
+                    <a class="btn btn-lg btn-default" href="http://lonelyplanet.com/france/paris/sights/landmarks-monuments/eiffel-tower?ref=mptutorial">I've done it, Take me a tour</a>
+                    <a class="btn btn-lg btn-primary" ng-click="installExtension()">Get MappingBird for Chrome</a>
+                </div>
             </div>
             <div class="span2"></div>
         </div>
