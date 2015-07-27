@@ -85,7 +85,7 @@ button.mb-signin .mdi:before{font-size: 18px!important;}
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	padding: 0 120px;
+	padding: 0 120px 6px;
 }
 .jumbotron {
 	background-color: transparent;
@@ -118,7 +118,7 @@ a.btn-primary.mb-play{
 #watch-video-button:hover{
 	background-color: #3276b1;
 	color: #fff;
-	border: #3276b1;
+	border-color: #3276b1;
 }
 #watch-video-button span{
 	background-color: #01a9e7;
@@ -137,7 +137,7 @@ a.btn-primary.mb-play{
 }
 .learnmore_wrapper{
 	color: #fff;
-	margin-top: 80px;
+	margin-top: 60px;
 	display: block;
 }
 .learnmore_wrapper:hover{
