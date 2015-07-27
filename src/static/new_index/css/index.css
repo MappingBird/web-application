@@ -127,9 +127,12 @@ a.btn-primary.mb-play{
 	margin-top: 60px;
 	display: block;
 }
+.learnmore_wrapper:hover{
+	color: #fff;
+}
 .learnmore_wrapper .learnmore_arrow{
 	background: url('../images/learnmore_arrow.png') 0 0 no-repeat;
-	width: 60px;
+	width: 45px;
 	height: 31px;
 	margin: 0 auto;
 }
