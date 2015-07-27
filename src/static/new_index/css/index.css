@@ -281,7 +281,7 @@ section.how .right.carousel-control>span{right: 12px;}
 	.jumbotron{
 		padding: 0px;
 	}
-	.mb-hero{padding: 0; bottom: 5%;}
+	.mb-hero{padding: 0 25px; bottom: 5%;}
 	section.intro h1, section.how h1{font-size: 32px;}
 	.jumbotron p{font-size: 12px;}
 	.mb-intro-actions{display: none;}
