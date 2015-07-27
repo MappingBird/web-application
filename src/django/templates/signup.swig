@@ -65,8 +65,8 @@
                     </div>
                 </form>
                 <div class="signup-action-button">
-                    <a class="btn btn-lg btn-default" href="http://lonelyplanet.com/france/paris/sights/landmarks-monuments/eiffel-tower?ref=mptutorial">I've done it, Take me a tour</a>
-                    <a class="btn btn-lg btn-primary" ng-click="installExtension()">Get MappingBird for Chrome</a>
+                    <a class="btn-mute pingismo-btn" href="http://lonelyplanet.com/france/paris/sights/landmarks-monuments/eiffel-tower?ref=mptutorial">I've done it, Take me a tour</a>
+                    <a class="btn-highlight pingismo-btn" ng-click="installExtension()">Get MappingBird for Chrome</a>
                 </div>
             </div>
             <div class="span2"></div>
