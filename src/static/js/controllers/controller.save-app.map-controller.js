@@ -302,7 +302,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                         if ($scope.fullMap) {
                                             map.panTo(new google.maps.LatLng(point.lat, point.lng));
                                         } else {
-                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
+                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/8));
                                         }
 
                                     $('#map').off('transitionend.' + point.id);
@@ -336,11 +336,11 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                     y - mapOffsetTop < popupHeight
                                     ) {
                                     if ($scope.fullMap) {
-                                            map.panTo(new google.maps.LatLng(point.lat, point.lng));
-                                        } else {
-                                            // offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
-                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/8));
-                                        }
+                                        map.panTo(new google.maps.LatLng(point.lat, point.lng));
+                                    } else {
+                                        // offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
+                                        offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/8));
+                                    }
                                 }
 
                                 // show point information if point detail panel is already open
