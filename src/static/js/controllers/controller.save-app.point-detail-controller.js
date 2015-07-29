@@ -122,7 +122,12 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
     $scope.closePoint = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
-        $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
+        if ($scope.listMode) {
+          $state.go('viewCollectionList', { collectionId: $scope.activeCollectionId});
+        } else {
+          $state.go('viewCollection', { collectionId: $scope.activeCollectionId});
+        }
+
     };
 
     $scope.setPointType = function($e, t){

@@ -18,22 +18,22 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     }
 
     // full map mode, no collections
-    function fullMapViewingMode () {
-        changeMapParams();
-        $scope.mapMode = true;
-        $scope.saveMode = false;
-        $scope.collectionsMode = false;
-        $scope.showCollectionList = false;
-        $scope.showSavePanel = false;
-        $scope.showPointDetailPanel = false;
-        $scope.fullTallMap = true;
-        $scope.fullMap = false;
-        $scope.mapRetracted = false;
-        $scope.semiRetractedMap = false;
-        $scope.halfMap = false;
-
-        $scope.listMode = false;
-    }
+    // function fullMapViewingMode () {
+    //     changeMapParams();
+    //     $scope.mapMode = true;
+    //     $scope.saveMode = false;
+    //     $scope.collectionsMode = false;
+    //     $scope.showCollectionList = false;
+    //     $scope.showSavePanel = false;
+    //     $scope.showPointDetailPanel = false;
+    //     $scope.fullTallMap = true;
+    //     $scope.fullMap = false;
+    //     $scope.mapRetracted = false;
+    //     $scope.semiRetractedMap = false;
+    //     $scope.halfMap = false;
+    //
+    //     $scope.listMode = false;
+    // }
 
     // map viewing mode
     function mapViewingMode () {
@@ -104,7 +104,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.semiRetractedMap = false;
         $scope.halfMap = true;
 
-        $scope.listMode = false;
+        // $scope.listMode = false; remain but close collectionsMode
     }
 
     // collection viewing mode
@@ -122,25 +122,43 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.semiRetractedMap = true;
         $scope.halfMap = false;
 
-        $scope.listMode = false;
+        // $scope.listMode = false; remain the same
+    }
+
+    // close collection View
+    function closeCollectionView () {
+        $scope.collectionsMode = false;
+        $scope.semiRetractedMap = false;
+        $scope.fullMap = true;
     }
 
     // list viewing mode
     function listViewingMode() {
         changeMapParams();
-        $scope.mapMode = true;
+        $scope.mapMode = false;
         $scope.saveMode = false;
-        $scope.collectionsMode = false;
+        // $scope.collectionsMode = false; remain
         $scope.showCollectionList = true;
         $scope.showSavePanel = false;
         $scope.showPointDetailPanel = false;
         $scope.fullTallMap = false;
-        $scope.fullMap = true;
+        // $scope.fullMap = false;
         $scope.mapRetracted = false;
-        $scope.semiRetractedMap = false;
+        // $scope.semiRetractedMap = true; remain
         $scope.halfMap = false;
 
         $scope.listMode = true;
+    }
+
+    // close list View
+    function closeListView () {
+        $scope.listMode = false;
+        if ($scope.collectionsMode) {
+          $scope.semiRetractedMap = true;
+        } else {
+          $scope.semiRetractedMap = false;
+          $scope.fullMap = true;
+        }
     }
 
     function reloadCollections(isFirstTime) {
@@ -199,6 +217,9 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
             case 'viewingCollectionList':
                 listViewingMode();
                 break;
+            case 'closeCollectionListView':
+                closeListView();
+                break;
             case 'viewSearchResults':
             case 'pointViewingMode':
                 searchResultsMode();
@@ -211,6 +232,9 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
                 break;
             case 'viewingCollections':
                 collectionViewingMode();
+                break;
+            case 'closeCollections':
+                closeCollectionView();
                 break;
             case 'userLoaded':
                 if (Collections.collections && Collections.collections.length == 0) {

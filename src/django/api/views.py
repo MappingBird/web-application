@@ -458,21 +458,54 @@ def places(request):
     out = {}
     out['places'] = []
 
+    #-- query placeDB only
+    onlyPlaceDB = request.GET.get('onlyPlaceDB')
+    if onlyPlaceDB and 'true' == onlyPlaceDB.lower():
+        q_str = request.GET.get('q')
+#        q_str = "coffee"
+#        print q_str
+        if q_str:
+            b = owl.BarnOwl()
+            points = b.getPointByKeyword(q_str)
+            try:
+                for p in points:
+                    entry = {
+                        'name': p['place_name'][0],
+                        'address': p['address'],
+                        'coordinates': { 
+                            'lat': float(p['latlng'].split(',')[0]),
+                            'lng': float(p['latlng'].split(',')[1])
+                        },
+                        'url': p['url'],
+                        'image_url': p['image_url'][:5],
+                        'isKnowUrl': True
+                    }
+
+                    out['places'].append(entry)
+            except Exception, e:
+                print e
+
+            return Response(out)
+
     if request.GET.get('url'):
         url = request.GET.get('url')
-        #url = "http://www.ipeen.com.tw/comment/652034"
-        print url
+#        url = 'http://www.ipeen.com.tw/comment/652034'
+#        print url
+
         b = owl.BarnOwl()
         points = b.getPointByUrl(url)
         try:
             for p in points:
                 entry = {
-                    'name': p['article_name'],
+                    'name': p['place_name'][0],
                     'address': p['address'],
                     'coordinates': {
                         'lat': float(p['latlng'].split(',')[0]),
-                        'lng': float(p['latlng'].split(',')[1])
-                    }
+                        'lng': float(p['latlng'].split(',')[1])                        
+                    },
+                    'url': p['url'],
+                    'image_url': p['image_url'][:5],
+                    'isKnowUrl': True
                 }
 
                 out['places'].append(entry)
@@ -482,8 +515,14 @@ def places(request):
 
     if request.GET.get('q'):
         gp = GooglePlaces(settings.GOOGLE_API_KEY)
-        result = gp.text_search(query=request.GET.get('q'))
-###        out['places'] = []
+
+        result = None
+        lang = request.GET.get('language')
+#        print lang
+        if lang:
+            result = gp.text_search(query=request.GET.get('q'), language=lang)
+        else:
+            result = gp.text_search(query=request.GET.get('q'))
 
         for place in result.places:
             place.get_details()
@@ -497,7 +536,9 @@ def places(request):
 
         return Response(out)
 
-    out['error'] = 'No q is provided'
+    if len(out['places']) <= 0:
+        out['error'] = 'No q is provided'
+
     return Response(out)
 
 @api_view(['POST'])
@@ -578,21 +619,24 @@ def mig_temp2real (request):
         o = json.loads(request.body)
         if 'temp_email' not in o or 'email' not in o or 'temp_password' not in o or 'password' not in o:
             raise ValueError('request parses error, e.g. {"temp_email":"...", "temp_password":"...", "email":"...", "password":"..."}')
-
+        
         acc = o['email'].strip()
         pwd = o['password'].strip()
         if len(pwd) <= 0 or len(acc) <= 0:
             raise ValueError('invalid Email or Password')
-
-        #-- sign-up new account
+        #-- sign-up the new account
         payload = {'email' : acc, 'password' : pwd} 
         url = urlparse(request.build_absolute_uri())
         apiRoot = "{0}://{1}".format(url[0], url[1])
         r = requests.post("{0}/api/users".format(apiRoot), data=payload)
         if 201 != r.status_code :
             raise ValueError('password error or {0} has already been used'.format(acc))
- 
-        ######TODO... migrate Collection and Point from temp_email to email
+
+        #-- move collections from temp to real account
+        tmp_acc = o['temp_email'].strip()
+        u = User.objects.get(email=acc)
+        u_tmp = User.objects.get(email=tmp_acc)
+        u.collection_set = u_tmp.collection_set.all()
        
         out = {
             'email' : acc,
@@ -600,6 +644,39 @@ def mig_temp2real (request):
             'status' : 'migration ok'
         }
     except ValueError, e:
-        return Response(str(e), status=status.HTTP_400_BAD_REQUEST) 
+        err_out = {
+            'error' : str(e)
+        }
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
+    except User.DoesNotExist, e:
+        err_out = {
+            'error' : str(e)
+        }
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
+    except:
+        err_out = {
+            'error' : str("unexpected error")
+        }
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
 
     return Response(out)
+
+@api_view(['GET'])
+def is_email_used (request):
+    email = request.GET.get('email')
+    resp = None
+
+    try:
+        u = User.objects.get(email=email)
+        out = {
+            'msg' : "{0} is used".format(email)
+        }
+        resp = Response(out, status=status.HTTP_400_BAD_REQUEST) 
+    except User.DoesNotExist, e:
+        out = {
+            'msg' : str(e) + '({0})'.format(email)
+        }
+        resp =  Response(out, status=status.HTTP_200_OK) 
+    
+
+    return resp

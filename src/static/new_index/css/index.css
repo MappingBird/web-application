@@ -13,6 +13,7 @@ section.intro{
 	background: url('../images/index_banner.jpg') center center no-repeat;
 	background-size: cover;
 	height: 100%;
+	position: relative;
 }
 section.what .row{
 	margin: 0;
@@ -81,6 +82,10 @@ button.mb-signin .mdi:before{font-size: 18px!important;}
 	color: #fff;
 	text-align: center;
 	font-weight: 300;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 0 120px 6px;
 }
 .jumbotron {
 	background-color: transparent;
@@ -95,10 +100,11 @@ a.btn-primary.mb-play{
 
 /* Intro */
 .mb-intro-actions{
-	margin-top: 28px;
+	margin-top: 0;
 }
 .mb-intro-actions .btn{
 	margin: 0 5px;
+	width: 240px;
 }
 .mb-intro-actions .btn-default{
 	background-color: transparent;
@@ -108,6 +114,40 @@ a.btn-primary.mb-play{
 .mb-intro-actions .btn-default:hover{
 	color: #01a9e7;
 	border-color: #01a9e7;
+}
+#watch-video-button:hover{
+	background-color: #3276b1;
+	color: #fff;
+	border-color: #3276b1;
+}
+#watch-video-button span{
+	background-color: #01a9e7;
+	border-radius: 15px;
+	padding: 0 1px 2px;
+	margin-left: 2px;
+}
+#watch-video-button:hover span{
+	background-color: #fff;
+}
+#watch-video-button span i{
+	line-height: 0;
+}
+#watch-video-button:hover span i{
+	color: #3276b1;
+}
+.learnmore_wrapper{
+	color: #fff;
+	margin-top: 60px;
+	display: block;
+}
+.learnmore_wrapper:hover, .learnmore_wrapper:active, .learnmore_wrapper:visited{
+	color: #fff;
+}
+.learnmore_wrapper .learnmore_arrow{
+	background: url('../images/learnmore_arrow.png') 0 0 no-repeat;
+	width: 60px;
+	height: 31px;
+	margin: 0 auto;
 }
 
 /* What It Is */
@@ -207,6 +247,7 @@ section.how .right.carousel-control>span{right: 12px;}
 }
 
 /* Responsive */
+/* Screen width 801~1200 */
 @media only screen and (min-width: 801px) and (max-width: 1200px){
 	section.how {height: 540px;}
 	section.how .carousel-wrapper{background-size: 520px; margin-top: -80px;}
@@ -214,8 +255,11 @@ section.how .right.carousel-control>span{right: 12px;}
 	section.how .carousel-inner{bottom: 90px;}
 	section.how .item img.ng-scope{ width: 480px; margin-right: 4px!important;}
 	section.how .carousel-caption{width: 375px;}
+	.mb-hero{padding: 0 20px 6px;}
 }
-@media only screen and (min-width: 500px) and (max-width: 800px){
+
+/* Screen width 501~800 */
+@media only screen and (min-width: 501px) and (max-width: 800px){
 	body{ font-size: 14px;}
 	section.intro{
 		height: 360px;
@@ -237,9 +281,11 @@ section.how .right.carousel-control>span{right: 12px;}
 	.jumbotron{
 		padding: 0px;
 	}
+	.mb-hero{padding: 0 25px; bottom: 5%;}
 	section.intro h1, section.how h1{font-size: 32px;}
 	.jumbotron p{font-size: 12px;}
 	.mb-intro-actions{display: none;}
+	.learnmore_wrapper{display:none;}
 	.vertical-align.mb-hero{top: 30%;}
 	section.what h2, section.follow-us h2{
 		margin-top: 10px;
@@ -282,6 +328,7 @@ section.how .right.carousel-control>span{right: 12px;}
 	footer.mb-footer .container-fluid .row:first-child{margin-bottom: 12px;}
 }
 
+/* Screen width < 500 */
 @media only screen and (max-width: 500px){
 	body{ font-size: 12px;}
 	section.intro{
@@ -304,9 +351,11 @@ section.how .right.carousel-control>span{right: 12px;}
 	.jumbotron{
 		padding: 0px;
 	}
+	.mb-hero{padding: 0; bottom: 5%;}
 	section.intro h1, section.how h1{font-size: 24px;}
 	.jumbotron p{font-size: 12px;}
 	.mb-intro-actions{display: none;}
+	.learnmore_wrapper{display:none;}
 	.vertical-align.mb-hero{top: 30%;}
 	section.what h2, section.follow-us h2{
 		margin-top: 10px;

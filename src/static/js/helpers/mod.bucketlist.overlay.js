@@ -125,7 +125,7 @@ BucketListSmallOverlay.prototype.constructor = BucketListSmallOverlay;
 // Overlay for Google maps
 // https://developers.google.com/maps/documentation/javascript/overlays#CustomOverlays
 // Requires jQuery, Google Maps
-function BucketListSmallOverlay(bounds, zoom, image, map, latlng, type, name, address, phone, defaultState, overlayType, callback, popupClickCallback) {
+function BucketListSmallOverlay(bounds, zoom, image, map, id, latlng, type, name, address, phone, defaultState, overlayType, callback, popupClickCallback) {
     // console.log('BucketListSmallOverlay');
 
     // Now initialize all properties.
@@ -136,6 +136,7 @@ function BucketListSmallOverlay(bounds, zoom, image, map, latlng, type, name, ad
     this.placeName_ = name;
     this.placeAddress_ = address;
     this.placePhone_ = phone;
+    this.id_ = id;
     this.latlng_ = latlng;
     this.type_ = type;
     this.defaultState_ = defaultState || 'open';
@@ -163,7 +164,7 @@ BucketListSmallOverlay.prototype.onAdd = function() {
     // the overlay to the map via the DOM.
     console.log('add new small overlay');
 
-    var div = $('<div class="pingismo-pin" />'),
+    var div = $('<div class="pingismo-pin" id="pin-' + this.id_ + '"/>'),
         icon = $('<a href="#" class="pin-' + this.type_ + '" title="' + this.placeName_ + '"></a>'),
         tip = $('<a href="javascript:void(0);" class="pin-popup-img show-details-btn"></a>'),
         popup = $('<div class="pin-popup" />'),
@@ -216,27 +217,28 @@ BucketListSmallOverlay.prototype.onAdd = function() {
                 posY = $(this).offset().top;
 
             if (typeof self.popupClickCallback_ === 'function') {
-                self.popupClickCallback_(posX, posY);
+                self.popupClickCallback_(e, posX, posY);
             }
-            $(popup).toggle();
 
             // remove animation showme class
             $(this).removeClass('showme');
-            
+
             // change icon to highlight or toggle remove
             // $(this).parent() is one of the $('.pingismo-pin')
-            if ($(this).parent().hasClass('active')) {
+            if ($(this).parent().hasClass('active') && $(popup).css('display') == 'block') {
               $(this).parent().removeClass('active');
-            } else {
+            } else if (!$(this).parent().hasClass('active')){
               $('.pingismo-pin').removeClass('active');
               $(this).parent().addClass('active');
             }
+
+            $(popup).toggle();
         });
     }
 
     // image
     if (this.image_) {
-        this.tip_.css({backgroundImage: 'url(' + this.image_ + ')'});
+        this.tip_.css({backgroundImage: 'url("' + this.image_ + '")'});
     } else {
       // default
         this.tip_.css({backgroundImage: 'url("../static/img/default_noimages.png")'});
@@ -276,7 +278,7 @@ BucketListSmallOverlay.prototype.setImage = function(imageUrl) {
     // Have to add another attribute in order to get bImage to work
     // TODO: check why
     if (this.tip_ && imageUrl) {
-        this.tip_.css({'backgroundImage': 'url(' + imageUrl + ')'});
+        this.tip_.css({'backgroundImage': 'url("' + imageUrl + '")'});
     }
 
 };
@@ -336,7 +338,7 @@ BucketListSmallOverlay.prototype.onRemove = function() {
 BucketListMessageOverlay.prototype = new BucketListOverlay();
 BucketListMessageOverlay.prototype.constructor = BucketListMessageOverlay;
 
-function BucketListMessageOverlay(bounds, zoom, map, latlng, type, title, message) {
+function BucketListMessageOverlay(bounds, zoom, map, id, latlng, type, title, message) {
     //console.log('BucketListSmallOverlay');
 
     // Now initialize all properties.
@@ -488,7 +490,7 @@ BucketListLargeOverlay.prototype.onAdd = function() {
     if (true) {
         $(div[0]).prepend(tip);
         $(tip).on('click', { bounds: this.bounds_, zoom: this.zoom_, image: this.image_, map: this.map_, latlng: this.latlng_, name: this.placeName_, address: this.placeAddress_, phone: this.placePhone_, point: this.point_, markerArray: this.markerArray_ }, function(e){
-            self.markerArray_.push(new BucketListSmallOverlay(e.data.bounds, e.data.zoom, e.data.image, e.data.map, e.data.latlng, e.data.name, e.data.address, e.data.phone, e.data.point, e.data.markerArray));
+            self.markerArray_.push(new BucketListSmallOverlay(e.data.bounds, e.data.zoom, e.data.image, e.data.map, e.data.id, e.data.latlng, e.data.name, e.data.address, e.data.phone, e.data.point, e.data.markerArray));
             if (self.getMap()) {
                 self.setMap(null);
             }

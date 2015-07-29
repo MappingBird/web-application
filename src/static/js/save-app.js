@@ -82,6 +82,13 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
 
             }]
         })
+        .state('viewCollectionSimple', {
+            url: '/collection/:collectionId',
+            template: '<span></span>',
+            controller: ['BroadcastService', 'User', '$stateParams', '$scope', function(BroadcastService, User, $stateParams, $scope) {
+                // just simple do nothing after state change
+            }]
+        })
         .state('viewCollectionList', {
             url: '/collection/:collectionId/list',
             template: '<span></span>',

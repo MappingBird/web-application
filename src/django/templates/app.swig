@@ -69,7 +69,7 @@
     <!-- End of alert -->
 
     <!-- Google maps -->
-    <div id="map" ng-class="{retracted: mapRetracted, 'full-tall': fullTallMap, full: fullMap, half: halfMap, 'semi-retracted': semiRetractedMap}" ng-show="mapVisible && !listMode" ng-controller="mapController"></div>
+    <div id="map" ng-class="{retracted: mapRetracted, 'full-tall': fullTallMap, full: fullMap, half: halfMap, 'semi-retracted': semiRetractedMap}" ng-show="mapVisible" ng-controller="mapController"></div>
     <!-- End of Google maps -->
 
     <!-- external map alert -->
@@ -99,7 +99,7 @@
     <!-- End of map dialog -->
 
     <!-- List view -->
-    <div class="collection-list-view" ng-show="listMode" ng-controller="listController" collection-list-view></div>
+    <div class="collection-list-view" ng-show="listMode" ng-class="{ withCollectionList: collectionsMode}" ng-controller="listController" collection-list-view></div>
     <!-- End of List view -->
 
     <!-- Massive Alert -->

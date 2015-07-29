@@ -24,3 +24,4 @@ python-google-places==0.12.1
 python-openid==2.2.5
 requests==2.4.3
 requests-oauthlib==0.4.2
+uservoice==0.0.20

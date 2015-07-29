@@ -1,3 +1,4 @@
+//initialize
 mappingbird.IndexApp = angular.module('IndexApp', ['Initialization', 'ui.router']);
 
 // Routing

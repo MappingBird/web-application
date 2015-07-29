@@ -187,7 +187,7 @@ section.map-section{
 #map {
 	height: 100%;
 	position: absolute;
-	top: 45px;
+	top: 95px;
 	width: 100%;
 	box-shadow: -8px 0 15px rgba(0,0,0,0.6), 8px 0 15px rgba(0,0,0,0.6);
 	background:
@@ -225,7 +225,6 @@ section.map-section{
 	width: calc(100% - 380px);
 	top: 95px;
 }
-
 #map.full-tall {
 	height: -moz-calc(100% - 45px);
 	height: -webkit-calc(100% - 45px);
@@ -1121,6 +1120,7 @@ ul.types > li{
 .collection-list-wrapper .collection-header{
 	position: relative;
 	margin-bottom: 15px;
+	z-index: 99999999; /* no one can cover this header */
 }
 .collection-header .collection-name{
 	line-height: 20px;
@@ -1182,31 +1182,26 @@ ul.types > li{
 	font-size: 12px;
 	margin-left: 5px;
 }
-.collection-header .list-view,
-.collection-header .map-view{
+.collection-header .list-view{
 	font-size: 12px;
 	display: inline-block;
 	height: 14px;
-	padding-left: 18px;
+	padding: 5px 15px 5px 35px;
+	border-radius: 3px;
 	color: #fff;
-	opacity: .3;
-	filter: alpha(opacity=30);
-	margin: 10px 0 0 15px;
-	line-height: 14px;
-}
-.collection-header .list-view{
-	background: url(../img/icon-list-view.png) 0 0 no-repeat;
-}
-.collection-header .map-view{
-	background: url(../img/icon-map-view.png) 0 0 no-repeat;
-}
-.collection-header .list-view:hover,
-.collection-header .map-view:hover,
-.collection-header .list-view.active,
-.collection-header .map-view.active{
 	opacity: 1;
 	filter: alpha(opacity=100);
 	text-decoration: none;
+	margin: 3px 0 0 0;
+	line-height: 16px;
+}
+.collection-header .list-view{
+	background: url(../img/icon-list-view.png) 10px 2px no-repeat;
+	background-color: #707070;
+}
+
+.collection-header .list-view.active{
+	background-color: #01A9E7;
 }
 .collection-list-wrapper .nav{
 	width: 350px;
@@ -1453,7 +1448,23 @@ ul.types > li{
 	margin-top: 10px;
 }
 
+.icon-clock {
+	background: transparent url(../img/icon-clock.png) 0 -32px no-repeat;
+	display: inline-block;
+	height: 16px;
+	margin-top: 0;
+	margin-bottom: 0;
+	width: 16px;
+}
 
+.item-pin.scenicspot { background-image: url(../img/pin-scenicspot.png); }
+.item-pin.restaurant { background-image: url(../img/pin-restaurant.png); }
+.item-pin.hotel { background-image: url(../img/pin-hotel.png); }
+.item-pin.mall { background-image: url(../img/pin-mall.png); }
+.item-pin.bar { background-image: url(../img/pin-bar.png); }
+.item-pin.misc { background-image: url(../img/pin-misc.png); }
+
+/* New collection list view template style */
 .collection-list-view {
 	align-content: flex-start;
 	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
@@ -1466,101 +1477,105 @@ ul.types > li{
 	height: calc(100% - 125px);
 	position: absolute;
 	top: 95px;
-	width: 100%;
+	left: 0px;
+	/*width: 100%;*/ /* toggle this, can move maps while on the listview mode */
 	-webkit-flex-wrap: wrap;
 	-moz-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
+	-moz-transition: left 0.3s;
+	-webkit-transition: left 0.3s;
+	transition: left 0.3s;
+}
+.collection-list-view.withCollectionList {
+	left: 380px;
+}
+.collection-listview{
+  background-color: rgba(0,0,0,0.1);
+  margin: 0;
+  height: 100% !important; /* hack for css style */
+  width: 360px;
+  list-style: none;
 }
 
-.collection-list-view .list-item {
-	background: white;
-	border-right: solid 1px gray;
-	-webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
-	-moz-box-flex: 1;         /* OLD - Firefox 19- */
-	-webkit-flex: 1;          /* Chrome */
-	-ms-flex: 1;              /* IE 10 */
-	flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
-	height: 280px;
-	position: relative;
-	width: 25%;
-	-webkit-box-flex-basis: 250px;      /* OLD - iOS 6-, Safari 3.1-6 */
-	-moz-box-flex-basis: 250px;         /* OLD - Firefox 19- */
-	-webkit-flex-basis: 250px;          /* Chrome */
-	-ms-flex-basis: 250px;              /* IE 10 */
-	flex-basis: 250px;
+.collection-listview li{
+	background-color: #fff;
+	border: 1px solid #dddddd;
+	padding: 9px;
+	font-size: 15px;
+	color: #181818;
+	cursor: pointer;
+	/*margin: 0 0 3px;*/
 }
 
-.collection-list-view .item-header {
-	margin: 19px 9px 0;
-}
-
-.collection-list-view .item-title {
-	font-size: 1.5em;
-	font-weight: bold;
-	margin-bottom: 0.1em;
-	margin-top: 0.4em;
-	overflow: hidden;
-	padding-left: 4px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	width: calc(100% - 52px);
-}
-
-.collection-list-view .item-time-added {
-	color: #777777;
-	padding-left: 48px;
-	width: calc(100% - 52px);
-}
-
-.collection-list-view .item-body {
-	bottom: 0;
-	position: absolute;
-	width: 100%;
-}
-
-.collection-list-view img {
-	position: relative;
-	height: 200px;
-}
-
-.collection-list-view .item-body .item-description {
-	background: transparent url(../img/list_description_background.png) center bottom repeat-x;
-	bottom: 0;
-	color: white;
-	margin-bottom: 0;
-	height: 50px;
-	overflow: hidden;
-	padding: 0.5em 5px;
-	position: absolute;
-	text-overflow: ellipsis;
-	/* white-space: nowrap; */
-	width: calc(100% - 10px);
-}
-
-.icon-clock {
-	background: transparent url(../img/icon-clock.png) 0 -32px no-repeat;
-	display: inline-block;
-	height: 16px;
-	margin-top: 0;
-	margin-bottom: 0;
-	width: 16px;
-}
-
-.collection-list-view .item-pin {
-	background-color: transparent;
-	background-position: 0 0;
-	background-repeat: no-repeat;
-	display: block;
+.collection-listview li .thumbnail{
+	background: url('/static/img/apple-touch-icon.png');
+	background-size: 90px;
+	background-position: center center;
+	width: 90px;
+	height: 90px;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
 	float: left;
-	height: 60px;
-	width: 44px;
-	text-indent: -10000em;
 }
 
-.item-pin.scenicspot { background-image: url(../img/pin-scenicspot.png); }
-.item-pin.restaurant { background-image: url(../img/pin-restaurant.png); }
-.item-pin.hotel { background-image: url(../img/pin-hotel.png); }
-.item-pin.mall { background-image: url(../img/pin-mall.png); }
-.item-pin.bar { background-image: url(../img/pin-bar.png); }
-.item-pin.misc { background-image: url(../img/pin-misc.png); }
+.collection-listview li .context{
+	float: right;
+	width: 240px;
+	font-weight: 200;
+}
+
+.collection-listview li .context span{
+	display: block;
+	font-size: 10px;
+	color: #707070;
+}
+
+.collection-listview .tags{
+	margin: 6px 0 0;
+	list-style: none;
+	font-size: 10px;
+	color: #707070;
+}
+
+.collection-listview .tags li{
+	float: left;
+	background-color: rgba(0,0,0,0.1);
+	padding: 0px 8px;
+	margin: 5px 5px 0 0;
+}
+
+.collection-listview li:hover, .collection-listview li:hover .context span{
+	border-color: #01A9E7;
+	color: #01A9E7;
+}
+.collection-listview li.isSelected,
+.collection-listview li.isSelected:hover,
+.collection-listview li.isSelected .context span,
+.collection-listview li.isSelected:hover .context span{
+	background-color: #01A9E7;
+	color: #fff;
+}
+
+.collection-listview li.isSelected .tags,
+.collection-listview li:hover .tags{
+	color: #fff;
+}
+/* collection-listview m-custom-scrollbar*/
+.collection-listview .mCSB_dragger_bar {
+	background-color: #707070 !important;
+}
+.collection-listview .mCSB_scrollTools {
+	opacity: 1;
+	width: 6px;
+}
+.collection-listview .mCSB_draggerRail {
+	background-color: #dddddd !important;
+	width: 6px !important;
+}
+.collection-listview .mCSB_container {
+	margin-right:2px !important; /* it's bad I know */
+}

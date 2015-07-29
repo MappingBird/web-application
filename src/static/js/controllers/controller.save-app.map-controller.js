@@ -5,19 +5,22 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
         overlay,
         noSearchQueryOverlay,
         marker,
+        id,
         lat = 0,
         lng = 0,
         type = '',
         myLatLng = new google.maps.LatLng(lat, lng),
         mapOptions = {
             zoom: Presets.mapZoom,
+            minZoom: Presets.minZoom,
             center: myLatLng,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            panControl: true,
+            panControl: false,
             streetViewControl: false,
             zoomControl: true,
             zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.LARGE
+                style: google.maps.ZoomControlStyle.LARGE,
+                position: google.maps.ControlPosition.RIGHT_CENTER
             },
             // styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#efefef"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#e3eed3"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#83a5b0"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#bdcdd3"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#b5cbe4"}]}],
             scaleControl: false
@@ -95,6 +98,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
             location = $scope.activeSavePoint.location;
             coords = $scope.activeSavePoint.location.coordinates.split(',');
 
+            id = $scope.activeSavePoint.id;
             lat = coords[0];
             lng = coords[1];
             type = $scope.activeSavePoint.type || 'scenicspot';
@@ -115,7 +119,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
             }
 
 
-            saveOverlay = new BucketListSmallOverlay(bounds, Presets.mapZoom, srcImage, map, myLatLng, type, location.place_name, location.place_address, phone, 'open', 'save');
+            saveOverlay = new BucketListSmallOverlay(bounds, Presets.mapZoom, srcImage, map, id, myLatLng, type, location.place_name, location.place_address, phone, 'open', 'save');
         }
     }
 
@@ -225,6 +229,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
 
             // place markers
             while (len--) {
+                id = $scope.activeViewPoints[len].id;
                 lat = $scope.activeViewPoints[len].lat;
                 lng = $scope.activeViewPoints[len].lng;
                 type = $scope.activeViewPoints[len].type || 'scenicspot';
@@ -245,6 +250,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                         Presets.mapZoom,
                         srcImage,
                         map,
+                        id,
                         new google.maps.LatLng(lat, lng),
                         type,
                         name,
@@ -280,6 +286,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                         Presets.mapZoom,
                         srcImage,
                         map,
+                        id,
                         new google.maps.LatLng(lat, lng),
                         type,
                         name,
@@ -295,8 +302,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                         if ($scope.fullMap) {
                                             map.panTo(new google.maps.LatLng(point.lat, point.lng));
                                         } else {
-                                            // offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
-                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/4));
+                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/8));
                                         }
 
                                     $('#map').off('transitionend.' + point.id);
@@ -311,7 +317,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                             };
                         })($scope.activeViewPoints[len]),
                         (function(point) {
-                            return function(x, y) {
+                            return function(e, x, y) {
                                 if (activePoint && activePoint !== point.id && viewOverlays[activePoint]) {
                                     viewOverlays[activePoint].hidePopup();
                                 }
@@ -330,11 +336,11 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                     y - mapOffsetTop < popupHeight
                                     ) {
                                     if ($scope.fullMap) {
-                                            map.panTo(new google.maps.LatLng(point.lat, point.lng));
-                                        } else {
-                                            // offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
-                                            offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/4));
-                                        }
+                                        map.panTo(new google.maps.LatLng(point.lat, point.lng));
+                                    } else {
+                                        // offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/2));
+                                        offsetCenter(new google.maps.LatLng(point.lat, point.lng), -($('#map').width()/8));
+                                    }
                                 }
 
                                 // show point information if point detail panel is already open
@@ -343,6 +349,14 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                     // google analytics
                                     Analytics.registerEvent('Point', 'View point detail', 'Map');
                                 }
+
+                                // human click trigger listview change
+                                if (e.originalEvent !== undefined) {
+                                  BroadcastService.prepForBroadcast({
+                                      type: 'selectListByPoint',
+                                      data: { id: point.id }
+                                  });
+                                };
 
                                 return false;
                             };
@@ -432,6 +446,20 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                 break;
             case 'noSearchQuery':
             case 'noSearchResults':
+                break;
+            case 'offsetCenterWhenListview':
+                var oldIdName = BroadcastService.message.data.oldId
+                var idName = BroadcastService.message.data.id;
+                $('#pin-' + oldIdName).removeClass('active').css('zIndex', 999);
+                $('#pin-' + idName + '> a').removeClass('showme');
+                $('#pin-' + idName).addClass('active').css('zIndex', google.maps.Marker.MAX_ZINDEX + 1);
+
+                if ($scope.fullMap) {
+                    map.panTo(new google.maps.LatLng(BroadcastService.message.data.lat, BroadcastService.message.data.lng));
+                } else {
+                    offsetCenter(new google.maps.LatLng(BroadcastService.message.data.lat, BroadcastService.message.data.lng), -($('#map').width()/8));
+                }
+
                 break;
         }
     });

@@ -6,12 +6,12 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.activeCollectionName = '';
     $scope.collectionsListVisible = false;
     $scope.editMode = false;
-    
+
     // delete collection use
     $scope.deleteCollectionId = null;
     $scope.deleteCollectionName = null;
     $scope.showDeleteCollectionDialog = false;
-    
+
 
     // delete collection use
     $scope.deleteCollectionId = null;
@@ -137,6 +137,14 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
                     refreshCollectionPoints($scope.activeCollectionId);
                 }
                 break;
+            case 'viewingCollectionList':
+                if (typeof BroadcastService.message.data.collectionId != 'undefined'
+                    && BroadcastService.message.data.collectionId != -1
+                    && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
+                    $scope.activeCollectionId = BroadcastService.message.data.collectionId;
+                    refreshCollectionPoints($scope.activeCollectionId);
+                }
+                break;
             case 'setSaveCollection':
                 if (typeof BroadcastService.message.data.collectionId != 'undefined'
                     && BroadcastService.message.data.collectionId != -1) {
@@ -178,23 +186,27 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         // edit mode - delete collection
         if ($scope.editMode) {
 
-<<<<<<< HEAD
-=======
             // Uncategorized catelog can't be deleted
             if (name === 'Uncategorized') {
               return;
             }
->>>>>>> stage
+
             // confirm dialog
             $scope.deleteCollectionId = id;
             $scope.deleteCollectionName = name;
             $scope.showDeleteCollectionDialog = true;
-<<<<<<< HEAD
-            
-=======
-
->>>>>>> stage
-        } else {
+        } else if ($scope.listMode) {
+          // collection + list view - change collection
+          console.log('viewCollection&List ' + id);
+          $scope.collectionsListVisible = true;
+          BroadcastService.prepForBroadcast({
+            type: 'closeCollections',
+            data: {}
+          });
+          $state.go('viewCollectionList', { collectionId: id});
+        }
+        else {
+          // collection view - change collection
             console.log('viewCollection ' + id);
             $scope.collectionsListVisible = false;
             $state.go('viewCollection', { collectionId: id});
@@ -226,11 +238,7 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
 
         $scope.editMode = false;
         $scope.showDeleteCollectionDialog = false;
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> stage
         // google analytics
         Analytics.registerEvent('Collection', 'Delete collection', 'Collection List');
     };
@@ -241,17 +249,10 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
 
         $scope.editMode = false;
         $scope.showDeleteCollectionDialog = false;
-<<<<<<< HEAD
-        
-        console.log('unselect delete collection: ' + $scope.deleteCollectionId);
-    };
-    
-=======
 
         console.log('unselect delete collection: ' + $scope.deleteCollectionId);
     };
 
->>>>>>> stage
     $scope.showCollections = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -268,7 +269,11 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         // hide collections list
         // show full map
         } else {
-            hideCollections();
+            $scope.collectionsListVisible = false;
+            BroadcastService.prepForBroadcast({
+              type: 'closeCollections',
+              data: {}
+            });
         }
 
     };
@@ -336,6 +341,19 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         $state.go('viewCollectionList', { collectionId: $scope.activeCollectionId});
         // google analytics
         Analytics.registerEvent('Collection', 'Change to List View', 'Collection List');
+    };
+
+    $scope.closeListView = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        BroadcastService.prepForBroadcast({
+            type: 'closeCollectionListView',
+            data: {}
+        });
+        $state.go('viewCollectionSimple', { collectionId: $scope.activeCollectionId});
+
+        // google analytics
+        Analytics.registerEvent('Collection', 'Close List View', 'Collection List');
     };
 
     $scope.gotoMapView = function ($event) {

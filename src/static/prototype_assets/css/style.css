@@ -70,7 +70,7 @@ header{
 header > .logo{
 	display: block;
 	background: url(../img/logo-bright.png) left center no-repeat;
-	width: 172px;
+	width: 190px;
 	height: 100%;
 	float: left;
 	margin: 0 15px 0 25px;;
@@ -205,7 +205,8 @@ header.float-top{
 }
 .btn-default.pingismo-btn,
 .btn-highlight.pingismo-btn,
-.btn-risk.pingismo-btn{
+.btn-risk.pingismo-btn,
+.btn-mute.pingismo-btn{
 	background-color: #707070;
 	display: inline-block;
 	color: #fff;
@@ -214,14 +215,20 @@ header.float-top{
 }
 .btn-default.pingismo-btn:hover,
 .btn-highlight.pingismo-btn:hover,
-.btn-risk.pingismo-btn:hover{
+.btn-risk.pingismo-btn:hover,
+.btn-mute.pingismo-btn:hover{
 	background-color: #01a9e7;
 	text-decoration: none;
 }
 .btn-highlight.pingismo-btn{
 	background-color: #01a9e7;
 }
-.btn-highlight.pingismo-btn:hover{
+.btn-mute.pingismo-btn{
+	background-color: transparent;
+	color: #01a9e7;
+}
+.btn-highlight.pingismo-btn:hover,
+.btn-mute.pingismo-btn:hover{
 	background-color: #33ccff;
 }
 .btn-risk.pingismo-btn{
@@ -370,7 +377,7 @@ footer:after {
 }
 
 footer img{
-	vertical-align: text-bottom;
+	vertical-align: bottom;
 }
 footer p{
 	margin: 0 0 5px;
