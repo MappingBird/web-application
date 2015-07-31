@@ -47,6 +47,31 @@ angular.module('IndexApp').controller('ModalDemoCtrl', function ($scope, $modal,
       $log.info('Modal dismissed at: ' + new Date());
     });
   };
+
+  $scope.getStarted = function () {
+
+    // not chrome
+    var isChrome = /Chrome/.test(navigator.userAgent) || /crios/.test(navigator.vendor);
+    if (isChrome) {
+      location.href = '/signup';
+    } else {
+      var modalInstance = $modal.open({
+        templateUrl: 'myModalContent2.html',
+        controller: 'ModalInstanceCtrl',
+        resolve: {
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    }
+  };
 });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
@@ -59,8 +84,8 @@ angular.module('IndexApp').controller('ModalInstanceCtrl', function ($scope, $mo
     item: $scope.items[0]
   };
 
-  $scope.ok = function () {
-    var email = $('#WaitingEmail').val();
+  $scope.ok = function (id) {
+    var email = $('#' + id).val();
     // test email regular expression
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(email)) {

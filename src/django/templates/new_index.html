@@ -52,13 +52,33 @@
 	        <div class="modal-footer">
 	        	<form class="form-inline">
 	        		<div class="form-group">
-	        			<label for="WaitingEmail" class="sr-only">Email address</label>
-	        			<input type="email" class="form-control waiting-email" id="WaitingEmail" placeholder="Your email address">
+	        			<label for="WaitingEmail1" class="sr-only">Email address</label>
+	        			<input type="email" class="form-control waiting-email" id="WaitingEmail1" placeholder="Your email address">
 	        		</div>
-	            	<button type="submit" class="btn btn-primary" onclick="sendEmailtoGoogleForm()" ng-click="ok()">Let me know when it's done.</button>
+	            	<button type="submit" class="btn btn-primary" onclick="sendEmailtoGoogleForm('WaitingEmail1')" ng-click="ok('WaitingEmail1')">Let me know when it's done.</button>
 	        	</form>
 	        </div>
 	    </script>
+			<script type="text/ng-template" id="myModalContent2.html">
+		        <div class="modal-header">
+	                <img src="{{ STATIC_URL }}new_index/images/Chrome-logo.png" />
+		            <h2 class="modal-title">INTERESTED IN MAPPINGBIRD?</h2>
+		        </div>
+		        <div class="modal-body">
+		        	<p>
+		        		We are sorry that MappingBird works for <b>Google Chrome</b> and <b>Android</b> for now. Join our waiting list and we'll let you know when we support your platform!
+		        	</p>
+		        </div>
+		        <div class="modal-footer">
+		        	<form class="form-inline">
+		        		<div class="form-group">
+		        			<label for="WaitingEmail2" class="sr-only">Email address</label>
+		        			<input type="email" class="form-control waiting-email" id="WaitingEmail2" placeholder="Your email address">
+		        		</div>
+		            	<button type="submit" class="btn btn-primary" onclick="sendEmailtoGoogleForm('WaitingEmail2')" ng-click="ok('WaitingEmail2')">Let me know when it's done.</button>
+		        	</form>
+		        </div>
+		    </script>
 		<section class="intro">
 			<nav class="navbar navbar-default mb-navbar-default">
 				<div class="container-fluid">
@@ -80,10 +100,10 @@
 						Save to MappingBird.</h1>
 					<p>Just 1 click. MappingBird helps you bookmark places from any website, and easy to access on any PC and smartphones.</p>
 				</div>
-				
+
 				<p class="mb-intro-actions">
 					<a id="watch-video-button" href="https://youtu.be/COZTEe9Mi10" class="btn btn-default btn-lg text-uppercase fancybox-media track-click">watch 1 min intro <span><i class="mdi mdi-play"></i></span></a>
-  					<a href="/signup" class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button">GET STARTED. IT’S FREE.</a>
+  					<a href="javascript:void(0);" ng-click="getStarted()"class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button">GET STARTED. IT’S FREE.</a>
 				</p>
 				<a class="learnmore_wrapper track-click" id="learnmore-btn" href="#whatitis" >
 					<p class="text-uppercase">Learn more</p>
@@ -240,8 +260,8 @@
                 window.location.href = $(this).attr('data-href');
             });
 
-			function sendEmailtoGoogleForm(){
-				var email = $('#WaitingEmail').val();
+			function sendEmailtoGoogleForm(id){
+				var email = $('#' + id).val();
 
 				// test email regular expression
 				var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
