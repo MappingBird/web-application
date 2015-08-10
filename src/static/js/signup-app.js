@@ -89,7 +89,7 @@ mappingbird.SignupApp.controller('mainController', ['$scope', '$timeout', 'Prese
         UserResource.save(newUser, function(data, headers) {
             $scope.accountCreated = true;
             // google analytics
-            Analytics.registerEvent('Signup', 'Signup success - new user created', 'Signup Page');
+            Analytics.registerEvent('Signup', 'Signup success - new user created', 'Signup Page', newUser.email);
 
             // hack for stupid footer - Footer covers major buttons on signup complete page (#213)
             $('footer').css('position', 'relative');
