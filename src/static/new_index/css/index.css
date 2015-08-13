@@ -27,8 +27,9 @@ section.how{
 	height: 700px;
 	overflow: hidden;
 }
-section.follow-us .container-fluid{
-	margin: 60px 0;
+section.follow-us{
+	padding: 60px 0;
+	background-color: #ddd;
 }
 footer.mb-footer{
 	background-color: #181818;
@@ -235,6 +236,7 @@ img.intro-screenshots{ width: 100%; }
 }
 
 /* What It Is */
+section.what h1{margin: 36px 0 20px; text-align: center;}
 section.what h2{margin-top: 80px;}
 
 /* How It Works */
