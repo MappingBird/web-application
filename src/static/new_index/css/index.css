@@ -130,14 +130,14 @@ a.btn-primary.mb-play{
 	color: #fff;
 	border-color: #3276b1;
 }
-#watch-video-button p{
+#watch-video-button span{
 	background-color: rgba(0,0,0,0.6);
 	margin: 0;
 	padding: 0;
 	line-height: 80px;
 	color: #fff;
 }
-#watch-video-button:hover p{
+#watch-video-button:hover span{
 	background-color: #3276b1;
 	text-decoration: none;
 }
