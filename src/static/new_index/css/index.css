@@ -148,7 +148,7 @@ a.btn-primary.mb-play{
 	font-weight: 400;
 }
 #watch-video-button:hover span{
-	background-color: rgba(50,118,177,0.7);
+	background-color: rgba(50,118,177,0.85);
 
 }
 #watch-video-button span b{
