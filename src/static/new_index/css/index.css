@@ -189,7 +189,15 @@ img.intro-screenshots{ width: 100%; }
 	background-size: auto 300px;
 	background-position: center 0;
 	background-repeat: no-repeat;
-	padding: 300px 0 0;
+	padding: 275px 0 0;
+}
+.testimony .indicator{
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-bottom: 25px solid #fff;
+	margin-left: 20px;
 }
 .testimony .user-traveler{
 	background-image: url('../images/user_traveler.jpg');
