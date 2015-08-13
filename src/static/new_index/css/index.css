@@ -123,23 +123,27 @@ a.btn-primary.mb-play{
 	width: 300px;
 	height: 170px;
 	margin: 0 auto;
+	padding-top: 45px;
 }
 #watch-video-button:hover{
 	background-color: #3276b1;
 	color: #fff;
 	border-color: #3276b1;
 }
-#watch-video-button span{
-	background-color: #01a9e7;
-	border-radius: 15px;
-	padding: 0 1px 2px;
-	margin-left: 2px;
+#watch-video-button p{
+	background-color: rgba(0,0,0,0.6);
+	margin: 0;
+	padding: 0;
+	line-height: 80px;
+	color: #fff;
 }
-#watch-video-button:hover span{
-	background-color: #fff;
+#watch-video-button:hover p{
+	background-color: #3276b1;
+	text-decoration: none;
 }
 #watch-video-button span i{
 	line-height: 0;
+	color: rgba(0,0,0,0);
 }
 #watch-video-button:hover span i{
 	color: #3276b1;
