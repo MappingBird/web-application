@@ -79,6 +79,7 @@
 		        	</form>
 		        </div>
 		    </script>
+		<!-- Intro section start -->
 		<section class="intro">
 			<nav class="navbar navbar-default mb-navbar-default">
 				<div class="container-fluid">
@@ -94,23 +95,31 @@
 					</ul>
 				</div>
 			</nav>
-			<div class="container mb-hero">
-				<div class="jumbotron">
-					<h1>Find interesting places?<br/>
-						Save to MappingBird.</h1>
-					<p>Just 1 click. MappingBird helps you bookmark places from any website, and easy to access on any PC and smartphones.</p>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 mb-hero">
+						<div class="jumbotron">
+							<h1>Find interesting places?<br/>
+								Save to MappingBird.</h1>
+							<p>Just 1 click. MappingBird helps you bookmark places from any website, and easy to access on any PC and smartphones.</p>
+						</div>
+						<p class="mb-intro-actions">
+							<a id="watch-video-button" href="https://youtu.be/COZTEe9Mi10" class="btn btn-default btn-lg text-uppercase fancybox-media track-click">watch 1 min intro <span><i class="mdi mdi-play"></i></span></a>
+							<a href="javascript:void(0);" ng-click="getStarted()"class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button">GET STARTED. IT’S FREE.</a>
+						</p>
+						<a class="learnmore_wrapper track-click" id="learnmore-btn" href="#whatitis" >
+							<p class="text-uppercase">Learn more</p>
+							<div class="learnmore_arrow"></div>
+						</a>
+					</div>
+					<div class="col-md-6">
+						<img src="{{ STATIC_URL }}new_index/images/index_imac_nexus.png">
+					</div>
 				</div>
-
-				<p class="mb-intro-actions">
-					<a id="watch-video-button" href="https://youtu.be/COZTEe9Mi10" class="btn btn-default btn-lg text-uppercase fancybox-media track-click">watch 1 min intro <span><i class="mdi mdi-play"></i></span></a>
-  					<a href="javascript:void(0);" ng-click="getStarted()"class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button">GET STARTED. IT’S FREE.</a>
-				</p>
-				<a class="learnmore_wrapper track-click" id="learnmore-btn" href="#whatitis" >
-					<p class="text-uppercase">Learn more</p>
-					<div class="learnmore_arrow"></div>
-				</a>
 			</div>
 		</section>
+		<!-- end of intro section -->
+		<!-- What section start -->
 		<section class="what">
 			<a name="whatitis"></a>
 			<!--nav class="navbar navbar-default mb-navbar-inverse">
@@ -159,6 +168,7 @@
 				</div>
 			</div>
 		</section>
+		<!-- End of what section -->
 		<section class="how">
             {% verbatim %}
 			<h1>How It Works</h1>
