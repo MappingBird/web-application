@@ -129,7 +129,7 @@ a.btn-primary.mb-play{
 	width: 240px;
 	height: 136px;
 	margin: 0 auto;
-	padding-top: 28px;
+	padding-top: 38px;
 }
 #watch-video-button:hover{
 	background-color: #3276b1;
@@ -141,14 +141,15 @@ a.btn-primary.mb-play{
 	background-color: rgba(0,0,0,0.6);
 	margin: 0;
 	padding: 0;
-	line-height: 80px;
+	line-height: 60px;
 	color: #fff;
 	display: block;
 	font-size: 18px;
 	font-weight: 400;
 }
 #watch-video-button:hover span{
-	background-color: #3276b1;
+	background-color: rgba(50,118,177,0.7);
+
 }
 #watch-video-button span b{
 	background-color: #fff;
