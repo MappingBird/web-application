@@ -5,15 +5,16 @@ h1, h2{
 	font-family: Cinzel;
 	font-weight: normal;
 }
-.intro h1{font-size: 52px;}
+.intro h1{font-size: 36px; margin-bottom: 16px;}
 .what h2{font-size: 24px;}
 
 /* Layout -------------------------------------------------------------------------------------- */
 section.intro{
-	background: url('../images/multi_websites_bg.jpg.jpg') center center no-repeat;
+	background: url('../images/multi_websites_bg.jpg') center center no-repeat;
 	background-size: cover;
 	height: 100%;
 	position: relative;
+	overflow: hidden;
 }
 section.what .row{
 	margin: 0;
@@ -82,14 +83,15 @@ button.mb-signin .mdi:before{font-size: 18px!important;}
 	color: #fff;
 	text-align: center;
 	font-weight: 300;
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	padding: 0 120px 6px;
 }
-.jumbotron {
+.mb-hero .jumbotron {
 	background-color: transparent;
 	margin: 0;
+	padding: 0;
+}
+.mb-hero .jumbotron p{
+	font-size: 16px;
+	margin-bottom: 36px;
 }
 
 a.btn-primary.mb-play{
@@ -149,6 +151,7 @@ a.btn-primary.mb-play{
 	height: 31px;
 	margin: 0 auto;
 }
+img.intro-screenshots{ width: 100%; }
 
 /* What It Is */
 section.what h2{margin-top: 80px;}
