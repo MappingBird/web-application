@@ -4,6 +4,8 @@ import os
 import os.path
 import time
 import uuid
+import Queue
+import threading
 from urlparse import urlparse
 
 from django.middleware import csrf
@@ -268,6 +270,81 @@ class PointViewSet(APIViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class DLWorker(threading.Thread):
+    def __init__(self, q):
+        threading.Thread.__init__(self)
+        threading.Thread.daemon = True
+
+        self.q_ = q
+
+    def run(self):
+        while True:
+            try:
+                dic = self.q_.get()
+
+                req = dic['req']
+                imgVS = dic['imgVS']
+            
+                data = req.DATA.copy()
+
+                # save thumbnail
+                url = data.get('url')
+                r = requests.get(url, stream=True)
+                if r.status_code == 200:
+
+                    # path: media/images/$id
+                    images_upload_path = os.path.join(settings.MEDIA_ROOT, 'images')
+
+                    if not os.path.exists(images_upload_path):
+                        os.mkdir(images_upload_path)
+
+                    images_upload_path = os.path.join(images_upload_path, data.get('point'))
+
+                    if not os.path.exists(images_upload_path):
+                        os.mkdir(images_upload_path)
+
+                    path = '%s/%f' % (images_upload_path, time.time())
+                    with open(path, 'wb') as f:
+                        for chunk in r.iter_content():
+                            f.write(chunk)
+
+                    f.close()
+
+                    im = PImage.open(path)
+                    # im.thumbnail((512, 512), PImage.ANTIALIAS)
+                    im.thumbnail((96, 96), PImage.ANTIALIAS)
+
+                    format_map = {
+                        'JPEG': 'jpg',
+                        'PNG': 'png',
+                        'GIF': 'gif',
+                        'TIFF': 'tiff',
+                    }
+                    final_path = '%s_thumb.%s' % (path, format_map[im.format])
+                    im.save('%s' % final_path, format=im.format, quality=90)
+
+                    split_index = final_path.find('/media')
+                    url_path = final_path[split_index:]
+                    data['thumb_path'] = req.build_absolute_uri(url_path)
+
+                serializer = imgVS.get_serializer(data=data, files=req.FILES)
+
+                if serializer.is_valid():
+                    imgVS.pre_save(serializer.object)
+                    imgVS.object = serializer.save(force_insert=True)
+                    imgVS.post_save(imgVS.object, created=True)
+                    headers = imgVS.get_success_headers(serializer.data)
+#                    return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+#                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            except Exception as e:
+                print e
+
+            finally:
+                self.q_.task_done()
+            
+
 class ImageViewSet(APIViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -278,60 +355,26 @@ class ImageViewSet(APIViewSet):
     authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication, )
     permission_classes = (IsOwnerOrAdmin,)
 
+    #-- threading image download  
+    img_q = Queue.Queue()
+    dlWorkerPool = None
+    SIZE_DLWorkers = 40
+
     def create(self, request, *args, **kwargs):
-        data = request.DATA.copy()
+        #-- init download worker pool
+        if ImageViewSet.dlWorkerPool is None:
+            ImageViewSet.dlWorkerPool = []
+            for i in range(ImageViewSet.SIZE_DLWorkers) :
+                ImageViewSet.dlWorkerPool.append( DLWorker(ImageViewSet.img_q) )
 
-        # save thumbnail
-        url = data.get('url')
-        r = requests.get(url, stream=True)
-        if r.status_code == 200:
+            for w in ImageViewSet.dlWorkerPool :
+                w.start()
 
-            # path: media/images/$id
-            images_upload_path = os.path.join(settings.MEDIA_ROOT, 'images')
+        #-- put image url in Q to schedule download
+        dic = { 'req':request, 'imgVS':self }
+        ImageViewSet.img_q.put(dic) 
 
-            if not os.path.exists(images_upload_path):
-                os.mkdir(images_upload_path)
-
-            images_upload_path = os.path.join(images_upload_path, data.get('point'))
-
-            if not os.path.exists(images_upload_path):
-                os.mkdir(images_upload_path)
-
-            path = '%s/%f' % (images_upload_path, time.time())
-            with open(path, 'wb') as f:
-                for chunk in r.iter_content():
-                    f.write(chunk)
-
-            f.close()
-
-            im = PImage.open(path)
-            # im.thumbnail((512, 512), PImage.ANTIALIAS)
-            im.thumbnail((96, 96), PImage.ANTIALIAS)
-
-            format_map = {
-                'JPEG': 'jpg',
-                'PNG': 'png',
-                'GIF': 'gif',
-                'TIFF': 'tiff',
-            }
-            final_path = '%s_thumb.%s' % (path, format_map[im.format])
-            im.save('%s' % final_path, format=im.format, quality=90)
-
-            split_index = final_path.find('/media')
-            url_path = final_path[split_index:]
-            data['thumb_path'] = request.build_absolute_uri(url_path)
-
-        serializer = self.get_serializer(data=data, files=request.FILES)
-
-        if serializer.is_valid():
-            self.pre_save(serializer.object)
-            self.object = serializer.save(force_insert=True)
-            self.post_save(self.object, created=True)
-            headers = self.get_success_headers(serializer.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED,
-                            headers=headers)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'result' : 'ok'}, status=status.HTTP_201_CREATED)
 
     def get_success_headers(self, data):
         try:
