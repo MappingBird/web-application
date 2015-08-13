@@ -101,12 +101,17 @@ a.btn-primary.mb-play{
 }
 
 /* Intro */
+.intro .container{
+	position: relative;
+	top: 50%;
+	margin-top: -300px;
+}
 .mb-intro-actions{
 	margin-top: 0;
 }
 .mb-intro-actions .btn{
-	margin: 0 5px;
-	width: 240px;
+	margin: 15px 5px 0;
+	width: 300px;
 }
 .mb-intro-actions .btn-default{
 	background-color: transparent;
@@ -129,6 +134,7 @@ a.btn-primary.mb-play{
 	background-color: #3276b1;
 	color: #fff;
 	border-color: #3276b1;
+	text-decoration: none;
 }
 #watch-video-button span{
 	background-color: rgba(0,0,0,0.6);
@@ -136,10 +142,18 @@ a.btn-primary.mb-play{
 	padding: 0;
 	line-height: 80px;
 	color: #fff;
+	display: block;
+	font-size: 18px;
+	font-weight: 400;
 }
 #watch-video-button:hover span{
 	background-color: #3276b1;
-	text-decoration: none;
+}
+#watch-video-button span b{
+	background-color: #fff;
+	border-radius: 15px;
+	padding: 0 1px 2px;
+	margin-left: 5px;
 }
 #watch-video-button span i{
 	line-height: 0;
