@@ -179,19 +179,29 @@ a.btn-primary.mb-play{
 img.intro-screenshots{ width: 100%; }
 
 /* Testimony */
+.testimony .row{margin: 0;}
 .testimony h2{ font-size: 24px; padding: 0 20px;}
 .testimony p{ padding: 0 20px; }
 .testimony .col-md-4{
 	background-size: auto 300px;
 }
+.testimony .col-md-4{
+	background-size: auto 300px;
+	background-position: center 0;
+	background-repeat: no-repeat;
+	padding: 300px 0 0;
+}
 .testimony .user-traveler{
-	background: url('../images/user_traveler.jpg') 0 0 no-repeat;
+	background-image: url('../images/user_traveler.jpg');
+	width: 33%;
 }
 .testimony .user-freelancer{
-	background: url('../images/user_freelancer.jpg') 0 0 no-repeat;
+	background-image: url('../images/user_freelancer.jpg');
+	width: 34%;
 }
 .testimony .user-foodies{
-	background: url('../images/user_foodies.jpg') 0 0 no-repeat;
+	background-image: url('../images/user_foodies.jpg');
+	width: 33%;
 }
 
 /* What It Is */
