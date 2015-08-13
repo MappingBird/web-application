@@ -178,6 +178,22 @@ a.btn-primary.mb-play{
 }
 img.intro-screenshots{ width: 100%; }
 
+/* Testimony */
+.testimony h2{ font-size: 24px; padding: 0 20px;}
+.testimony p{ padding: 0 20px; }
+.testimony .col-md-4{
+	background-size: auto 300px;
+}
+.testimony .user-traveler{
+	background: url('../images/user_traveler.jpg') 0 0 no-repeat;
+}
+.testimony .user-freelancer{
+	background: url('../images/user_freelancer.jpg') 0 0 no-repeat;
+}
+.testimony .user-foodies{
+	background: url('../images/user_foodies.jpg') 0 0 no-repeat;
+}
+
 /* What It Is */
 section.what h2{margin-top: 80px;}
 
