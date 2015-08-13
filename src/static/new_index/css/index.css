@@ -215,7 +215,24 @@ img.intro-screenshots{ width: 100%; }
 
 /* Efficient */
 .efficient{ background: #f6892a; line-height: 180px; height: 180px; text-align: center;}
-.efficient h2{font-size: 24px; margin: 0;}
+.efficient h2{
+	font-size: 32px;
+	margin: 0;
+	line-height: 180px;
+	color: #fff;
+}
+.efficient .btn-default{
+	font-size: 18px;
+	font-family: "Open Sans", "Segoe UI", "Helvetica Neue",Helvetica,Arial,sans-serif;
+	margin-left: 20px;
+	border: 1px solid #fff;
+	background-color: transparent;
+	color: #fff;
+}
+.efficient .btn-default:hover{
+	background-color: #fff;
+	color: #01a9e7;
+}
 
 /* What It Is */
 section.what h2{margin-top: 80px;}
