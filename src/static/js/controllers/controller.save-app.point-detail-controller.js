@@ -296,11 +296,7 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
                 $scope.collections.push(data);
 
                 // set this collection as active collection
-                $scope.selectPointCollection(data.id);
-
-                // Select Collection List show be the new one
-                $scope.changeCollectionName = data.name;
-                $scope.changeCollectionId = data.id;
+                $scope.selectPointCollection(null, data.id);
 
                 // blank the form
                 $scope.newCollectionName = '';
