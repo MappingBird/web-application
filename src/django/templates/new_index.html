@@ -80,42 +80,45 @@
 		        </div>
 		    </script>
 		<!-- Intro section start -->
-		<section class="intro">
-			<nav class="navbar navbar-default mb-navbar-default">
-				<div class="container-fluid">
-					<div class="navbar-header">
-                        <a class="navbar-brand" href="#"><img src="{{ STATIC_URL }}new_index/images/white_logo.png" /></a>
-					</div>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<button class="btn btn-default navbar-btn text-uppercase mb-signin" data-href="/login">
-								<i class="mdi mdi-account"></i> Sign In
-							</button>
-						</li>
-					</ul>
-				</div>
-			</nav>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 mb-hero">
-						<div class="jumbotron">
-							<h1>Find interesting places?<br/>
-								Save to MappingBird.</h1>
-							<p>Just 1 click. MappingBird helps you bookmark places from any website, and easy to access on any PC and smartphones.</p>
+		<section class="intro homepage-hero-module">
+			<div class="video-container">
+				<nav class="navbar navbar-default mb-navbar-default">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand" href="#"><img src="{{ STATIC_URL }}new_index/images/white_logo.png" /></a>
 						</div>
-						<p class="mb-intro-actions">
-							<a id="watch-video-button" href="https://youtu.be/COZTEe9Mi10" class="text-uppercase fancybox-media track-click"><span>watch 1 min intro <b><i class="mdi mdi-play"></i></b></span></a>
-							<a href="javascript:void(0);" ng-click="getStarted()"class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button">GET STARTED. IT’S FREE.</a>
-						</p>
-						<a class="learnmore_wrapper track-click" id="learnmore-btn" href="#testimony" >
-							<p class="text-uppercase">Why people love MappingBird?</p>
-							<div class="learnmore_arrow"></div>
-						</a>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<button class="btn btn-default navbar-btn text-uppercase mb-signin" data-href="/login">
+									<i class="mdi mdi-account"></i> Sign In
+								</button>
+							</li>
+						</ul>
 					</div>
-					<div class="col-md-6">
-						<img src="{{ STATIC_URL }}new_index/images/index_imac_nexus.png" class="intro-screenshots">
+				</nav>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 mb-hero">
+							<div class="jumbotron">
+								<h1>Find interesting places?<br/>
+									Save to MappingBird.</h1>
+								<p>Just 1 click. MappingBird helps you bookmark places from any website, and easy to access on any PC and smartphones.</p>
+							</div>
+							<p class="mb-intro-actions">
+								<a id="watch-video-button" href="https://youtu.be/COZTEe9Mi10" class="text-uppercase fancybox-media track-click"><span>watch 1 min intro <b><i class="mdi mdi-play"></i></b></span></a>
+								<a href="javascript:void(0);" ng-click="getStarted()"class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button">GET STARTED. IT’S FREE.</a>
+							</p>
+							<a class="learnmore_wrapper track-click" id="learnmore-btn" href="#testimony" >
+								<p class="text-uppercase">Why people love MappingBird?</p>
+								<div class="learnmore_arrow"></div>
+							</a>
+						</div>
+						<div class="col-md-6">
+							<img src="{{ STATIC_URL }}new_index/images/index_imac_nexus.png" class="intro-screenshots">
+						</div>
 					</div>
 				</div>
+				<div class="filter"></div>
 			</div>
 		</section>
 		<!-- End of intro section -->
