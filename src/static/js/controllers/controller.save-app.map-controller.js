@@ -371,16 +371,15 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
             // ActiveViewPoint only one, zoom to 16
             if ($scope.activeViewPoints && $scope.activeViewPoints.length === 1) {
                 map.setZoom(16);
-            } else if ($scope.activeViewPoints == null || ($scope.activeViewPoints && $scope.activeViewPoints.length === 0)) {
-                // ActiveViewPoint no point
-                // center of taiwan 23.6871252,120.9912367,8z
-                map.setCenter({lat: 23.6871252, lng: 120.9912367});
-                map.setZoom(8);
             }
-
+            
             console.log('viewOverlays post marker');
             console.log(viewOverlays);
 
+        } else {
+          // no point
+          map.setCenter({lat: 23.6871252, lng: 120.9912367});
+          map.setZoom(8);
         }
     }
 
