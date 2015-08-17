@@ -79,40 +79,92 @@
 		        	</form>
 		        </div>
 		    </script>
-		<section class="intro">
-			<nav class="navbar navbar-default mb-navbar-default">
-				<div class="container-fluid">
-					<div class="navbar-header">
-                        <a class="navbar-brand" href="#"><img src="{{ STATIC_URL }}new_index/images/white_logo.png" /></a>
-					</div>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<button class="btn btn-default navbar-btn text-uppercase mb-signin" data-href="/login">
-								<i class="mdi mdi-account"></i> Sign In
-							</button>
-						</li>
-					</ul>
-				</div>
-			</nav>
-			<div class="container mb-hero">
-				<div class="jumbotron">
-					<h1>Find interesting places?<br/>
-						Save to MappingBird.</h1>
-					<p>Just 1 click. MappingBird helps you bookmark places from any website, and easy to access on any PC and smartphones.</p>
+		<!-- Intro section start -->
+		<section class="intro homepage-hero-module">
+			<div class="video-container">
+
+				<div class="filter"></div>
+				<video autoplay loop class="fillWidth">
+					<source src="{{ STATIC_URL }}new_index/images/Surfers-Paradise/MP4/Surfers-Paradise.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+					<source src="{{ STATIC_URL }}new_index/images/Surfers-Paradise/WEBM/Surfers-Paradise.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+				</video>
+				<div class="poster hidden">
+					<img src="{{ STATIC_URL }}new_index/images/Surfers-Paradise/Snapshots/Surfers-Paradise.jpg" alt="">
 				</div>
 
-				<p class="mb-intro-actions">
-					<a id="watch-video-button" href="https://youtu.be/COZTEe9Mi10" class="btn btn-default btn-lg text-uppercase fancybox-media track-click">watch 1 min intro <span><i class="mdi mdi-play"></i></span></a>
-  					<a href="javascript:void(0);" ng-click="getStarted()"class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button">GET STARTED. IT’S FREE.</a>
-				</p>
-				<a class="learnmore_wrapper track-click" id="learnmore-btn" href="#whatitis" >
-					<p class="text-uppercase">Learn more</p>
-					<div class="learnmore_arrow"></div>
-				</a>
+				<nav class="navbar navbar-default mb-navbar-default">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand" href="#"><img src="{{ STATIC_URL }}new_index/images/white_logo.png" /></a>
+						</div>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<button class="btn btn-default navbar-btn text-uppercase mb-signin" data-href="/login">
+									<i class="mdi mdi-account"></i> Sign In
+								</button>
+							</li>
+						</ul>
+					</div>
+				</nav>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 mb-hero">
+							<div class="jumbotron">
+								<h1>Found interesting places?<br/>
+									Save to MappingBird.</h1>
+								<p>Just 1 click. MappingBird helps you bookmark places from any website, and easy to access on any PC and smartphones.</p>
+							</div>
+							<p class="mb-intro-actions">
+								<a id="watch-video-button" href="https://youtu.be/COZTEe9Mi10" class="text-uppercase fancybox-media track-click"><span>watch 1 min intro <b><i class="mdi mdi-play"></i></b></span></a>
+								<a href="javascript:void(0);" ng-click="getStarted()"class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button">GET STARTED. IT’S FREE.</a>
+							</p>
+							<a class="learnmore_wrapper track-click" id="learnmore-btn" href="#testimony" >
+								<p class="text-uppercase">Why people love MappingBird?</p>
+								<div class="learnmore_arrow"></div>
+							</a>
+						</div>
+						<div class="col-md-6">
+							<img src="{{ STATIC_URL }}new_index/images/index_imac_nexus.png" class="intro-screenshots">
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
+		<!-- End of intro section -->
+		<!-- Testimony section start -->
+		<section class="testimony">
+			<a name="testimony"></a>
+			<div class="row">
+				<div class="col-md-4 user-traveler">
+					<div class="indicator"></div>
+					<h2>Traveler</h2>
+					<p class="quote">While I was searching for rooms, restaurants, and things to do in planning stage, MappingBird instantly helped me save places when I found. Its offline map* allowed me accessing all my saved stuffs when on the go.</p>
+					<p class="notes">*Offline map is still internal beta</p>
+				</div>
+				<div class="col-md-4 user-freelancer">
+					<div class="indicator"></div>
+					<h2>Freelancer</h2>
+					<p class="quote">I used to wander near my home to find good places for work. When I found one, I used
+						MappingBird to bookmark it. Now I have a bunch of places in my pocket. I don’t have to worry if one place is too noisy, because I can find a new place whenever I want.</p>
+				</div>
+				<div class="col-md-4 user-foodies">
+					<div class="indicator"></div>
+					<h2>Foodies</h2>
+					<p class="quote">My friends all know we like to eat. Whenever they found nice restaurants, they share with us immediately. Then, we remembered those places to MappingBird, and visit them when we had time.</p>
+				</div>
+			</div>
+		</section>
+		<!-- End of testimony section -->
+		<!-- Efficient section start -->
+		<section class="efficient">
+			<h2>
+				It only takes about 5 seconds to save a place.
+				<a id="efficient-ready-to-go-button" href="javascript:void(0);" ng-click="getStarted()" class="btn btn-default btn-lg text-uppercase track-click">Sign up now. It's free.</a>
+			</h2>
+		</section>
+		<!-- End of Efficient section -->
+		<!-- What section start -->
 		<section class="what">
-			<a name="whatitis"></a>
 			<!--nav class="navbar navbar-default mb-navbar-inverse">
 				<div class="container-fluid">
 					<div class="navbar-header">
@@ -125,10 +177,11 @@
 					</ul>
 				</div>
 			</nav-->
+			<h1>What They Do?</h1>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
-						<h2>Map Places From Any Website</h2>
+						<h2>Save Places From Any Websites</h2>
 						<p>With the free Save to MappingBird browser button, you can bookmark interesting and intriguing places with just a few clicks while browsing.</p>
 					</div>
 					<div class="col-md-6">
@@ -140,14 +193,14 @@
                         <img src="{{ STATIC_URL }}new_index/images/what_screenshot_organize.jpg" width="90%" />
 					</div>
 					<div class="col-md-6">
-						<h2>Get A Bird’s-eye View of All Your Saved Places</h2>
+						<h2>Get A Bird’s-eye View of All Your Places</h2>
 						<p>Mappingbird offers ways to group your places by collections and/or tags. View groups of places on the map by selecting a collection.</p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<h2>Access Saved Places From Any Device</h2>
-						<p>Install the free Mappingbird app on your Android phone so you can access your saved places whenever and wherever you need them. (iOS app coming soon!)</p>
+						<p>Install the free Mappingbird app on your Android phone so you can access your saved places whenever and wherever you need them.</p>
 						<ul class="list-inline">
                             <li><a href="//play.google.com/store/apps/details?id=com.mpbd.mappingbird" target="_blank"><img src="{{ STATIC_URL }}new_index/images/googleplay_icon.png" id="google-play-icon" class="track-click" /></a></li>
                             <li><a href="javascript:void(0);" ng-click="open()"><img src="{{ STATIC_URL }}new_index/images/appstore_icon.png" id="app-store-icon" class="track-click" /></a></li>
@@ -159,7 +212,8 @@
 				</div>
 			</div>
 		</section>
-		<section class="how">
+		<!-- End of what section -->
+		<!--section class="how">
             {% verbatim %}
 			<h1>How It Works</h1>
 			<div ng-controller="CarouselDemoCtrl" class="carousel-wrapper container">
@@ -176,7 +230,7 @@
 				</div>
 		  	</div>
             {% endverbatim %}
-		</section>
+		</section-->
 		<section class="follow-us">
 			<div class="container-fluid">
 				<div class="row">
@@ -250,7 +304,67 @@
 				    }
 				  });
 				});
+
+				//add hero video background
+				scaleVideoContainer();
+
+				initBannerVideoSize('.video-container .poster img');
+				initBannerVideoSize('.video-container .filter');
+				initBannerVideoSize('.video-container video');
+
+				$(window).on('resize', function() {
+					scaleVideoContainer();
+					scaleBannerVideoSize('.video-container .poster img');
+					scaleBannerVideoSize('.video-container .filter');
+					scaleBannerVideoSize('.video-container video');
+				});
 			});
+
+			function scaleVideoContainer() {
+
+				var height = $(window).height() + 5;
+				var unitHeight = parseInt(height) + 'px';
+				$('.homepage-hero-module').css('height',unitHeight);
+
+			}
+
+			function initBannerVideoSize(element){
+
+				$(element).each(function(){
+					$(this).data('height', $(this).height());
+					$(this).data('width', $(this).width());
+				});
+
+				scaleBannerVideoSize(element);
+
+			}
+
+			function scaleBannerVideoSize(element){
+
+				var windowWidth = $(window).width(),
+						windowHeight = $(window).height() + 5,
+						videoWidth,
+						videoHeight;
+
+				console.log(windowHeight);
+
+				$(element).each(function(){
+					var videoAspectRatio = $(this).data('height')/$(this).data('width');
+
+					$(this).width(windowWidth);
+
+					if(windowWidth < 1000){
+						videoHeight = windowHeight;
+						videoWidth = videoHeight / videoAspectRatio;
+						$(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
+
+						$(this).width(videoWidth).height(videoHeight);
+					}
+
+					$('.homepage-hero-module .video-container video').addClass('fadeIn animated');
+
+				});
+			}
 
 			$('.track-click').on('click', function() {
 				sga($(this).attr('id'), 'click', 'fb-landing');

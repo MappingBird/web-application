@@ -356,7 +356,7 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
                                       type: 'selectListByPoint',
                                       data: { id: point.id }
                                   });
-                                };
+                                }
 
                                 return false;
                             };
@@ -368,14 +368,18 @@ mappingbird.SaveApp.controller('mapController', ['$scope', 'Presets', 'MapPoints
 
             }
 
-            if ($scope.activeViewPoints && $scope.activeViewPoints.length == 1) {
-                console.log('ActiveViewPoint only one, zoom to 16');
+            // ActiveViewPoint only one, zoom to 16
+            if ($scope.activeViewPoints && $scope.activeViewPoints.length === 1) {
                 map.setZoom(16);
             }
-
+            
             console.log('viewOverlays post marker');
             console.log(viewOverlays);
 
+        } else {
+          // no point
+          map.setCenter({lat: 23.6871252, lng: 120.9912367});
+          map.setZoom(8);
         }
     }
 
