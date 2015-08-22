@@ -139,7 +139,7 @@ def scraper(request):
             image_url = image
         elif '//' in image[:2]:
             image_url = u'%s:%s' % (urlparsed.scheme, image)
-        elif image[0] == '/':
+        elif 0 < len(image) and image[0] == '/':
             image_url = u'%s://%s/%s' % (urlparsed.scheme, urlparsed.hostname, image)
         else:
             image_url = urljoin(url, image)
