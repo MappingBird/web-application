@@ -379,6 +379,18 @@ section.how .right.carousel-control>span{right: 12px;}
 /* Responsive */
 /* Screen width 801~1200 */
 @media only screen and (min-width: 801px) and (max-width: 1200px){
+	.video-container video.fillWidth{width: 1280px;}
+	section.intro h1{font-size: 24px;}
+	section.efficient{
+		height: auto;
+		padding: 60px 30px;
+	}
+	section.efficient h2{line-height: initial;}
+	#efficient-ready-to-go-button{
+		display: block;
+		margin: 20px auto 0;
+		width: 240px;
+	}
 	section.how {height: 540px;}
 	section.how .carousel-wrapper{background-size: 520px; margin-top: -80px;}
 	section.how .carousel-indicators { bottom: 420px; }
