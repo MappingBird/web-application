@@ -412,11 +412,27 @@ section.how .right.carousel-control>span{right: 12px;}
 		padding: 0px;
 	}
 	.mb-hero{padding: 0 25px; bottom: 5%;}
+	section.intro .container{
+		margin-top: 50%;
+		top: -260px;
+	}
 	section.intro h1, section.how h1{font-size: 32px;}
 	.jumbotron p{font-size: 12px;}
-	.mb-intro-actions{display: none;}
-	.learnmore_wrapper{display:none;}
+	#ready-to-go-button{display: none;}
+	.learnmore_wrapper{margin-top: 120px;}
 	.vertical-align.mb-hero{top: 30%;}
+	img.intro-screenshots{display: none;}
+	section.testimony .user-traveler,
+	section.testimony .user-freelancer,
+	section.testimony .user-foodies{width: 100%;}
+	section.testimony .col-md-4{background-size: auto 420px; padding-top: 395px;}
+	section.efficient{height: auto; padding: 60px 30px;}
+	section.efficient h2{font-size: 28px; line-height: initial;}
+	#efficient-ready-to-go-button{
+		display: block;
+		width: 240px;
+		margin: 20px auto 0;
+	}
 	section.what h2, section.follow-us h2{
 		margin-top: 10px;
 		font-size: 25px;
