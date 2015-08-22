@@ -391,6 +391,7 @@ section.how .right.carousel-control>span{right: 12px;}
 /* Screen width 501~800 */
 @media only screen and (min-width: 501px) and (max-width: 800px){
 	body{ font-size: 14px;}
+	.video-container .filter{display: none;}
 	section.intro{
 		height: 360px;
 	}
@@ -414,7 +415,7 @@ section.how .right.carousel-control>span{right: 12px;}
 	.mb-hero{padding: 0 25px; bottom: 5%;}
 	section.intro .container{
 		margin-top: 50%;
-		top: -260px;
+		top: -200px;
 	}
 	section.intro h1, section.how h1{font-size: 32px;}
 	.jumbotron p{font-size: 12px;}
