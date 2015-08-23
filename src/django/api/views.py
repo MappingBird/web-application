@@ -279,12 +279,10 @@ class DLWorker(threading.Thread):
 
     def run(self):
         while True:
-            try:
+            try:  
                 dic = self.q_.get()
-
-                req = dic['req']
-                imgVS = dic['imgVS']
-            
+                req = dic['req'] if 'req' in dic else None
+                imgVS = dic['imgVS'] if 'imgVS' in dic else None
                 data = req.DATA.copy()
 
                 # save thumbnail
@@ -358,7 +356,7 @@ class ImageViewSet(APIViewSet):
     #-- threading image download  
     img_q = Queue.Queue()
     dlWorkerPool = None
-    SIZE_DLWorkers = 40
+    SIZE_DLWorkers = 20
 
     def create(self, request, *args, **kwargs):
         #-- init download worker pool
@@ -505,8 +503,6 @@ def places(request):
     onlyPlaceDB = request.GET.get('onlyPlaceDB')
     if onlyPlaceDB and 'true' == onlyPlaceDB.lower():
         q_str = request.GET.get('q')
-#        q_str = "coffee"
-#        print q_str
         if q_str:
             b = owl.BarnOwl()
             points = b.getPointByKeyword(q_str)
@@ -532,9 +528,8 @@ def places(request):
 
     if request.GET.get('url'):
         url = request.GET.get('url')
-#        url = 'http://www.ipeen.com.tw/comment/652034'
-#        print url
 
+        #-- query placeDB
         b = owl.BarnOwl()
         points = b.getPointByUrl(url)
         try:
@@ -561,7 +556,6 @@ def places(request):
 
         result = None
         lang = request.GET.get('language')
-#        print lang
         if lang:
             result = gp.text_search(query=request.GET.get('q'), language=lang)
         else:
