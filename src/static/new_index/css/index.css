@@ -247,15 +247,15 @@ img.intro-screenshots{ width: 100%; }
 }
 .testimony .user-traveler{
 	background-image: url('../images/user_traveler.jpg');
-	width: 33%;
+	/*width: 33%;*/
 }
 .testimony .user-freelancer{
 	background-image: url('../images/user_freelancer.jpg');
-	width: 34%;
+	/*width: 34%;*/
 }
 .testimony .user-foodies{
 	background-image: url('../images/user_foodies.jpg');
-	width: 33%;
+	/*width: 33%;*/
 }
 
 /* Efficient */
@@ -298,7 +298,7 @@ section.how .carousel-wrapper{
 }
 section.how .carousel-wrapper>div{
 	padding: 0;
-	margin: 0 auto; 
+	margin: 0 auto;
 	height: 100%;
 }
 section.how .carousel{
