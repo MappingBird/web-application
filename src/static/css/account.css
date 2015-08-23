@@ -3,12 +3,12 @@
 
 /* Base -------------------------------------------------------------------------------------- */
 h1{
-	font-size: 88px;
+    line-height: initial;
 }
 hr{
 	border-top: 1px solid #ccc;
 	border-bottom: none;
-	margin: 60px 0 36px;
+	margin: 30px 0;
 }
 
 /* Layout ------------------------------------------------------------------------------------ */
@@ -17,7 +17,7 @@ section.main{
 	background: #ebebeb;
 }
 section.main .container{
-	margin-top: 60px;
+	margin-top: 30px;
 	text-align: center;
 	color: #707070;
 }
