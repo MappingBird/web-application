@@ -372,9 +372,6 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
             console.log(data);
             $scope.collections.push(data);
 
-            // set this collection as active collection
-            $scope.selectPointCollection(null, data.id);
-
             // send event
             BroadcastService.prepForBroadcast({
                 type: 'collectionUpdate',

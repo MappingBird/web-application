@@ -1203,6 +1203,11 @@ ul.types > li{
 .collection-header .list-view.active{
 	background-color: #01A9E7;
 }
+
+.collection-list-btn-create {
+	position: relative;
+	left: 180px;
+}
 .collection-list-wrapper .nav{
 	width: 350px;
 	overflow: hidden;

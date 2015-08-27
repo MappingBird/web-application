@@ -30,7 +30,7 @@
 <a href="#" class="btn-default pingismo-btn" ng-click="toggleEditMode($event)" id="edit-list-btn" ng-bind="editMode && 'Done' || 'Edit'" ng-show="!showDeleteCollectionDialog"></a>
 
 <!-- Create Collection Button -->
-<a href="#" class="btn-default pingismo-btn" ng-click="createCollection($event)"></a>
+<a href="#" class="btn-default pingismo-btn collection-list-btn-create" ng-click="createCollection($event)" ng-show="!showDeleteCollectionDialog">+</a>
 
 <!-- Delete a collection -->
 <div class="delete-collection-wrapper" ng-class="{visible: showDeleteCollectionDialog}">
