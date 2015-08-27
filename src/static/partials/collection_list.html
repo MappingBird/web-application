@@ -29,6 +29,9 @@
 <!-- Edit Button -->
 <a href="#" class="btn-default pingismo-btn" ng-click="toggleEditMode($event)" id="edit-list-btn" ng-bind="editMode && 'Done' || 'Edit'" ng-show="!showDeleteCollectionDialog"></a>
 
+<!-- Create Collection Button -->
+<a href="#" class="btn-default pingismo-btn" ng-click="createCollection($event)"></a>
+
 <!-- Delete a collection -->
 <div class="delete-collection-wrapper" ng-class="{visible: showDeleteCollectionDialog}">
     <h4>Delete "<i>[[deleteCollectionName]]</i>" permanently?</h4>

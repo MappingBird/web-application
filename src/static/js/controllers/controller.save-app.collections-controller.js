@@ -1,4 +1,4 @@
-mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collections', 'MapPoints', 'BroadcastService', '$state', 'Analytics', function($scope, Collection, Collections, MapPoints, BroadcastService, $state, Analytics) {
+mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collections', 'MapPoints', 'BroadcastService', '$state', 'Analytics', 'User', function($scope, Collection, Collections, MapPoints, BroadcastService, $state, Analytics, User) {
 
     $scope.activeCollectionId;
     $scope.activeCollectionPoints = [];
@@ -6,6 +6,12 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.activeCollectionName = '';
     $scope.collectionsListVisible = false;
     $scope.editMode = false;
+
+    // delete collection use
+    $scope.deleteCollectionId = null;
+    $scope.deleteCollectionName = null;
+    $scope.showDeleteCollectionDialog = false;
+
 
     // delete collection use
     $scope.deleteCollectionId = null;
@@ -184,11 +190,11 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
             if (name === 'Uncategorized') {
               return;
             }
+
             // confirm dialog
             $scope.deleteCollectionId = id;
             $scope.deleteCollectionName = name;
             $scope.showDeleteCollectionDialog = true;
-
         } else if ($scope.listMode) {
           // collection + list view - change collection
           console.log('viewCollection&List ' + id);
@@ -358,6 +364,34 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         Analytics.registerEvent('Collection', 'Change to Map View', 'Collection List');
     };
 
+
+    function newCollection(d) {
+        //var newCollection = new Collection();
+        Collection.save(d, function(data, headers){
+            console.log('saveNewCollection successful');
+            console.log(data);
+            $scope.collections.push(data);
+
+            // set this collection as active collection
+            $scope.selectPointCollection(null, data.id);
+
+            // send event
+            BroadcastService.prepForBroadcast({
+                type: 'collectionUpdate',
+                data: { }
+            });
+
+            // google analytics
+            Analytics.registerEvent('Collection', 'Create Collection', 'From Collection List');
+        });
+
+    }
+
+    $scope.createCollection = function ($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      newCollection({ name: $scope.activeCollectionName + Math.random()*100, user: User.data.id });
+    };
 
     $scope.$on('stateChange', function() {
         console.log ('[[[stateChange collectionsController]]]');
