@@ -106,13 +106,14 @@ footer.mb-footer .brand-logo{
 .navbar.navbar-default.mb-navbar-default button.mb-signin{
 	background-color: transparent;
 	border-color: #ffffff;
+	margin-right: 10px;
 }
 .navbar.navbar-default.mb-navbar-default button:hover{
 	background-color: #d1711e;
 	border-color: #d1711e;
 }
-button.mb-signin .mdi{margin-bottom: 2px;}
-button.mb-signin .mdi:before{font-size: 18px!important;}
+.navbar.navbar-default.mb-navbar-default button .mdi{margin-bottom: 2px;}
+.navbar.navbar-default.mb-navbar-default button .mdi:before{font-size: 18px!important;}
 
 /* inverse navigation bar */
 .navbar.navbar-default.mb-navbar-inverse{
