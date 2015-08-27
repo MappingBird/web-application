@@ -30,7 +30,7 @@
 <a href="#" class="btn-default pingismo-btn" ng-click="toggleEditMode($event)" id="edit-list-btn" ng-bind="editMode && 'Done' || 'Edit'" ng-show="!showDeleteCollectionDialog"></a>
 
 <!-- Create Collection Button -->
-<a href="#" class="btn-default pingismo-btn collection-list-btn-create" ng-click="createCollection($event)" ng-show="!showDeleteCollectionDialog">+</a>
+<a href="#" class="btn-default pingismo-btn collection-list-btn-create" ng-click="createCollectionModal($event)" ng-show="!showDeleteCollectionDialog">+</a>
 
 <!-- Delete a collection -->
 <div class="delete-collection-wrapper" ng-class="{visible: showDeleteCollectionDialog}">
@@ -41,4 +41,22 @@
         <a href="#" class="btn-risk pingismo-btn" ng-click="deleteCollection($event)">Yes, Delete It.</a>
         <a href="#" class="btn-default pingismo-btn" ng-click="unselectCollectionForDelete($event)">Cancel</a>
     </div>
+</div>
+
+<!-- Create Collection Modal Box , special hack style for this -->
+<div class="modal fade" id="createCollectionModal" style="width: 420px;top: 100px;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="padding:0;border-bottom: 0;">
+        <h4 class="modal-title" style="margin: 24px 30px;">CREATE A NEW COLLECTION</h4>
+      </div>
+      <div class="modal-body" style="padding:0">
+        <input class="input-xlarge" type="text" placeholder="New Collection Name" style="width:345px;margin: 0px 30px;" ng-model="newCollectionName"/>
+      </div>
+      <div class="modal-footer" style="text-align: center;background-color: white;margin: 24px 30px;padding: 24px 0 0 0;">
+        <button type="button" ng-click="createCollection($event)" style="background-color: rgb(1, 169, 231);color: #fff;border: 0;padding: 5px 20px;">Create New</button>
+        <button type="button" data-dismiss="modal" style="border: 0;color: #fff;background-color: #655A5A;padding: 5px 20px;margin-left: 8px;">Cancel</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </div>

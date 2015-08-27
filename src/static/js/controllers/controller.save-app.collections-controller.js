@@ -365,7 +365,7 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     };
 
 
-    function newCollection(d) {
+    function newCollection(d, fn) {
         //var newCollection = new Collection();
         Collection.save(d, function(data, headers){
             console.log('saveNewCollection successful');
@@ -378,16 +378,28 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
                 data: { }
             });
 
+            // callback
+            fn();
+
             // google analytics
             Analytics.registerEvent('Collection', 'Create Collection', 'From Collection List');
         });
 
     }
 
+    $scope.createCollectionModal = function ($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $('#createCollectionModal').modal('toggle');
+      $scope.newCollectionName = '';
+    };
+
     $scope.createCollection = function ($event) {
       $event.preventDefault();
       $event.stopPropagation();
-      newCollection({ name: $scope.activeCollectionName + Math.random()*100, user: User.data.id });
+      newCollection({ name: $scope.newCollectioName, user: User.data.id }, function () {
+        $('#createCollectionModal').modal('hide');
+      });
     };
 
     $scope.$on('stateChange', function() {
