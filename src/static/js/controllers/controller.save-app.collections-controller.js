@@ -10,14 +10,10 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     // delete collection use
     $scope.deleteCollectionId = null;
     $scope.deleteCollectionName = null;
-    $scope.showDeleteCollectionDialog = false;
-
 
     // delete collection use
     $scope.deleteCollectionId = null;
     $scope.deleteCollectionName = null;
-    $scope.showDeleteCollectionDialog = false;
-
 
     // watchers
     $scope.$watch(function(){return Collections.activeCollectionId;}, function(activeCollectionId, oldActiveCollectionId) {
@@ -191,10 +187,13 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
               return;
             }
 
+            // popup modal
+            $('#deleteCollectionModal').modal('toggle');
+
             // confirm dialog
             $scope.deleteCollectionId = id;
             $scope.deleteCollectionName = name;
-            $scope.showDeleteCollectionDialog = true;
+
         } else if ($scope.listMode) {
           // collection + list view - change collection
           console.log('viewCollection&List ' + id);
@@ -227,6 +226,9 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         // hide collection list before deletion
         hideCollections();
 
+        // dismiss delete collection modal
+        $('#deleteCollectionModal').modal('hide');
+
         console.log('delete collection: ' + $scope.deleteCollectionId);
         BroadcastService.prepForBroadcast({
             type: 'requestDeleteCollection',
@@ -237,7 +239,6 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         });
 
         $scope.editMode = false;
-        $scope.showDeleteCollectionDialog = false;
 
         // google analytics
         Analytics.registerEvent('Collection', 'Delete collection', 'Collection List');
@@ -248,7 +249,6 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         $event.stopPropagation();
 
         $scope.editMode = false;
-        $scope.showDeleteCollectionDialog = false;
 
         console.log('unselect delete collection: ' + $scope.deleteCollectionId);
     };
@@ -397,7 +397,7 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.createCollection = function ($event) {
       $event.preventDefault();
       $event.stopPropagation();
-      newCollection({ name: $scope.newCollectioName, user: User.data.id }, function () {
+      newCollection({ name: $scope.newCollectionName, user: User.data.id }, function () {
         $('#createCollectionModal').modal('hide');
       });
     };

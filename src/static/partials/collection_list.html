@@ -1,4 +1,4 @@
-<div class="collection-header" ng-show="!showDeleteCollectionDialog">
+<div class="collection-header">
     <a href="#" class="collection-name" ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="showCollections($event)">
         <i class="icon-expand-collapse"></i>
         <span ng-bind="activeCollectionName"></span>
@@ -11,7 +11,7 @@
     <div class="clearfix"></div>
 </div>
 
-<ul class="nav nav-stacked" ng-show="!showDeleteCollectionDialog" height-to-bottom m-custom-scrollbar="{scrollInertia: 0}">
+<ul class="nav nav-stacked" height-to-bottom m-custom-scrollbar="{scrollInertia: 0}">
     <!-- show collections[0] uncategorized collection -->
     <li ng-class="{active: collections[0].id == activeCollectionId}">
         <a href="#" class="collection" ng-click="clickCollection($event, collections[0].id, collections[0].name)">
@@ -27,13 +27,13 @@
     </li>
 </ul>
 <!-- Edit Button -->
-<a href="#" class="btn-default pingismo-btn" ng-click="toggleEditMode($event)" id="edit-list-btn" ng-bind="editMode && 'Done' || 'Edit'" ng-show="!showDeleteCollectionDialog"></a>
+<a href="#" class="btn-default pingismo-btn" ng-click="toggleEditMode($event)" id="edit-list-btn" ng-bind="editMode && 'Done' || 'Edit'"></a>
 
 <!-- Create Collection Button -->
-<a href="#" class="btn-default pingismo-btn collection-list-btn-create" ng-click="createCollectionModal($event)" ng-show="!showDeleteCollectionDialog">+</a>
+<a href="#" class="btn-default pingismo-btn collection-list-btn-create" ng-click="createCollectionModal($event)">+</a>
 
-<!-- Delete a collection -->
-<div class="delete-collection-wrapper" ng-class="{visible: showDeleteCollectionDialog}">
+<!-- Delete collection Modal Box-->
+<!-- <div class="delete-collection-wrapper" ng-class="{visible: showDeleteCollectionDialog}">
     <h4>Delete "<i>[[deleteCollectionName]]</i>" permanently?</h4>
     Do you really want to delete this collection? Once you delete it, all places saved under this collection will be removed from your map forever.
     <div class="pin-content-footer">
@@ -41,6 +41,27 @@
         <a href="#" class="btn-risk pingismo-btn" ng-click="deleteCollection($event)">Yes, Delete It.</a>
         <a href="#" class="btn-default pingismo-btn" ng-click="unselectCollectionForDelete($event)">Cancel</a>
     </div>
+</div> -->
+
+<div class="modal fade in" id="deleteCollectionModal" style="width: 420px; top: 100px; display: block;" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="padding:0;border-bottom: 0;">
+        <h4 class="modal-title" style="margin: 24px 30px;">DELETE "[[deleteCollectionName]]" PERMANENTLY?</h4>
+      </div>
+      <div class="modal-body" style="padding: 0;/* margin: 0 30px; */">
+        <p style="
+    margin: 0 30px;
+">Do you really want to delete this collection? Once you delete it, all places saved under this collection will be removed from your map forever.
+</p>
+
+      </div>
+      <div class="modal-footer" style="text-align: center;background-color: white;margin: 24px 30px;padding: 24px 0 0 0;">
+        <button type="button" ng-click="deleteCollection($event)" style="background-color: rgb(231, 1, 1);color: #fff;border: 0;padding: 5px 20px;">Yes, Delete it</button>
+        <button type="button" data-dismiss="modal" ng-click="unselectCollectionForDelete($event)" style="border: 0;color: #fff;background-color: #655A5A;padding: 5px 20px;margin-left: 8px;">Cancel</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </div>
 
 <!-- Create Collection Modal Box , special hack style for this -->

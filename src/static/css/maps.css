@@ -1120,7 +1120,7 @@ ul.types > li{
 .collection-list-wrapper .collection-header{
 	position: relative;
 	margin-bottom: 15px;
-	z-index: 99999999; /* no one can cover this header */
+	z-index: 1000; /* no one can cover this header */
 }
 .collection-header .collection-name{
 	line-height: 20px;
@@ -1245,7 +1245,7 @@ ul.types > li{
 	background-color: #01a9e7;
 }
 
-/* confirm to delete collection */
+/* confirm to delete collection 
 .delete-collection-wrapper{
 	position: absolute;
 	left: 0;
@@ -1285,6 +1285,7 @@ ul.types > li{
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
+*/
 /* pin content */
 .pin-content-wrapper,
 .delete-pin-wrapper{
