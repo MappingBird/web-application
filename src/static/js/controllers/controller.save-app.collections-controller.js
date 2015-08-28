@@ -1,4 +1,4 @@
-mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collections', 'MapPoints', 'BroadcastService', '$state', 'Analytics', 'User', function($scope, Collection, Collections, MapPoints, BroadcastService, $state, Analytics, User) {
+mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collections', 'MapPoints', 'BroadcastService', '$state', 'Analytics', 'User', '$http', function($scope, Collection, Collections, MapPoints, BroadcastService, $state, Analytics, User, $http) {
 
     $scope.activeCollectionId;
     $scope.activeCollectionPoints = [];
@@ -11,9 +11,8 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.deleteCollectionId = null;
     $scope.deleteCollectionName = null;
 
-    // delete collection use
-    $scope.deleteCollectionId = null;
-    $scope.deleteCollectionName = null;
+    // edit collection use
+    $scope.editCollection = [];
 
     // watchers
     $scope.$watch(function(){return Collections.activeCollectionId;}, function(activeCollectionId, oldActiveCollectionId) {
@@ -333,6 +332,37 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         $event.preventDefault();
         $event.stopPropagation();
         $scope.editMode = !$scope.editMode;
+
+        if ($scope.editMode == true) {
+          // copy all value to input text box
+          for (var c in $scope.collections) {
+              if ($scope.editCollection[c] != $scope.collections[c]) {
+                $scope.editCollection[c] = {};
+                $scope.editCollection[c].name = $scope.collections[c].name;
+                $scope.editCollection[c].id = $scope.collections[c].id;
+              }
+
+          }
+        } else if ($scope.editMode == false) {
+          for (var k in $scope.collections) {
+              // Check collection name, rename if different
+              if ($scope.editCollection[k].name != $scope.collections[k].name) {
+                // Collection updated
+                $http.put('/api/collections/' + $scope.editCollection[k].id, {
+                    name: $scope.editCollection[k].name,
+                    user: User.data.id
+                },{
+                  headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                  }
+                }
+              ).success(function(data, headers) {
+                  $scope.collections[k].name = $scope.editCollection[k].name;
+                  Analytics.registerEvent('Collection', 'Rename Collection', 'From Collection List', $scope.collections[k].name + "=>" + $scope.editCollection[k].name);
+                });
+              }
+            }
+          }
     };
 
     $scope.gotoListView = function ($event) {
