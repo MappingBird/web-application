@@ -244,14 +244,14 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         Analytics.registerEvent('Collection', 'Delete collection', 'Collection List');
     };
 
-    $scope.unselectCollectionForDelete = function ($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.editMode = false;
-
-        console.log('unselect delete collection: ' + $scope.deleteCollectionId);
-    };
+    // $scope.unselectCollectionForDelete = function ($event) {
+    //     $event.preventDefault();
+    //     $event.stopPropagation();
+    //
+    //     $scope.editMode = false;
+    //
+    //     console.log('unselect delete collection: ' + $scope.deleteCollectionId);
+    // };
 
     $scope.showCollections = function($event) {
         $event.preventDefault();
