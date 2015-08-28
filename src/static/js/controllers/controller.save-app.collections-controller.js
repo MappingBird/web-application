@@ -356,11 +356,12 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
                     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
                   }
                 }
-              ).success(function(data, headers) {
-                  $scope.collections[k].name = $scope.editCollection[k].name;
-                  Analytics.registerEvent('Collection', 'Rename Collection', 'From Collection List', $scope.collections[k].name + "=>" + $scope.editCollection[k].name);
-                });
-              }
+                ).success(function(data, headers) {
+                    Analytics.registerEvent('Collection', 'Rename Collection', 'From Collection List', $scope.collections[k].name + "=>" + $scope.editCollection[k].name);
+                  });
+                // Change the name immediately  
+                $scope.collections[k].name = $scope.editCollection[k].name;
+                }
             }
           }
     };
