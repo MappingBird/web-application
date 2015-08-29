@@ -219,10 +219,10 @@ section.map-section{
 	height: -moz-calc(100% - 125px);
 	height: -webkit-calc(100% - 125px);
 	height: calc(100% - 125px);
-	left: 380px;
-	width: -moz-calc(100% - 380px);
-	width: -webkit-calc(100% - 380px);
-	width: calc(100% - 380px);
+	left: 300px;
+	width: -moz-calc(100% - 300px);
+	width: -webkit-calc(100% - 300px);
+	width: calc(100% - 300px);
 	top: 95px;
 }
 #map.full-tall {
@@ -1206,7 +1206,7 @@ ul.types > li{
 
 .collection-list-btn-create {
 	position: relative;
-	left: 180px;
+	left: 110px;
 }
 .collection-list-wrapper .nav{
 	width: 350px;
@@ -1245,7 +1245,7 @@ ul.types > li{
 	background-color: #01a9e7;
 }
 
-/* confirm to delete collection 
+/* confirm to delete collection
 .delete-collection-wrapper{
 	position: absolute;
 	left: 0;
@@ -1494,7 +1494,7 @@ ul.types > li{
 	transition: left 0.3s;
 }
 .collection-list-view.withCollectionList {
-	left: 380px;
+	left: 300px;
 }
 .collection-listview{
   background-color: rgba(0,0,0,0.1);
