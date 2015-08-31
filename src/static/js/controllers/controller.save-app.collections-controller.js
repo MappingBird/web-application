@@ -1,4 +1,4 @@
-mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collections', 'MapPoints', 'BroadcastService', '$state', 'Analytics', function($scope, Collection, Collections, MapPoints, BroadcastService, $state, Analytics) {
+mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collections', 'MapPoints', 'BroadcastService', '$state', 'Analytics', 'User', '$http', function($scope, Collection, Collections, MapPoints, BroadcastService, $state, Analytics, User, $http) {
 
     $scope.activeCollectionId;
     $scope.activeCollectionPoints = [];
@@ -10,8 +10,9 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     // delete collection use
     $scope.deleteCollectionId = null;
     $scope.deleteCollectionName = null;
-    $scope.showDeleteCollectionDialog = false;
 
+    // edit collection use
+    $scope.editCollection = [];
 
     // delete collection use
     $scope.deleteCollectionId = null;
@@ -191,10 +192,13 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
               return;
             }
 
+            // popup modal
+            $('#deleteCollectionModal').modal('toggle');
+
             // confirm dialog
             $scope.deleteCollectionId = id;
             $scope.deleteCollectionName = name;
-            $scope.showDeleteCollectionDialog = true;
+
         } else if ($scope.listMode) {
           // collection + list view - change collection
           console.log('viewCollection&List ' + id);
@@ -227,6 +231,9 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         // hide collection list before deletion
         hideCollections();
 
+        // dismiss delete collection modal
+        $('#deleteCollectionModal').modal('hide');
+
         console.log('delete collection: ' + $scope.deleteCollectionId);
         BroadcastService.prepForBroadcast({
             type: 'requestDeleteCollection',
@@ -237,21 +244,19 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         });
 
         $scope.editMode = false;
-        $scope.showDeleteCollectionDialog = false;
 
         // google analytics
         Analytics.registerEvent('Collection', 'Delete collection', 'Collection List');
     };
 
-    $scope.unselectCollectionForDelete = function ($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.editMode = false;
-        $scope.showDeleteCollectionDialog = false;
-
-        console.log('unselect delete collection: ' + $scope.deleteCollectionId);
-    };
+    // $scope.unselectCollectionForDelete = function ($event) {
+    //     $event.preventDefault();
+    //     $event.stopPropagation();
+    //
+    //     $scope.editMode = false;
+    //
+    //     console.log('unselect delete collection: ' + $scope.deleteCollectionId);
+    // };
 
     $scope.showCollections = function($event) {
         $event.preventDefault();
@@ -333,6 +338,38 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         $event.preventDefault();
         $event.stopPropagation();
         $scope.editMode = !$scope.editMode;
+
+        if ($scope.editMode == true) {
+          // copy all value to input text box
+          for (var c in $scope.collections) {
+              if ($scope.editCollection[c] != $scope.collections[c]) {
+                $scope.editCollection[c] = {};
+                $scope.editCollection[c].name = $scope.collections[c].name;
+                $scope.editCollection[c].id = $scope.collections[c].id;
+              }
+
+          }
+        } else if ($scope.editMode == false) {
+          for (var k in $scope.collections) {
+              // Check collection name, rename if different
+              if ($scope.editCollection[k].name != $scope.collections[k].name) {
+                // Collection updated
+                $http.put('/api/collections/' + $scope.editCollection[k].id, {
+                    name: $scope.editCollection[k].name,
+                    user: User.data.id
+                },{
+                  headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                  }
+                }
+                ).success(function(data, headers) {
+                    Analytics.registerEvent('Collection', 'Rename Collection', 'From Collection List', $scope.collections[k].name + "=>" + $scope.editCollection[k].name);
+                  });
+                // Change the name immediately
+                $scope.collections[k].name = $scope.editCollection[k].name;
+                }
+            }
+          }
     };
 
     $scope.gotoListView = function ($event) {
@@ -364,6 +401,43 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         Analytics.registerEvent('Collection', 'Change to Map View', 'Collection List');
     };
 
+
+    function newCollection(d, fn) {
+        //var newCollection = new Collection();
+        Collection.save(d, function(data, headers){
+            console.log('saveNewCollection successful');
+            console.log(data);
+            $scope.collections.push(data);
+
+            // send event
+            BroadcastService.prepForBroadcast({
+                type: 'collectionUpdate',
+                data: { }
+            });
+
+            // callback
+            fn();
+
+            // google analytics
+            Analytics.registerEvent('Collection', 'Create Collection', 'From Collection List');
+        });
+
+    }
+
+    $scope.createCollectionModal = function ($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $('#createCollectionModal').modal('toggle');
+      $scope.newCollectionName = '';
+    };
+
+    $scope.createCollection = function ($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      newCollection({ name: $scope.newCollectionName, user: User.data.id }, function () {
+        $('#createCollectionModal').modal('hide');
+      });
+    };
 
     $scope.$on('stateChange', function() {
         console.log ('[[[stateChange collectionsController]]]');

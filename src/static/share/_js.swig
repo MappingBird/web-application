@@ -4,6 +4,7 @@
 <script src="../js/vendor/slimbox2/slimbox2.js"></script>
 <script src="../bower_components/fancybox/source/jquery.fancybox.pack.js"></script>
 <script src="../bower_components/fancybox/source/helpers/jquery.fancybox-media.js"></script>
+<script src="../bower_components/bootstrap/js/bootstrap-modal.js"></script>
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
