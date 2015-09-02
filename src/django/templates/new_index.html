@@ -374,6 +374,7 @@
 
 						$(this).width(videoWidth).height(videoHeight);
 
+						console.log('videoHeight:',videoHeight, 'windowHeight:', windowHeight);
 						if(videoHeight < windowHeight){
 							$(this).height(windowHeight).css('width','auto');
 						}
