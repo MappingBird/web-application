@@ -367,7 +367,7 @@
 
 					$(this).width(windowWidth);
 					console.log('videoWidth:', $(this).width(), 'windowWidth:',windowWidth);
-					console.log('videoHeight:',$(this).height(), 'windowHeight:', windowHeight);
+					console.log('videoHeight:',$(this).height(), 'windowHeight:', windowHeight, 'newHeight:', windowWidth * videoAspectRatio);
 
 					if(windowWidth < 1000){
 						videoHeight = windowHeight;
