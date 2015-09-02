@@ -365,7 +365,7 @@
 				$(element).each(function(){
 					var videoAspectRatio = $(this).data('height')/$(this).data('width');
 
-					$(this).width(windowWidth);
+					$(this).width(windowWidth).height(windowWidth * videoAspectRatio);
 					console.log($(this).height(), windowHeight);
 					if($(this).height() < windowHeight){
 						videoHeight = windowHeight;
