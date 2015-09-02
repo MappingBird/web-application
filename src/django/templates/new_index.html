@@ -366,7 +366,7 @@
 					var videoAspectRatio = $(this).data('height')/$(this).data('width');
 
 					$(this).width(windowWidth);
-
+					console.log($(this).height(), windowHeight);
 					if($(this).height() < windowHeight){
 						videoHeight = windowHeight;
 						videoWidth = videoHeight / videoAspectRatio;
