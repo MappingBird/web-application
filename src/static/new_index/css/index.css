@@ -85,7 +85,7 @@ footer.mb-footer .brand-logo{
 	bottom: 0;
 	/* fix */
 	width: auto !important;
-  height: 805px !important;
+    /* height: 805px !important; */
 }
 .video-container video.fillWidth {
 	width: 100%;
