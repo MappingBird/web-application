@@ -314,13 +314,13 @@
 				scaleVideoContainer();
 
 				initBannerVideoSize('.video-container .poster img');
-				//initBannerVideoSize('.video-container .filter');
+				initBannerVideoSize('.video-container .filter');
 				initBannerVideoSize('.video-container video');
 
 				$(window).on('resize', function() {
 					scaleVideoContainer();
 					scaleBannerVideoSize('.video-container .poster img');
-					//scaleBannerVideoSize('.video-container .filter');
+					scaleBannerVideoSize('.video-container .filter');
 					scaleBannerVideoSize('.video-container video');
 				});
 			});
@@ -346,7 +346,7 @@
 
 				$(element).each(function(){
 					$(this).data('height', 1080);
-					$(this).data('width', 1290);
+					$(this).data('width', 1920);
 				});
 
 				scaleBannerVideoSize(element);
@@ -366,10 +366,8 @@
 					var videoAspectRatio = $(this).data('height')/$(this).data('width');
 
 					$(this).width(windowWidth);
-					console.log('oriHeight:', $(this).data('height'), 'oriWidth:', $(this).data('width'));
-					console.log('windowWidth:', windowWidth, 'windowHeight:', windowHeight, 'videoAspectRatio', videoAspectRatio);
-					console.log('windowWidth * videoAspectRatio:', windowWidth * videoAspectRatio, 'windowHeight:', windowHeight);
-					if($(this).height() < windowHeight){
+
+					if(windowWidth < 1000){
 						videoHeight = windowHeight;
 						videoWidth = videoHeight / videoAspectRatio;
 						$(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
