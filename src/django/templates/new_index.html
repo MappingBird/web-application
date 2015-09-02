@@ -374,7 +374,9 @@
 						$(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
 
 						$(this).width(videoWidth).height(videoHeight);
-					} else if($(this).height() < windowHeight) {
+					}
+
+					if($(this).height() < windowHeight) {
 						$(this).height(windowHeight).css('width','auto');
 					}
 
