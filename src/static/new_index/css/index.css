@@ -152,9 +152,10 @@ a.btn-primary.mb-play{
 
 /* Intro */
 .intro .container{
-	position: relative;
-	top: 50%;
-	margin-top: -300px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 .mb-intro-actions{
 	margin-top: 0;
@@ -215,7 +216,7 @@ a.btn-primary.mb-play{
 }
 .learnmore_wrapper{
 	color: #fff;
-	margin-top: 60px;
+	margin-top: 50px;
 	display: block;
 }
 .learnmore_wrapper:hover, .learnmore_wrapper:active, .learnmore_wrapper:visited{
@@ -434,10 +435,6 @@ section.how .right.carousel-control>span{right: 12px;}
 		padding: 0px;
 	}
 	.mb-hero{padding: 0 25px; bottom: 5%;}
-	section.intro .container{
-		margin-top: 50%;
-		top: -200px;
-	}
 	section.intro h1, section.how h1{font-size: 32px;}
 	.jumbotron p{font-size: 12px;}
 	#ready-to-go-button{display: none;}
@@ -524,10 +521,6 @@ section.how .right.carousel-control>span{right: 12px;}
 		padding: 0px;
 	}
 	.mb-hero{bottom: 5%;}
-	section.intro .container{
-		margin-top: 50%;
-		top: -120px;
-	}
 	section.intro h1, section.how h1{font-size: 24px;}
 	.jumbotron p{font-size: 12px;}
 	#ready-to-go-button{display: none;}
