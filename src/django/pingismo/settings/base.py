@@ -12,7 +12,7 @@ AUTH_USER_MODEL = 'base.User'
 # ADMINS = (
 #     # ('Your Name', 'your_email@example.com'),
 # )
-# 
+#
 # MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -27,7 +27,7 @@ TIME_ZONE = 'Asia/Taipei'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us' #zh_TW
 
 SITE_ID = 1
 
