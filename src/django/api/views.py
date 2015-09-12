@@ -98,7 +98,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
         data = {'collections': serializer.data, }
         try:
-            data['most_recent_modified_collection'] = queryset.order_by('-points__update_time')[0].id
+#            data['most_recent_modified_collection'] = queryset.order_by('-points__update_time')[0].id
+            data['most_recent_modified_collection'] = queryset.latest('update_time').id
         except Exception, e:
             data['most_recent_modified_collection'] = None
 
@@ -241,6 +242,12 @@ class PointViewSet(APIViewSet):
                 collection = Collection(user=request.user, name='Uncategorized')
                 collection.save()
             data['collection'] = collection.id
+        else:
+            #-- update collection update_time
+            c_id = data['collection']
+            collection = Collection.objects.get(pk=c_id)
+            collection.save()
+
 
         # Need to use Write Serializer for related field (location)
         serializer = PointWriteSerializer(data=data, files=request.FILES)
