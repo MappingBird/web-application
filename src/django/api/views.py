@@ -27,6 +27,7 @@ from geopy.geocoders import GoogleV3
 from googleplaces import GooglePlaces
 
 import requests
+import langid
 from PIL import Image as PImage
 
 from serializers import UserSerializer, CollectionSerializer, CollectionShortSerializer, PointShortSerializer, PointSerializer, PointWriteSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
@@ -543,7 +544,7 @@ def geocode(request):
 
 @api_view(['GET'])
 def places(request):
-    out = {}    
+    out = {}
     out['places'] = []
 
     #-- query placeDB only
@@ -601,12 +602,16 @@ def places(request):
     if request.GET.get('q'):
         gp = GooglePlaces(settings.GOOGLE_API_KEY)
 
-        result = None
+        q = request.GET.get('q')
         lang = request.GET.get('language')
-        if lang:
-            result = gp.text_search(query=request.GET.get('q'), language=lang)
-        else:
-            result = gp.text_search(query=request.GET.get('q'))
+
+        if lang is None or len(lang.strip()) <= 0:
+            lang = langid.classify(q)[0]
+
+        if 'zh' == lang:
+            lang = 'zh-TW'
+            
+        result = gp.text_search(query=q, language=lang)
 
         for place in result.places:
             place.get_details()
