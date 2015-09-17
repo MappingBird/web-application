@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-12 11:01+0800\n"
+"POT-Creation-Date: 2015-09-17 17:58+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,4 +43,128 @@ msgstr ""
 
 #: base/forms.py:17
 msgid "You must type the same password each time."
+msgstr ""
+
+#: templates/index.swig:74
+msgid "Remember Places With Just a Few Clicks"
+msgstr ""
+
+#: templates/new_index.html:104
+msgid "homeLoginBtn"
+msgstr "登入"
+
+#: templates/new_index.html:109
+#, fuzzy
+#| msgid "homeLoginBtn"
+msgid "homeSignUpBtn"
+msgstr "登入"
+
+#: templates/new_index.html:119
+msgid "homeHeroTitle1"
+msgstr ""
+
+#: templates/new_index.html:120
+msgid "homeHeroTitle2"
+msgstr ""
+
+#: templates/new_index.html:121
+msgid "homeHeroDescription"
+msgstr ""
+
+#: templates/new_index.html:124
+msgid "homePlayVideoBtn"
+msgstr ""
+
+#: templates/new_index.html:125
+msgid "homeGetStartBtn"
+msgstr ""
+
+#: templates/new_index.html:128
+msgid "homeLearnMore"
+msgstr ""
+
+#: templates/new_index.html:146
+msgid "homeTravelerTitle"
+msgstr ""
+
+#: templates/new_index.html:147
+msgid "homeTravelerDescription"
+msgstr ""
+
+#: templates/new_index.html:148
+msgid "homeTravelerNotes"
+msgstr ""
+
+#: templates/new_index.html:152
+msgid "homeFreelancerTitle"
+msgstr ""
+
+#: templates/new_index.html:153
+msgid "homeFreelancerDescription"
+msgstr ""
+
+#: templates/new_index.html:157
+msgid "homeFoodieTitle"
+msgstr ""
+
+#: templates/new_index.html:158
+msgid "homeFoodieDescription"
+msgstr ""
+
+#: templates/new_index.html:166
+msgid "homeHighlightDescription"
+msgstr ""
+
+#: templates/new_index.html:167
+#, fuzzy
+#| msgid "homeLoginBtn"
+msgid "homeHighlightBtn"
+msgstr "登入"
+
+#: templates/new_index.html:185
+msgid "homeFeaturesTitle"
+msgstr ""
+
+#: templates/new_index.html:189
+msgid "homeFeaturesSaveSubtitle"
+msgstr ""
+
+#: templates/new_index.html:190
+msgid "homeFeaturesSaveDescription"
+msgstr ""
+
+#: templates/new_index.html:201
+msgid "homeFeaturesMapSubtitle"
+msgstr ""
+
+#: templates/new_index.html:202
+msgid "homeFeaturesMapDescription"
+msgstr ""
+
+#: templates/new_index.html:207
+msgid "homeFeaturesMobileSubtitle"
+msgstr ""
+
+#: templates/new_index.html:208
+msgid "homeFeaturesMobileDescription"
+msgstr ""
+
+#: templates/new_index.html:246
+msgid "homeFacebookTitle"
+msgstr ""
+
+#: templates/new_index.html:247
+msgid "homeFacebookDescription"
+msgstr ""
+
+#: templates/new_index.html:248
+msgid "homeFacebookBtn"
+msgstr ""
+
+#: templates/new_index.html:257
+msgid "homeFooterSlogan"
+msgstr ""
+
+#: templates/new_index.html:269
+msgid "homeFooterCopyright"
 msgstr ""
