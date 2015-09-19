@@ -604,6 +604,8 @@ def places(request):
 
         q = request.GET.get('q')
         lang = request.GET.get('language')
+        
+        out['kw'] = q
 
         if lang is None or len(lang.strip()) <= 0:
             lang = langid.classify(q)[0]
@@ -615,10 +617,22 @@ def places(request):
 
         for place in result.places:
             place.get_details()
+
+            phone_number = None
+            if 'international_phone_number' in place.details:
+                phone_number = place.details['international_phone_number']
+
+            business_hours = None
+            if 'opening_hours' in place.details:
+                business_hours = place.details['opening_hours']
+
             entry = {
+                'place_id': place.place_id,
                 'name': place.name,
                 'address': place.formatted_address,
-                'coordinates': place.geo_location
+                'coordinates': place.geo_location,
+                'phone_number': phone_number,
+                'business_hours': business_hours
             }
 
             out['places'].append(entry)
