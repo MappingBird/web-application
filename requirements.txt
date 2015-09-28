@@ -20,9 +20,9 @@ oauthlib==0.7.2
 paramiko==1.15.1
 psycopg2==2.5.4
 pycrypto==2.6.1
-python-google-places==0.12.1
+python-google-places==1.0.1
 python-openid==2.2.5
 requests==2.4.3
 requests-oauthlib==0.4.2
 uservoice==0.0.20
-langid
+langid==1.1.5
