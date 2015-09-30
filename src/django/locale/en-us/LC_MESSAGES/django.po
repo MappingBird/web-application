@@ -51,120 +51,116 @@ msgstr ""
 
 #: templates/new_index.html:104
 msgid "homeLoginBtn"
-msgstr "登入"
+msgstr "LOG IN"
 
 #: templates/new_index.html:109
-#, fuzzy
-#| msgid "homeLoginBtn"
 msgid "homeSignUpBtn"
-msgstr "登入"
+msgstr "SIGN UP"
 
 #: templates/new_index.html:119
 msgid "homeHeroTitle1"
-msgstr ""
+msgstr "Found interesting places?"
 
 #: templates/new_index.html:120
 msgid "homeHeroTitle2"
-msgstr ""
+msgstr "Save to MappingBird."
 
 #: templates/new_index.html:121
 msgid "homeHeroDescription"
-msgstr ""
+msgstr "Just 1 click. MappingBird helps you bookmark places from any website, and easy to access on any PC and smartphones."
 
 #: templates/new_index.html:124
 msgid "homePlayVideoBtn"
-msgstr ""
+msgstr "WATCH 1 MIN INTRO"
 
 #: templates/new_index.html:125
 msgid "homeGetStartBtn"
-msgstr ""
+msgstr "GET STARTED. IT’S FREE."
 
 #: templates/new_index.html:128
 msgid "homeLearnMore"
-msgstr ""
+msgstr "WHY PEOPLE LOVE MAPPINGBIRD?"
 
 #: templates/new_index.html:146
 msgid "homeTravelerTitle"
-msgstr ""
+msgstr "Traveler"
 
 #: templates/new_index.html:147
 msgid "homeTravelerDescription"
-msgstr ""
+msgstr "While I was searching for rooms, restaurants, and things to do in planning stage, MappingBird instantly helped me save places when I found. Its offline map* allowed me accessing all my saved stuffs when on the go."
 
 #: templates/new_index.html:148
 msgid "homeTravelerNotes"
-msgstr ""
+msgstr "*offline map is still internal beta"
 
 #: templates/new_index.html:152
 msgid "homeFreelancerTitle"
-msgstr ""
+msgstr "Freelancer"
 
 #: templates/new_index.html:153
 msgid "homeFreelancerDescription"
-msgstr ""
+msgstr "I used to wander near my home to find good places for work. When I found one, I used MappingBird to bookmark it. Now I have a bunch of places in my pocket. I don’t have to worry if one place is too noisy, because I can find a new place whenever I want."
 
 #: templates/new_index.html:157
 msgid "homeFoodieTitle"
-msgstr ""
+msgstr "Foodies"
 
 #: templates/new_index.html:158
 msgid "homeFoodieDescription"
-msgstr ""
+msgstr "My friends all know we like to eat. Whenever they found nice restaurants, they share with us immediately. Then, we remembered those places to MappingBird, and visit them when we had time."
 
 #: templates/new_index.html:166
 msgid "homeHighlightDescription"
-msgstr ""
+msgstr "It only takes about 5 seconds to save a place."
 
 #: templates/new_index.html:167
-#, fuzzy
-#| msgid "homeLoginBtn"
 msgid "homeHighlightBtn"
-msgstr "登入"
+msgstr "SIGN UP NOW. IT’S FREE."
 
 #: templates/new_index.html:185
 msgid "homeFeaturesTitle"
-msgstr ""
+msgstr "How They Do?"
 
 #: templates/new_index.html:189
 msgid "homeFeaturesSaveSubtitle"
-msgstr ""
+msgstr "Save Places From Any Websites"
 
 #: templates/new_index.html:190
 msgid "homeFeaturesSaveDescription"
-msgstr ""
+msgstr "With the free Save to MappingBird browser button, you can bookmark interesting and intriguing places with just a few clicks while browsing."
 
 #: templates/new_index.html:201
 msgid "homeFeaturesMapSubtitle"
-msgstr ""
+msgstr "Get A Bird’s-eye View of All Your Places"
 
 #: templates/new_index.html:202
 msgid "homeFeaturesMapDescription"
-msgstr ""
+msgstr "Mappingbird offers ways to group your places by collections and/or tags. View groups of places on the map by selecting a collection."
 
 #: templates/new_index.html:207
 msgid "homeFeaturesMobileSubtitle"
-msgstr ""
+msgstr "Access Saved Places From Any Devices"
 
 #: templates/new_index.html:208
 msgid "homeFeaturesMobileDescription"
-msgstr ""
+msgstr "Install the free Mappingbird app on your Android phone so you can access your saved places whenever and wherever you need them."
 
 #: templates/new_index.html:246
 msgid "homeFacebookTitle"
-msgstr ""
+msgstr "Like our Facebook page"
 
 #: templates/new_index.html:247
 msgid "homeFacebookDescription"
-msgstr ""
+msgstr "Help us help you by sharing your likes and dislikes about MappingBird on our Facebook page."
 
 #: templates/new_index.html:248
 msgid "homeFacebookBtn"
-msgstr ""
+msgstr "LIKE US NOW"
 
 #: templates/new_index.html:257
 msgid "homeFooterSlogan"
-msgstr ""
+msgstr "Remember places for later."
 
 #: templates/new_index.html:269
 msgid "homeFooterCopyright"
-msgstr ""
+msgstr "Copyright © 2015 Mappingbird. All referred posts © their respective owners."

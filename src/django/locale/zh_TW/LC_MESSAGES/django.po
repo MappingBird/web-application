@@ -57,117 +57,113 @@ msgid "homeLoginBtn"
 msgstr "登入"
 
 #: templates/new_index.html:109
-#, fuzzy
-#| msgid "homeLoginBtn"
 msgid "homeSignUpBtn"
-msgstr "登入"
+msgstr "註冊"
 
 #: templates/new_index.html:119
 msgid "homeHeroTitle1"
-msgstr ""
+msgstr "發現有趣的地點？"
 
 #: templates/new_index.html:120
 msgid "homeHeroTitle2"
-msgstr ""
+msgstr "收藏到MappingBird吧。"
 
 #: templates/new_index.html:121
 msgid "homeHeroDescription"
-msgstr ""
+msgstr "僅一鍵，MappingBird就幫你把任何網站看到的地點收藏起來，同時，還可以輕易地在電腦或行動裝置中瀏覽。"
 
 #: templates/new_index.html:124
 msgid "homePlayVideoBtn"
-msgstr ""
+msgstr "觀看一分鐘介紹"
 
 #: templates/new_index.html:125
 msgid "homeGetStartBtn"
-msgstr ""
+msgstr "現在就免費試試吧"
 
 #: templates/new_index.html:128
 msgid "homeLearnMore"
-msgstr ""
+msgstr "為什麼他們喜歡MappingBird？"
 
 #: templates/new_index.html:146
 msgid "homeTravelerTitle"
-msgstr ""
+msgstr "旅行者"
 
 #: templates/new_index.html:147
 msgid "homeTravelerDescription"
-msgstr ""
+msgstr "每當我在規劃旅行要住哪裡、吃什麼以及去哪些景點看看時，MappingBird提供給我快速的收藏這些地點的功能。而它的離線地圖* 讓我在旅程中，可以更方便的參考我收集的這些資訊。"
 
 #: templates/new_index.html:148
 msgid "homeTravelerNotes"
-msgstr ""
+msgstr "* 離線地圖仍在內部測試階段"
 
 #: templates/new_index.html:152
 msgid "homeFreelancerTitle"
-msgstr ""
+msgstr "自由工作者"
 
 #: templates/new_index.html:153
 msgid "homeFreelancerDescription"
-msgstr ""
+msgstr "我常常會在住家附近尋找適合工作的咖啡廳。當我找到適合的，我就會把它收藏在MappingBird裡。現在，我已經有一個口袋名單，我再也不用擔心我常去的那間，是否客滿或太吵，因為，我可以隨時從口袋中，挑選下一間去工作。"
 
 #: templates/new_index.html:157
 msgid "homeFoodieTitle"
-msgstr ""
+msgstr "美食饕客"
 
 #: templates/new_index.html:158
 msgid "homeFoodieDescription"
-msgstr ""
+msgstr "我們的朋友都知道我們愛美食。每當他們發現值得推薦的餐廳，就會馬上分享給我們。然後，我們就會先收藏在MappingBird裡，之後再找個時間親自去嚐嚐。"
 
 #: templates/new_index.html:166
 msgid "homeHighlightDescription"
-msgstr ""
+msgstr "只要5秒鐘，就可以收藏一個最愛的地點。"
 
 #: templates/new_index.html:167
-#, fuzzy
-#| msgid "homeLoginBtn"
 msgid "homeHighlightBtn"
-msgstr "登入"
+msgstr "現在就免費試試吧"
 
 #: templates/new_index.html:185
 msgid "homeFeaturesTitle"
-msgstr ""
+msgstr "大家都怎麼用？"
 
 #: templates/new_index.html:189
 msgid "homeFeaturesSaveSubtitle"
-msgstr ""
+msgstr "收藏來自任何網站的地點"
 
 #: templates/new_index.html:190
 msgid "homeFeaturesSaveDescription"
-msgstr ""
+msgstr "透過免費的MappingBird按鈕，只要點擊幾下，你就可以收藏任何感興趣的地點。"
 
 #: templates/new_index.html:201
 msgid "homeFeaturesMapSubtitle"
-msgstr ""
+msgstr "輕鬆總覽已收藏的地點"
 
 #: templates/new_index.html:202
 msgid "homeFeaturesMapDescription"
-msgstr ""
+msgstr "MappingBird讓你可以透過建立不同的地圖或標籤來分類你的收藏。點擊地圖列表，快速切換不同的地圖收藏。"
 
 #: templates/new_index.html:207
 msgid "homeFeaturesMobileSubtitle"
-msgstr ""
+msgstr "在任何裝置上瀏覽收藏"
 
 #: templates/new_index.html:208
 msgid "homeFeaturesMobileDescription"
-msgstr ""
+msgstr "在行動裝置上安裝MappingBird應用程式，你就可以隨時隨地參考收藏的地點。"
 
 #: templates/new_index.html:246
 msgid "homeFacebookTitle"
-msgstr ""
+msgstr "關注我們的Facebook"
 
 #: templates/new_index.html:247
 msgid "homeFacebookDescription"
-msgstr ""
+msgstr "把你的喜歡與不喜歡，透過Facebook分享給我們知道，可以幫助我們更知道如何幫助你。"
 
 #: templates/new_index.html:248
 msgid "homeFacebookBtn"
-msgstr ""
+msgstr "現在就去關注"
 
 #: templates/new_index.html:257
 msgid "homeFooterSlogan"
-msgstr ""
+msgstr "一鍵收藏，隨時參考。"
 
 #: templates/new_index.html:269
 msgid "homeFooterCopyright"
-msgstr ""
+msgstr "Copyright © 2015 Mappingbird. 所有版權，屬於連結的原始作者。"
