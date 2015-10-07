@@ -24,7 +24,7 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         if ($scope.collections
             && $scope.collections.length > 0) {
 
-            console.log('get collectionName');
+            console.log('get collectionName.');
             for (var c in $scope.collections) {
                 if ($scope.activeCollectionId == $scope.collections[c].id) {
                     $scope.activeCollectionName = $scope.collections[c].name;
@@ -359,7 +359,7 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
                 ).success(function(data, headers) {
                     Analytics.registerEvent('Collection', 'Rename Collection', 'From Collection List', $scope.collections[k].name + "=>" + $scope.editCollection[k].name);
                   });
-                // Change the name immediately  
+                // Change the name immediately
                 $scope.collections[k].name = $scope.editCollection[k].name;
                 }
             }
