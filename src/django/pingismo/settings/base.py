@@ -27,7 +27,7 @@ TIME_ZONE = 'Asia/Taipei'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us' #zh_TW
+LANGUAGE_CODE = 'en' #zh_TW
 
 SITE_ID = 1
 
@@ -84,6 +84,7 @@ AUTHENTICATION_BACKENDS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -223,3 +224,16 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+# i18n
+from django.utils.translation import ugettext_lazy as _
+LANGUAGES = (
+    ('zh-tw', _('Traditional Chinese')),
+    ('en', _('English')),
+)
+
+
+LOCALE_PATHS = (
+    PROJECT_DIR.child('locale'),
+)
+

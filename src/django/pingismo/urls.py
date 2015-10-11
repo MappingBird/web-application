@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.i18n import i18n_patterns
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -23,7 +24,7 @@ urlpatterns = patterns('',
     url(r'', include('bucketlist.urls', namespace='bucketlist')),
 
     # home
-    url(r'^$', 'base.views.home', name='home'),
+    # url(r'^$', 'base.views.home', name='home'),
     url(r'^(?P<page>login|signup|settings|app)$', 'base.views.page', name='page'),
 )
 
@@ -35,6 +36,10 @@ urlpatterns += patterns('django.contrib.staticfiles.views',
         url(r'^signup$', 'serve', {'path': '/signup.html'}))
 urlpatterns += patterns('django.contrib.staticfiles.views',
         url(r'^forget/password$', 'serve', {'path': '/forget_password.html'}))
+
+# home, i18n
+urlpatterns += i18n_patterns('',
+        url(r'^$', 'base.views.home', name='home'))
 
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
