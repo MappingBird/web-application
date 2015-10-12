@@ -228,7 +228,7 @@ REST_FRAMEWORK = {
 # i18n
 from django.utils.translation import ugettext_lazy as _
 LANGUAGES = (
-    ('zh-tw', _('Traditional Chinese')),
+    ('zh_tw', _('Traditional Chinese')),
     ('en', _('English')),
 )
 
@@ -236,4 +236,3 @@ LANGUAGES = (
 LOCALE_PATHS = (
     PROJECT_DIR.child('locale'),
 )
-
