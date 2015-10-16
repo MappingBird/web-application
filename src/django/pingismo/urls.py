@@ -38,7 +38,11 @@ urlpatterns += patterns('django.contrib.staticfiles.views',
         url(r'^forget/password$', 'serve', {'path': '/forget_password.html'}))
 
 # home, i18n
-urlpatterns += i18n_patterns('',
+# 原本是用 i18n_patterns，這樣會區隔變成兩個網址
+# www.mappingbird.com/en/app
+# www.mappingbird.com/zh-tw/app
+# 為了避免變成這樣，所以改回用 patterns
+urlpatterns += patterns('',
         url(r'^$', 'base.views.home', name='home'))
 
 urlpatterns += staticfiles_urlpatterns()
