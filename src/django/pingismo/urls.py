@@ -1,8 +1,9 @@
+#-*- coding: utf-8 -*-　　　←表示使用 utf-8 編碼
+
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.conf.urls.i18n import i18n_patterns
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
