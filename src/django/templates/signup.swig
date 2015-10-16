@@ -79,8 +79,8 @@
         </div>
         <div class="lang-contact pull-right">
             <ul class="nav nav-pills">
-                <li><a href="#" ng-click="changeLanguage($event, 'zh_tw')">繁體中文</a></li>
-                <li class="divider-vertical pingismo-divider-vertical"></li>
+                <!-- <li><a href="#" ng-click="changeLanguage($event, 'zh-tw')">繁體中文</a></li>
+                <li class="divider-vertical pingismo-divider-vertical"></li> -->
                 <li class="active"><a href="#" ng-click="changeLanguage($event, 'en')">English</a></li>
             </ul>
             <p>
