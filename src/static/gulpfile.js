@@ -40,7 +40,7 @@ gulp.task('usemin', [],function () {
 });
 
 gulp.task('copy:swig:share', function() {
-    return gulp.src('../' + stageFile + '/_*.swig')
+    return gulp.src('../' + stageFile + '/share/_*.swig')
         .pipe(gulp.dest('../django/templates/share/'));
 });
 
@@ -53,7 +53,7 @@ gulp.task('clean:js', function(cb) {
 });
 
 gulp.task('copy:js', function() {
-    return gulp.src('../' + stageFile + '/static/js/*.js')
+    return gulp.src('../' + stageFile + '/js/*.js')
         .pipe(gulp.dest('js/'));
 });
 
