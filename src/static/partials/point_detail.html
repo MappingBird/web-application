@@ -31,7 +31,7 @@
             <p class="ref-address ng-binding" ng-bind="activeViewPoint.location.place_address"></p>
             <a ng-href="[[activeViewPoint.url]]" class="ref-url ellipsis" title="[[activeViewPoint.url]]" new-window ng-bind="activeViewPoint.url"></a>
 
-            <a ng-href="[[activeViewPoint.location.place_phone]]" class="ref-url ellipsis" title="[[activeViewPoint.location.place_phone]]" new-window ng-bind="activeViewPoint.location.place_phone"></a>
+            <a ng-href="tel:[[activeViewPoint.location.place_phone]]" class="ref-url ellipsis" title="[[activeViewPoint.location.place_phone]]" new-window ng-bind="activeViewPoint.location.place_phone"></a>
             <div open-day></div>
 
             <div>

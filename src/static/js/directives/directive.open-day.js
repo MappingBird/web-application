@@ -12,7 +12,19 @@ mappingbird.directives.directive('openDay', ['BroadcastService', '$timeout', '$s
 
             scope.inlineDisplay = false;
             // scope.todayOpen = [(new Date()).getDay()].time;
-            scope.today = (new Date()).getDay() - 1;
+            scope.today = (function(){
+                var day = (new Date()).getDay();
+
+                if (day == 0) {
+                    // sunday
+                    day = 6
+                } else {
+                    // mon - sat
+                    day--
+                }
+
+                return day
+            })();
             scope.toggleOpenDayDisplay = function ($event) {
                 console.log("click toggleOpenDayDisplay")
                 $event.preventDefault();
