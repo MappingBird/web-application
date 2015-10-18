@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-　　　←表示使用 utf-8 編碼
 # Create your views here.
 import json
 import os
@@ -7,6 +8,7 @@ import uuid
 import Queue
 import threading
 from urlparse import urlparse
+import datetime
 
 from django.middleware import csrf
 from django.views.decorators.csrf import csrf_exempt
@@ -33,10 +35,12 @@ from serializers import UserSerializer, CollectionSerializer, CollectionShortSer
 from api.forms import UserCreationForm, UserChangeForm
 from base.models import User
 from base.mail import send_mail
-from bucketlist.models import Collection, Point, Image, Location, Tag
+from bucketlist.models import Collection, Point, Image, Location, Tag, ResetPasswordRecord
 from permissions import IsOwner, IsOwnerOrAdmin
 
 import owl
+
+import logging
 
 class APIViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
@@ -279,7 +283,7 @@ class DLWorker(threading.Thread):
 
     def run(self):
         while True:
-            try:  
+            try:
                 dic = self.q_.get()
                 req = dic['req'] if 'req' in dic else None
                 imgVS = dic['imgVS'] if 'imgVS' in dic else None
@@ -341,7 +345,7 @@ class DLWorker(threading.Thread):
 
             finally:
                 self.q_.task_done()
-            
+
 
 class ImageViewSet(APIViewSet):
     """
@@ -353,7 +357,7 @@ class ImageViewSet(APIViewSet):
     authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication, )
     permission_classes = (IsOwnerOrAdmin,)
 
-    #-- threading image download  
+    #-- threading image download
     img_q = Queue.Queue()
     dlWorkerPool = None
     SIZE_DLWorkers = 20
@@ -551,7 +555,7 @@ def places(request):
                     entry = {
                         'name': p['place_name'][0],
                         'address': p['address'],
-                        'coordinates': { 
+                        'coordinates': {
                             'lat': float(p['latlng'].split(',')[0]),
                             'lng': float(p['latlng'].split(',')[1])
                         },
@@ -579,7 +583,7 @@ def places(request):
                     'address': p['address'],
                     'coordinates': {
                         'lat': float(p['latlng'].split(',')[0]),
-                        'lng': float(p['latlng'].split(',')[1])                        
+                        'lng': float(p['latlng'].split(',')[1])
                     },
                     'url': p['url'],
                     'image_url': p['image_url'][:5],
@@ -677,11 +681,11 @@ def gen_temp (request):
     apiRoot = "{0}://{1}".format(url[0], url[1])
 
     #-- sign-up to valid this account
-    payload = {'email' : acc, 'password' : pwd} 
+    payload = {'email' : acc, 'password' : pwd}
     r = requests.post("{0}/api/users".format(apiRoot), data=payload)
     if 201 == r.status_code :
        out = {
-           'email' : acc, 
+           'email' : acc,
            'password' : pwd,
        }
        return Response(out)
@@ -696,13 +700,13 @@ def mig_temp2real (request):
         o = json.loads(request.body)
         if 'temp_email' not in o or 'email' not in o or 'temp_password' not in o or 'password' not in o:
             raise ValueError('request parses error, e.g. {"temp_email":"...", "temp_password":"...", "email":"...", "password":"..."}')
-        
+
         acc = o['email'].strip()
         pwd = o['password'].strip()
         if len(pwd) <= 0 or len(acc) <= 0:
             raise ValueError('invalid Email or Password')
         #-- sign-up the new account
-        payload = {'email' : acc, 'password' : pwd} 
+        payload = {'email' : acc, 'password' : pwd}
         url = urlparse(request.build_absolute_uri())
         apiRoot = "{0}://{1}".format(url[0], url[1])
         r = requests.post("{0}/api/users".format(apiRoot), data=payload)
@@ -714,7 +718,7 @@ def mig_temp2real (request):
         u = User.objects.get(email=acc)
         u_tmp = User.objects.get(email=tmp_acc)
         u.collection_set = u_tmp.collection_set.all()
-       
+
         out = {
             'email' : acc,
             'password' : pwd,
@@ -724,17 +728,17 @@ def mig_temp2real (request):
         err_out = {
             'error' : str(e)
         }
-        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist, e:
         err_out = {
             'error' : str(e)
         }
-        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST)
     except:
         err_out = {
             'error' : str("unexpected error")
         }
-        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(out)
 
@@ -748,12 +752,133 @@ def is_email_used (request):
         out = {
             'msg' : "{0} is used".format(email)
         }
-        resp = Response(out, status=status.HTTP_400_BAD_REQUEST) 
+        resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist, e:
         out = {
             'msg' : str(e) + '({0})'.format(email)
         }
-        resp =  Response(out, status=status.HTTP_200_OK) 
-    
+        resp =  Response(out, status=status.HTTP_200_OK)
+
+
+    return resp
+
+
+@api_view(['POST'])
+def forget_Password (request):
+
+    email = None
+    resp = None
+
+    try:
+        json_data=json.loads(request.body)
+        email = json_data['email']
+    except ValueError:
+        out = {
+            'msg': 'You forget to pass User Email.'
+        }
+        resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
+        return resp
+
+    try:
+        now = datetime.datetime.today()
+        nextdate = get_reset_password_expire_date();
+
+        # 先檢查之前有沒有發送過（一天內），沒有才繼續做下去
+        # try:
+        #     record = ResetPasswordRecord.objects.get(email=email)
+        #
+        #     if record.expired_time > now:
+        #         out = {
+        #             'msg': "Have sent reset response. Please check the Email."
+        #         }
+        #         resp = Response(out, status=status.HTTP_200_OK)
+        #         return resp
+        # except Exception as e:
+        #     print e
+
+
+        user = User.objects.get(email=email)
+        out = {
+            'msg': "Get reset password request. Please check the Email."
+        }
+        resp = Response(out, status=status.HTTP_200_OK)
+        request_code = uuid.uuid4()
+
+        record = ResetPasswordRecord(email=email, request_code=request_code)
+        record.save()
+
+        # send email here
+        # resetUrl = 'https://mappingbird.com/api/user/reset_Password?request_code=' + str(request_code)
+        resetUrl = 'localhost:9999/reset_password?request_code=' + str(request_code)
+        send_mail([email], 'ResetPassword.html', {'account': email, 'resetUrl': resetUrl}, 'Reset your MappingBird password')
+
+
+    except User.DoesNotExist, e:
+        out = {
+            'msg': 'User Account({0}) does not exist'.format(email)
+        }
+        resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
+
+    return resp
+
+
+def get_reset_password_expire_date():
+    return datetime.datetime.today() + datetime.timedelta(days=1)
+
+@api_view(['POST'])
+def reset_Password (request):
+
+    password = None
+    request_code = None
+    resp = None
+
+    try:
+        json_data = json.loads(request.body)
+        request_code = json_data['request_code']
+        password = json_data['password']
+
+    except ValueError:
+        out = {
+            'msg': 'no valid request_code found'
+        }
+        resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
+        return resp
+
+    try:
+        now = datetime.datetime.today()
+        record = ResetPasswordRecord.objects.get(request_code=request_code)
+
+        if record.expired_time > now:
+
+            if(record.is_updated == True):
+                out = {
+                    'msg': 'User\'s password has been updated.'
+                }
+                resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
+                return resp
+
+            user = User.objects.get(email=record.email)
+
+            user.set_password(password)
+            user.save()
+
+            out = {
+                'msg': 'Update password success'
+            }
+            resp = Response(out, status=status.HTTP_200_OK)
+            record.is_updated = True
+            record.save()
+
+        else:
+            out = {
+                'msg': 'Reset time is expired. Please reset again'
+            }
+            resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
+
+    except ResetPasswordRecord.DoesNotExist, e:
+        out = {
+            'msg': 'User does not need to reset password'
+        }
+        resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
 
     return resp

@@ -213,6 +213,8 @@ USERVOICE_API_SECRET = 'Op56l4akyiqo4IXnEXDJFXqFGwDWIN0jO8tM9swty9w'
 
 LOGIN_REDIRECT_URL = '/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = PROJECT_DIR.child('tmp') # change this to a proper location
 # EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 # Django REST Framework

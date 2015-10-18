@@ -26,7 +26,7 @@ urlpatterns = patterns('',
 
     # home
     # url(r'^$', 'base.views.home', name='home'),
-    url(r'^(?P<page>login|signup|settings|app)$', 'base.views.page', name='page'),
+    url(r'^(?P<page>login|signup|settings|app|reset_password$)$', 'base.views.page', name='page'),
 )
 
 urlpatterns += patterns('django.contrib.staticfiles.views',
@@ -36,7 +36,9 @@ urlpatterns += patterns('django.contrib.staticfiles.views',
 urlpatterns += patterns('django.contrib.staticfiles.views',
         url(r'^signup$', 'serve', {'path': '/signup.html'}))
 urlpatterns += patterns('django.contrib.staticfiles.views',
-        url(r'^forget/password$', 'serve', {'path': '/forget_password.html'}))
+        url(r'^forget_password$', 'serve', {'path': '/forget_password.html'}))
+# urlpatterns += patterns('django.contrib.staticfiles.views',
+#         url(r'^reset_password$', 'serve', {'path': '/reset_password$.html'}))
 
 # home, i18n
 # 原本是用 i18n_patterns，這樣會區隔變成兩個網址

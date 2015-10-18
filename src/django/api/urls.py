@@ -29,6 +29,8 @@ urlpatterns = patterns('',
     url(r'^user/temp$', 'api.views.gen_temp', name='temp'),
     url(r'^user/temp2real$', 'api.views.mig_temp2real', name='temp2real'),
     url(r'^user/is_email_used$', 'api.views.is_email_used', name='is_email_used'),
+    url(r'^user/forget_Password$', 'api.views.forget_Password', name='forget_Password'),
+    url(r'^user/reset_Password$', 'api.views.reset_Password', name='reset_Password'),
 )
 
 
