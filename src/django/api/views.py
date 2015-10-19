@@ -764,7 +764,7 @@ def is_email_used (request):
 
 
 @api_view(['POST'])
-def forget_Password (request):
+def forget_password (request):
 
     email = None
     resp = None
@@ -784,17 +784,21 @@ def forget_Password (request):
         nextdate = get_reset_password_expire_date();
 
         # 先檢查之前有沒有發送過（一天內），沒有才繼續做下去
-        # try:
-        #     record = ResetPasswordRecord.objects.get(email=email)
-        #
-        #     if record.expired_time > now:
-        #         out = {
-        #             'msg': "Have sent reset response. Please check the Email."
-        #         }
-        #         resp = Response(out, status=status.HTTP_200_OK)
-        #         return resp
-        # except Exception as e:
-        #     print e
+        try:
+            # 可能會有一個帳號可能有多筆重設的紀錄，一個個檢查
+            record_list = ResetPasswordRecord.objects.filter(email=email, is_updated=False)
+
+            for i, record in enumerate(record_list):
+
+                if record.expired_time > now:
+                    out = {
+                        'msg': "Have sent reset response. Please check the Email."
+                    }
+                    resp = Response(out, status=status.HTTP_200_OK)
+                    return resp
+
+        except Exception as e:
+            print e
 
 
         user = User.objects.get(email=email)
@@ -808,8 +812,11 @@ def forget_Password (request):
         record.save()
 
         # send email here
-        # resetUrl = 'https://mappingbird.com/api/user/reset_Password?request_code=' + str(request_code)
-        resetUrl = 'localhost:9999/reset_password?request_code=' + str(request_code)
+        # use this if developing
+        # resetUrl = 'localhost:9999/reset_password?request_code=' + str(request_code)
+        # otherwise use this
+        resetUrl = 'https://mappingbird.com/reset_password?request_code=' + str(request_code)
+
         send_mail([email], 'ResetPassword.html', {'account': email, 'resetUrl': resetUrl}, 'Reset your MappingBird password')
 
 
@@ -826,7 +833,7 @@ def get_reset_password_expire_date():
     return datetime.datetime.today() + datetime.timedelta(days=1)
 
 @api_view(['POST'])
-def reset_Password (request):
+def reset_password(request):
 
     password = None
     request_code = None
@@ -852,7 +859,7 @@ def reset_Password (request):
 
             if(record.is_updated == True):
                 out = {
-                    'msg': 'User\'s password has been updated.'
+                    'msg': 'User\'s password has been updated before, no need to update.'
                 }
                 resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
                 return resp
@@ -871,13 +878,13 @@ def reset_Password (request):
 
         else:
             out = {
-                'msg': 'Reset time is expired. Please reset again'
+                'msg': 'Time for reset password is expired'
             }
             resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
 
     except ResetPasswordRecord.DoesNotExist, e:
         out = {
-            'msg': 'User does not need to reset password'
+            'msg': 'User did\'t request reset password'
         }
         resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
 
