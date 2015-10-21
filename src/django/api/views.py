@@ -1,5 +1,6 @@
 # Create your views here.
 import json
+import logging
 import os
 import os.path
 import time
@@ -703,11 +704,11 @@ def gen_temp (request):
     apiRoot = "{0}://{1}".format(url[0], url[1])
 
     #-- sign-up to valid this account
-    payload = {'email' : acc, 'password' : pwd} 
+    payload = {'email' : acc, 'password' : pwd}
     r = requests.post("{0}/api/users".format(apiRoot), data=payload)
     if 201 == r.status_code :
        out = {
-           'email' : acc, 
+           'email' : acc,
            'password' : pwd,
        }
        return Response(out)
@@ -722,13 +723,13 @@ def mig_temp2real (request):
         o = json.loads(request.body)
         if 'temp_email' not in o or 'email' not in o or 'temp_password' not in o or 'password' not in o:
             raise ValueError('request parses error, e.g. {"temp_email":"...", "temp_password":"...", "email":"...", "password":"..."}')
-        
+
         acc = o['email'].strip()
         pwd = o['password'].strip()
         if len(pwd) <= 0 or len(acc) <= 0:
             raise ValueError('invalid Email or Password')
         #-- sign-up the new account
-        payload = {'email' : acc, 'password' : pwd} 
+        payload = {'email' : acc, 'password' : pwd}
         url = urlparse(request.build_absolute_uri())
         apiRoot = "{0}://{1}".format(url[0], url[1])
         r = requests.post("{0}/api/users".format(apiRoot), data=payload)
@@ -740,7 +741,7 @@ def mig_temp2real (request):
         u = User.objects.get(email=acc)
         u_tmp = User.objects.get(email=tmp_acc)
         u.collection_set = u_tmp.collection_set.all()
-       
+
         out = {
             'email' : acc,
             'password' : pwd,
@@ -750,17 +751,17 @@ def mig_temp2real (request):
         err_out = {
             'error' : str(e)
         }
-        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist, e:
         err_out = {
             'error' : str(e)
         }
-        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST)
     except:
         err_out = {
             'error' : str("unexpected error")
         }
-        return Response(err_out, status=status.HTTP_400_BAD_REQUEST) 
+        return Response(err_out, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(out)
 
@@ -774,12 +775,57 @@ def is_email_used (request):
         out = {
             'msg' : "{0} is used".format(email)
         }
-        resp = Response(out, status=status.HTTP_400_BAD_REQUEST) 
+        resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist, e:
         out = {
             'msg' : str(e) + '({0})'.format(email)
         }
-        resp =  Response(out, status=status.HTTP_200_OK) 
-    
+        resp =  Response(out, status=status.HTTP_200_OK)
+
 
     return resp
+
+
+@api_view(['POST'])
+def fb_login(request):
+
+    accessToken = None
+    userID = None
+    signedRequest = None
+
+    try:
+        json_data = json.loads(request.body)
+
+        userID = json_data['userID']
+        accessToken = json_data['accessToken']
+        signedRequest = json_data['signedRequest']
+    except ValueError:
+        out = {
+            'msg': 'FB params missing.'
+        }
+        resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
+        return resp
+
+
+    email = get_email_from_fb(userID, accessToken)
+
+    out = {
+        "token": "d953b18a876da1005bd8d5082012d40feb3ff9aa",
+        "user": {
+            "id": 1,
+            "email": "fake_user@email.com"
+          }
+    }
+    resp = Response(out, status=status.HTTP_200_OK)
+
+    return resp
+
+
+def get_email_from_fb(userId, accessToken):
+
+    return "asdfasdf@email.com"
+
+
+def get_account(email):
+
+    return "asdfasdf@email.com"
