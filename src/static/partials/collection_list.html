@@ -1,3 +1,4 @@
+{% load i18n %}
 <div class="collection-header">
     <a href="#" class="collection-name" ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="showCollections($event)">
         <i class="icon-expand-collapse"></i>
@@ -6,8 +7,8 @@
     <span class="description"><span ng-bind="activeCollectionPointLength"></span> places saved</span>
     <!-- <a href="#" class="list-view pull-right" ng-class="{ 'active' : listMode }" ng-click="gotoListView($event)">List</a>
     <a href="#" class="map-view pull-right" ng-class="{ 'active' : !listMode }" ng-click="gotoMapView($event)">Map</a> -->
-    <a href="#" class="list-view pull-right" ng-show="!listMode && activeCollectionPointLength != 0" ng-click="gotoListView($event)">SHOW LIST</a>
-    <a href="#" class="list-view pull-right active" ng-show="listMode && activeCollectionPointLength != 0" ng-click="closeListView($event)">HIDE LIST</a>
+    <a href="#" class="list-view pull-right" ng-show="!listMode && activeCollectionPointLength != 0" ng-click="gotoListView($event)">{% trans "mapShowListBtn" %}</a>
+    <a href="#" class="list-view pull-right active" ng-show="listMode && activeCollectionPointLength != 0" ng-click="closeListView($event)">{% trans "mapHideListBtn" %}</a>
     <div class="clearfix"></div>
 </div>
 
@@ -30,7 +31,7 @@
     </li>
 </ul>
 <!-- Edit Button -->
-<a href="#" class="btn-default pingismo-btn" ng-click="toggleEditMode($event)" id="edit-list-btn" ng-bind="editMode && 'Done' || 'Edit'"></a>
+<a href="#" class="btn-default pingismo-btn" ng-click="toggleEditMode($event)" id="edit-list-btn" ng-bind="editMode && '{% trans "mapAdded" %}' || '{% trans "mapEditBtn" %}'"></a>
 
 <!-- Create Collection Button -->
 <a href="#" class="btn-default pingismo-btn collection-list-btn-create" ng-click="createCollectionModal($event)">+</a>

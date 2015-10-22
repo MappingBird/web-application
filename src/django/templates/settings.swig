@@ -1,3 +1,4 @@
+{% load i18n %}
 {% extends "./share/_layout.swig" %}
 
 {% block ngApp %}SettingsApp{% endblock %}
@@ -23,10 +24,10 @@
                         <span ng-bind="email"></span>
                         <b class="caret"></b>                        </a>
                     <ul class="dropdown-menu pingismo-dropdown-menu">
-                        <li><a href="/app#/"><i class="icon-globe"></i> View map</a></li>
-                        <li><a href="/settings"><i class="icon-wrench"></i> Settings</a></li>
+                        <li><a href="/app#/"><i class="icon-globe"></i> {% trans "userPanelViewMap" %}</a></li>
+                        <li><a href="/settings"><i class="icon-wrench"></i> {% trans "userPanelSettings" %}</a></li>
                         <li class="divider"></li>
-                        <li><a href="#" ng-click="logout($event)"><i class="icon-off"></i> Logout</a></li>
+                        <li><a href="#" ng-click="logout($event)"><i class="icon-off"></i> {% trans "userPanelLogout" %}</a></li>
                     </ul>
                 </li>
             </ul>

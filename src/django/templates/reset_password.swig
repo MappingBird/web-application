@@ -1,3 +1,4 @@
+{% load i18n %}
 {% extends "./share/_layout.swig" %}
 
 {% block ngApp %}LoginApp{% endblock %}

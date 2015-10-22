@@ -1,8 +1,9 @@
+{% load i18n %}
 <div class="pin-content-wrapper" ng-show="showPointDetailPanel" ng-class="{ editable: pointEditMode}">
     <a href="#" ng-click="closePoint($event)" class="pingismo-proceed"><img src="/static/img/icon-proceed.png" /></a>
     <div class="pin-content">
         <div class="pin-details pull-left" height-to-bottom m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
-            Added: <span ng-bind="activeViewPoint.date_created"></span>
+            {% trans "mapAdded" %}: <span ng-bind="activeViewPoint.date_created"></span>
             <h4 ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.title" class="editable"></h4>
             <input type="text" ng-model="activeViewPoint.title" class="content-title" />
             <li class="btn-group pingismo-btn-group">
@@ -10,7 +11,7 @@
                 <ul ng-show="showSelectCollection" class="collections-newCollection">
                   <li class="input-append">
                       <input type="text" class="span2" id="appendedInputButton" ng-model="newCollectionName" placeholder="Create a new collection" />
-                      <button class="btn" type="button" ng-click="saveNewCollection($event)">Create</button>
+                      <button class="btn" type="button" ng-click="saveNewCollection($event)">{% trans "mapAddCollectionBtn" %}</button>
                   </li>
                 </ul>
                 <ul class="collections-menu thin-menu" ng-show="showSelectCollection" scrollbar-height-to-bottom>
@@ -24,7 +25,7 @@
                 <li ng-class="{active : activeViewPoint.type == 'restaurant'}"><a href="#" class="types-restaurant" ng-click="setPointType($event, 'restaurant')"></a></li>
                 <li ng-class="{active : activeViewPoint.type == 'bar'}"><a href="#" class="types-bar" ng-click="setPointType($event, 'bar')"></a></li>
                 <li ng-class="{active : activeViewPoint.type == 'misc'}"><a href="#" class="types-misc" ng-click="setPointType($event, 'misc')"></a></li>
-                <li class="collectionName">Under <span class="collection" ng-bind="activeCollectionName"></span></li>
+                <li class="collectionName">{% trans "mapUnder" %} <span class="collection" ng-bind="activeCollectionName"></span></li>
             </ul>
             <p class="ref-context editable" ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.description"></p>
             <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
@@ -70,20 +71,20 @@
     </div>
     <div class="pin-content-footer fixed">
         <hr />
-        <a href="#" ng-click="togglePointEditMode($event)" class="btn-default pingismo-btn" id="edit-pin-content-btn">Edit</a>
-        <a href="#" ng-click="savePointChanges($event)" class="btn-highlight pingismo-btn" id="done-edit-pin-content-btn">Done</a>
-        <a href="#" ng-click="selectPointForDelete($event)" class="btn-default pingismo-btn pull-right" id="del-pin-content-btn">Delete This Place</a>
+        <a href="#" ng-click="togglePointEditMode($event)" class="btn-default pingismo-btn" id="edit-pin-content-btn">{% trans "mapEditBtn" %}</a>
+        <a href="#" ng-click="savePointChanges($event)" class="btn-highlight pingismo-btn" id="done-edit-pin-content-btn">{% trans "mapDoneBtn" %}</a>
+        <a href="#" ng-click="selectPointForDelete($event)" class="btn-default pingismo-btn pull-right" id="del-pin-content-btn">{% trans "mapDelPlaceBtn" %}</a>
     </div>
 </div>
 
 <!-- Delete a Pin -->
 <div class="delete-pin-wrapper" ng-class="{visible: showDeletePoint}">
     <h4 ng-bind="activeViewPoint.title"></h4>
-    Do you really want to delete this place permanently? Once you delete it, it will be removed from your map forever.
+    {% trans "mapDelPlaceDescription" %}
     <div class="pin-content-footer">
         <hr />
-        <a href="#" class="btn-risk pingismo-btn" id="delete-pin-btn" ng-click="deletePoint($event)">Yes, Delete It.</a>
-        <a href="#" class="btn-default pingismo-btn" id="cancel-delete-pin-btn" ng-click="unselectPointForDelete($event)">Cancel</a>
+        <a href="#" class="btn-risk pingismo-btn" id="delete-pin-btn" ng-click="deletePoint($event)">{% trans "mapConfirmDelBtn" %}</a>
+        <a href="#" class="btn-default pingismo-btn" id="cancel-delete-pin-btn" ng-click="unselectPointForDelete($event)">{% trans "mapCancelBtn" %}</a>
     </div>
     <p ng-show="pointDeletError">There was an error deleting this point.</p>
 </div>
