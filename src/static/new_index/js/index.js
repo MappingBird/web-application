@@ -99,3 +99,22 @@ angular.module('IndexApp').controller('ModalInstanceCtrl', function ($scope, $mo
     $modalInstance.dismiss('cancel');
   };
 });
+
+angular.module('IndexApp').directive('changeLanguage', function() {
+    return {
+        restrict: 'A',
+        scope: false,
+        controller: ['$scope', '$element', '$attrs', '$window', function($scope, $element, $attrs, $window) {
+
+            var lang = $attrs.changeLanguage;
+            $element[0].onclick = function (e) {
+              e.preventDefault();
+              // Setting a cookie
+              document.cookie = 'lang=' + lang;
+
+              // reload the page
+              $window.location.reload();
+            };
+        }]
+    };
+});

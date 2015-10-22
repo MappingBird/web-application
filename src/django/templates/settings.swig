@@ -84,16 +84,16 @@
             <div class="span2"></div>
         </div>
     </div>
-    <footer ng-controller="footerController">
+    <footer>
         <div class="logo-copyright">
             <p class="slogan"><img src="/static/img/logo-footer.png" /> Remember places for later.</p>
             <p>Copyright &copy; 2015 MappingBird LLC. All referred posts &copy; their respective owners.</p>
         </div>
         <div class="lang-contact pull-right">
             <ul class="nav nav-pills">
-                <!-- <li><a href="#" ng-click="changeLanguage($event, 'zh-tw')">繁體中文</a></li>
-                <li class="divider-vertical pingismo-divider-vertical"></li> -->
-                <li class="active"><a href="#" ng-click="changeLanguage($event, 'en')">English</a></li>
+                <li><a href="#" change-language='zh-tw'>繁體中文</a></li>
+                <li class="divider-vertical pingismo-divider-vertical"></li>
+                <li class="active"><a href="#" change-language='en'>English</a></li>
             </ul>
             <p>
                 <a href="mailto:feedback@mappingbird.com" class="footer-contact">Contact Us</a>

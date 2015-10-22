@@ -1,0 +1,84 @@
+<form class="form-search" ng-submit="searchPlaces()">
+                    <input type="text" class="input-medium search-query" ng-model="searchQuery" search-box><i class="icon-search" ng-click="displaySearchTip($event)"></i>
+                    <span class="help-block search-static"><span ng-bind="numResults"></span> places found. Pick one you want to save.</span>
+                </form>
+
+                <!-- No search results tip -->
+                <div class="no-keyword tip tip-below" ng-show="noSearchResults">
+                    <h2>There were no search results.</h2>
+                    <p>We were unable to find search results for the place <b ng-bind="lastSearchQuery"></b> that you selected. Try again by typing in the name of the place you're searching for above.</p>
+                </div>
+                <!-- End of no search keyword tip -->
+
+                <!-- Searching for location -->
+                <div class="loading-wrapper" ng-show="searchResultsLoading">
+                    <img src="/static/img/blue-loading-circle.png" class="loading-img" />
+                    <p>Searching...</p>
+                </div>
+                <!-- End of Searching for location -->
+
+                <!-- Search result -->
+                <div class="left-panel-container" ng-show="searchResultsLoaded" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placesLoaded'}" left-outer-height>
+                    <ul class="location-list">
+                        <!--
+                        <li ng-repeat="address in pageAddresses" ng-click="setActiveSaveAddress($event, $index, true)" ng-class="{'last-item': $index == places.length-1}" class="item address-only"><i class="icon-pin"></i><p><span class="place-address" ng-bind="address"></span></p>
+                            <a href="#" class="show-on-map" ng-click="setActiveSaveAddress($event, $index)"><img src="/static/img/icon-proceed.png" /></a>
+                            <div class="clearfix">
+                        </li>
+                        -->
+                        <li ng-repeat="place in places" on-repeat-done="places_loaded" ng-class="{active: $index==activeSearchResult, 'last-item': $index == places.length-1}" ng-click="setActiveSavePoint($event, $index, true)" class="item"><i class="icon-pin"></i><p><span class="place-name" ng-bind="place.name"></span> <span class="place-address" ng-bind="place.address"></span></p>
+                            <a href="#" class="show-on-map" ng-click="setActiveSavePoint($event, $index)"><img src="/static/img/icon-proceed.png" /></a>
+                            <div class="clearfix">
+                        </li>
+                        <li class="text-only-item first-item" ng-hide="noSearchQuery || noSearchResults">
+                            <p>
+                                <span class="item-title">Can't find what you're looking for?</span>
+                                <span class="item-text">Try entering the name or address of the place you are looking for in the search bar above to get better results.</span>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End of Search result -->
+
+                <!-- Save Contents -->
+                <div class="save-content" ng-class="{retracted: !searchResultSelected}" m-custom-scrollbar-parent>
+                    <a class="back" href="#" ng-click="cancelSaveActiveSearchResult($event)" ng-show="numResults > 1"><img src="/static/img/icon-back.png" /></a>
+                    <form class="form-save-content" ng-submit="savePoint($event)">
+                        <div class="primary-content">
+                            <input type="text" ng-model="pageData.title" class="content-title" />
+                            <textarea rows="8" ng-model="pageData.text"></textarea>
+                            <tags-input ng-model="pageData.tags" placeholder="Tags (optional)" min-length="1">
+                                <auto-complete source="loadTags($query)"></auto-complete>
+                            </tags-input>
+                        </div>
+                        <div ng-class="{'input-append' : true, 'control-group' : true, error: noCollectionError}" ng-show="collections.length == 0">
+                            <input type="text" id="input-new-collection-name" ng-model="newCollectionName" ng-class="{ 'fresh' : true, error: noCollectionError}" placeholder="[[ noCollectionError && 'Enter name of map to save this point to' || 'Create a map to save this place to, ex: Paris trip']]" class="fresh" />
+                            <button id="btn-create-collection" class="btn btn-default" type="button" ng-click="saveNewCollection($event)">Create</button>
+                        </div>
+                        <div class="btn-group pingismo-btn-group" ng-show="collections.length > 0">
+                            <a class="btn exist collections-selection" href="#" ng-click="clickShowSelectCollection($event)" ng-show="!showSelectCollection"><span ng-bind="saveCollectionName"></span> <span class="caret"></span></a>
+                            <ul class="collections-menu upward-menu" ng-show="showSelectCollection">
+                                <li ng-repeat="collection in collections"><a href="#" ng-click="selectCollection($event, collection.id)" ng-bind="collection.name"></a></li>
+                            </ul>
+                            <div class="input-append control-group" ng-class="{ 'error': noCollectionError}" ng-show="showSelectCollection">
+                                <input type="text" class="span2" ng-model="newCollectionName" id="appendedInputButton" placeholder="[[ noCollectionError && 'Select from above or enter a new name' || 'Create a new map']]" />
+                                    <button class="btn" type="button" ng-click="saveNewCollection($event)">Create</button>
+                            </div>
+                        </div>
+                        <ul class="types">
+                            <li ng-class="{active: activeSavePoint.type == 'scenicspot'}"><a href="#" class="types-scenicspot" ng-click="setPointType($event, 'scenicspot')"></a></li>
+                            <li ng-class="{active: activeSavePoint.type == 'hotel'}"><a href="#" class="types-hotel" ng-click="setPointType($event, 'hotel')"></a></li>
+                            <li ng-class="{active: activeSavePoint.type == 'mall'}"><a href="#" class="types-mall" ng-click="setPointType($event, 'mall')"></a></li>
+                            <li ng-class="{active: activeSavePoint.type == 'restaurant'}"><a href="#" class="types-restaurant" ng-click="setPointType($event, 'restaurant')"></a></li>
+                            <li ng-class="{active: activeSavePoint.type == 'bar'}"><a href="#" class="types-bar" ng-click="setPointType($event, 'bar')"></a></li>
+                            <li ng-class="{active: activeSavePoint.type == 'misc'}"><a href="#" class="types-misc" ng-click="setPointType($event, 'misc')"></a></li>
+                            <div class=" clearfix"></div>
+                        </ul>
+                        <hr/>
+                        <button class="btn btn-large btn-primary pingismo-btn super-wide" type="submit" id="save-to-map">Save to Map</button>
+                    </form>
+                    <div class="image-select" m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
+                        <div class="ref-context-img" thumb-alignment="{displayArray: 'pageImages', selectImages: 'selectedPageImages', deselectImages: 'deselectedPageImages', onlyFirstSelected: false, whiteBackground: true}"></div>
+                    </div>
+
+                </div>

@@ -31,7 +31,6 @@
 <script src="../js/controllers/controller.save-app.map-controller.js"></script>
 <script src="../js/controllers/controller.save-app.point-detail-controller.js"></script>
 <script src="../js/controllers/controller.save-app.list-controller.js"></script>
-<script src="../js/controllers/controller.footer-controller.js"></script>
 <script src="../js/services/service.presets.js"></script>
 <script src="../js/services/service.map-points.js"></script>
 <script src="../js/services/service.user.js"></script>
@@ -53,6 +52,7 @@
 <script src="../js/resources/resource.current-user.js"></script>
 <script src="../js/resources/resource.user-resource.js"></script>
 <script src="../js/resources/resource.tag-resource.js"></script>
+<script src="../js/directives/directive.change-language.js"></script>
 <script src="../js/directives/directive.collection-list.js"></script>
 <script src="../js/directives/directive.collection-list-view.js"></script>
 <script src="../js/directives/directive.height-to-bottom.js"></script>
