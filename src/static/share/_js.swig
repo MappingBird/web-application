@@ -13,6 +13,7 @@
 <script src="../bower_components/ng-tags-input/ng-tags-input.min.js"></script>
 <script src="../bower_components/moment/min/moment.min.js"></script>
 <script src="../bower_components/angular-moment/angular-moment.min.js"></script>
+<script src="../bower_components/moment/locale/zh-tw.js"></script>
 <script src="../js/mappingbird.js"></script>
 <script src="../js/helpers/mod.noconsole.js"></script>
 <script src="../js/helpers/mod.prototype.js"></script>
