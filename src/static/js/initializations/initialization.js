@@ -94,7 +94,7 @@ mappingbird.initializations = angular.module('Initialization', [
             $http.defaults.headers.patch['X-CSRFToken'] = $cookies.csrftoken;
 
             if ($cookies.lang === 'zh-tw') {
-              $window.moment.lang('zh-tw');
+              window.moment.lang('zh-tw');
             }
         }]);
 
