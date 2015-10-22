@@ -1,5 +1,5 @@
-{% load i18n %}
 {% extends "./share/_layout.swig" %}
+{% load i18n %}
 
 {% block ngApp %}SettingsApp{% endblock %}
 
