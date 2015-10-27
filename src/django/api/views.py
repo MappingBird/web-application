@@ -39,6 +39,7 @@ from bucketlist.models import Collection, Point, Image, Location, Tag
 from permissions import IsOwner, IsOwnerOrAdmin
 
 import owl
+import facebook
 
 class APIViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
@@ -806,26 +807,53 @@ def fb_login(request):
         resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
         return resp
 
+    profile = _get_profile_from_fb(userID, accessToken)
+    user = _get_mb_account(profile['email'])
+    serializer = UserSerializer(user)
 
-    email = get_email_from_fb(userID, accessToken)
-
+    # out = {
+    #     "token": "d953b18a876da1005bd8d5082012d40feb3ff9aa",    # put MappingBird token here (not yet)
+    #     "user": {
+    #         "id": mb_account.id,                                # put MappingBird id here (not yet)
+    #         "email": profile['email']
+    #       }
+    # }
     out = {
-        "token": "d953b18a876da1005bd8d5082012d40feb3ff9aa",
-        "user": {
-            "id": 1,
-            "email": "fake_user@email.com"
-          }
+        "token": "d953b18a876da1005bd8d5082012d40feb3ff9aa",    # put MappingBird token here (not yet)
+        "user": serializer.data
     }
     resp = Response(out, status=status.HTTP_200_OK)
 
     return resp
 
 
-def get_email_from_fb(userId, accessToken):
+def _get_profile_from_fb(userId, access_token):
 
-    return "asdfasdf@email.com"
+    graph = facebook.GraphAPI(access_token=access_token, version='2.5')
+    args = {'fields': 'id,name,email', }
+    profiles = graph.get_object(id='me', **args)
+
+    return profiles
 
 
-def get_account(email):
+def _get_mb_account(email):
+
+    user = None
+
+    try:
+        user = User.objects.get(email=email)
+    except User.DoesNotExist:
+        pass
+
+    if user is not None:
+        logging.error('true')
+        return user
+    else:
+        logging.error('false')
+        return user #create account
+
+
+    # 1. if account exists, return MappingBird profile
+    # 2. if not exist, use this email to create a MappingBird account, and return MappingBird profile
 
     return "asdfasdf@email.com"
