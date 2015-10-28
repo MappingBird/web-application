@@ -1,6 +1,6 @@
 # Create your views here.
 from django.shortcuts import redirect, render
-from django.contrib.staticfiles.views import serve
+from django.utils.translation import activate
 
 def home(request):
     '''
@@ -12,6 +12,14 @@ def home(request):
     # return serve(request, path='/index.html')
     if request.user.is_authenticated():
         return redirect('/app')
+
+    lang = None
+    try:
+        lang = request.COOKIES.get('lang')
+    except Exception as e:
+        lang = 'en'
+    finally:
+        activate(lang)
 
     return render(request, 'new_index.html')
 
