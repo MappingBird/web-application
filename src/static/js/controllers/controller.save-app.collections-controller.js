@@ -14,6 +14,12 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     // edit collection use
     $scope.editCollection = [];
 
+    // delete collection use
+    $scope.deleteCollectionId = null;
+    $scope.deleteCollectionName = null;
+    $scope.showDeleteCollectionDialog = false;
+
+
     // watchers
     $scope.$watch(function(){return Collections.activeCollectionId;}, function(activeCollectionId, oldActiveCollectionId) {
         console.log('Collections.activeCollectionId watcher: ' + activeCollectionId);
