@@ -27,6 +27,7 @@ from geopy.geocoders import GoogleV3
 from googleplaces import GooglePlaces
 
 import requests
+import langid
 from PIL import Image as PImage
 
 from serializers import UserSerializer, CollectionSerializer, CollectionShortSerializer, PointShortSerializer, PointSerializer, PointWriteSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
@@ -98,7 +99,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
         data = {'collections': serializer.data, }
         try:
-            data['most_recent_modified_collection'] = queryset.order_by('-points__update_time')[0].id
+#            data['most_recent_modified_collection'] = queryset.order_by('-points__update_time')[0].id
+            data['most_recent_modified_collection'] = queryset.latest('update_time').id
         except Exception, e:
             data['most_recent_modified_collection'] = None
 
@@ -241,6 +243,12 @@ class PointViewSet(APIViewSet):
                 collection = Collection(user=request.user, name='Uncategorized')
                 collection.save()
             data['collection'] = collection.id
+        else:
+            #-- update collection update_time
+            c_id = data['collection']
+            collection = Collection.objects.get(pk=c_id)
+            collection.save()
+
 
         # Need to use Write Serializer for related field (location)
         serializer = PointWriteSerializer(data=data, files=request.FILES)
@@ -359,20 +367,60 @@ class ImageViewSet(APIViewSet):
     SIZE_DLWorkers = 20
 
     def create(self, request, *args, **kwargs):
-        #-- init download worker pool
-        if ImageViewSet.dlWorkerPool is None:
-            ImageViewSet.dlWorkerPool = []
-            for i in range(ImageViewSet.SIZE_DLWorkers) :
-                ImageViewSet.dlWorkerPool.append( DLWorker(ImageViewSet.img_q) )
+        data = request.DATA.copy()
 
-            for w in ImageViewSet.dlWorkerPool :
-                w.start()
+#        # save thumbnail
+#        url = data.get('url')
+#        r = requests.get(url, stream=True)
+#        if r.status_code == 200:
+#
+#            # path: media/images/$id
+#            images_upload_path = os.path.join(settings.MEDIA_ROOT, 'images')
+#
+#            if not os.path.exists(images_upload_path):
+#                os.mkdir(images_upload_path)
+#
+#            images_upload_path = os.path.join(images_upload_path, data.get('point'))
+#
+#            if not os.path.exists(images_upload_path):
+#                os.mkdir(images_upload_path)
+#
+#            path = '%s/%f' % (images_upload_path, time.time())
+#            with open(path, 'wb') as f:
+#                for chunk in r.iter_content():
+#                    f.write(chunk)
+#
+#            f.close()
+#
+#            im = PImage.open(path)
+#            # im.thumbnail((512, 512), PImage.ANTIALIAS)
+#            im.thumbnail((96, 96), PImage.ANTIALIAS)
+#
+#            format_map = {
+#                'JPEG': 'jpg',
+#                'PNG': 'png',
+#                'GIF': 'gif',
+#                'TIFF': 'tiff',
+#            }
+#            final_path = '%s_thumb.%s' % (path, format_map[im.format])
+#            im.save('%s' % final_path, format=im.format, quality=90)
+#
+#            split_index = final_path.find('/media')
+#            url_path = final_path[split_index:]
+#            data['thumb_path'] = request.build_absolute_uri(url_path)
+        data['thumb_path'] = ''
 
-        #-- put image url in Q to schedule download
-        dic = { 'req':request, 'imgVS':self }
-        ImageViewSet.img_q.put(dic) 
+        serializer = self.get_serializer(data=data, files=request.FILES)
 
-        return Response({'result' : 'ok'}, status=status.HTTP_201_CREATED)
+        if serializer.is_valid():
+            self.pre_save(serializer.object)
+            self.object = serializer.save(force_insert=True)
+            self.post_save(self.object, created=True)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED,
+                            headers=headers)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get_success_headers(self, data):
         try:
@@ -496,7 +544,7 @@ def geocode(request):
 
 @api_view(['GET'])
 def places(request):
-    out = {}    
+    out = {}
     out['places'] = []
 
     #-- query placeDB only
@@ -554,19 +602,37 @@ def places(request):
     if request.GET.get('q'):
         gp = GooglePlaces(settings.GOOGLE_API_KEY)
 
-        result = None
+        q = request.GET.get('q')
         lang = request.GET.get('language')
-        if lang:
-            result = gp.text_search(query=request.GET.get('q'), language=lang)
-        else:
-            result = gp.text_search(query=request.GET.get('q'))
+        
+        out['kw'] = q
+
+        if lang is None or len(lang.strip()) <= 0:
+            lang = langid.classify(q)[0]
+
+        if 'zh' == lang:
+            lang = 'zh-TW'
+            
+        result = gp.text_search(query=q, language=lang)
 
         for place in result.places:
             place.get_details()
+
+            phone_number = None
+            if 'international_phone_number' in place.details:
+                phone_number = place.details['international_phone_number']
+
+            business_hours = None
+            if 'opening_hours' in place.details:
+                business_hours = place.details['opening_hours']
+
             entry = {
+                'place_id': place.place_id,
                 'name': place.name,
                 'address': place.formatted_address,
-                'coordinates': place.geo_location
+                'coordinates': place.geo_location,
+                'phone_number': phone_number,
+                'business_hours': business_hours
             }
 
             out['places'].append(entry)

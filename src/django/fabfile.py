@@ -21,7 +21,7 @@ def notify(message):
     }
 
     r = requests.post(url, data=json.dumps(payload), headers=headers)
- 
+
 def get_code(stage=False):
     directory = 'pingismo'
     branch = 'master'
@@ -32,7 +32,11 @@ def get_code(stage=False):
 
     with cd(directory):
         # Get remote HEAD hash
+<<<<<<< HEAD
         head_hash = run("git ls-remote https://github.com/MappingBird/web-application.git refs/heads/%s | awk -F' ' '{print $1}'" % branch)
+=======
+        head_hash = run("git ls-remote git@github.com:MappingBird/web-application.git refs/heads/%s | awk -F' ' '{print $1}'" % branch)
+>>>>>>> adb968909573de0f1893a172a258cf605c2a3d6c
         previous_hash = run("git rev-parse HEAD")
         run('git pull origin %s' % branch)
         # Ouput Commit Log (no longer use on hipchat)
@@ -46,7 +50,7 @@ def get_code(stage=False):
 def copy_db():
     with cd('pingismo/backup'):
         run('./main2stage.sh')
- 
+
 def collect_static(stage=False):
     directory = 'pingismo'
     venv = 'pingismo'
@@ -57,7 +61,7 @@ def collect_static(stage=False):
 
     with prefix('workon %s' % venv), cd('%s/src/django' % directory):
         run('python manage.py collectstatic')
- 
+
 def restart_mappingbird(stage=False):
     service = 'mappingbird'
 
