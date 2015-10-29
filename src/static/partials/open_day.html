@@ -4,11 +4,11 @@
         <div class="openTime inlineDis inlineSty">
             <span class="inlineSty">
                 <span>Open today:</span> 
-                <a ng-click="toggleOpenDayDisplay($event);">[[ fakeOpenDay.business_hours.weekday_text[today].time ]]</a>
+                <a class="mouseMove" ng-click="toggleOpenDayDisplay($event);">[[ fakeOpenDay.business_hours.weekday_text[today].time ]]</a>
             </span>
         </div>
         <div class="openTime blockDis">
-            <table ng-click="toggleOpenDayDisplay($event);">
+            <table class="mouseMove" ng-click="toggleOpenDayDisplay($event);">
                 <tbody>
                     <tr ng-repeat="weekday in fakeOpenDay.business_hours.weekday_text">
                         <td>[[weekday.day]]</td>
