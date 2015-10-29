@@ -32,7 +32,7 @@ def get_code(stage=False):
 
     with cd(directory):
         # Get remote HEAD hash
-        head_hash = run("git ls-remote git@github.com:mariachimike/pingismo.git refs/heads/%s | awk -F' ' '{print $1}'" % branch)
+        head_hash = run("git ls-remote https://github.com/MappingBird/web-application.git refs/heads/%s | awk -F' ' '{print $1}'" % branch)
         previous_hash = run("git rev-parse HEAD")
         run('git pull origin %s' % branch)
         # Ouput Commit Log (no longer use on hipchat)
