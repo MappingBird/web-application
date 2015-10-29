@@ -30,7 +30,7 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         if ($scope.collections
             && $scope.collections.length > 0) {
 
-            console.log('get collectionName');
+            console.log('get collectionName.');
             for (var c in $scope.collections) {
                 if ($scope.activeCollectionId == $scope.collections[c].id) {
                     $scope.activeCollectionName = $scope.collections[c].name;

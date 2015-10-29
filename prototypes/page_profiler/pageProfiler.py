@@ -223,9 +223,10 @@ class DomainParser_Tripadvisor :
 		#-- address
 		addr = ""
 		span_format_address = div_heading_group.find("span", class_="format_address")
-		for str in span_format_address.stripped_strings :
-			if str is not None :
-				addr += str
+		if span_format_address is not None:
+			for str in span_format_address.stripped_strings :
+				if str is not None :
+					addr += str
 		if 0 < len(addr) : pInfo.address = addr	
 		
 		#-- phone		
