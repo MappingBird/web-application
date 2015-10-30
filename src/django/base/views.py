@@ -24,4 +24,12 @@ def home(request):
     return render(request, 'new_index.html')
 
 def page(request, page=None):
+    lang = None
+    try:
+        lang = request.COOKIES.get('lang')
+    except Exception as e:
+        lang = 'en'
+    finally:
+        activate(lang)
+        
     return render(request, '%s.swig' % page)

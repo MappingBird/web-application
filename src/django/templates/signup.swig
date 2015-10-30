@@ -43,7 +43,7 @@
                         By creating an account, I accept MappingBird's <a href="#">Terms of Service</a>. Don’t worry. <i>We don’t spam you or make your email public</i>.
                     </div> -->
                     <div class="action-button">
-                        <input class="btn btn-giant btn-primary pingismo-btn" type="submit" value="Create Your Account">
+                        <input class="btn btn-giant btn-primary pingismo-btn" type="submit" value="{% trans "AccountSignupCreateBtn" %}">
                     </div>
                 </form>
             </div>

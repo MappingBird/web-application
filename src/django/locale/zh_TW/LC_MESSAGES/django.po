@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-30 15:31+0800\n"
+"POT-Creation-Date: 2015-10-30 15:41+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,6 +77,21 @@ msgstr "註冊"
 msgid "userPanelLogin"
 msgstr "登入"
 
+#: templates/app.swig:120 templates/login.swig:52 templates/new_index.html:269
+#: templates/settings.swig:91 templates/signup.swig:79
+msgid "homeFooterCopyright"
+msgstr "Copyright © 2015 Mappingbird. 所有版權，屬於連結的原始作者。"
+
+#: templates/app.swig:124 templates/login.swig:61 templates/settings.swig:100
+#: templates/signup.swig:88
+msgid "AccountContactUs"
+msgstr "聯絡我們"
+
+#: templates/app.swig:125 templates/login.swig:62 templates/settings.swig:101
+#: templates/signup.swig:89
+msgid "AccountFollow"
+msgstr "追蹤我們"
+
 #: templates/index.swig:74
 msgid "Remember Places With Just a Few Clicks"
 msgstr ""
@@ -94,8 +109,6 @@ msgid "AccountForget"
 msgstr "忘記密碼？"
 
 #: templates/login.swig:41
-#, fuzzy
-#| msgid "homeLoginBtn"
 msgid "AccountLoginBtn"
 msgstr "登入"
 
@@ -111,19 +124,6 @@ msgstr "註冊"
 #: templates/settings.swig:90 templates/signup.swig:78
 msgid "homeFooterSlogan"
 msgstr "一鍵收藏，隨時參考。"
-
-#: templates/login.swig:52 templates/new_index.html:269
-#: templates/settings.swig:91 templates/signup.swig:79
-msgid "homeFooterCopyright"
-msgstr "Copyright © 2015 Mappingbird. 所有版權，屬於連結的原始作者。"
-
-#: templates/login.swig:61 templates/settings.swig:100 templates/signup.swig:88
-msgid "AccountContactUs"
-msgstr "聯絡我們"
-
-#: templates/login.swig:62 templates/settings.swig:101 templates/signup.swig:89
-msgid "AccountFollow"
-msgstr "追蹤我們"
 
 #: templates/new_index.html:104
 msgid "homeLoginBtn"
@@ -283,8 +283,6 @@ msgid "mapDelPlaceBtn"
 msgstr "刪除地點"
 
 #: templates/partials/point_detail.html:83
-#, fuzzy
-#| msgid "homeFreelancerDescription"
 msgid "mapDelPlaceDescription"
 msgstr ""
 "我常常會在住家附近尋找適合工作的咖啡廳。當我找到適合的，我就會把它收藏在"
@@ -314,3 +312,7 @@ msgstr "此帳號已被使用"
 #: templates/signup.swig:39
 msgid "AccountSignupAlreadyHasAccount"
 msgstr "已有帳號？"
+
+#: templates/signup.swig:46
+msgid "AccountSignupCreateBtn"
+msgstr "建立帳號"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-30 15:31+0800\n"
+"POT-Creation-Date: 2015-10-30 15:41+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,6 +74,22 @@ msgstr "Sign up"
 msgid "userPanelLogin"
 msgstr "Login"
 
+#: templates/app.swig:120 templates/login.swig:52 templates/new_index.html:269
+#: templates/settings.swig:91 templates/signup.swig:79
+msgid "homeFooterCopyright"
+msgstr ""
+"Copyright © 2015 Mappingbird. All referred posts © their respective owners."
+
+#: templates/app.swig:124 templates/login.swig:61 templates/settings.swig:100
+#: templates/signup.swig:88
+msgid "AccountContactUs"
+msgstr "Contact Us"
+
+#: templates/app.swig:125 templates/login.swig:62 templates/settings.swig:101
+#: templates/signup.swig:89
+msgid "AccountFollow"
+msgstr "Follow Us"
+
 #: templates/index.swig:74
 msgid "Remember Places With Just a Few Clicks"
 msgstr "Remember Places With Just a Few Clicks"
@@ -91,8 +107,6 @@ msgid "AccountForget"
 msgstr "Forgot your password"
 
 #: templates/login.swig:41
-#, fuzzy
-#| msgid "homeLoginBtn"
 msgid "AccountLoginBtn"
 msgstr "LOG IN"
 
@@ -108,20 +122,6 @@ msgstr "Sign up now"
 #: templates/settings.swig:90 templates/signup.swig:78
 msgid "homeFooterSlogan"
 msgstr "Remember places for later."
-
-#: templates/login.swig:52 templates/new_index.html:269
-#: templates/settings.swig:91 templates/signup.swig:79
-msgid "homeFooterCopyright"
-msgstr ""
-"Copyright © 2015 Mappingbird. All referred posts © their respective owners."
-
-#: templates/login.swig:61 templates/settings.swig:100 templates/signup.swig:88
-msgid "AccountContactUs"
-msgstr "Contact Us"
-
-#: templates/login.swig:62 templates/settings.swig:101 templates/signup.swig:89
-msgid "AccountFollow"
-msgstr "Follow Us"
 
 #: templates/new_index.html:104
 msgid "homeLoginBtn"
@@ -286,8 +286,6 @@ msgid "mapDelPlaceBtn"
 msgstr "Delete This Place"
 
 #: templates/partials/point_detail.html:83
-#, fuzzy
-#| msgid "homeFreelancerDescription"
 msgid "mapDelPlaceDescription"
 msgstr ""
 "I used to wander near my home to find good places for work. When I found "
@@ -305,7 +303,7 @@ msgstr "Cancel"
 
 #: templates/signup.swig:25
 msgid "AccountSignup"
-msgstr "Sign up"
+msgstr "Sign Up"
 
 #: templates/signup.swig:36
 msgid "AccountSignupFailShort"
@@ -318,3 +316,7 @@ msgstr "The email has been used."
 #: templates/signup.swig:39
 msgid "AccountSignupAlreadyHasAccount"
 msgstr "Already has account?"
+
+#: templates/signup.swig:46
+msgid "AccountSignupCreateBtn"
+msgstr "Create Your Account"

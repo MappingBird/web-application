@@ -38,7 +38,7 @@
                         <a href="#">{% trans "AccountForget" %}</a>
                     </div>
                     <div class="action-button">
-                        <button class="btn btn-giant btn-primary pingismo-btn" type="submit" id="login-button">{% trans "AccountLoginBtn" %}</button>
+                        <button class="btn btn-giant btn-primary pingismo-btn" type="submit" id="login-button"> {% trans "AccountLoginBtn" %}</button>
                         <p class="button-option">{% trans "AccountNotMember" %} <a href="/signup">{% trans "AccountSignupnow" %}</a></p>
                     </div>
                 </form>
