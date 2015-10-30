@@ -22,7 +22,7 @@
         <div class="row-fluid">
             <div class="span2"></div>
             <div class="span8">
-                <h1>Sign Up</h1>
+                <h1>{% trans "AccountSignup" %}</h1>
                 <hr>
                 <!--p class="title">Sign up</p-->
                 <form ng-submit="checkInput()">
@@ -33,15 +33,15 @@
                         <input type="password" placeholder="Password" name="password" ng-model="password" required />
                     </div>
                     <div class="error-message control-group" ng-class="{ 'error-message' : 1, 'control-group' : 1, 'error' : errorPasswordTooShort }" ng-show="errorPasswordTooShort">
-                        <p class="help-inline">Password is too short.</p>
+                        <p class="help-inline">{% trans "AccountSignupFailShort" %}</p>
                     </div>
                     <div class="error-message control-group" ng-class="{ 'error-message' : 1, 'control-group' : 1, 'error' : errorEmailAlreadyRegistered }" ng-show="errorEmailAlreadyRegistered">
-                        <p class="help-inline">The email has been used. <a href="/login" target="_self">Already has account?</a></p>
+                        <p class="help-inline">{% trans "AccountSignupFailUsed" %} <a href="/login" target="_self">{% trans "AccountSignupAlreadyHasAccount" %}</a></p>
                     </div>
 
-                    <div>
+                    <!-- <div>
                         By creating an account, I accept MappingBird's <a href="#">Terms of Service</a>. Don’t worry. <i>We don’t spam you or make your email public</i>.
-                    </div>
+                    </div> -->
                     <div class="action-button">
                         <input class="btn btn-giant btn-primary pingismo-btn" type="submit" value="Create Your Account">
                     </div>
@@ -75,8 +75,8 @@
     </div>
     <footer>
         <div class="logo-copyright">
-            <p class="slogan"><img src="/static/img/logo-footer.png" /> Remember places for later.</p>
-            <p>Copyright &copy; 2015 MappingBird LLC. All referred posts &copy; their respective owners.</p>
+            <p class="slogan"><img src="/static/img/logo-footer.png" /> {% trans "homeFooterSlogan" %}</p>
+            <p>{% trans "homeFooterCopyright" %}</p>
         </div>
         <div class="lang-contact pull-right">
             <ul class="nav nav-pills">
@@ -85,8 +85,8 @@
                 <li class="active"><a href="#" change-language='en'>English</a></li>
             </ul>
             <p>
-                <a href="mailto:feedback@mappingbird.com" class="footer-contact">Contact Us</a>
-                <a href="//www.facebook.com/MappingBird" class="footer-follow" target="_blank">Follow Us</a>
+                <a href="mailto:feedback@mappingbird.com" class="footer-contact">{% trans "AccountContactUs" %}</a>
+                <a href="//www.facebook.com/MappingBird" class="footer-follow" target="_blank">{% trans "AccountFollow" %}</a>
             </p>
         </div>
     </footer>

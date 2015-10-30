@@ -1,6 +1,6 @@
 {% extends "./share/_layout.swig" %}
 {% load i18n %}
-
+　
 {% block ngApp %}SaveApp{% endblock %}
 
 {% block css %}
@@ -117,12 +117,12 @@
 
     <footer class="narrow">
         <div class="logo-copyright">
-            <p>Copyright &copy; 2015 MappingBird LLC. All referred posts &copy; their respective owners.</p>
+            <p>{% trans "homeFooterCopyright" %}</p>
         </div>
         <div class="lang-contact pull-right">
             <p>
-                <a href="mailto:feedback@mappingbird.com" class="footer-contact">Contact Us</a>
-                <a href="//www.facebook.com/MappingBird" class="footer-follow" target="_blank">Follow Us</a>
+                <a href="mailto:feedback@mappingbird.com" class="footer-contact">{% trans "AccountContactUs" %}</a>
+                <a href="//www.facebook.com/MappingBird" class="footer-follow" target="_blank">{% trans "AccountFollow" %}</a>
             </p>
         </div>
     </footer>

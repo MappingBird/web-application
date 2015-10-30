@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 17:26+0800\n"
+"POT-Creation-Date: 2015-10-30 15:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,6 +77,51 @@ msgstr "Login"
 #: templates/index.swig:74
 msgid "Remember Places With Just a Few Clicks"
 msgstr "Remember Places With Just a Few Clicks"
+
+#: templates/login.swig:26
+msgid "AccountLogin"
+msgstr "Login"
+
+#: templates/login.swig:35
+msgid "AccountLoginFailed"
+msgstr "Invalid ID or password! Please try again."
+
+#: templates/login.swig:38
+msgid "AccountForget"
+msgstr "Forgot your password"
+
+#: templates/login.swig:41
+#, fuzzy
+#| msgid "homeLoginBtn"
+msgid "AccountLoginBtn"
+msgstr "LOG IN"
+
+#: templates/login.swig:42
+msgid "AccountNotMember"
+msgstr "Not a member?"
+
+#: templates/login.swig:42
+msgid "AccountSignupnow"
+msgstr "Sign up now"
+
+#: templates/login.swig:51 templates/new_index.html:257
+#: templates/settings.swig:90 templates/signup.swig:78
+msgid "homeFooterSlogan"
+msgstr "Remember places for later."
+
+#: templates/login.swig:52 templates/new_index.html:269
+#: templates/settings.swig:91 templates/signup.swig:79
+msgid "homeFooterCopyright"
+msgstr ""
+"Copyright © 2015 Mappingbird. All referred posts © their respective owners."
+
+#: templates/login.swig:61 templates/settings.swig:100 templates/signup.swig:88
+msgid "AccountContactUs"
+msgstr "Contact Us"
+
+#: templates/login.swig:62 templates/settings.swig:101 templates/signup.swig:89
+msgid "AccountFollow"
+msgstr "Follow Us"
 
 #: templates/new_index.html:104
 msgid "homeLoginBtn"
@@ -206,15 +251,6 @@ msgstr ""
 msgid "homeFacebookBtn"
 msgstr "LIKE US NOW"
 
-#: templates/new_index.html:257
-msgid "homeFooterSlogan"
-msgstr "Remember places for later."
-
-#: templates/new_index.html:269
-msgid "homeFooterCopyright"
-msgstr ""
-"Copyright © 2015 Mappingbird. All referred posts © their respective owners."
-
 #: templates/partials/collection_list.html:10
 msgid "mapShowListBtn"
 msgstr "SHOW LIST"
@@ -266,3 +302,19 @@ msgstr "Yes, Delete it."
 #: templates/partials/point_detail.html:87
 msgid "mapCancelBtn"
 msgstr "Cancel"
+
+#: templates/signup.swig:25
+msgid "AccountSignup"
+msgstr "Sign up"
+
+#: templates/signup.swig:36
+msgid "AccountSignupFailShort"
+msgstr "Password is too short."
+
+#: templates/signup.swig:39
+msgid "AccountSignupFailUsed"
+msgstr "The email has been used."
+
+#: templates/signup.swig:39
+msgid "AccountSignupAlreadyHasAccount"
+msgstr "Already has account?"

@@ -87,8 +87,8 @@
     </div>
     <footer>
         <div class="logo-copyright">
-            <p class="slogan"><img src="/static/img/logo-footer.png" /> Remember places for later.</p>
-            <p>Copyright &copy; 2015 MappingBird LLC. All referred posts &copy; their respective owners.</p>
+            <p class="slogan"><img src="/static/img/logo-footer.png" /> {% trans "homeFooterSlogan" %}</p>
+            <p>{% trans "homeFooterCopyright" %}</p>
         </div>
         <div class="lang-contact pull-right">
             <ul class="nav nav-pills">
@@ -97,8 +97,8 @@
                 <li class="active"><a href="#" change-language='en'>English</a></li>
             </ul>
             <p>
-                <a href="mailto:feedback@mappingbird.com" class="footer-contact">Contact Us</a>
-                <a href="//www.facebook.com/MappingBird" class="footer-follow" target="_blank">Follow Us</a>
+                <a href="mailto:feedback@mappingbird.com" class="footer-contact">{% trans "AccountContactUs" %}</a>
+                <a href="//www.facebook.com/MappingBird" class="footer-follow" target="_blank">{% trans "AccountFollow" %}</a>
             </p>
         </div>
     </footer>

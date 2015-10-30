@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 17:26+0800\n"
+"POT-Creation-Date: 2015-10-30 15:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,6 +80,50 @@ msgstr "登入"
 #: templates/index.swig:74
 msgid "Remember Places With Just a Few Clicks"
 msgstr ""
+
+#: templates/login.swig:26
+msgid "AccountLogin"
+msgstr "登入失敗"
+
+#: templates/login.swig:35
+msgid "AccountLoginFailed"
+msgstr "帳號密碼錯誤！請在輸入一次。"
+
+#: templates/login.swig:38
+msgid "AccountForget"
+msgstr "忘記密碼？"
+
+#: templates/login.swig:41
+#, fuzzy
+#| msgid "homeLoginBtn"
+msgid "AccountLoginBtn"
+msgstr "登入"
+
+#: templates/login.swig:42
+msgid "AccountNotMember"
+msgstr "不是會員？"
+
+#: templates/login.swig:42
+msgid "AccountSignupnow"
+msgstr "註冊"
+
+#: templates/login.swig:51 templates/new_index.html:257
+#: templates/settings.swig:90 templates/signup.swig:78
+msgid "homeFooterSlogan"
+msgstr "一鍵收藏，隨時參考。"
+
+#: templates/login.swig:52 templates/new_index.html:269
+#: templates/settings.swig:91 templates/signup.swig:79
+msgid "homeFooterCopyright"
+msgstr "Copyright © 2015 Mappingbird. 所有版權，屬於連結的原始作者。"
+
+#: templates/login.swig:61 templates/settings.swig:100 templates/signup.swig:88
+msgid "AccountContactUs"
+msgstr "聯絡我們"
+
+#: templates/login.swig:62 templates/settings.swig:101 templates/signup.swig:89
+msgid "AccountFollow"
+msgstr "追蹤我們"
 
 #: templates/new_index.html:104
 msgid "homeLoginBtn"
@@ -204,14 +248,6 @@ msgstr ""
 msgid "homeFacebookBtn"
 msgstr "現在就去關注"
 
-#: templates/new_index.html:257
-msgid "homeFooterSlogan"
-msgstr "一鍵收藏，隨時參考。"
-
-#: templates/new_index.html:269
-msgid "homeFooterCopyright"
-msgstr "Copyright © 2015 Mappingbird. 所有版權，屬於連結的原始作者。"
-
 #: templates/partials/collection_list.html:10
 msgid "mapShowListBtn"
 msgstr "顯示列表"
@@ -262,3 +298,19 @@ msgstr "是，永久刪除。"
 #: templates/partials/point_detail.html:87
 msgid "mapCancelBtn"
 msgstr "取消"
+
+#: templates/signup.swig:25
+msgid "AccountSignup"
+msgstr "註冊"
+
+#: templates/signup.swig:36
+msgid "AccountSignupFailShort"
+msgstr "密碼太短"
+
+#: templates/signup.swig:39
+msgid "AccountSignupFailUsed"
+msgstr "此帳號已被使用"
+
+#: templates/signup.swig:39
+msgid "AccountSignupAlreadyHasAccount"
+msgstr "已有帳號？"

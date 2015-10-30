@@ -23,7 +23,7 @@
             <div class="span8">
                 <h1>MappingBird</h1>
                 <hr>
-                <p class="title">Login</p>
+                <p class="title">{% trans "AccountLogin" %}</p>
                 <form ng-submit="checkInput()">
                     <div class="control-group">
                         <input type="text" placeholder="Email" ng-model="email" autofocus />
@@ -32,14 +32,14 @@
                         <input type="password" placeholder="Password" ng-model="password" />
                     </div>
                     <div class="error-message control-group" ng-class="{'error' : errorInvalidLogin }" ng-show="errorInvalidLogin" id="error">
-                        <p class="help-inline">Invalid ID or password! Please try again.</p>
+                        <p class="help-inline">{% trans "AccountLoginFailed" %}</p>
                     </div>
                     <div>
-                        <a href="#">Forgot your password?</a>
+                        <a href="#">{% trans "AccountForget" %}</a>
                     </div>
                     <div class="action-button">
-                        <button class="btn btn-giant btn-primary pingismo-btn" type="submit" id="login-button">Login to Your Account</button>
-                        <p class="button-option">Not a member? <a href="/signup">Sign up now</a></p>
+                        <button class="btn btn-giant btn-primary pingismo-btn" type="submit" id="login-button">{% trans "AccountLoginBtn" %}</button>
+                        <p class="button-option">{% trans "AccountNotMember" %} <a href="/signup">{% trans "AccountSignupnow" %}</a></p>
                     </div>
                 </form>
             </div>
@@ -48,8 +48,8 @@
     </div>
     <footer>
         <div class="logo-copyright">
-            <p class="slogan"><img src="/static/img/logo-footer.png" /> Remember places for later.</p>
-            <p>Copyright &copy; 2015 MappinBird LLC. All referred posts &copy; their respective owners.</p>
+            <p class="slogan"><img src="/static/img/logo-footer.png" /> {% trans "homeFooterSlogan" %}</p>
+            <p>{% trans "homeFooterCopyright" %}</p>
         </div>
         <div class="lang-contact pull-right">
             <ul class="nav nav-pills">
@@ -58,8 +58,8 @@
                 <li class="active"><a href="#" change-language='en'>English</a></li>
             </ul>
             <p>
-                <a href="mailto:feedback@mappingbird.com" class="footer-contact">Contact Us</a>
-                <a href="//www.facebook.com/MappingBird" class="footer-follow" target="_blank">Follow Us</a>
+                <a href="mailto:feedback@mappingbird.com" class="footer-contact">{% trans "AccountContactUs" %}</a>
+                <a href="//www.facebook.com/MappingBird" class="footer-follow" target="_blank">{% trans "AccountFollow" %}</a>
             </p>
         </div>
     </footer>
