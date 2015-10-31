@@ -98,7 +98,7 @@ msgstr ""
 
 #: templates/login.swig:26
 msgid "AccountLogin"
-msgstr "登入失敗"
+msgstr "登入"
 
 #: templates/login.swig:35
 msgid "AccountLoginFailed"
