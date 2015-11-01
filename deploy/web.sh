@@ -4,7 +4,7 @@ DIR=$(dirname $0)
 BASEDIR=$DIR/../
 
 # virtualenv
-VENV=/home/django/venvs/pingismo
+VENV=/home/django/venvs/stage
 source $VENV/bin/activate
 source $VENV/bin/postactivate
 
@@ -12,9 +12,9 @@ source $VENV/bin/postactivate
 USER=django
 GROUP=django
 NUM_WORKERS=3
-LOGFILE=/var/log/pingismo/gunicorn.log
+LOGFILE=/var/log/pingismo/gunicorn-stage.log
 PID=/var/run/gunicorn.pid
-PORT=9001
+PORT=9002
 BIND_IP=127.0.0.1:$PORT
 LANG=en_US.UTF-8
 
