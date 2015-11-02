@@ -23,6 +23,11 @@
             <div class="span8">
                 <h1>Sign Up</h1>
                 <hr>
+                <div class="myButton" onclick="fb_login();">
+                    <i class="fa fa-facebook"></i>
+                    <span>Sign up with Facebook</span>
+                </div>
+                <hr class="or-style">
                 <!--p class="title">Sign up</p-->
                 <form ng-submit="checkInput()">
                     <div class="control-group">
@@ -43,7 +48,9 @@
                     </div>
                     <div class="action-button">
                         <input class="btn btn-giant btn-primary pingismo-btn" type="submit" value="Create Your Account">
+                        <p class="button-option">Already an MappingBird account? <a href="/signup">Log In </a></p>
                     </div>
+
                 </form>
             </div>
             <div class="span2"></div>
