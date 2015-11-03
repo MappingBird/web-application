@@ -16,6 +16,8 @@ def home(request):
     lang = None
     try:
         lang = request.COOKIES.get('lang')
+        if lang is None:
+            lang = 'en'
     except Exception as e:
         lang = 'en'
     finally:
@@ -27,9 +29,11 @@ def page(request, page=None):
     lang = None
     try:
         lang = request.COOKIES.get('lang')
+        if lang is None:
+            lang = 'en'
     except Exception as e:
         lang = 'en'
     finally:
         activate(lang)
-        
+
     return render(request, '%s.swig' % page)
