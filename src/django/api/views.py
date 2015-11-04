@@ -587,7 +587,7 @@ def places(request):
                 entry = {
                     'name': p['place_name'][0],
                     'address': p['address'],
-                    'coordinates': { 
+                    'coordinates': {
                         'lat': float(p['latlng'].split(',')[0]),
                         'lng': float(p['latlng'].split(',')[1])                        
                     },

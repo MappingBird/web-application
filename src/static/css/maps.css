@@ -1326,6 +1326,12 @@ ul.types > li{
 	padding-left: 30px;
 	width: 85%;
 }
+.pin-content-wrapper .pin-content .ref-tel {
+	font-size: 12px;
+	background: url('../img/icon-clock.png') no-repeat;
+	padding-left: 30px;
+	width: 85%;
+}
 .pin-content ul.types li{
 	padding-top: 5px;
 	display:none;

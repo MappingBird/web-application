@@ -1,0 +1,21 @@
+<div class="openDayBlock">
+    <span>Hours: </span>
+    <div class="inlineSty" ng-class="{'expand': inlineDisplay}">
+        <div class="openTime inlineDis inlineSty">
+            <span class="inlineSty">
+                <span>Open today:</span> 
+                <a class="mouseMove" ng-click="toggleOpenDayDisplay($event);">[[ fakeOpenDay.business_hours.weekday_text[today].time ]]</a>
+            </span>
+        </div>
+        <div class="openTime blockDis">
+            <table class="mouseMove" ng-click="toggleOpenDayDisplay($event);">
+                <tbody>
+                    <tr ng-repeat="weekday in fakeOpenDay.business_hours.weekday_text">
+                        <td>[[weekday.day]]</td>
+                        <td>[[weekday.time]]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ var minifyCss = require('gulp-minify-css');
 var imagemin = require('gulp-imagemin');
 var rev = require('gulp-rev');
 var swig = require('gulp-swig');
+var replace = require('gulp-replace');
 var del = require('del');
 var runSequence = require('run-sequence');
 var stageFile = 'temp';
@@ -40,7 +41,7 @@ gulp.task('usemin', [],function () {
 });
 
 gulp.task('copy:swig:share', function() {
-    return gulp.src('../' + stageFile + '/_*.swig')
+    return gulp.src('../' + stageFile + '/share/_*.swig')
         .pipe(gulp.dest('../django/templates/share/'));
 });
 
@@ -53,10 +54,25 @@ gulp.task('clean:js', function(cb) {
 });
 
 gulp.task('copy:js', function() {
-    return gulp.src('../' + stageFile + '/static/js/*.js')
+    return gulp.src('../' + stageFile + '/js/*.js')
         .pipe(gulp.dest('js/'));
 });
 
+// modify static resources can replace path 
+gulp.task('replace', function(){
+  gulp.src(['../static/share/_*.swig'])
+    .pipe(replace(/\.\./g, '/static'))
+    .pipe(gulp.dest('../django/templates/share/'));
+});
+
+// shoudl be use by deployment.
 gulp.task('build', function () {
   runSequence('clean:temp', 'clean:js', 'usemin', 'copy:swig:share', 'copy:js');
 });
+
+// watch developer modify static resources will replace and copy to corresponding file.
+gulp.task('dev', function () {
+  runSequence('replace');
+});
+
+

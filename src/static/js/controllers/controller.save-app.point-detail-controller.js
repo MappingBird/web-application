@@ -12,6 +12,86 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
     $scope.activeViewPoint;
     $scope.activeViewPointResource;
 
+    // cause api not ready, so use fake test first. 
+    $scope.fakeOpenDay = {
+        "business_hours": {
+         "weekday_text": [
+             { day: "Monday", time: "6:00 am – 10:00 pm"},
+             { day: "Tuesday", time: "6:00 am – 10:00 pm"},
+             { day: "Wednesday", time: "6:00 am – 10:00 pm"},
+             { day: "Thursday", time: "6:00 am – 10:00 pm"},
+             { day: "Friday", time: "6:00 am – 10:00 pm"},
+             { day: "Saturday", time: "6:00 am – 8:00 pm"},
+             { day: "Sunday", time: "6:00 am – 10:00 pm"}
+         ],
+         "open_now": true,
+         "periods": [{
+             "close": {
+                 "day": 0,
+                 "time": "2200"
+             },
+             "open": {
+                 "day": 0,
+                 "time": "1000"
+             }
+         }, {
+             "close": {
+                 "day": 1,
+                 "time": "2200"
+             },
+             "open": {
+                 "day": 1,
+                 "time": "1000"
+             }
+         }, {
+             "close": {
+                 "day": 2,
+                 "time": "2200"
+             },
+             "open": {
+                 "day": 2,
+                 "time": "1000"
+             }
+         }, {
+             "close": {
+                 "day": 3,
+                 "time": "2200"
+             },
+             "open": {
+                 "day": 3,
+                 "time": "1000"
+             }
+         }, {
+             "close": {
+                 "day": 4,
+                 "time": "2200"
+             },
+             "open": {
+                 "day": 4,
+                 "time": "1000"
+             }
+         }, {
+             "close": {
+                 "day": 5,
+                 "time": "2200"
+             },
+             "open": {
+                 "day": 5,
+                 "time": "1000"
+             }
+         }, {
+             "close": {
+                 "day": 6,
+                 "time": "2200"
+             },
+             "open": {
+                 "day": 6,
+                 "time": "1000"
+             }
+         }]
+        }
+    };
+
     function fillActiveViewPoint (activeViewPointId) {
 
         var x = MapPoints.activeViewPoints,
