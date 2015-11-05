@@ -65,6 +65,7 @@
 <script src="../js/directives/directive.mcustomscrollbar-parent.js"></script>
 <script src="../js/directives/directive.new-window.js"></script>
 <script src="../js/directives/directive.on-repeat-done.js"></script>
+<script src="../js/directives/directive.open-day.js"></script>
 <script src="../js/directives/directive.p-alert.js"></script>
 <script src="../js/directives/directive.point-detail.js"></script>
 <script src="../js/directives/directive.save-panel.js"></script>

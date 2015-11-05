@@ -445,3 +445,58 @@ footer.narrow { padding: 5px 0 0; }
 	padding: 1.0em 2.0em;
 	width: 70%;
 }
+
+/* open day */
+.openTimeBlock {
+	display:inline
+}
+
+.inlineSty {
+	display: inline-block;
+}
+
+.expand .inlineDis {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.blockDis {
+    opacity: 0;
+    position: absolute;
+    visibility: hidden
+}
+
+.blockDis td {
+	padding-right: 1em;
+}
+
+.expand {
+	position: relative;
+    top: 2px;
+}
+
+.expand .inlineDis {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.expand .blockDis {
+    color: #707070;
+    display: inline-block;
+    height: auto;
+    margin-top: -3px;
+    overflow: hidden;
+    text-decoration: none;
+    -webkit-transition: opacity 1s;
+    transition: opacity 1s;
+    vertical-align: top;
+    opacity: 1;
+    position: static;
+    visibility: inherit
+}
+
+.mouseMove {
+	cursor: pointer;
+}
