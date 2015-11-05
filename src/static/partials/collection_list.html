@@ -4,7 +4,7 @@
         <i class="icon-expand-collapse"></i>
         <span ng-bind="activeCollectionName"></span>
     </a>
-    <span class="description"><span ng-bind="activeCollectionPointLength"></span> places saved</span>
+    <span class="description"><span ng-bind="activeCollectionPointLength"></span> {% trans "mapSaveNumber" %}</span>
     <!-- <a href="#" class="list-view pull-right" ng-class="{ 'active' : listMode }" ng-click="gotoListView($event)">List</a>
     <a href="#" class="map-view pull-right" ng-class="{ 'active' : !listMode }" ng-click="gotoMapView($event)">Map</a> -->
     <a href="#" class="list-view pull-right" ng-show="!listMode && activeCollectionPointLength != 0" ng-click="gotoListView($event)">{% trans "mapShowListBtn" %}</a>
@@ -51,14 +51,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="padding:0;border-bottom: 0;">
-        <h4 class="modal-title" style="margin: 24px 30px;">DELETE "[[deleteCollectionName]]" PERMANENTLY?</h4>
+        <h4 class="modal-title" style="margin: 24px 30px;">{% trans "mapDelCollectionTitle1" %} "[[deleteCollectionName]]" {% trans "mapDelCollectionTitle2" %}?</h4>
       </div>
       <div class="modal-body" style="padding: 0;/* margin: 0 30px; */">
-        <p style="margin: 0 30px;">Do you really want to delete this collection? Once you delete it, all places saved under this collection will be removed from your map forever.</p>
+        <p style="margin: 0 30px;">{% trans "mapDelCollectionDescription" %}</p>
       </div>
       <div class="modal-footer" style="text-align: center;background-color: white;margin: 24px 30px;padding: 24px 0 0 0;">
-        <button type="button" ng-click="deleteCollection($event)" style="background-color: rgb(231, 1, 1);color: #fff;border: 0;padding: 5px 20px;">Yes, Delete it</button>
-        <button type="button" data-dismiss="modal" style="border: 0;color: #fff;background-color: #655A5A;padding: 5px 20px;margin-left: 8px;">Cancel</button>
+        <button type="button" ng-click="deleteCollection($event)" style="background-color: rgb(231, 1, 1);color: #fff;border: 0;padding: 5px 20px;">{% trans "mapConfirmDelBtn" %}</button>
+        <button type="button" data-dismiss="modal" style="border: 0;color: #fff;background-color: #655A5A;padding: 5px 20px;margin-left: 8px;">{% trans "mapCancelBtn" %}</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -69,14 +69,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="padding:0;border-bottom: 0;">
-        <h4 class="modal-title" style="margin: 24px 30px;">CREATE A NEW COLLECTION</h4>
+        <h4 class="modal-title" style="margin: 24px 30px;">{% trans "mapAddCollectionTitle" %}</h4>
       </div>
       <div class="modal-body" style="padding:0">
         <input class="input-xlarge" type="text" placeholder="New Collection Name" style="width:345px;margin: 0px 30px;" ng-model="newCollectionName"/>
       </div>
       <div class="modal-footer" style="text-align: center;background-color: white;margin: 24px 30px;padding: 24px 0 0 0;">
-        <button type="button" ng-click="createCollection($event)" style="background-color: rgb(1, 169, 231);color: #fff;border: 0;padding: 5px 20px;">Create New</button>
-        <button type="button" data-dismiss="modal" style="border: 0;color: #fff;background-color: #655A5A;padding: 5px 20px;margin-left: 8px;">Cancel</button>
+        <button type="button" ng-click="createCollection($event)" style="background-color: rgb(1, 169, 231);color: #fff;border: 0;padding: 5px 20px;">{% trans "mapAddCollectionBtn" %}</button>
+        <button type="button" data-dismiss="modal" style="border: 0;color: #fff;background-color: #655A5A;padding: 5px 20px;margin-left: 8px;">{% trans "mapCancelBtn" %}</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

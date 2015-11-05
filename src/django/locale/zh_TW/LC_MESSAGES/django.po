@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-30 15:41+0800\n"
+"POT-Creation-Date: 2015-11-05 11:05+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -248,6 +248,10 @@ msgstr ""
 msgid "homeFacebookBtn"
 msgstr "現在就去關注"
 
+#: templates/partials/collection_list.html:7
+msgid "mapSaveNumber"
+msgstr "地點已儲存"
+
 #: templates/partials/collection_list.html:10
 msgid "mapShowListBtn"
 msgstr "顯示列表"
@@ -257,6 +261,7 @@ msgid "mapHideListBtn"
 msgstr "隱藏列表"
 
 #: templates/partials/collection_list.html:34
+#: templates/partials/collection_list_view.html:19
 #: templates/partials/point_detail.html:6
 msgid "mapAdded"
 msgstr "更新："
@@ -266,6 +271,40 @@ msgstr "更新："
 msgid "mapEditBtn"
 msgstr "編輯"
 
+#: templates/partials/collection_list.html:54
+#, fuzzy
+#| msgid "mapAddCollectionBtn"
+msgid "mapDelCollectionTitle1"
+msgstr "永久刪除"
+
+#: templates/partials/collection_list.html:54
+#, fuzzy
+#| msgid "mapAddCollectionBtn"
+msgid "mapDelCollectionTitle2"
+msgstr " "
+
+#: templates/partials/collection_list.html:57
+#, fuzzy
+#| msgid "mapDelPlaceDescription"
+msgid "mapDelCollectionDescription"
+msgstr "你是否真的要永久刪除這個地圖？一旦你刪除了這個地圖，所有存於這個地圖裡面的地點，也將一併永久刪除。"
+
+#: templates/partials/collection_list.html:60
+#: templates/partials/point_detail.html:86
+msgid "mapConfirmDelBtn"
+msgstr "是，永久刪除。"
+
+#: templates/partials/collection_list.html:61
+#: templates/partials/collection_list.html:79
+#: templates/partials/point_detail.html:87
+msgid "mapCancelBtn"
+msgstr "取消"
+
+#: templates/partials/collection_list.html:72
+msgid "mapAddCollectionTitle"
+msgstr "建立新的地圖"
+
+#: templates/partials/collection_list.html:78
 #: templates/partials/point_detail.html:14
 msgid "mapAddCollectionBtn"
 msgstr "建立"
@@ -284,18 +323,7 @@ msgstr "刪除地點"
 
 #: templates/partials/point_detail.html:83
 msgid "mapDelPlaceDescription"
-msgstr ""
-"我常常會在住家附近尋找適合工作的咖啡廳。當我找到適合的，我就會把它收藏在"
-"MappingBird裡。現在，我已經有一個口袋名單，我再也不用擔心我常去的那間，是否客"
-"滿或太吵，因為，我可以隨時從口袋中，挑選下一間去工作。"
-
-#: templates/partials/point_detail.html:86
-msgid "mapConfirmDelBtn"
-msgstr "是，永久刪除。"
-
-#: templates/partials/point_detail.html:87
-msgid "mapCancelBtn"
-msgstr "取消"
+msgstr "你是否真的要永久刪除這個地點？一旦你刪除了這個地點，將永遠無法再復原。"
 
 #: templates/signup.swig:25
 msgid "AccountSignup"

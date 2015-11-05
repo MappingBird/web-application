@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-30 15:41+0800\n"
+"POT-Creation-Date: 2015-11-05 11:05+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -251,6 +251,10 @@ msgstr ""
 msgid "homeFacebookBtn"
 msgstr "LIKE US NOW"
 
+#: templates/partials/collection_list.html:7
+msgid "mapSaveNumber"
+msgstr "places saved"
+
 #: templates/partials/collection_list.html:10
 msgid "mapShowListBtn"
 msgstr "SHOW LIST"
@@ -260,15 +264,54 @@ msgid "mapHideListBtn"
 msgstr "HIDE LIST"
 
 #: templates/partials/collection_list.html:34
+#: templates/partials/collection_list_view.html:19
 #: templates/partials/point_detail.html:6
 msgid "mapAdded"
-msgstr ""
+msgstr "Added:"
 
 #: templates/partials/collection_list.html:34
 #: templates/partials/point_detail.html:74
 msgid "mapEditBtn"
 msgstr "Added:"
 
+#: templates/partials/collection_list.html:54
+#, fuzzy
+#| msgid "mapAddCollectionBtn"
+msgid "mapDelCollectionTitle1"
+msgstr "Create New"
+
+#: templates/partials/collection_list.html:54
+#, fuzzy
+#| msgid "mapAddCollectionBtn"
+msgid "mapDelCollectionTitle2"
+msgstr "Create New"
+
+#: templates/partials/collection_list.html:57
+#, fuzzy
+#| msgid "mapDelPlaceDescription"
+msgid "mapDelCollectionDescription"
+msgstr ""
+"I used to wander near my home to find good places for work. When I found "
+"one, I used MappingBird to bookmark it. Now I have a bunch of places in my "
+"pocket. I don’t have to worry if one place is too noisy, because I can find "
+"a new place whenever I want."
+
+#: templates/partials/collection_list.html:60
+#: templates/partials/point_detail.html:86
+msgid "mapConfirmDelBtn"
+msgstr "Yes, Delete it."
+
+#: templates/partials/collection_list.html:61
+#: templates/partials/collection_list.html:79
+#: templates/partials/point_detail.html:87
+msgid "mapCancelBtn"
+msgstr "Cancel"
+
+#: templates/partials/collection_list.html:72
+msgid "mapAddCollectionTitle"
+msgstr "CREATE A NEW COLLECTION"
+
+#: templates/partials/collection_list.html:78
 #: templates/partials/point_detail.html:14
 msgid "mapAddCollectionBtn"
 msgstr "Create New"
@@ -287,19 +330,7 @@ msgstr "Delete This Place"
 
 #: templates/partials/point_detail.html:83
 msgid "mapDelPlaceDescription"
-msgstr ""
-"I used to wander near my home to find good places for work. When I found "
-"one, I used MappingBird to bookmark it. Now I have a bunch of places in my "
-"pocket. I don’t have to worry if one place is too noisy, because I can find "
-"a new place whenever I want."
-
-#: templates/partials/point_detail.html:86
-msgid "mapConfirmDelBtn"
-msgstr "Yes, Delete it."
-
-#: templates/partials/point_detail.html:87
-msgid "mapCancelBtn"
-msgstr "Cancel"
+msgstr "Do you really want to delete this place permanently? Once you delete it, it will be removed from your map forever."
 
 #: templates/signup.swig:25
 msgid "AccountSignup"
