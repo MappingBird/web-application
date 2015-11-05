@@ -11,6 +11,7 @@
         SettingsApp: null,
         SaveApp: null,
         LoginApp: null,
-        IndexApp: null
-    }
+        IndexApp: null,
+        FooterApp: null
+    };
 })();

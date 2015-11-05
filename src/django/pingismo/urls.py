@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-　　　←表示使用 utf-8 編碼
+
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.conf import settings
@@ -23,8 +25,8 @@ urlpatterns = patterns('',
     url(r'', include('bucketlist.urls', namespace='bucketlist')),
 
     # home
-    url(r'^$', 'base.views.home', name='home'),
-    url(r'^(?P<page>login|signup|settings|app)$', 'base.views.page', name='page'),
+    # url(r'^$', 'base.views.home', name='home'),
+    url(r'^(?P<page>login|signup|settings|app|reset_password$)$', 'base.views.page', name='page'),
 )
 
 urlpatterns += patterns('django.contrib.staticfiles.views',
@@ -34,7 +36,17 @@ urlpatterns += patterns('django.contrib.staticfiles.views',
 urlpatterns += patterns('django.contrib.staticfiles.views',
         url(r'^signup$', 'serve', {'path': '/signup.html'}))
 urlpatterns += patterns('django.contrib.staticfiles.views',
-        url(r'^forget/password$', 'serve', {'path': '/forget_password.html'}))
+        url(r'^forget_password$', 'serve', {'path': '/forget_password.html'}))
+# urlpatterns += patterns('django.contrib.staticfiles.views',
+#         url(r'^reset_password$', 'serve', {'path': '/reset_password$.html'}))
+
+# home, i18n
+# 原本是用 i18n_patterns，這樣會區隔變成兩個網址
+# www.mappingbird.com/en/app
+# www.mappingbird.com/zh-tw/app
+# 為了避免變成這樣，所以改回用 patterns
+urlpatterns += patterns('',
+        url(r'^$', 'base.views.home', name='home'))
 
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

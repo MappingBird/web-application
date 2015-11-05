@@ -1,4 +1,5 @@
 {% extends "./share/_layout.swig" %}
+{% load i18n %}
 
 {% block ngApp %}IndexApp{% endblock %}
 
@@ -70,7 +71,7 @@
         <div class="span3"></div>
     </div>
     <div class="what-text save-text" data-target="save">
-        <h2>Remember Places With Just a Few Clicks</h2>
+        <h2> {% trans "Remember Places With Just a Few Clicks" %}</h2>
         <p class="container">Just add our free “Remember This Place” bookmark to your bookmarks bar and you can save interesting places while surfing the web with just a few clicks.</p>
     </div>
     <div class="what-text organize-text" data-target="organize">

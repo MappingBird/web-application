@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html ng-app="IndexApp">
 	<head>
@@ -100,12 +101,12 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li>
 								<button class="btn btn-default navbar-btn text-uppercase mb-signin track-click" id="home-sign-in" data-href="/login">
-									<i class="mdi mdi-account"></i> Log In
+									<i class="mdi mdi-account"></i> {% trans "homeLoginBtn" %}
 								</button>
 							</li>
 							<li>
 								<button class="btn btn-default navbar-btn text-uppercase mb-signup track-click" ng-click="getStarted()" id="home-sign-up">
-									<i class="mdi mdi-account-plus"></i> Sign Up
+									<i class="mdi mdi-account-plus"></i> {% trans "homeSignUpBtn" %}
 								</button>
 							</li>
 						</ul>
@@ -115,16 +116,16 @@
 					<div class="row">
 						<div class="col-md-6 mb-hero">
 							<div class="jumbotron">
-								<h1>Found interesting places?<br/>
-									Save to MappingBird.</h1>
-								<p>Just 1 click. MappingBird helps you bookmark places from any website, and easy to access on any PC and smartphones.</p>
+								<h1>{% trans "homeHeroTitle1" %}<br/>
+									{% trans "homeHeroTitle2" %}</h1>
+								<p>{% trans "homeHeroDescription" %}</p>
 							</div>
 							<p class="mb-intro-actions">
-								<a id="watch-video-button" href="https://youtu.be/COZTEe9Mi10" class="text-uppercase fancybox-media track-click"><span>watch 1 min intro <b><i class="mdi mdi-play"></i></b></span></a>
-								<a href="javascript:void(0);" ng-click="getStarted()" class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button">GET STARTED. IT’S FREE.</a>
+								<a id="watch-video-button" href="https://youtu.be/COZTEe9Mi10" class="text-uppercase fancybox-media track-click"><span>{% trans "homePlayVideoBtn" %} <b><i class="mdi mdi-play"></i></b></span></a>
+								<a href="javascript:void(0);" ng-click="getStarted()" class="btn btn-primary btn-lg text-uppercase track-click" id="ready-to-go-button">{% trans "homeGetStartBtn" %}</a>
 							</p>
 							<a class="learnmore_wrapper track-click" id="learnmore-btn" href="#testimony" >
-								<p class="text-uppercase">Why people love MappingBird?</p>
+								<p class="text-uppercase">{% trans "homeLearnMore" %}</p>
 								<div class="learnmore_arrow"></div>
 							</a>
 						</div>
@@ -142,20 +143,19 @@
 			<div class="row">
 				<div class="col-sm-12 col-md-4 user-traveler">
 					<div class="indicator"></div>
-					<h2>Traveler</h2>
-					<p class="quote">While I was searching for rooms, restaurants, and things to do in planning stage, MappingBird instantly helped me save places when I found. Its offline map* allowed me accessing all my saved stuffs when on the go.</p>
-					<p class="notes">*Offline map is still internal beta</p>
+					<h2>{% trans "homeTravelerTitle" %}</h2>
+					<p class="quote">{% trans "homeTravelerDescription" %}</p>
+					<p class="notes">{% trans "homeTravelerNotes" %}</p>
 				</div>
 				<div class="col-sm-12 col-md-4 user-freelancer">
 					<div class="indicator"></div>
-					<h2>Freelancer</h2>
-					<p class="quote">I used to wander near my home to find good places for work. When I found one, I used
-						MappingBird to bookmark it. Now I have a bunch of places in my pocket. I don’t have to worry if one place is too noisy, because I can find a new place whenever I want.</p>
+					<h2>{% trans "homeFreelancerTitle" %}</h2>
+					<p class="quote">{% trans "homeFreelancerDescription" %}</p>
 				</div>
 				<div class="col-sm-12 col-md-4 user-foodies">
 					<div class="indicator"></div>
-					<h2>Foodies</h2>
-					<p class="quote">My friends all know we like to eat. Whenever they found nice restaurants, they share with us immediately. Then, we remembered those places to MappingBird, and visit them when we had time.</p>
+					<h2>{% trans "homeFoodieTitle" %}</h2>
+					<p class="quote">{% trans "homeFoodieDescription" %}</p>
 				</div>
 			</div>
 		</section>
@@ -163,8 +163,8 @@
 		<!-- Efficient section start -->
 		<section class="efficient">
 			<h2>
-				It only takes about 5 seconds to save a place.
-				<a id="efficient-ready-to-go-button" href="javascript:void(0);" ng-click="getStarted()" class="btn btn-default btn-lg text-uppercase track-click">Sign up now. It's free.</a>
+				{% trans "homeHighlightDescription" %}
+				<a id="efficient-ready-to-go-button" href="javascript:void(0);" ng-click="getStarted()" class="btn btn-default btn-lg text-uppercase track-click">{% trans "homeHighlightBtn" %}</a>
 			</h2>
 		</section>
 		<!-- End of Efficient section -->
@@ -182,12 +182,12 @@
 					</ul>
 				</div>
 			</nav-->
-			<h1>What They Do?</h1>
+			<h1>{% trans "homeFeaturesTitle" %}</h1>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
-						<h2>Save Places From Any Websites</h2>
-						<p>With the free Save to MappingBird browser button, you can bookmark interesting and intriguing places with just a few clicks while browsing.</p>
+						<h2>{% trans "homeFeaturesSaveSubtitle" %}</h2>
+						<p>{% trans "homeFeaturesSaveDescription" %}</p>
 					</div>
 					<div class="col-md-6">
                         <img src="{{ STATIC_URL }}new_index/images/what_screenshot_bookmark.jpg" width="90%" />
@@ -198,14 +198,14 @@
                         <img src="{{ STATIC_URL }}new_index/images/what_screenshot_organize.jpg" width="90%" />
 					</div>
 					<div class="col-md-6">
-						<h2>Get A Bird’s-eye View of All Your Places</h2>
-						<p>Mappingbird offers ways to group your places by collections and/or tags. View groups of places on the map by selecting a collection.</p>
+						<h2>{% trans "homeFeaturesMapSubtitle" %}</h2>
+						<p>{% trans "homeFeaturesMapDescription" %}</p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<h2>Access Saved Places From Any Device</h2>
-						<p>Install the free Mappingbird app on your Android phone so you can access your saved places whenever and wherever you need them.</p>
+						<h2>{% trans "homeFeaturesMobileSubtitle" %}</h2>
+						<p>{% trans "homeFeaturesMobileDescription" %}</p>
 						<ul class="list-inline">
                             <li><a href="//play.google.com/store/apps/details?id=com.mpbd.mappingbird" target="_blank"><img src="{{ STATIC_URL }}new_index/images/googleplay_icon.png" id="google-play-icon" class="track-click" /></a></li>
                             <li><a href="javascript:void(0);" ng-click="open()"><img src="{{ STATIC_URL }}new_index/images/appstore_icon.png" id="app-store-icon" class="track-click" /></a></li>
@@ -243,9 +243,9 @@
                         <img src="{{ STATIC_URL }}new_index/images/index_facebook_icon.png" />
 					</div>
 					<div class="col-md-6">
-						<h2>Like our Facebook page</h2>
-						<p>Help us help you by sharing your likes and dislikes about MappingBird on our Facebook page.</p>
-                        <a class="btn btn-primary text-uppercase track-click" href="https://www.facebook.com/MappingBird" id="facebook-button"><img src="{{ STATIC_URL }}new_index/images/facebook_like_thumb.png" /> Like us now</a>
+						<h2>{% trans "homeFacebookTitle" %}</h2>
+						<p>{% trans "homeFacebookDescription" %}</p>
+                        <a class="btn btn-primary text-uppercase track-click" href="https://www.facebook.com/MappingBird" id="facebook-button"><img src="{{ STATIC_URL }}new_index/images/facebook_like_thumb.png" />{% trans "homeFacebookBtn" %}</a>
 					</div>
 				</div>
 			</div>
@@ -254,19 +254,19 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-6">
-                        <img class="brand-logo" src="{{ STATIC_URL }}new_index/images/footer_logo.png" /> Remember places for later.
+                        <img class="brand-logo" src="{{ STATIC_URL }}new_index/images/footer_logo.png" /> {% trans "homeFooterSlogan" %}
 					</div>
 					<div class="col-md-6">
-						<!--ul class="nav navbar-nav navbar-right mb-lang-switch">
-							<li class="active"><a href="#">English</a></li>
+						<ul class="nav navbar-nav navbar-right mb-lang-switch">
+							<li class="active"><a href="#" change-language='en'>English</a></li>
 							<li>|</li>
-							<li><a href="#">繁體中文</a></li>
-						</ul-->
+							<li><a href="#" change-language='zh-tw'>繁體中文</a></li>
+						</ul
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<small>Copyright &copy; 2015 Mappingbird. All referred posts © their respective owners.</small>
+						<small>{% trans "homeFooterCopyright" %}</small>
 					</div>
 					<div class="col-md-6">
 						<!--ul class="nav navbar-nav navbar-right">

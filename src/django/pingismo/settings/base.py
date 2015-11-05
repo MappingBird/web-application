@@ -12,7 +12,7 @@ AUTH_USER_MODEL = 'base.User'
 # ADMINS = (
 #     # ('Your Name', 'your_email@example.com'),
 # )
-# 
+#
 # MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -27,7 +27,7 @@ TIME_ZONE = 'Asia/Taipei'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en' #zh_TW
 
 SITE_ID = 1
 
@@ -84,6 +84,7 @@ AUTHENTICATION_BACKENDS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -212,6 +213,9 @@ USERVOICE_API_SECRET = 'Op56l4akyiqo4IXnEXDJFXqFGwDWIN0jO8tM9swty9w'
 
 LOGIN_REDIRECT_URL = '/'
 
+# https://docs.djangoproject.com/en/1.8/topics/email/#topic-email-console-backend
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = PROJECT_DIR.child('tmp') # change this to a proper location
 # EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 # Django REST Framework
@@ -223,3 +227,16 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+# i18n
+from django.utils.translation import ugettext_lazy as _
+LANGUAGES = (
+    ('zh-tw', _('Traditional Chinese')),
+    ('en', _('English')),
+)
+
+
+LOCALE_PATHS = (
+    PROJECT_DIR.child('locale'),
+)
+

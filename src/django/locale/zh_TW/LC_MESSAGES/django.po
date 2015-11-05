@@ -1,0 +1,376 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Execute next
+# django-admin.py compilemessages
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-05 15:29+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh-tw\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: api/forms.py:12
+msgid "A user with that email already exists."
+msgstr "此郵件已被使用"
+
+#: api/forms.py:14 api/forms.py:46
+msgid "Username"
+msgstr "帳號"
+
+#: api/forms.py:16 api/forms.py:48
+msgid "Required. 255 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "必填(255 字以下)、英文字母、號碼和 @/./+/-/_ 符號"
+
+#: api/forms.py:19 api/forms.py:51
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr "只能含有英文字母、號碼和 @/./+/-/_ 符號"
+
+#: api/forms.py:21 api/forms.py:53 base/forms.py:10
+msgid "Password"
+msgstr "密碼"
+
+#: base/forms.py:11
+msgid "Password (again)"
+msgstr "確認密碼"
+
+#: base/forms.py:17
+msgid "You must type the same password each time."
+msgstr "請輸入同樣的密碼"
+
+#: pingismo/settings/base.py:234
+msgid "Traditional Chinese"
+msgstr "繁體中文"
+
+#: pingismo/settings/base.py:235
+msgid "English"
+msgstr "English"
+
+#: templates/app.swig:34 templates/partials/user_panel.html:11
+#: templates/settings.swig:27
+msgid "userPanelViewMap"
+msgstr "檢視地圖"
+
+#: templates/app.swig:35 templates/settings.swig:28
+msgid "userPanelSettings"
+msgstr "設定"
+
+#: templates/app.swig:37 templates/settings.swig:30
+msgid "userPanelLogout"
+msgstr "登出"
+
+#: templates/app.swig:44 templates/partials/user_panel.html:21
+msgid "userPanelSignup"
+msgstr "註冊"
+
+#: templates/app.swig:46 templates/partials/user_panel.html:23
+msgid "userPanelLogin"
+msgstr "登入"
+
+#: templates/app.swig:120 templates/login.swig:52 templates/new_index.html:269
+#: templates/settings.swig:91 templates/signup.swig:79
+msgid "homeFooterCopyright"
+msgstr "Copyright © 2015 Mappingbird. 所有版權，屬於連結的原始作者。"
+
+#: templates/app.swig:124 templates/login.swig:61 templates/settings.swig:100
+#: templates/signup.swig:88
+msgid "AccountContactUs"
+msgstr "聯絡我們"
+
+#: templates/app.swig:125 templates/login.swig:62 templates/settings.swig:101
+#: templates/signup.swig:89
+msgid "AccountFollow"
+msgstr "追蹤我們"
+
+#: templates/index.swig:74
+msgid "Remember Places With Just a Few Clicks"
+msgstr ""
+
+#: templates/login.swig:26
+msgid "AccountLogin"
+msgstr "登入"
+
+#: templates/login.swig:35
+msgid "AccountLoginFailed"
+msgstr "帳號密碼錯誤！請在輸入一次。"
+
+#: templates/login.swig:38
+msgid "AccountForget"
+msgstr "忘記密碼？"
+
+#: templates/login.swig:41
+msgid "AccountLoginBtn"
+msgstr "登入"
+
+#: templates/login.swig:42
+msgid "AccountNotMember"
+msgstr "不是會員？"
+
+#: templates/login.swig:42
+msgid "AccountSignupnow"
+msgstr "註冊"
+
+#: templates/login.swig:51 templates/new_index.html:257
+#: templates/settings.swig:90 templates/signup.swig:78
+msgid "homeFooterSlogan"
+msgstr "一鍵收藏，隨時參考。"
+
+#: templates/new_index.html:104
+msgid "homeLoginBtn"
+msgstr "登入"
+
+#: templates/new_index.html:109
+msgid "homeSignUpBtn"
+msgstr "註冊"
+
+#: templates/new_index.html:119
+msgid "homeHeroTitle1"
+msgstr "發現有趣的地點？"
+
+#: templates/new_index.html:120
+msgid "homeHeroTitle2"
+msgstr "收藏到MappingBird吧。"
+
+#: templates/new_index.html:121
+msgid "homeHeroDescription"
+msgstr ""
+"僅一鍵，MappingBird就幫你把任何網站看到的地點收藏起來，同時，還可以輕易地在電"
+"腦或行動裝置中瀏覽。"
+
+#: templates/new_index.html:124
+msgid "homePlayVideoBtn"
+msgstr "觀看一分鐘介紹"
+
+#: templates/new_index.html:125
+msgid "homeGetStartBtn"
+msgstr "現在就免費試試吧"
+
+#: templates/new_index.html:128
+msgid "homeLearnMore"
+msgstr "為什麼他們喜歡MappingBird？"
+
+#: templates/new_index.html:146
+msgid "homeTravelerTitle"
+msgstr "旅行者"
+
+#: templates/new_index.html:147
+msgid "homeTravelerDescription"
+msgstr ""
+"每當我在規劃旅行要住哪裡、吃什麼以及去哪些景點看看時，MappingBird提供給我快速"
+"的收藏這些地點的功能。而它的離線地圖* 讓我在旅程中，可以更方便的參考我收集的"
+"這些資訊。"
+
+#: templates/new_index.html:148
+msgid "homeTravelerNotes"
+msgstr "* 離線地圖仍在內部測試階段"
+
+#: templates/new_index.html:152
+msgid "homeFreelancerTitle"
+msgstr "自由工作者"
+
+#: templates/new_index.html:153
+msgid "homeFreelancerDescription"
+msgstr ""
+"我常常會在住家附近尋找適合工作的咖啡廳。當我找到適合的，我就會把它收藏在"
+"MappingBird裡。現在，我已經有一個口袋名單，我再也不用擔心我常去的那間，是否客"
+"滿或太吵，因為，我可以隨時從口袋中，挑選下一間去工作。"
+
+#: templates/new_index.html:157
+msgid "homeFoodieTitle"
+msgstr "美食饕客"
+
+#: templates/new_index.html:158
+msgid "homeFoodieDescription"
+msgstr ""
+"我們的朋友都知道我們愛美食。每當他們發現值得推薦的餐廳，就會馬上分享給我們。"
+"然後，我們就會先收藏在MappingBird裡，之後再找個時間親自去嚐嚐。"
+
+#: templates/new_index.html:166
+msgid "homeHighlightDescription"
+msgstr "只要5秒鐘，就可以收藏一個最愛的地點。"
+
+#: templates/new_index.html:167
+msgid "homeHighlightBtn"
+msgstr "現在就免費試試吧"
+
+#: templates/new_index.html:185
+msgid "homeFeaturesTitle"
+msgstr "大家都怎麼用？"
+
+#: templates/new_index.html:189
+msgid "homeFeaturesSaveSubtitle"
+msgstr "收藏來自任何網站的地點"
+
+#: templates/new_index.html:190
+msgid "homeFeaturesSaveDescription"
+msgstr ""
+"透過免費的MappingBird按鈕，只要點擊幾下，你就可以收藏任何感興趣的地點。"
+
+#: templates/new_index.html:201
+msgid "homeFeaturesMapSubtitle"
+msgstr "輕鬆總覽已收藏的地點"
+
+#: templates/new_index.html:202
+msgid "homeFeaturesMapDescription"
+msgstr ""
+"MappingBird讓你可以透過建立不同的地圖或標籤來分類你的收藏。點擊地圖列表，快速"
+"切換不同的地圖收藏。"
+
+#: templates/new_index.html:207
+msgid "homeFeaturesMobileSubtitle"
+msgstr "在任何裝置上瀏覽收藏"
+
+#: templates/new_index.html:208
+msgid "homeFeaturesMobileDescription"
+msgstr "在行動裝置上安裝MappingBird應用程式，你就可以隨時隨地參考收藏的地點。"
+
+#: templates/new_index.html:246
+msgid "homeFacebookTitle"
+msgstr "關注我們的Facebook"
+
+#: templates/new_index.html:247
+msgid "homeFacebookDescription"
+msgstr ""
+"把你的喜歡與不喜歡，透過Facebook分享給我們知道，可以幫助我們更知道如何幫助"
+"你。"
+
+#: templates/new_index.html:248
+msgid "homeFacebookBtn"
+msgstr "現在就去關注"
+
+#: templates/partials/collection_list.html:7
+msgid "mapSaveNumber"
+msgstr "地點已儲存"
+
+#: templates/partials/collection_list.html:10
+msgid "mapShowListBtn"
+msgstr "顯示列表"
+
+#: templates/partials/collection_list.html:11
+msgid "mapHideListBtn"
+msgstr "隱藏列表"
+
+#: templates/partials/collection_list.html:34
+#: templates/partials/collection_list_view.html:19
+#: templates/partials/point_detail.html:6
+msgid "mapAdded"
+msgstr "更新："
+
+#: templates/partials/collection_list.html:34
+#: templates/partials/point_detail.html:74
+msgid "mapEditBtn"
+msgstr "編輯"
+
+#: templates/partials/collection_list.html:54
+#, fuzzy
+#| msgid "mapAddCollectionBtn"
+msgid "mapDelCollectionTitle1"
+msgstr "永久刪除"
+
+#: templates/partials/collection_list.html:54
+#, fuzzy
+#| msgid "mapAddCollectionBtn"
+msgid "mapDelCollectionTitle2"
+msgstr " "
+
+#: templates/partials/collection_list.html:57
+#, fuzzy
+#| msgid "mapDelPlaceDescription"
+msgid "mapDelCollectionDescription"
+msgstr ""
+"你是否真的要永久刪除這個地圖？一旦你刪除了這個地圖，所有存於這個地圖裡面的地"
+"點，也將一併永久刪除。"
+
+#: templates/partials/collection_list.html:60
+#: templates/partials/point_detail.html:86
+msgid "mapConfirmDelBtn"
+msgstr "是，永久刪除。"
+
+#: templates/partials/collection_list.html:61
+#: templates/partials/collection_list.html:79
+#: templates/partials/point_detail.html:87
+msgid "mapCancelBtn"
+msgstr "取消"
+
+#: templates/partials/collection_list.html:72
+msgid "mapAddCollectionTitle"
+msgstr "建立新的地圖"
+
+#: templates/partials/collection_list.html:78
+#: templates/partials/point_detail.html:14
+msgid "mapAddCollectionBtn"
+msgstr "建立"
+
+#: templates/partials/point_detail.html:28
+msgid "mapUnder"
+msgstr "存於"
+
+#: templates/partials/point_detail.html:75
+msgid "mapDoneBtn"
+msgstr "完成"
+
+#: templates/partials/point_detail.html:76
+msgid "mapDelPlaceBtn"
+msgstr "刪除地點"
+
+#: templates/partials/point_detail.html:83
+msgid "mapDelPlaceDescription"
+msgstr "你是否真的要永久刪除這個地點？一旦你刪除了這個地點，將永遠無法再復原。"
+
+#: templates/settings.swig:41
+msgid "AccountSettings"
+msgstr "設定"
+
+#: templates/settings.swig:43
+msgid "AccountSettingsChangePassword"
+msgstr "更新密碼"
+
+#: templates/settings.swig:49
+msgid "AccountSettingsPassIncorrect"
+msgstr "密碼錯誤"
+
+#: templates/settings.swig:56
+msgid "AccountSettingsPassCantSame"
+msgstr "新密碼不能和舊的密碼一樣"
+
+#: templates/settings.swig:59
+msgid "AccountSettingsPassTooShort"
+msgstr "密碼太短"
+
+#: templates/settings.swig:66
+msgid "AccountSettingsPassDontMatch"
+msgstr "新密碼不對"
+
+#: templates/settings.swig:69
+msgid "AccountSettingsPassChangeSuccess"
+msgstr "密碼更新成功"
+
+#: templates/signup.swig:25
+msgid "AccountSignup"
+msgstr "註冊"
+
+#: templates/signup.swig:36
+msgid "AccountSignupFailShort"
+msgstr "密碼太短"
+
+#: templates/signup.swig:39
+msgid "AccountSignupFailUsed"
+msgstr "此帳號已被使用"
+
+#: templates/signup.swig:39
+msgid "AccountSignupAlreadyHasAccount"
+msgstr "已有帳號？"
+
+#: templates/signup.swig:46
+msgid "AccountSignupCreateBtn"
+msgstr "建立帳號"

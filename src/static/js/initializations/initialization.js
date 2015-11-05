@@ -92,6 +92,10 @@ mappingbird.initializations = angular.module('Initialization', [
             $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
             $http.defaults.headers.put['X-CSRFToken'] = $cookies.csrftoken;
             $http.defaults.headers.patch['X-CSRFToken'] = $cookies.csrftoken;
+
+            if ($cookies.lang === 'zh-tw') {
+              window.moment.lang('zh-tw');
+            }
         }]);
 
     // Include the UserVoice JavaScript SDK (only needed once on a page)

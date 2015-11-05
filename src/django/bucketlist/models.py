@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 from django.db import models
 
 from base.models import User
@@ -51,3 +52,18 @@ class Image(models.Model):
 
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
+
+
+def get_reset_password_expire_date():
+    return datetime.datetime.today() + datetime.timedelta(days=1)
+
+
+class ResetPasswordRecord(models.Model):
+    email = models.EmailField(u'E-mail', max_length=255)
+    request_code = models.CharField(max_length=64)
+    create_time = models.DateTimeField(auto_now_add=True)
+    expired_time = models.DateTimeField(default=get_reset_password_expire_date)
+    update_time = models.DateTimeField(auto_now=True)
+    is_updated = models.BooleanField(default=False)
+
+

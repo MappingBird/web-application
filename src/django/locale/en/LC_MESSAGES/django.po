@@ -1,0 +1,383 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-05 15:29+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: api/forms.py:12
+msgid "A user with that email already exists."
+msgstr "A user with that email already exists."
+
+#: api/forms.py:14 api/forms.py:46
+msgid "Username"
+msgstr "Username"
+
+#: api/forms.py:16 api/forms.py:48
+msgid "Required. 255 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "Required. 255 characters or fewer. Letters, digits and @/./+/-/_ only."
+
+#: api/forms.py:19 api/forms.py:51
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr "This value may contain only letters, numbers and @/./+/-/_ characters."
+
+#: api/forms.py:21 api/forms.py:53 base/forms.py:10
+msgid "Password"
+msgstr "Password"
+
+#: base/forms.py:11
+msgid "Password (again)"
+msgstr "Password (again)"
+
+#: base/forms.py:17
+msgid "You must type the same password each time."
+msgstr "You must type the same password each time."
+
+#: pingismo/settings/base.py:234
+msgid "Traditional Chinese"
+msgstr "Traditional Chinese"
+
+#: pingismo/settings/base.py:235
+msgid "English"
+msgstr "English"
+
+#: templates/app.swig:34 templates/partials/user_panel.html:11
+#: templates/settings.swig:27
+msgid "userPanelViewMap"
+msgstr "View Map"
+
+#: templates/app.swig:35 templates/settings.swig:28
+msgid "userPanelSettings"
+msgstr "Settings"
+
+#: templates/app.swig:37 templates/settings.swig:30
+msgid "userPanelLogout"
+msgstr "Logout"
+
+#: templates/app.swig:44 templates/partials/user_panel.html:21
+msgid "userPanelSignup"
+msgstr "Sign up"
+
+#: templates/app.swig:46 templates/partials/user_panel.html:23
+msgid "userPanelLogin"
+msgstr "Login"
+
+#: templates/app.swig:120 templates/login.swig:52 templates/new_index.html:269
+#: templates/settings.swig:91 templates/signup.swig:79
+msgid "homeFooterCopyright"
+msgstr ""
+"Copyright © 2015 Mappingbird. All referred posts © their respective owners."
+
+#: templates/app.swig:124 templates/login.swig:61 templates/settings.swig:100
+#: templates/signup.swig:88
+msgid "AccountContactUs"
+msgstr "Contact Us"
+
+#: templates/app.swig:125 templates/login.swig:62 templates/settings.swig:101
+#: templates/signup.swig:89
+msgid "AccountFollow"
+msgstr "Follow Us"
+
+#: templates/index.swig:74
+msgid "Remember Places With Just a Few Clicks"
+msgstr "Remember Places With Just a Few Clicks"
+
+#: templates/login.swig:26
+msgid "AccountLogin"
+msgstr "Login"
+
+#: templates/login.swig:35
+msgid "AccountLoginFailed"
+msgstr "Invalid ID or password! Please try again."
+
+#: templates/login.swig:38
+msgid "AccountForget"
+msgstr "Forgot your password"
+
+#: templates/login.swig:41
+msgid "AccountLoginBtn"
+msgstr "LOG IN"
+
+#: templates/login.swig:42
+msgid "AccountNotMember"
+msgstr "Not a member?"
+
+#: templates/login.swig:42
+msgid "AccountSignupnow"
+msgstr "Sign up now"
+
+#: templates/login.swig:51 templates/new_index.html:257
+#: templates/settings.swig:90 templates/signup.swig:78
+msgid "homeFooterSlogan"
+msgstr "Remember places for later."
+
+#: templates/new_index.html:104
+msgid "homeLoginBtn"
+msgstr "LOG IN"
+
+#: templates/new_index.html:109
+msgid "homeSignUpBtn"
+msgstr "SIGN UP"
+
+#: templates/new_index.html:119
+msgid "homeHeroTitle1"
+msgstr "Found interesting places?"
+
+#: templates/new_index.html:120
+msgid "homeHeroTitle2"
+msgstr "Save to MappingBird."
+
+#: templates/new_index.html:121
+msgid "homeHeroDescription"
+msgstr ""
+"Just 1 click. MappingBird helps you bookmark places from any website, and "
+"easy to access on any PC and smartphones."
+
+#: templates/new_index.html:124
+msgid "homePlayVideoBtn"
+msgstr "WATCH 1 MIN INTRO"
+
+#: templates/new_index.html:125
+msgid "homeGetStartBtn"
+msgstr "GET STARTED. IT’S FREE."
+
+#: templates/new_index.html:128
+msgid "homeLearnMore"
+msgstr "WHY PEOPLE LOVE MAPPINGBIRD?"
+
+#: templates/new_index.html:146
+msgid "homeTravelerTitle"
+msgstr "Traveler"
+
+#: templates/new_index.html:147
+msgid "homeTravelerDescription"
+msgstr ""
+"While I was searching for rooms, restaurants, and things to do in planning "
+"stage, MappingBird instantly helped me save places when I found. Its offline "
+"map* allowed me accessing all my saved stuffs when on the go."
+
+#: templates/new_index.html:148
+msgid "homeTravelerNotes"
+msgstr "*offline map is still internal beta"
+
+#: templates/new_index.html:152
+msgid "homeFreelancerTitle"
+msgstr "Freelancer"
+
+#: templates/new_index.html:153
+msgid "homeFreelancerDescription"
+msgstr ""
+"I used to wander near my home to find good places for work. When I found "
+"one, I used MappingBird to bookmark it. Now I have a bunch of places in my "
+"pocket. I don’t have to worry if one place is too noisy, because I can find "
+"a new place whenever I want."
+
+#: templates/new_index.html:157
+msgid "homeFoodieTitle"
+msgstr "Foodies"
+
+#: templates/new_index.html:158
+msgid "homeFoodieDescription"
+msgstr ""
+"My friends all know we like to eat. Whenever they found nice restaurants, "
+"they share with us immediately. Then, we remembered those places to "
+"MappingBird, and visit them when we had time."
+
+#: templates/new_index.html:166
+msgid "homeHighlightDescription"
+msgstr "It only takes about 5 seconds to save a place."
+
+#: templates/new_index.html:167
+msgid "homeHighlightBtn"
+msgstr "SIGN UP NOW. IT’S FREE."
+
+#: templates/new_index.html:185
+msgid "homeFeaturesTitle"
+msgstr "How They Do?"
+
+#: templates/new_index.html:189
+msgid "homeFeaturesSaveSubtitle"
+msgstr "Save Places From Any Websites"
+
+#: templates/new_index.html:190
+msgid "homeFeaturesSaveDescription"
+msgstr ""
+"With the free Save to MappingBird browser button, you can bookmark "
+"interesting and intriguing places with just a few clicks while browsing."
+
+#: templates/new_index.html:201
+msgid "homeFeaturesMapSubtitle"
+msgstr "Get A Bird’s-eye View of All Your Places"
+
+#: templates/new_index.html:202
+msgid "homeFeaturesMapDescription"
+msgstr ""
+"Mappingbird offers ways to group your places by collections and/or tags. "
+"View groups of places on the map by selecting a collection."
+
+#: templates/new_index.html:207
+msgid "homeFeaturesMobileSubtitle"
+msgstr "Access Saved Places From Any Devices"
+
+#: templates/new_index.html:208
+msgid "homeFeaturesMobileDescription"
+msgstr ""
+"Install the free Mappingbird app on your Android phone so you can access "
+"your saved places whenever and wherever you need them."
+
+#: templates/new_index.html:246
+msgid "homeFacebookTitle"
+msgstr "Like our Facebook page"
+
+#: templates/new_index.html:247
+msgid "homeFacebookDescription"
+msgstr ""
+"Help us help you by sharing your likes and dislikes about MappingBird on our "
+"Facebook page."
+
+#: templates/new_index.html:248
+msgid "homeFacebookBtn"
+msgstr "LIKE US NOW"
+
+#: templates/partials/collection_list.html:7
+msgid "mapSaveNumber"
+msgstr "places saved"
+
+#: templates/partials/collection_list.html:10
+msgid "mapShowListBtn"
+msgstr "SHOW LIST"
+
+#: templates/partials/collection_list.html:11
+msgid "mapHideListBtn"
+msgstr "HIDE LIST"
+
+#: templates/partials/collection_list.html:34
+#: templates/partials/collection_list_view.html:19
+#: templates/partials/point_detail.html:6
+msgid "mapAdded"
+msgstr "Added:"
+
+#: templates/partials/collection_list.html:34
+#: templates/partials/point_detail.html:74
+msgid "mapEditBtn"
+msgstr "Added:"
+
+#: templates/partials/collection_list.html:54
+#, fuzzy
+#| msgid "mapAddCollectionBtn"
+msgid "mapDelCollectionTitle1"
+msgstr "Create New"
+
+#: templates/partials/collection_list.html:54
+#, fuzzy
+#| msgid "mapAddCollectionBtn"
+msgid "mapDelCollectionTitle2"
+msgstr "Create New"
+
+#: templates/partials/collection_list.html:57
+#, fuzzy
+#| msgid "mapDelPlaceDescription"
+msgid "mapDelCollectionDescription"
+msgstr ""
+"I used to wander near my home to find good places for work. When I found "
+"one, I used MappingBird to bookmark it. Now I have a bunch of places in my "
+"pocket. I don’t have to worry if one place is too noisy, because I can find "
+"a new place whenever I want."
+
+#: templates/partials/collection_list.html:60
+#: templates/partials/point_detail.html:86
+msgid "mapConfirmDelBtn"
+msgstr "Yes, Delete it."
+
+#: templates/partials/collection_list.html:61
+#: templates/partials/collection_list.html:79
+#: templates/partials/point_detail.html:87
+msgid "mapCancelBtn"
+msgstr "Cancel"
+
+#: templates/partials/collection_list.html:72
+msgid "mapAddCollectionTitle"
+msgstr "CREATE A NEW COLLECTION"
+
+#: templates/partials/collection_list.html:78
+#: templates/partials/point_detail.html:14
+msgid "mapAddCollectionBtn"
+msgstr "Create New"
+
+#: templates/partials/point_detail.html:28
+msgid "mapUnder"
+msgstr "Under"
+
+#: templates/partials/point_detail.html:75
+msgid "mapDoneBtn"
+msgstr "Done"
+
+#: templates/partials/point_detail.html:76
+msgid "mapDelPlaceBtn"
+msgstr "Delete This Place"
+
+#: templates/partials/point_detail.html:83
+msgid "mapDelPlaceDescription"
+msgstr ""
+"Do you really want to delete this place permanently? Once you delete it, it "
+"will be removed from your map forever."
+
+#: templates/settings.swig:41
+msgid "AccountSettings"
+msgstr "Settings"
+
+#: templates/settings.swig:43
+msgid "AccountSettingsChangePassword"
+msgstr "Change Password"
+
+#: templates/settings.swig:49
+msgid "AccountSettingsPassIncorrect"
+msgstr "Password is incorrect."
+
+#: templates/settings.swig:56
+msgid "AccountSettingsPassCantSame"
+msgstr "New password cannot be the same as the old password."
+
+#: templates/settings.swig:59
+msgid "AccountSettingsPassTooShort"
+msgstr "Password is too short."
+
+#: templates/settings.swig:66
+msgid "AccountSettingsPassDontMatch"
+msgstr "New passwords don't match."
+
+#: templates/settings.swig:69
+msgid "AccountSettingsPassChangeSuccess"
+msgstr "Password changed successfully."
+
+#: templates/signup.swig:25
+msgid "AccountSignup"
+msgstr "Sign Up"
+
+#: templates/signup.swig:36
+msgid "AccountSignupFailShort"
+msgstr "Password is too short."
+
+#: templates/signup.swig:39
+msgid "AccountSignupFailUsed"
+msgstr "The email has been used."
+
+#: templates/signup.swig:39
+msgid "AccountSignupAlreadyHasAccount"
+msgstr "Already has account?"
+
+#: templates/signup.swig:46
+msgid "AccountSignupCreateBtn"
+msgstr "Create Your Account"
