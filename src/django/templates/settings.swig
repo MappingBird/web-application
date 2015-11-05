@@ -37,50 +37,50 @@
         <div class="row-fluid">
             <div class="span2"></div>
             <div class="span8">
-                <p class="title">{{email}}</p>
-                <h1>Settings</h1>
+                <p class="title">[[email]]</p>
+                <h1>{% trans "AccountSettings" %}</h1>
                 <hr>
-                <p class="title">Change Password</p>
+                <p class="title">{% trans "AccountSettingsChangePassword" %}</p>
                 <form ng-submit="checkInput()">
                     <div class="control-group" ng-class="{ 'control-group' : 1, 'error' : errorOldPasswordIncorrect }">
                         <input type="password" placeholder="Old Password" name="old_password" ng-model="old_password" required />
                     </div>
                     <div class="error-message control-group" ng-class="{ 'error-message' : 1, 'control-group' : 1, 'error' : errorOldPasswordIncorrect }" ng-show="errorOldPasswordIncorrect">
-                        <p class="help-inline">Password is incorrect.</p>
+                        <p class="help-inline">{% trans "AccountSettingsPassIncorrect" %}</p>
                     </div>
 
                     <div class="control-group" ng-class="{ 'control-group' : 1, 'error' : errorPasswordTooShort || errorOldPasswordNewPasswordSame }">
                         <input type="password" placeholder="New Password" name="new_password" ng-model="new_password" required />
                     </div>
                     <div class="error-message control-group" ng-class="{ 'error-message' : 1, 'control-group' : 1, 'error' : errorOldPasswordNewPasswordSame }" ng-show="errorOldPasswordNewPasswordSame">
-                        <p class="help-inline">New password cannot be the same as the old password.</p>
+                        <p class="help-inline">{% trans "AccountSettingsPassCantSame" %}</p>
                     </div>
                     <div class="error-message control-group" ng-class="{ 'error-message' : 1, 'control-group' : 1, 'error' : errorPasswordTooShort }" ng-show="errorPasswordTooShort">
-                        <p class="help-inline">New password is too short.</p>
+                        <p class="help-inline">{% trans "AccountSettingsPassTooShort" %}</p>
                     </div>
 
                     <div class="control-group" ng-class="{ 'control-group' : 1, 'error' : errorNewPasswordsNoMatch }">
                         <input type="password" placeholder="Confirm Password" name="confirm_password" ng-model="confirm_password" required />
                     </div>
                     <div class="error-message control-group" ng-class="{ 'error-message' : 1, 'control-group' : 1, 'error' : errorNewPasswordsNoMatch }" ng-show="errorNewPasswordsNoMatch">
-                        <p class="help-inline">New passwords don't match.</p>
+                        <p class="help-inline">{% trans "AccountSettingsPassDontMatch" %}</p>
                     </div>
                     <div class="control-group" ng-show="passwordChanged">
-                        <p class="help-inline">Password changed successfully.</p>
+                        <p class="help-inline">{% trans "AccountSettingsPassChangeSuccess" %}</p>
                     </div>
                     <div class="action-button">
                         <input class="btn btn-primary pingismo-btn" type="submit" value="Update Password">
                     </div>
                 </form>
 
-                <div ng-show="false">
+                <!-- <div ng-show="false">
                     <hr>
                     <p class="title">Delete Account</p>
                     <p class="error">Once you delete your account, all of your saved points will be deleted. There is no way to recover your deleted data. Are you sure you want to do this?</p>
                     <div class="action-button">
                         <a href="" ng-click="" class="btn btn-primary pingismo-btn">Delete Account</a>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="span2"></div>
         </div>

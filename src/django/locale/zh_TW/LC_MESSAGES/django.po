@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-05 11:05+0800\n"
+"POT-Creation-Date: 2015-11-05 15:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -287,7 +287,9 @@ msgstr " "
 #, fuzzy
 #| msgid "mapDelPlaceDescription"
 msgid "mapDelCollectionDescription"
-msgstr "你是否真的要永久刪除這個地圖？一旦你刪除了這個地圖，所有存於這個地圖裡面的地點，也將一併永久刪除。"
+msgstr ""
+"你是否真的要永久刪除這個地圖？一旦你刪除了這個地圖，所有存於這個地圖裡面的地"
+"點，也將一併永久刪除。"
 
 #: templates/partials/collection_list.html:60
 #: templates/partials/point_detail.html:86
@@ -324,6 +326,34 @@ msgstr "刪除地點"
 #: templates/partials/point_detail.html:83
 msgid "mapDelPlaceDescription"
 msgstr "你是否真的要永久刪除這個地點？一旦你刪除了這個地點，將永遠無法再復原。"
+
+#: templates/settings.swig:41
+msgid "AccountSettings"
+msgstr "設定"
+
+#: templates/settings.swig:43
+msgid "AccountSettingsChangePassword"
+msgstr "更新密碼"
+
+#: templates/settings.swig:49
+msgid "AccountSettingsPassIncorrect"
+msgstr "密碼錯誤"
+
+#: templates/settings.swig:56
+msgid "AccountSettingsPassCantSame"
+msgstr "新密碼不能和舊的密碼一樣"
+
+#: templates/settings.swig:59
+msgid "AccountSettingsPassTooShort"
+msgstr "密碼太短"
+
+#: templates/settings.swig:66
+msgid "AccountSettingsPassDontMatch"
+msgstr "新密碼不對"
+
+#: templates/settings.swig:69
+msgid "AccountSettingsPassChangeSuccess"
+msgstr "密碼更新成功"
 
 #: templates/signup.swig:25
 msgid "AccountSignup"

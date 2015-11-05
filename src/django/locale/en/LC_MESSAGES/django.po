@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-05 11:05+0800\n"
+"POT-Creation-Date: 2015-11-05 15:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -330,7 +330,37 @@ msgstr "Delete This Place"
 
 #: templates/partials/point_detail.html:83
 msgid "mapDelPlaceDescription"
-msgstr "Do you really want to delete this place permanently? Once you delete it, it will be removed from your map forever."
+msgstr ""
+"Do you really want to delete this place permanently? Once you delete it, it "
+"will be removed from your map forever."
+
+#: templates/settings.swig:41
+msgid "AccountSettings"
+msgstr "Settings"
+
+#: templates/settings.swig:43
+msgid "AccountSettingsChangePassword"
+msgstr "Change Password"
+
+#: templates/settings.swig:49
+msgid "AccountSettingsPassIncorrect"
+msgstr "Password is incorrect."
+
+#: templates/settings.swig:56
+msgid "AccountSettingsPassCantSame"
+msgstr "New password cannot be the same as the old password."
+
+#: templates/settings.swig:59
+msgid "AccountSettingsPassTooShort"
+msgstr "Password is too short."
+
+#: templates/settings.swig:66
+msgid "AccountSettingsPassDontMatch"
+msgstr "New passwords don't match."
+
+#: templates/settings.swig:69
+msgid "AccountSettingsPassChangeSuccess"
+msgstr "Password changed successfully."
 
 #: templates/signup.swig:25
 msgid "AccountSignup"
