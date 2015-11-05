@@ -29,6 +29,7 @@ from geopy.geocoders import GoogleV3
 from googleplaces import GooglePlaces
 
 import requests
+import langid
 from PIL import Image as PImage
 
 from serializers import UserSerializer, CollectionSerializer, CollectionShortSerializer, PointShortSerializer, PointSerializer, PointWriteSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
@@ -102,7 +103,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
         data = {'collections': serializer.data, }
         try:
-            data['most_recent_modified_collection'] = queryset.order_by('-points__update_time')[0].id
+#            data['most_recent_modified_collection'] = queryset.order_by('-points__update_time')[0].id
+            data['most_recent_modified_collection'] = queryset.latest('update_time').id
         except Exception, e:
             data['most_recent_modified_collection'] = None
 
@@ -245,6 +247,12 @@ class PointViewSet(APIViewSet):
                 collection = Collection(user=request.user, name='Uncategorized')
                 collection.save()
             data['collection'] = collection.id
+        else:
+            #-- update collection update_time
+            c_id = data['collection']
+            collection = Collection.objects.get(pk=c_id)
+            collection.save()
+
 
         # Need to use Write Serializer for related field (location)
         serializer = PointWriteSerializer(data=data, files=request.FILES)
@@ -598,19 +606,37 @@ def places(request):
     if request.GET.get('q'):
         gp = GooglePlaces(settings.GOOGLE_API_KEY)
 
-        result = None
+        q = request.GET.get('q')
         lang = request.GET.get('language')
-        if lang:
-            result = gp.text_search(query=request.GET.get('q'), language=lang)
-        else:
-            result = gp.text_search(query=request.GET.get('q'))
+        
+        out['kw'] = q
+
+        if lang is None or len(lang.strip()) <= 0:
+            lang = langid.classify(q)[0]
+
+        if 'zh' == lang:
+            lang = 'zh-TW'
+            
+        result = gp.text_search(query=q, language=lang)
 
         for place in result.places:
             place.get_details()
+
+            phone_number = None
+            if 'international_phone_number' in place.details:
+                phone_number = place.details['international_phone_number']
+
+            business_hours = None
+            if 'opening_hours' in place.details:
+                business_hours = place.details['opening_hours']
+
             entry = {
+                'place_id': place.place_id,
                 'name': place.name,
                 'address': place.formatted_address,
-                'coordinates': place.geo_location
+                'coordinates': place.geo_location,
+                'phone_number': phone_number,
+                'business_hours': business_hours
             }
 
             out['places'].append(entry)
