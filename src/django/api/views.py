@@ -805,27 +805,30 @@ def fb_login(request):
         resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
         return resp
 
-    profile = _get_profile_from_fb(userID, accessToken)
-    user = _get_mb_account(profile['email'])
-    serializer = UserSerializer(user)
+    profile = get_profile_from_fb(userID, accessToken)
+    user = get_mb_account(profile['email'], request.build_absolute_uri())
 
-    # out = {
-    #     "token": "d953b18a876da1005bd8d5082012d40feb3ff9aa",    # put MappingBird token here (not yet)
-    #     "user": {
-    #         "id": mb_account.id,                                # put MappingBird id here (not yet)
-    #         "email": profile['email']
-    #       }
-    # }
-    out = {
-        "token": "d953b18a876da1005bd8d5082012d40feb3ff9aa",    # put MappingBird token here (not yet)
-        "user": serializer.data
-    }
-    resp = Response(out, status=status.HTTP_200_OK)
+    # token = request.DATA.get('token')
+    token = 1
+    if user is not None:
+        serializer = UserSerializer(user)
 
-    return resp
+        data = {
+            'user': serializer.data,
+        }
+        if token == '1' or token == 1:
+            token = Token.objects.get_or_create(user=user)[0]
+            data['token'] = token.key
+        else:
+            django_login(request, user)
+
+        return Response(data)
 
 
-def _get_profile_from_fb(userId, access_token):
+    return Response({'error': 'authentication_error'})
+
+
+def get_profile_from_fb(userId, access_token):
 
     graph = facebook.GraphAPI(access_token=access_token, version='2.5')
     args = {'fields': 'id,name,email', }
@@ -834,9 +837,10 @@ def _get_profile_from_fb(userId, access_token):
     return profiles
 
 
-def _get_mb_account(email):
+def get_mb_account(email, absolute_uri):
 
     user = None
+    pwd = 'bird1234'
 
     try:
         user = User.objects.get(email=email)
@@ -844,14 +848,21 @@ def _get_mb_account(email):
         pass
 
     if user is not None:
-        logging.error('true')
+        # 1. if account exists, return MappingBird profile
+        user = authenticate(email=email, password=pwd)
         return user
     else:
-        logging.error('false')
-        return user #create account
+        # 2. if not exist, use this email to create a MappingBird account, and return MappingBird profile
+        #  sign up a new account
+        payload = {'email': email, 'password': pwd}
+        url = urlparse(absolute_uri)
+        apiRoot = "{0}://{1}".format(url[0], url[1])
+        response = requests.post("{0}/api/users".format(apiRoot), data=payload)
+        if 201 != response.status_code:
+            logging.error(response)
+            raise ValueError('password error or {0} has already been used'.format(email))
+
+        user = User.objects.get(email=email)
+        return user
 
 
-    # 1. if account exists, return MappingBird profile
-    # 2. if not exist, use this email to create a MappingBird account, and return MappingBird profile
-
-    return "asdfasdf@email.com"
