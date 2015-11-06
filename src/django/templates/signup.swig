@@ -8,7 +8,11 @@
 <link href="/static/prototype_assets/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 <link href="/static/prototype_assets/css/style.css" rel="stylesheet" media="screen">
 <link href="/static/css/account.css" rel="stylesheet" media="screen">
-
+<style type="text/css">
+    footer {
+        position: relative;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -23,7 +27,7 @@
             <div class="span8">
                 <h1>Sign Up</h1>
                 <hr>
-                <div class="myButton" onclick="fb_login();">
+                <div class="myButton" ng-click="attemptFBLogin();">
                     <i class="fa fa-facebook"></i>
                     <span>Sign up with Facebook</span>
                 </div>
@@ -48,7 +52,7 @@
                     </div>
                     <div class="action-button">
                         <input class="btn btn-giant btn-primary pingismo-btn" type="submit" value="Create Your Account">
-                        <p class="button-option">Already an MappingBird account? <a href="/signup">Log In </a></p>
+                        <p class="button-option">Already an MappingBird account? <a href="/login">Log In </a></p>
                     </div>
 
                 </form>

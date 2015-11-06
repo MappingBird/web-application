@@ -793,13 +793,11 @@ def fb_login(request):
     accessToken = None
     userID = None
     signedRequest = None
-
+    
     try:
-        json_data = json.loads(request.body)
-
-        userID = json_data['userID']
-        accessToken = json_data['accessToken']
-        signedRequest = json_data['signedRequest']
+        userID = request.DATA.get('userID')
+        accessToken = request.DATA.get('accessToken')
+        signedRequest = request.DATA.get('signedRequest')
     except ValueError:
         out = {
             'msg': 'FB params missing.'

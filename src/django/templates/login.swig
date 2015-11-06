@@ -8,6 +8,11 @@
 <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 <link href="/static/prototype_assets/css/style.css" rel="stylesheet" media="screen">
 <link href="/static/css/account.css" rel="stylesheet" media="screen">
+<style type="text/css">
+    footer {
+        position: relative;
+    }
+</style>
 
 {% endblock %}
 
@@ -22,7 +27,7 @@
             <div class="span8">
                 <h1>Log In</h1>
                 <hr>
-                <div class="myButton" onclick="fb_login();">
+                <div class="myButton" ng-click="attemptFBLogin();">
                     <i class="fa fa-facebook"></i>
                     <span>Log in with Facebook</span>
                 </div>

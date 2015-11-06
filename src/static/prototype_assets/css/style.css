@@ -563,19 +563,7 @@ i.icon-people{
 	margin: 0 3px 0 0;
 }
 
-/* login */
-.fb_login {
-    width: 360px;
-    height: 52px;
-    background-color: #4e69a2;
-    display: block;
-    color: #ffffff;
-    margin: auto;
-    line-height: 52px;
-    border-radius: 5px;
-}
-
-/* button generate http://www.bestcssbuttongenerator.com/#/16 */
+/* Facebook signup and login button generate http://www.bestcssbuttongenerator.com/#/16 */
 .myButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #7a8eb9;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #7a8eb9;
