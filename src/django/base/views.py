@@ -37,3 +37,18 @@ def page(request, page=None):
         activate(lang)
 
     return render(request, '%s.swig' % page)
+
+
+def partial_page(request):
+
+    lang = None
+    try:
+        lang = request.COOKIES.get('lang')
+        if lang is None:
+            lang = 'en'
+    except Exception as e:
+        lang = 'en'
+    finally:
+        activate(lang)
+
+    return render(request, 'partials/%s.html' % request.path)

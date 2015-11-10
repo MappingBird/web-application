@@ -12,6 +12,7 @@
 </div> -->
 
 <!-- New Listview Template -->
+{% load i18n %}
 <ul class="collection-listview" height-to-bottom m-custom-scrollbar="{scrollInertia: 0}">
 	<li id="list-[[point.id]]" ng-class="{'isSelected': isSelected==point.id }" class="list-item" ng-repeat="point in activeViewPoints" ng-click="popupPin($event, point.id)" ng-mouseover="offsetMapWhenHover($event, point.id, point.lat, point.lng)">
 		<div class="item-wrapper">

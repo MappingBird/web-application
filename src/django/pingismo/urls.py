@@ -37,6 +37,19 @@ urlpatterns += patterns('django.contrib.staticfiles.views',
         url(r'^signup$', 'serve', {'path': '/signup.html'}))
 urlpatterns += patterns('django.contrib.staticfiles.views',
         url(r'^forget_password$', 'serve', {'path': '/forget_password.html'}))
+
+# for angular partials
+urlpatterns += patterns('',
+        url(r'^collection_list$', 'base.views.partial_page', name='partial_page'))
+urlpatterns += patterns('',
+        url(r'^collection_list_view$', 'base.views.partial_page', name='partial_page'))
+urlpatterns += patterns('',
+        url(r'^point_detail$', 'base.views.partial_page', name='partial_page'))
+urlpatterns += patterns('',
+        url(r'^save_panel$', 'base.views.partial_page', name='partial_page'))
+urlpatterns += patterns('',
+        url(r'^user_panel$', 'base.views.partial_page', name='partial_page'))
+
 # urlpatterns += patterns('django.contrib.staticfiles.views',
 #         url(r'^reset_password$', 'serve', {'path': '/reset_password$.html'}))
 
