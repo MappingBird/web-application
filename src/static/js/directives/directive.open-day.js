@@ -5,7 +5,7 @@
 mappingbird.directives.directive('openDay', ['BroadcastService', '$timeout', '$sce', function(BroadcastService, $timeout, $sce) {
     return {
         restrict: 'A',
-        templateUrl: '/static/partials/open_day.html',
+        templateUrl: '/open_day',
         link: function (scope, element, attrs) {
 
             // how to get pointCtrl??
