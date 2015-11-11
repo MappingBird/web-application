@@ -49,6 +49,8 @@ urlpatterns += patterns('',
         url(r'^save_panel$', 'base.views.partial_page', name='partial_page'))
 urlpatterns += patterns('',
         url(r'^user_panel$', 'base.views.partial_page', name='partial_page'))
+urlpatterns += patterns('',
+        url(r'^open_day$', 'base.views.partial_page', name='partial_page'))
 
 # urlpatterns += patterns('django.contrib.staticfiles.views',
 #         url(r'^reset_password$', 'serve', {'path': '/reset_password$.html'}))

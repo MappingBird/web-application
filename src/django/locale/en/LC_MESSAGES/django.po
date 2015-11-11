@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-05 15:29+0800\n"
+"POT-Creation-Date: 2015-11-11 10:23+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,11 +58,13 @@ msgstr "English"
 msgid "userPanelViewMap"
 msgstr "View Map"
 
-#: templates/app.swig:35 templates/settings.swig:28
+#: templates/app.swig:35 templates/partials/user_panel.html:12
+#: templates/settings.swig:28
 msgid "userPanelSettings"
 msgstr "Settings"
 
-#: templates/app.swig:37 templates/settings.swig:30
+#: templates/app.swig:37 templates/partials/user_panel.html:14
+#: templates/settings.swig:30
 msgid "userPanelLogout"
 msgstr "Logout"
 
@@ -264,7 +266,7 @@ msgid "mapHideListBtn"
 msgstr "HIDE LIST"
 
 #: templates/partials/collection_list.html:34
-#: templates/partials/collection_list_view.html:19
+#: templates/partials/collection_list_view.html:20
 #: templates/partials/point_detail.html:6
 msgid "mapAdded"
 msgstr "Added:"
@@ -275,26 +277,18 @@ msgid "mapEditBtn"
 msgstr "Added:"
 
 #: templates/partials/collection_list.html:54
-#, fuzzy
-#| msgid "mapAddCollectionBtn"
 msgid "mapDelCollectionTitle1"
-msgstr "Create New"
+msgstr "Delete"
 
 #: templates/partials/collection_list.html:54
-#, fuzzy
-#| msgid "mapAddCollectionBtn"
 msgid "mapDelCollectionTitle2"
-msgstr "Create New"
+msgstr "permanently?"
 
 #: templates/partials/collection_list.html:57
-#, fuzzy
-#| msgid "mapDelPlaceDescription"
 msgid "mapDelCollectionDescription"
 msgstr ""
-"I used to wander near my home to find good places for work. When I found "
-"one, I used MappingBird to bookmark it. Now I have a bunch of places in my "
-"pocket. I don’t have to worry if one place is too noisy, because I can find "
-"a new place whenever I want."
+"Do you really want to delete this place permanently? Once you delete it, it "
+"will be removed from your map forever."
 
 #: templates/partials/collection_list.html:60
 #: templates/partials/point_detail.html:86

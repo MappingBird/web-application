@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-05 15:29+0800\n"
+"POT-Creation-Date: 2015-11-11 10:23+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,11 +61,13 @@ msgstr "English"
 msgid "userPanelViewMap"
 msgstr "檢視地圖"
 
-#: templates/app.swig:35 templates/settings.swig:28
+#: templates/app.swig:35 templates/partials/user_panel.html:12
+#: templates/settings.swig:28
 msgid "userPanelSettings"
 msgstr "設定"
 
-#: templates/app.swig:37 templates/settings.swig:30
+#: templates/app.swig:37 templates/partials/user_panel.html:14
+#: templates/settings.swig:30
 msgid "userPanelLogout"
 msgstr "登出"
 
@@ -261,7 +263,7 @@ msgid "mapHideListBtn"
 msgstr "隱藏列表"
 
 #: templates/partials/collection_list.html:34
-#: templates/partials/collection_list_view.html:19
+#: templates/partials/collection_list_view.html:20
 #: templates/partials/point_detail.html:6
 msgid "mapAdded"
 msgstr "更新："
@@ -272,14 +274,10 @@ msgid "mapEditBtn"
 msgstr "編輯"
 
 #: templates/partials/collection_list.html:54
-#, fuzzy
-#| msgid "mapAddCollectionBtn"
 msgid "mapDelCollectionTitle1"
 msgstr "永久刪除"
 
 #: templates/partials/collection_list.html:54
-#, fuzzy
-#| msgid "mapAddCollectionBtn"
 msgid "mapDelCollectionTitle2"
 msgstr " "
 
