@@ -171,7 +171,7 @@ BucketListSmallOverlay.prototype.onAdd = function() {
 
         // detail = $('<p><strong>' + this.placeName_ + '</strong>' + this.placeAddress_ + ' ' + this.placePhone_ + '</p>'),
         detail = $('<p><strong>' + this.placeName_ + '</strong>' + '</p>'),
-        settings = $('<p class="pin-popup-settings">View Details</p>'),
+        settings = $('<p class="pin-popup-settings">' + gettext('View Details') + '</p>'),
         triangle = $('<p class="pin-popup-triangle"></p>'),
 
         checkmark = $('<i class="icon-check pull-right"></i>'),

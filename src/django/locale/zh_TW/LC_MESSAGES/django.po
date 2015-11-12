@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-11 10:23+0800\n"
+"POT-Creation-Date: 2015-11-12 12:22+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -303,6 +303,10 @@ msgstr "取消"
 #: templates/partials/collection_list.html:72
 msgid "mapAddCollectionTitle"
 msgstr "建立新的地圖"
+
+#: templates/partials/collection_list.html:75
+msgid "mapAddCollectionPlaceholder"
+msgstr "地圖名稱"
 
 #: templates/partials/collection_list.html:78
 #: templates/partials/point_detail.html:14

@@ -72,7 +72,7 @@
         <h4 class="modal-title" style="margin: 24px 30px;">{% trans "mapAddCollectionTitle" %}</h4>
       </div>
       <div class="modal-body" style="padding:0">
-        <input class="input-xlarge" type="text" placeholder="New Collection Name" style="width:345px;margin: 0px 30px;" ng-model="newCollectionName"/>
+        <input class="input-xlarge" type="text" placeholder="{% trans "mapAddCollectionPlaceholder" %}" style="width:345px;margin: 0px 30px;" ng-model="newCollectionName"/>
       </div>
       <div class="modal-footer" style="text-align: center;background-color: white;margin: 24px 30px;padding: 24px 0 0 0;">
         <button type="button" ng-click="createCollection($event)" style="background-color: rgb(1, 169, 231);color: #fff;border: 0;padding: 5px 20px;">{% trans "mapAddCollectionBtn" %}</button>

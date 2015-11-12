@@ -32,7 +32,7 @@ mappingbird.directives.directive('pAlert', ['BroadcastService', '$timeout', '$sc
                         case 'pointDeleted':
 
                             $scope.alertActive = true;
-                            $scope.message = $sce.trustAsHtml('Point deleted successfully.');
+                            $scope.message = $sce.trustAsHtml(gettext('Point deleted successfully.'));
                             $scope.actionMessage = '';
 
                             $timeout(function(){

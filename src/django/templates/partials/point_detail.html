@@ -3,7 +3,7 @@
     <a href="#" ng-click="closePoint($event)" class="pingismo-proceed"><img src="/static/img/icon-proceed.png" /></a>
     <div class="pin-content">
         <div class="pin-details pull-left" height-to-bottom m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
-            {% trans "mapAdded" %}: <span ng-bind="activeViewPoint.date_created"></span>
+            {% trans "mapAdded" %} <span ng-bind="activeViewPoint.date_created"></span>
             <h4 ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.title" class="editable"></h4>
             <input type="text" ng-model="activeViewPoint.title" class="content-title" />
             <li class="btn-group pingismo-btn-group">
