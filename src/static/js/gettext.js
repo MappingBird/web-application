@@ -1,8 +1,9 @@
 // https://docs.djangoproject.com/en/1.8/topics/i18n/translation/#using-the-javascript-translation-catalog
 // django do support javascript i18n using gettext
 // But I implement javascript i18n in client side
-window.gettext = function (string) {
-  // get cookie lang=zh-tw or lang=en
+window.gettext = (function () {
+
+  // check language
   var index;
   if (document.cookie.match(/lang=zh-tw/)) {
     index = 1;
@@ -19,5 +20,9 @@ window.gettext = function (string) {
     'View Details': ['View Details', '詳細資料']
   };
 
-  return translateString[string][index];
-};
+  // get cookie lang=zh-tw or lang=en
+  return function (string) {
+      return translateString[string][index];
+  };
+
+})();
