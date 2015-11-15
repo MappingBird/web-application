@@ -17,16 +17,12 @@ mappingbird.directives.directive('mCustomScrollbar', function() {
                   if (element.attr('parent-height')) {
                       element.css('height', element.attr('parent-height') + 'px');
                   }
+              });
+            }
 
-                  if (!$(element).hasClass('mCustomScrollbar')) {
-                      $(element).mCustomScrollbar(scrollbarAttrs);
-                  }
-              } );
-            } else {
-              // trigger mCustomScrollbar directly
-              if (!$(element).hasClass('mCustomScrollbar')) {
-                  $(element).mCustomScrollbar(scrollbarAttrs);
-              }
+            // trigger mCustomScrollbar directly
+            if (!$(element).hasClass('mCustomScrollbar')) {
+                $(element).mCustomScrollbar(scrollbarAttrs);
             }
 
         }

@@ -1,4 +1,4 @@
-mappingbird.SaveApp = angular.module('SaveApp', ['Initialization', 'ui.router', 'ngTagsInput', 'angularMoment']);
+mappingbird.SaveApp = angular.module('SaveApp', ['Initialization', 'ui.router', 'ngTagsInput', 'angularMoment', 'ui.sortable']);
 
 // Routing
 mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {

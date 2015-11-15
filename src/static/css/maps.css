@@ -185,7 +185,9 @@ section.map-section{
 /* Module ------------------------------------------------------------------------------------ */
 /* Map */
 #map {
-	height: 100%;
+	/*height: 100%;*/
+	/* solve overheight */
+	height: -webkit-calc(100% - 125px);
 	position: absolute;
 	top: 95px;
 	width: 100%;

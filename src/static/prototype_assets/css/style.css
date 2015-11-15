@@ -635,3 +635,7 @@ i.icon-people{
 .span8 h1 {
 	font-size: 72px;
 }
+
+.section .main .container {
+	min-height: 650px;
+}

@@ -80,7 +80,7 @@ mappingbird.LoginApp.controller('mainController', ['$scope', '$timeout', 'Preset
                 };
 
                 UserLogin.facebook.save(userCredentials, function(data, headers) {
-
+                
                     if (typeof data !== 'undefined') {
                         window.location.href="/app";
                     } else {
