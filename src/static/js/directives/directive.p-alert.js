@@ -72,7 +72,7 @@ mappingbird.directives.directive('pAlert', ['BroadcastService', '$timeout', '$sc
                         case 'pointChangeCollectionComplete':
 
                             $scope.alertActive = true;
-                            $scope.message = $sce.trustAsHtml('Point was changed to <strong>' + BroadcastService.message.data.savedCollectionName + '</strong> successfully. :)');
+                            $scope.message = $sce.trustAsHtml(gettext('Point was changed') + ' to <strong>' + BroadcastService.message.data.savedCollectionName + '</strong>. :)');
 
                             $timeout(function(){
                                 $scope.alertActive = false;

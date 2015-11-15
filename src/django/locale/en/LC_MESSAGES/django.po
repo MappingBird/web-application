@@ -286,9 +286,7 @@ msgstr "permanently?"
 
 #: templates/partials/collection_list.html:57
 msgid "mapDelCollectionDescription"
-msgstr ""
-"Do you really want to delete this place permanently? Once you delete it, it "
-"will be removed from your map forever."
+msgstr "Do you really want to delete this place permanently? Once you delete it, it will be removed from your map forever."
 
 #: templates/partials/collection_list.html:60
 #: templates/partials/point_detail.html:86

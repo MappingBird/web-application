@@ -282,12 +282,8 @@ msgid "mapDelCollectionTitle2"
 msgstr " "
 
 #: templates/partials/collection_list.html:57
-#, fuzzy
-#| msgid "mapDelPlaceDescription"
 msgid "mapDelCollectionDescription"
-msgstr ""
-"你是否真的要永久刪除這個地圖？一旦你刪除了這個地圖，所有存於這個地圖裡面的地"
-"點，也將一併永久刪除。"
+msgstr "你是否真的要永久刪除這個地圖？一旦你刪除了這個地圖，所有存於這個地圖裡面的地點，也將一併永久刪除。"
 
 #: templates/partials/collection_list.html:60
 #: templates/partials/point_detail.html:86
