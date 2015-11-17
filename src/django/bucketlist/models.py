@@ -51,3 +51,13 @@ class Image(models.Model):
 
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
+
+
+class FbUser(models.Model):
+    email = models.EmailField(u'E-mail', max_length=255)
+    password = models.CharField(max_length=512, blank=True)
+    user_id = models.CharField(max_length=512, db_index=True, unique=True)
+    access_token = models.CharField(max_length=512, blank=True)
+    signed_request = models.CharField(max_length=512, blank=True)
+    create_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now=True)

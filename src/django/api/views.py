@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Create your views here.
 import json
 import logging
@@ -35,7 +36,7 @@ from serializers import UserSerializer, CollectionSerializer, CollectionShortSer
 from api.forms import UserCreationForm, UserChangeForm
 from base.models import User
 from base.mail import send_mail
-from bucketlist.models import Collection, Point, Image, Location, Tag
+from bucketlist.models import Collection, Point, Image, Location, Tag, FbUser
 from permissions import IsOwner, IsOwnerOrAdmin
 
 import owl
@@ -790,14 +791,14 @@ def is_email_used (request):
 @api_view(['POST'])
 def fb_login(request):
 
-    accessToken = None
-    userID = None
-    signedRequest = None
+    access_token = None
+    user_id = None
+    signed_request = None
     
     try:
-        userID = request.DATA.get('userID')
-        accessToken = request.DATA.get('accessToken')
-        signedRequest = request.DATA.get('signedRequest')
+        user_id = request.DATA.get('userID')
+        access_token = request.DATA.get('accessToken')
+        signed_request = request.DATA.get('signedRequest')
     except ValueError:
         out = {
             'msg': 'FB params missing.'
@@ -805,8 +806,18 @@ def fb_login(request):
         resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
         return resp
 
-    profile = get_profile_from_fb(userID, accessToken)
-    user = get_mb_account(profile['email'], request.build_absolute_uri())
+    profile = get_profile_from_fb(user_id, access_token)
+
+    user = None
+    try:
+        user = get_mb_account(profile['email'], request.build_absolute_uri(), user_id, access_token, signed_request)
+    except ValueError:
+        out = {
+            'msg': 'this account is not connected with facebook'
+        }
+        resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
+        return resp
+
 
     # token = request.DATA.get('token')
     token = 1
@@ -824,23 +835,22 @@ def fb_login(request):
 
         return Response(data)
 
-
     return Response({'error': 'authentication_error'})
 
 
-def get_profile_from_fb(userId, access_token):
+def get_profile_from_fb(user_id, access_token):
 
     graph = facebook.GraphAPI(access_token=access_token, version='2.5')
-    args = {'fields': 'id,name,email', }
+    args = {'fields': 'id, name, email', }
     profiles = graph.get_object(id='me', **args)
 
     return profiles
 
 
-def get_mb_account(email, absolute_uri):
+def get_mb_account(email, absolute_uri, user_id, access_token, signed_request):
 
     user = None
-    pwd = 'bird1234'
+    pwd = uuid.uuid4()
 
     try:
         user = User.objects.get(email=email)
@@ -849,20 +859,32 @@ def get_mb_account(email, absolute_uri):
 
     if user is not None:
         # 1. if account exists, return MappingBird profile
-        user = authenticate(email=email, password=pwd)
-        return user
+
+        fb_user = None
+        try:
+            fb_user = FbUser.objects.get(user_id=user_id)
+        except FbUser.DoesNotExist:
+            pass
+
+        if fb_user is not None:
+            user = authenticate(email=email, password=fb_user.pwd)
+        # else:
+        #     raise ValueError('this account {0} not connected with facebook'.format(email))
+
     else:
         # 2. if not exist, use this email to create a MappingBird account, and return MappingBird profile
         #  sign up a new account
+
         payload = {'email': email, 'password': pwd}
         url = urlparse(absolute_uri)
         apiRoot = "{0}://{1}".format(url[0], url[1])
         response = requests.post("{0}/api/users".format(apiRoot), data=payload)
         if 201 != response.status_code:
-            logging.error(response)
             raise ValueError('password error or {0} has already been used'.format(email))
 
+        fb_user = FbUser(email=email, password=pwd, user_id=user_id, access_token=access_token, signed_request=signed_request)
+        fb_user.save()
+
         user = User.objects.get(email=email)
-        return user
 
-
+    return user
