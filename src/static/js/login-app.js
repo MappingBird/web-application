@@ -98,7 +98,7 @@ mappingbird.LoginApp.controller('mainController', ['$scope', '$timeout', 'Preset
             }
 
         }, {
-            scope: 'public_profile,email'
+            scope: 'public_profile, email, user_friends'
         });
 
     };

@@ -820,22 +820,21 @@ def fb_login(request):
 
 
     # token = request.DATA.get('token')
-    token = 1
     if user is not None:
         serializer = UserSerializer(user)
 
         data = {
             'user': serializer.data,
         }
-        if token == '1' or token == 1:
-            token = Token.objects.get_or_create(user=user)[0]
-            data['token'] = token.key
-        else:
-            django_login(request, user)
+
+        token = Token.objects.get_or_create(user=user)[0]
+        data['token'] = token.key
+        django_login(request, user)
 
         return Response(data)
 
-    return Response({'error': 'authentication_error'})
+    else:
+        return Response({'error': 'authentication_error'})
 
 
 def get_profile_from_fb(user_id, access_token):
@@ -850,12 +849,12 @@ def get_profile_from_fb(user_id, access_token):
 def get_mb_account(email, absolute_uri, user_id, access_token, signed_request):
 
     user = None
-    pwd = uuid.uuid4()
 
     try:
         user = User.objects.get(email=email)
     except User.DoesNotExist:
         pass
+
 
     if user is not None:
         # 1. if account exists, return MappingBird profile
@@ -867,14 +866,16 @@ def get_mb_account(email, absolute_uri, user_id, access_token, signed_request):
             pass
 
         if fb_user is not None:
-            user = authenticate(email=email, password=fb_user.pwd)
+            user = authenticate(email=email, password=fb_user.password)
         # else:
+            # logging.error('fb_user is null')
         #     raise ValueError('this account {0} not connected with facebook'.format(email))
 
+        # logging.error('{email}, {pwd}, {user_id}, {access_token}, {signed_request}'.format(email=email, pwd=fb_user.password, user_id=user_id, access_token=access_token, signed_request=signed_request))
     else:
         # 2. if not exist, use this email to create a MappingBird account, and return MappingBird profile
         #  sign up a new account
-
+        pwd = uuid.uuid4()
         payload = {'email': email, 'password': pwd}
         url = urlparse(absolute_uri)
         apiRoot = "{0}://{1}".format(url[0], url[1])
@@ -885,6 +886,6 @@ def get_mb_account(email, absolute_uri, user_id, access_token, signed_request):
         fb_user = FbUser(email=email, password=pwd, user_id=user_id, access_token=access_token, signed_request=signed_request)
         fb_user.save()
 
-        user = User.objects.get(email=email)
+        user = authenticate(email=email, password=pwd)
 
     return user
