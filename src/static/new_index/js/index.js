@@ -107,6 +107,14 @@ angular.module('IndexApp').directive('changeLanguage', function() {
         controller: ['$scope', '$element', '$attrs', '$window', function($scope, $element, $attrs, $window) {
 
             var lang = $attrs.changeLanguage;
+
+            // active view
+            if (document.cookie.indexOf('lang=' + lang) !== -1) {
+              $element.parent().addClass('active');
+            } else {
+              $element.parent().removeClass('active');
+            }
+            
             $element[0].onclick = function (e) {
               e.preventDefault();
               // Setting a cookie
