@@ -75,7 +75,7 @@ mappingbird.LoginApp.controller('mainController', ['$scope', '$timeout', 'Preset
                 
                 var userCredentials = {
                     accessToken: response.authResponse.accessToken,
-                    signedRequest: response.authResponse.accessToken,
+                    signedRequest: response.authResponse.signedRequest,
                     userID: response.authResponse.userID
                 };
 
