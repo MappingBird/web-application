@@ -1292,16 +1292,18 @@ ul.types > li{
 .pin-content-wrapper,
 .delete-pin-wrapper{
 	position: absolute;
-	right: 0;
+	left: 0;
 	top: 0;
 	width: 440px;
 	overflow: hidden;
-	padding: 95px 0 30px;
+	margin: 95px 0 30px;
+	background-color: #ffffff;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
+	z-index: 1;
 }
 .pin-content-wrapper{
-	height: 100%;
+	height: 80%;
 }
 .pin-content-wrapper .pin-content{
 	padding: 5px 0 60px 55px;
@@ -1320,7 +1322,7 @@ ul.types > li{
 }
 .pin-content-wrapper h4,
 .delete-pin-wrapper h4{
-	color: #fff;
+	color: #707070;
 }
 .pin-content-wrapper .pin-content .ref-url{
 	font-size: 12px;
