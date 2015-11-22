@@ -12,6 +12,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     $scope.mapMode = false;
     $scope.pointMode = false;
     $scope.listMode = false;
+    $scope.dbclickCollection = false;
 
     function changeMapParams () {
        // $('#map').data('transitioning', true);
@@ -90,7 +91,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     }
 
     // point viewing mode
-    function pointViewingMode () {
+    function pointViewingMode (mode) {
         changeMapParams();
         $scope.mapMode = false;
         $scope.saveMode = false;
@@ -103,6 +104,9 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.mapRetracted = false;
         $scope.semiRetractedMap = false;
         $scope.halfMap = false;
+        if (mode == "dbclickCollection") {
+            $scope.dbclickCollection = true;
+        }
 
         // $scope.listMode = false; remain but close collectionsMode
     }
@@ -209,6 +213,9 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         switch(BroadcastService.message.type) {
             case 'pointSelected':
                 pointViewingMode();
+                break;
+            case 'pointDbSelected':
+                pointViewingMode("dbclickCollection");
                 break;
             case 'pointClosed':
             case 'viewingCollection':

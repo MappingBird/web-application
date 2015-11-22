@@ -50,7 +50,28 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
         hoverId = null;
       }
     };
+    $scope.popupDbPin = function (e, id) {
+      console.log('popupDbPin', id, clickId);
+      // console.log($scope.activeViewPoints[0].collection)
+      e.preventDefault();
+      $state.go('viewPoint', { pointId: id, collectionId: $scope.activeViewPoints[0].collection, dbc: true});
+      // dbclickCollection = true;
+      // if (clickId && id == clickId) {
+      //   console.log('repeated click');
+      //   return;
+      // }
+      // $scope.isSelected = id; // toggle isSelected class
 
+      // var idName = 'pin-' + id;
+      // $('#' + idName).removeClass('active'); // remove popup style first
+      // $('#' + idName + ' > a').trigger('click');
+
+      // // prepare for next time click popup
+      // clickId = id;
+      // if (hoverId && clickId == hoverId) {
+      //   hoverId = null;
+      // }
+    };
     var hoverId = null;
     $scope.offsetMapWhenHover = function (e, id, lat, lng) {
       e.preventDefault();

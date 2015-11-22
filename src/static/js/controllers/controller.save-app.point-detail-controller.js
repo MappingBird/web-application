@@ -202,6 +202,7 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
     $scope.closePoint = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
+        // $scope.dbclickCollection = false;
         if ($scope.listMode) {
           $state.go('viewCollectionList', { collectionId: $scope.activeCollectionId});
         } else {

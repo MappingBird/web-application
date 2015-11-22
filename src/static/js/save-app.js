@@ -158,16 +158,16 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
             }]
         })
         .state('viewPoint', {
-            url: '/point/:pointId/:collectionId',
+            url: '/point/:pointId/:collectionId?dbc',
             template: '<span></span>',
             controller: ['BroadcastService', 'Collections', '$stateParams', '$scope', function(BroadcastService, Collections, $stateParams, $scope) {
 
                 var killHandler;
-
-                function b () {
+                
+                function b (type) {
                     // use Collections.mostRecentModifiedCollection) since no activeCollection set
                     BroadcastService.prepForBroadcast({
-                        type: 'pointSelected',
+                        type: type,
                         data: {
                             collectionId: $stateParams.collectionId,
                             pointId: $stateParams.pointId
@@ -179,15 +179,20 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
                     }
                 }
 
-                if (Collections.activeCollectionId !== -1) {
-                    b();
+
+                if ($stateParams.dbc) {
+                    b("pointDbSelected");
                 } else {
-                    killHandler = $scope.$on('stateChange', function() {
-                        if (BroadcastService.message.type == 'collectionsLoaded' &&
-                            BroadcastService.message.data.hasCollectionsSaved) {
-                            b();
-                        }
-                    });
+                    if (Collections.activeCollectionId !== -1) {
+                        b("pointSelected");
+                    } else {
+                        killHandler = $scope.$on('stateChange', function() {
+                            if (BroadcastService.message.type == 'collectionsLoaded' &&
+                                BroadcastService.message.data.hasCollectionsSaved) {
+                                b("pointSelected");
+                            }
+                        });
+                    }
                 }
 
 

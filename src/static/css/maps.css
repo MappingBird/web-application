@@ -477,9 +477,18 @@ a.show-on-map i.icon-show{
 	height: 27px;
 }
 .pingismo-proceed{
-	width: 20px;
-	top: 105px;
-	padding: 3px 0 0 15px;
+    width: 36px;
+    top: 78px;
+    z-index: 2;
+    left: 342px;
+    border-radius: 47px;
+    height: 36px;
+    box-shadow: 0px 0px 10px rgba(20%,20%,40%,0.5);
+}
+.pingismo-proceed .fa {
+    color: #ffffff;
+    font-size: 2em;
+    margin: 3px 7px;
 }
 .pingismo-back{
 	width: 25px;
@@ -592,7 +601,7 @@ a.show-on-map i.icon-show{
 .pin-content-wrapper input[type="text"] {
 	border-radius: 0;
 	background-color: #F2F2F2;
-	width: 326px;
+	width: 306px;
 }
 
 .save-content input.fresh {
@@ -1301,9 +1310,15 @@ ul.types > li{
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	z-index: 1;
+    box-shadow: -4px 0px 10px rgba(20%,20%,40%,0.5);
 }
 .pin-content-wrapper{
-	height: 80%;
+	height: 88%;
+    width: 360px;
+}
+.thumbnail {
+	width: 310px;
+    height: 180px;
 }
 .pin-content-wrapper .pin-content{
 	padding: 5px 0 60px 55px;
@@ -1313,7 +1328,11 @@ ul.types > li{
 	color: #ffffff;
 }
 .pin-content-wrapper .pin-content .pin-details{
-	width: 380px;
+    /*height: 752px;*/
+    left: 20px;
+    position: absolute;
+    width: 320px;
+    top: 20px;
 }
 .pin-content-wrapper .pin-content .ref-address{
 	background: url('../img/icon-address.png') no-repeat;
@@ -1323,6 +1342,9 @@ ul.types > li{
 .pin-content-wrapper h4,
 .delete-pin-wrapper h4{
 	color: #707070;
+}
+.pin-content-wrapper h4 {
+	margin: 25px 0;
 }
 .pin-content-wrapper .pin-content .ref-url{
 	font-size: 12px;
@@ -1345,6 +1367,9 @@ ul.types > li{
 }
 .pin-content-wrapper.editable .pin-content ul.types li {
 	display: inline-block;
+}
+.pin-content-wrapper.editable {
+	/*margin: 25px 0;*/
 }
 .pin-content ul.types li.active{
 	display: block;
@@ -1378,14 +1403,14 @@ ul.types > li{
 .pin-content-wrapper .pin-content-footer{
 	height: 60px;
 	width: 100%;
-	background-color: #2c2c2c;
-	padding: 0 20px 0 55px;
+	background-color: #ffffff;
+	padding: 0 20px 0 20px;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
 .pin-content-wrapper .pin-content-footer.fixed{
 	position: absolute;
-	bottom: 30px;
+	bottom: 0px;
 }
 .pin-content-wrapper hr,
 .delete-pin-wrapper hr{
@@ -1439,7 +1464,7 @@ ul.types > li{
 	margin: -20px 15px 0;
 }
 .pin-content-wrapper .pingismo-btn-group.btn-group .exist{
-	width: 314px;
+	width: 294px;
 }
 
 /* confirm to delete pin */
@@ -1512,6 +1537,7 @@ ul.types > li{
   height: 100% !important; /* hack for css style */
   width: 360px;
   list-style: none;
+  z-index: 0;
 }
 
 .collection-listview li{
@@ -1546,8 +1572,9 @@ ul.types > li{
 
 .collection-listview li .context span{
 	display: block;
-	font-size: 10px;
+	font-size: 13px;
 	color: #707070;
+	font-weight: bolder;
 }
 
 .collection-listview .tags{
@@ -1594,4 +1621,23 @@ ul.types > li{
 }
 .collection-listview .mCSB_container {
 	margin-right:2px !important; /* it's bad I know */
+}
+.dbclickCollection {
+    left: 110px;
+}
+.dbclickCollectionCross {
+	left: 450px;
+}
+.pointTags {
+    display: inline !important;
+    background: #CECECE;
+    padding: .3em 1em;
+    border-radius: 2px;	
+    margin: 0em .5em 0 0;
+}
+.pointTags.isSelected {
+	background-color: #008ABD !important;
+}
+.editModeTime {
+    margin-left: 1em;
 }
