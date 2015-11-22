@@ -32,11 +32,11 @@ import requests
 import langid
 from PIL import Image as PImage
 
-from serializers import UserSerializer, CollectionSerializer, CollectionShortSerializer, PointShortSerializer, PointSerializer, PointWriteSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer
+from serializers import UserSerializer, CollectionSerializer, CollectionShortSerializer, PointShortSerializer, PointSerializer, PointWriteSerializer, ImageSerializer, CollectionByUserSerializer, LocationSerializer, TagSerializer, BHOpenSerializer, BHCloseSerializer, BHWriteSerializer, BHSerializer
 from api.forms import UserCreationForm, UserChangeForm
 from base.models import User
 from base.mail import send_mail
-from bucketlist.models import Collection, Point, Image, Location, Tag, ResetPasswordRecord
+from bucketlist.models import Collection, Point, Image, Location, Tag, ResetPasswordRecord, Business_Hour, BH_Open, BH_Close
 from permissions import IsOwner, IsOwnerOrAdmin
 
 import owl
@@ -224,8 +224,48 @@ class PointViewSet(APIViewSet):
                 location = location_serializer.save(force_insert=True)
             else:
                 return Response(location_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        #-- deal $business_hours
+        bh_pk = None
+        if 'business_hours' in data and 'periods' in data.get('business_hours'):
+            pds_dic = data.get('business_hours').get('periods')
+                            
+            periods = {}
+            periods['periods'] = []
+            for pd_dic in pds_dic:
+                o_pk = None
+                if 'open' in pd_dic:
+                    o_dic = pd_dic.get('open')
+                    o_qs = BH_Open.objects.filter(day=o_dic.get('day'), time=o_dic.get('time'))
+                    if o_qs.count() <= 0:
+                        o_ser = BHOpenSerializer(data=o_dic)
+                        if o_ser.is_valid():
+                            o = o_ser.save()
+                            o_pk = o.pk
+                    else:
+                        o_pk = o_qs[0].pk
+
+                c_pk = None            
+                if 'close' in pd_dic:
+                    c_dic = pd_dic.get('close')
+                    c_qs = BH_Close.objects.filter(day=c_dic.get('day'), time=c_dic.get('time'))
+                    if c_qs.count() <= 0:
+                        c_ser = BHCloseSerializer(data=c_dic)
+                        if c_ser.is_valid():
+                            c = c_ser.save()
+                            c_pk = c.pk
+                    else:
+                        c_pk = c_qs[0].pk
+
+                periods['periods'].append( {'open': o_pk, 'close': c_pk } ) 
+
+            bhw_ser = BHWriteSerializer(data=periods)
+            if (bhw_ser.is_valid()):
+                bh = bhw_ser.save()
+                bh_pk = bh.pk
 
         data['location'] = location.id
+        data['business_hours'] = bh_pk
         del data['place_name']
         del data['place_address']
         del data['place_phone']
