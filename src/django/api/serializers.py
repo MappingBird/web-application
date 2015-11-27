@@ -134,7 +134,7 @@ class CollectionShortSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Collection
-        fields = ('id', 'name', 'user', 'points', )
+        fields = ('id', 'name', 'user', 'points', 'create_time', 'update_time',  )
 
 
 class CollectionByUserSerializer(serializers.HyperlinkedModelSerializer):
