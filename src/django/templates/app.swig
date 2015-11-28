@@ -12,7 +12,7 @@
 <link type="text/css" rel="stylesheet" href="/static/css/jquery.mCustomScrollbar.css" media="screen">
 <link type="text/css" rel="stylesheet" href="/static/css/ng-tags-input.min.css" media="screen">
 <link type="text/css" rel="stylesheet" href="/static/css/slimbox2/slimbox2.css" media="screen">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block prejs %}<script src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>{% endblock %}
@@ -45,6 +45,14 @@
                 <li><a href="/login">Login To Your Account</a></li>
             </ul>
         </div>
+        <div class="collection-search pull-right" ng-show="isLoggedIn">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <div class="search-icons">
+                <span class="search-icon mb-search"><i class="fa fa-search"></i></span>           
+                <span class="search-icon mb-close"><i class="fa fa-close"></i></span>
+                <span class="search-icon mb-arrow-right"><i class="fa fa-arrow-right"></i></span>
+            </div>
+        </div><!-- /input-group -->
     </header>
 
     <!-- Save Panel -->

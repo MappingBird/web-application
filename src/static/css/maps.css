@@ -1632,7 +1632,7 @@ ul.types > li{
     display: inline !important;
     background: #CECECE;
     padding: .3em 1em;
-    border-radius: 2px;	
+    border-radius: 2px;
     margin: 0em .5em 0 0;
 }
 .pointTags.isSelected {
@@ -1640,4 +1640,73 @@ ul.types > li{
 }
 .editModeTime {
     margin-left: 1em;
+}
+
+
+/* collection search */
+.collection-search input {
+    width: 250px;
+    height: 20px;
+    padding: 8px 15px;
+    background: #f8a65f;
+    border: 0px solid #dbdbdb;
+    font-size: 14px;
+    border-radius: 1px;
+    margin-right: 2em;
+    margin-top: 0.3em;
+	color: #ffffff;
+}
+.collection-search .search-icons {
+	color: #ffffff;
+	display: block;
+}
+.search-icons .mb-close, .search-icons .mb-arrow-right {
+	display: none;
+}
+.collection-search input:focus ~ div .mb-search {
+	display: none;
+}
+.collection-search input:focus ~ div .mb-close, .collection-search input:focus ~ div .mb-arrow-right {
+	display: block;
+}
+.collection-search input:focus {
+	outline: none;
+	outline-style:none;
+	box-shadow:none;
+	border-color:transparent;
+}
+.collection-search input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #ffffff;
+}
+.collection-search input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #ffffff;
+}
+.collection-search input::-moz-placeholder, textarea::-moz-placeholder {
+    color: #ffffff;
+}
+.collection-search input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #ffffff;
+}
+.search-icon {
+    width: 23px;
+    height: 20px;
+    position: absolute;
+    cursor: pointer;
+    font-size: 1.3em;
+    padding: 8px;
+}
+.mb-search {
+    top: 5px;
+    right: 27px;
+}
+.mb-arrow-right {
+	top: 5px;
+    right: 27px;
+}
+.mb-close {
+    top: 5px;
+    right: 60px;
+    padding: 8px 1px;
+    width: 23px;
+    font-size: 22px;
 }
