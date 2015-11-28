@@ -14,7 +14,7 @@ from django.middleware import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib.auth import login as django_login, logout as django_logout, authenticate
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.conf import settings
 
 from rest_framework import viewsets, status
@@ -224,12 +224,12 @@ class PointViewSet(APIViewSet):
                 location = location_serializer.save(force_insert=True)
             else:
                 return Response(location_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
         #-- deal $business_hours
         bh_pk = None
         if 'business_hours' in data and 'periods' in data.get('business_hours'):
             pds_dic = data.get('business_hours').get('periods')
-                            
+
             periods = {}
             periods['periods'] = []
             for pd_dic in pds_dic:
@@ -245,7 +245,7 @@ class PointViewSet(APIViewSet):
                     else:
                         o_pk = o_qs[0].pk
 
-                c_pk = None            
+                c_pk = None
                 if 'close' in pd_dic:
                     c_dic = pd_dic.get('close')
                     c_qs = BH_Close.objects.filter(day=c_dic.get('day'), time=c_dic.get('time'))
@@ -257,7 +257,7 @@ class PointViewSet(APIViewSet):
                     else:
                         c_pk = c_qs[0].pk
 
-                periods['periods'].append( {'open': o_pk, 'close': c_pk } ) 
+                periods['periods'].append( {'open': o_pk, 'close': c_pk } )
 
             bhw_ser = BHWriteSerializer(data=periods)
             if (bhw_ser.is_valid()):
@@ -648,7 +648,7 @@ def places(request):
 
         q = request.GET.get('q')
         lang = request.GET.get('language')
-        
+
         out['kw'] = q
 
         if lang is None or len(lang.strip()) <= 0:
@@ -656,7 +656,7 @@ def places(request):
 
         if 'zh' == lang:
             lang = 'zh-TW'
-            
+
         result = gp.text_search(query=q, language=lang)
 
         for place in result.places:
@@ -955,3 +955,30 @@ def reset_password(request):
         resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
 
     return resp
+
+
+@api_view(['GET'])
+@authentication_classes((SessionAuthentication, TokenAuthentication, BasicAuthentication))
+@permission_classes((IsAuthenticated, ))
+def search_point(request):
+
+    q_str = request.GET.get('q')
+    cid = request.GET.get('cid')   # cid means collection id
+
+    if q_str is None or not q_str or q_str.isspace():
+        out = {
+            'msg': 'missing query params'
+        }
+        return Response(out, status=status.HTTP_400_BAD_REQUEST)
+
+    if cid is None or not cid or cid.isspace():
+        points = Point.objects.filter(Q(collection__user=request.user) &
+                                      (Q(title__icontains=q_str) | Q(description__icontains=q_str)))
+    else:
+        points = Point.objects.filter(Q(collection__user=request.user) &
+                                      (Q(title__icontains=q_str) | Q(description__icontains=q_str)) &
+                                      Q(collection=cid))
+
+    serializer = PointSerializer(points, many=True)
+
+    return Response(serializer.data)
