@@ -980,5 +980,6 @@ def search_point(request):
                                       Q(collection=cid))
 
     serializer = PointSerializer(points, many=True)
+    data = {'points': serializer.data, }
 
-    return Response(serializer.data)
+    return Response(data)
