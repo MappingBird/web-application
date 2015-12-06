@@ -6,7 +6,7 @@ mappingbird.directives.directive('collectionListView', function() {
     return {
         restrict: 'A',
         scope: false,
-        templateUrl: '/static/partials/collection_list_view.html',
+        templateUrl: 'collection_list_view',
         replace: false,
         controller: ['$scope', '$element', '$attrs', 'BroadcastService', '$window', function($scope, $element, $attrs, BroadcastService, $window) {
 			var tmpList = [];
