@@ -1,13 +1,23 @@
 <div class="collection-header">
-    <a href="#" class="collection-name" ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="showCollections($event)">
+    <a href="#" class="collection-name" ng-hide="showSearchResult" ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="showCollections($event)">
         <i class="icon-expand-collapse"></i>
         <span ng-bind="activeCollectionName"></span>
     </a>
+    <div class="close-search-wrapper" ng-show="showSearchResult">
+      <span class="close-search" ng-click="closeSearchResult($event);"><i class="fa fa-close"></i></span>    
+      <a href="#" class="collection-name"  ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="closeSearchResult($event)" >
+          <span ng-bind="searchContent"></span>
+      </a>
+    </div>
+
     <span class="description"><span ng-bind="activeCollectionPointLength"></span> places saved</span>
     <!-- <a href="#" class="list-view pull-right" ng-class="{ 'active' : listMode }" ng-click="gotoListView($event)">List</a>
     <a href="#" class="map-view pull-right" ng-class="{ 'active' : !listMode }" ng-click="gotoMapView($event)">Map</a> -->
-    <a href="#" class="list-view pull-right" ng-show="!listMode && activeCollectionPointLength != 0" ng-click="gotoListView($event)">SHOW LIST</a>
-    <a href="#" class="list-view pull-right active" ng-show="listMode && activeCollectionPointLength != 0" ng-click="closeListView($event)">HIDE LIST</a>
+
+    <span ng-show="toggleList">
+      <a href="#" class="list-view pull-right" ng-show="!listMode && activeCollectionPointLength != 0" ng-click="gotoListView($event)">SHOW LIST</a>
+      <a href="#" class="list-view pull-right active" ng-show="listMode && activeCollectionPointLength != 0" ng-click="closeListView($event)">HIDE LIST</a>
+    </span>
     <div class="clearfix"></div>
 </div>
 

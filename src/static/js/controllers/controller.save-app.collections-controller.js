@@ -1,4 +1,4 @@
-mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection', 'Collections', 'MapPoints', 'BroadcastService', '$state', 'Analytics', 'User', '$http', function($scope, Collection, Collections, MapPoints, BroadcastService, $state, Analytics, User, $http) {
+mappingbird.SaveApp.controller('collectionsController', ['$rootScope', '$scope', 'Collection', 'Collections', 'MapPoints', 'BroadcastService', '$state', 'Analytics', 'User', '$http', 'Search', function($rootScope, $scope, Collection, Collections, MapPoints, BroadcastService, $state, Analytics, User, $http, Search) {
 
     $scope.activeCollectionId;
     $scope.activeCollectionPoints = [];
@@ -19,6 +19,10 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.deleteCollectionName = null;
     $scope.showDeleteCollectionDialog = false;
 
+    // search use
+    $scope.showSearchResult = false;
+    $scope.searchInput;
+    $scope.haveSitePrevPage = false;
 
     // watchers
     $scope.$watch(function(){return Collections.activeCollectionId;}, function(activeCollectionId, oldActiveCollectionId) {
@@ -118,56 +122,6 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         });
     });
 
-    $scope.$on('stateChange', function() {
-        console.log('[stateChange in collectionsController]');
-        console.log(BroadcastService.message.type);
-        console.log(BroadcastService.message.data);
-        switch (BroadcastService.message.type) {
-            case 'pointSaveComplete':
-                if (typeof BroadcastService.message.data.savedCollectionId !== 'undefined') {
-                    $scope.activeCollectionName = BroadcastService.message.data.savedCollectionName;
-                    refreshCollectionPointLength(BroadcastService.message.data.savedCollectionId);
-                }
-                break;
-            case 'saveCollectionChanged':
-            case 'viewingCollection':
-                if (typeof BroadcastService.message.data.collectionId != 'undefined'
-                    && BroadcastService.message.data.collectionId != -1
-                    && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
-                    $scope.activeCollectionId = BroadcastService.message.data.collectionId;
-                    refreshCollectionPoints($scope.activeCollectionId);
-                }
-                break;
-            case 'viewingCollectionList':
-                if (typeof BroadcastService.message.data.collectionId != 'undefined'
-                    && BroadcastService.message.data.collectionId != -1
-                    && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
-                    $scope.activeCollectionId = BroadcastService.message.data.collectionId;
-                    refreshCollectionPoints($scope.activeCollectionId);
-                }
-                break;
-            case 'setSaveCollection':
-                if (typeof BroadcastService.message.data.collectionId != 'undefined'
-                    && BroadcastService.message.data.collectionId != -1) {
-                    $scope.activeCollectionId = BroadcastService.message.data.collectionId;
-                    refreshCollectionPoints($scope.activeCollectionId);
-                }
-                break;
-            case 'pointSelected':
-                if (typeof BroadcastService.message.data.collectionId != 'undefined'
-                    && BroadcastService.message.data.collectionId != -1
-                    && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
-                    $scope.activeCollectionId = BroadcastService.message.data.collectionId;
-                    refreshCollectionPoints($scope.activeCollectionId);
-                }
-                break;
-            case 'pointChangeCollection':
-                reduceCollectionPointLength();
-                break;
-        }
-
-    });
-
     $scope.setActiveCollection = function($event, id) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -258,6 +212,30 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     //     console.log('unselect delete collection: ' + $scope.deleteCollectionId);
     // };
 
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){ 
+        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+        console.log(event, toState, toParams, fromState, fromParams)
+        console.log(toState.name)
+
+        $scope.haveSitePrevPage = true;
+        $scope.prevPageStateName = fromState.name;
+        $scope.prevPageStateProp = fromParams;
+    });
+
+    $scope.closeSearchResult = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation(); 
+        console.log('close search result'); 
+        $scope.showSearchResult = false;
+        $scope.$emit("closeSearch");
+
+        if ($scope.haveSitePrevPage) {
+            $state.go($scope.prevPageStateName, $scope.prevPageStateProp);
+        } else {
+            $state.go("default");
+        }
+    }
+
     $scope.showCollections = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -293,21 +271,45 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
         });
     }
 
+    function searchCollectionPoints (searchInput) {
+        console.log('searchCollectionPoints');
+        console.log(searchInput);
+        $scope.showSearchResult = true;
+        $scope.searchContent = searchInput;
+        if (searchInput) {
+            // 改成 call search api
+            Collection.get({id: 4}, function(data, headers){
+                renderCollection(data);
+            });
+
+            // Search.get({ q: searchInput }, function(data, headers){
+            //     renderCollection(data);
+            // });
+
+        }
+
+    }
+
+    // utils function for search and get collection
+    function renderCollection (data) {
+        console.log('loading points for collection');
+        console.log(data);
+        if (typeof data.points !== 'undefined') {
+            if ($scope.saveMode && MapPoints.activeSavePoint.name != '') {
+                data.points.push(MapPoints.activeSavePoint);
+            }
+            $scope.activeCollectionPoints = data.points;
+            $scope.activeCollectionPointLength = data.points.length;
+        }
+    }
+
     function refreshCollectionPoints (collectionId) {
         console.log('refreshCollectionPoints');
         console.log(collectionId);
 
         if (collectionId) {
             Collection.get({id: collectionId}, function(data, headers){
-                console.log('loading points for collection');
-                console.log(data);
-                if (typeof data.points !== 'undefined') {
-                    if ($scope.saveMode && MapPoints.activeSavePoint.name != '') {
-                        data.points.push(MapPoints.activeSavePoint);
-                    }
-                    $scope.activeCollectionPoints = data.points;
-                    $scope.activeCollectionPointLength = data.points.length;
-                }
+                renderCollection(data);
             });
         }
 
@@ -440,8 +442,9 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     };
 
     $scope.$on('stateChange', function() {
-        console.log ('[[[stateChange collectionsController]]]');
-        console.log (BroadcastService.message.type);
+        console.log('[stateChange in collectionsController]');
+        console.log(BroadcastService.message.type);
+        console.log(BroadcastService.message.data);
         switch (BroadcastService.message.type) {
             case 'deleteCollection':
                 Collection.delete({id: BroadcastService.message.data.id}, function(data, headers){
@@ -451,8 +454,65 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
                     });
                 });
                 break;
+            case 'searchPoint':
+                Collection.delete({id: BroadcastService.message.data.id}, function(data, headers){
+                    BroadcastService.prepForBroadcast({
+                        type: 'collectionUpdate',
+                        data: {}
+                    });
+                    // $scope.user = CurrentUser.get(function(data) {
+                });
+                break;
+            case 'pointSaveComplete':
+                if (typeof BroadcastService.message.data.savedCollectionId !== 'undefined') {
+                    $scope.activeCollectionName = BroadcastService.message.data.savedCollectionName;
+                    refreshCollectionPointLength(BroadcastService.message.data.savedCollectionId);
+                }
+                break;
+            case 'saveCollectionChanged':
+            case 'viewingCollection':
+                if (typeof BroadcastService.message.data.collectionId != 'undefined'
+                    && BroadcastService.message.data.collectionId != -1
+                    && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
+                    $scope.activeCollectionId = BroadcastService.message.data.collectionId;
+                    refreshCollectionPoints($scope.activeCollectionId);
+                }
+                break;
+            case 'viewingPointSearchResults':
+                if (typeof BroadcastService.message.data.searchInput != 'undefined'
+                    && BroadcastService.message.data.searchInput != -1
+                    && $scope.searchInput != BroadcastService.message.data.searchInput) {
+                    $scope.searchInput = BroadcastService.message.data.searchInput;
+                    searchCollectionPoints($scope.searchInput);
+                }
+                break;
+            case 'viewingCollectionList':
+                if (typeof BroadcastService.message.data.collectionId != 'undefined'
+                    && BroadcastService.message.data.collectionId != -1
+                    && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
+                    $scope.activeCollectionId = BroadcastService.message.data.collectionId;
+                    refreshCollectionPoints($scope.activeCollectionId);
+                }
+                break;
+            case 'setSaveCollection':
+                if (typeof BroadcastService.message.data.collectionId != 'undefined'
+                    && BroadcastService.message.data.collectionId != -1) {
+                    $scope.activeCollectionId = BroadcastService.message.data.collectionId;
+                    refreshCollectionPoints($scope.activeCollectionId);
+                }
+                break;
+            case 'pointSelected':
+                if (typeof BroadcastService.message.data.collectionId != 'undefined'
+                    && BroadcastService.message.data.collectionId != -1
+                    && $scope.activeCollectionId != BroadcastService.message.data.collectionId) {
+                    $scope.activeCollectionId = BroadcastService.message.data.collectionId;
+                    refreshCollectionPoints($scope.activeCollectionId);
+                }
+                break;
+            case 'pointChangeCollection':
+                reduceCollectionPointLength();
+                break;
         }
+
     });
-
-
 }]);

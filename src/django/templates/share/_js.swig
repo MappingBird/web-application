@@ -8,10 +8,9 @@
 <script src="/static/bower_components/angular/angular.js"></script>
 <script src="/static/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="/static/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="/static/bower_components/angular-ui-sortable/sortable.js"></script>
 <script src="/static/bower_components/angular-resource/angular-resource.min.js"></script>
 <script src="/static/bower_components/angular-cookies/angular-cookies.min.js"></script>
-<script src="/static/bower_components/angular-ui-sortable/sortable.js"></script>
-<script src="/static/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/static/bower_components/ng-tags-input/ng-tags-input.min.js"></script>
 <script src="/static/bower_components/moment/min/moment.min.js"></script>
 <script src="/static/bower_components/angular-moment/angular-moment.min.js"></script>
@@ -47,6 +46,7 @@
 <script src="/static/js/resources/resource.user-login.js"></script>
 <script src="/static/js/resources/resource.user-logout.js"></script>
 <script src="/static/js/resources/resource.scraper.js"></script>
+<script src="/static/js/resources/resource.search.js"></script>
 <script src="/static/js/resources/resource.collection.js"></script>
 <script src="/static/js/resources/resource.collections-by-user-resource.js"></script>
 <script src="/static/js/resources/resource.point-resource.js"></script>
@@ -57,6 +57,7 @@
 <script src="/static/js/directives/directive.collection-list.js"></script>
 <script src="/static/js/directives/directive.collection-list-view.js"></script>
 <script src="/static/js/directives/directive.height-to-bottom.js"></script>
+<script src="/static/js/directives/directive.keypress.js"></script>
 <script src="/static/js/directives/directive.left-outer-height.js"></script>
 <script src="/static/js/directives/directive.map-alert.js"></script>
 <script src="/static/js/directives/directive.map-dialog.js"></script>

@@ -1,7 +1,7 @@
 /**
     Overall page controller
  */
-mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Presets', 'BroadcastService', 'Collections', 'CollectionsByUserResource', 'User', function($scope, $timeout, Presets, BroadcastService, Collections, CollectionsByUserResource, User) {
+mappingbird.SaveApp.controller('savePageController',['$rootScope', '$scope', '$timeout', 'Presets', 'BroadcastService', 'Collections', 'CollectionsByUserResource', 'User', function($rootScope, $scope, $timeout, Presets, BroadcastService, Collections, CollectionsByUserResource, User) {
 
     $scope.collectionsByUser = [];
 
@@ -13,6 +13,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     $scope.pointMode = false;
     $scope.listMode = false;
     $scope.dbclickCollection = false;
+    $scope.toggleList = true;
 
     function changeMapParams () {
        // $('#map').data('transitioning', true);
@@ -55,7 +56,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     }
 
     // search results mode
-    function searchResultsMode () {
+    function searchResultsMode (data) {
         changeMapParams();
         $scope.mapMode = false;
         $scope.saveMode = true;
@@ -137,7 +138,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     }
 
     // list viewing mode
-    function listViewingMode() {
+    function listViewingMode(state) {
         changeMapParams();
         $scope.mapMode = false;
         $scope.saveMode = false;
@@ -152,6 +153,10 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.halfMap = false;
 
         $scope.listMode = true;
+        
+        if (state == "search") {
+            $scope.toggleList = false;
+        } 
     }
 
     // close list View
@@ -205,11 +210,16 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
 
         });
     }
-
+    
+    $scope.$on('closeSearch', function () {
+        $scope.toggleList = true;
+    });
 
     $scope.$on('stateChange', function() {
         console.log('[[[stateChange in savePageController]]]');
         console.log(BroadcastService.message.type);
+        data = BroadcastService.message.data;
+        console.log(data);
         switch(BroadcastService.message.type) {
             case 'pointSelected':
                 pointViewingMode();
@@ -220,6 +230,9 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
             case 'pointClosed':
             case 'viewingCollection':
                 mapViewingMode();
+                break;
+            case 'viewingPointSearchResults':
+                listViewingMode("search", data);
                 break;
             case 'viewingCollectionList':
                 listViewingMode();
