@@ -1,9 +1,15 @@
 {% load i18n %}
 <div class="collection-header">
-    <a href="#" class="collection-name" ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="showCollections($event)">
+    <a href="#" class="collection-name" ng-hide="showSearchResult" ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="showCollections($event)">
         <i class="icon-expand-collapse"></i>
         <span ng-bind="activeCollectionName"></span>
     </a>
+
+    <a href="#" class="collection-name" ng-show="showSearchResult" ng-class="{ 'collection-name' : 1, 'active' : collectionsListVisible }" ng-click="closeSearchResult($event)" >
+        <i class="fa fa-close"></i>
+        <span ng-bind="activeCollectionName"></span>
+    </a>
+
     <span class="description"><span ng-bind="activeCollectionPointLength"></span> {% trans "mapSaveNumber" %}</span>
     <!-- <a href="#" class="list-view pull-right" ng-class="{ 'active' : listMode }" ng-click="gotoListView($event)">List</a>
     <a href="#" class="map-view pull-right" ng-class="{ 'active' : !listMode }" ng-click="gotoMapView($event)">Map</a> -->

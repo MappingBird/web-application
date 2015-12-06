@@ -12,6 +12,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     $scope.mapMode = false;
     $scope.pointMode = false;
     $scope.listMode = false;
+    $scope.dbclickCollection = false;
 
     function changeMapParams () {
        // $('#map').data('transitioning', true);
@@ -90,7 +91,7 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
     }
 
     // point viewing mode
-    function pointViewingMode () {
+    function pointViewingMode (mode) {
         changeMapParams();
         $scope.mapMode = false;
         $scope.saveMode = false;
@@ -100,9 +101,12 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
         $scope.showPointDetailPanel = true;
         $scope.fullTallMap = false;
         $scope.fullMap = false;
-        $scope.mapRetracted = true;
+        $scope.mapRetracted = false;
         $scope.semiRetractedMap = false;
-        $scope.halfMap = true;
+        $scope.halfMap = false;
+        if (mode == "dbclickCollection") {
+            $scope.dbclickCollection = true;
+        }
 
         // $scope.listMode = false; remain but close collectionsMode
     }
@@ -210,6 +214,9 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
             case 'pointSelected':
                 pointViewingMode();
                 break;
+            case 'pointDbSelected':
+                pointViewingMode("dbclickCollection");
+                break;
             case 'pointClosed':
             case 'viewingCollection':
                 mapViewingMode();
@@ -240,6 +247,11 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
                 if (Collections.collections && Collections.collections.length == 0) {
                     reloadCollections(true);
                 }
+                break;
+            case 'viewingPointSearchResults':
+                // if (Collections.collections && Collections.collections.length == 0) {
+                //     reloadCollections(true);
+                // }
                 break;
             case 'collectionUpdate':
                 reloadCollections();

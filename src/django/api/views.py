@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-　　　←表示使用 utf-8 編碼
 # Create your views here.
 import json
+import logging
 import os
 import os.path
 import time
@@ -40,6 +41,7 @@ from bucketlist.models import Collection, Point, Image, Location, Tag, ResetPass
 from permissions import IsOwner, IsOwnerOrAdmin
 
 import owl
+import facebook
 
 import logging
 
@@ -894,7 +896,6 @@ def forget_password (request):
 
     return resp
 
-
 def get_reset_password_expire_date():
     return datetime.datetime.today() + datetime.timedelta(days=1)
 
@@ -913,6 +914,24 @@ def reset_password(request):
     except ValueError:
         out = {
             'msg': 'no valid request_code found'
+        }
+        resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
+        return resp
+
+@api_view(['POST'])
+def fb_login(request):
+
+    accessToken = None
+    userID = None
+    signedRequest = None
+    
+    try:
+        userID = request.DATA.get('userID')
+        accessToken = request.DATA.get('accessToken')
+        signedRequest = request.DATA.get('signedRequest')
+    except ValueError:
+        out = {
+            'msg': 'FB params missing.'
         }
         resp = Response(out, status=status.HTTP_400_BAD_REQUEST)
         return resp

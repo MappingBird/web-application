@@ -1,4 +1,4 @@
-mappingbird.SaveApp = angular.module('SaveApp', ['Initialization', 'ui.router', 'ngTagsInput', 'angularMoment']);
+mappingbird.SaveApp = angular.module('SaveApp', ['Initialization', 'ui.router', 'ngTagsInput', 'angularMoment', 'ui.sortable']);
 
 // Routing
 mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -60,6 +60,40 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
                         type: 'viewingCollection',
                         data: {
                             collectionId: $stateParams.collectionId
+                        }
+                    });
+
+                    if (typeof killHandler === 'function') {
+                        killHandler();
+                    }
+                }
+
+                if (User.data.isLoggedIn == true) {
+                    b();
+                } else {
+                    killHandler = $scope.$on('stateChange', function() {
+                        if (BroadcastService.message.type == 'collectionsLoaded' &&
+                            BroadcastService.message.data.hasCollectionsSaved) {
+                            b();
+                        }
+                    });
+                }
+
+
+            }]
+        })
+        .state('viewPointSearchResults', {
+            url: '/search/:searchInput',
+            template: '<span></span>',
+            controller: ['BroadcastService', 'User', '$stateParams', '$scope', function(BroadcastService, User, $stateParams, $scope) {
+
+                var killHandler;
+
+                function b () {
+                    BroadcastService.prepForBroadcast({
+                        type: 'viewingPointSearchResults',
+                        data: {
+                            searchInput: $stateParams.searchInput
                         }
                     });
 
@@ -158,16 +192,16 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
             }]
         })
         .state('viewPoint', {
-            url: '/point/:pointId/:collectionId',
+            url: '/point/:pointId/:collectionId?dbc',
             template: '<span></span>',
             controller: ['BroadcastService', 'Collections', '$stateParams', '$scope', function(BroadcastService, Collections, $stateParams, $scope) {
 
                 var killHandler;
-
-                function b () {
+                
+                function b (type) {
                     // use Collections.mostRecentModifiedCollection) since no activeCollection set
                     BroadcastService.prepForBroadcast({
-                        type: 'pointSelected',
+                        type: type,
                         data: {
                             collectionId: $stateParams.collectionId,
                             pointId: $stateParams.pointId
@@ -179,15 +213,20 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
                     }
                 }
 
-                if (Collections.activeCollectionId !== -1) {
-                    b();
+
+                if ($stateParams.dbc) {
+                    b("pointDbSelected");
                 } else {
-                    killHandler = $scope.$on('stateChange', function() {
-                        if (BroadcastService.message.type == 'collectionsLoaded' &&
-                            BroadcastService.message.data.hasCollectionsSaved) {
-                            b();
-                        }
-                    });
+                    if (Collections.activeCollectionId !== -1) {
+                        b("pointSelected");
+                    } else {
+                        killHandler = $scope.$on('stateChange', function() {
+                            if (BroadcastService.message.type == 'collectionsLoaded' &&
+                                BroadcastService.message.data.hasCollectionsSaved) {
+                                b("pointSelected");
+                            }
+                        });
+                    }
                 }
 
 

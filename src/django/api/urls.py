@@ -29,9 +29,13 @@ urlpatterns = patterns('',
     url(r'^user/temp$', 'api.views.gen_temp', name='temp'),
     url(r'^user/temp2real$', 'api.views.mig_temp2real', name='temp2real'),
     url(r'^user/is_email_used$', 'api.views.is_email_used', name='is_email_used'),
+
     url(r'^user/forget_password$', 'api.views.forget_password', name='forget_password'),
     url(r'^user/reset_password$', 'api.views.reset_password', name='reset_password'),
     url(r'^search_point$', 'api.views.search_point', name='search_point'),
+
+    # FB Login
+    url(r'^user/fb_login$', 'api.views.fb_login', name='fb_login'),
 )
 
 

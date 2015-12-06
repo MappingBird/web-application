@@ -46,7 +46,7 @@ mappingbird.LoginApp.controller('mainController', ['$scope', '$timeout', 'Preset
             password: $scope.password
         };
 
-        UserLogin.save(userCredentials, function(data, headers) {
+        UserLogin.local.save(userCredentials, function(data, headers) {
 
             if (typeof data !== 'undefined'
                 && typeof data.user !== 'undefined'
@@ -60,6 +60,45 @@ mappingbird.LoginApp.controller('mainController', ['$scope', '$timeout', 'Preset
                 // google analytics
                 Analytics.registerEvent('Login', 'Login failed - invalid credentials', 'Login Page');
             }
+        });
+
+    };
+
+    $scope.attemptFBLogin = function() {
+
+        console.log('attemptFBLogin');
+
+        FB.login(function(response) {
+
+            if (response.authResponse) {
+                console.log('Welcome!  Fetching your information.... ');
+                
+                var userCredentials = {
+                    accessToken: response.authResponse.accessToken,
+                    signedRequest: response.authResponse.accessToken,
+                    userID: response.authResponse.userID
+                };
+
+                UserLogin.facebook.save(userCredentials, function(data, headers) {
+                
+                    if (typeof data !== 'undefined') {
+                        window.location.href="/app";
+                    } else {
+                        $scope.errorInvalidLogin = true;
+
+                        // google analytics
+                        Analytics.registerEvent('Login', 'Login failed - invalid credentials', 'Login Page');
+                    }
+                });
+
+            } else {
+                //user hit cancel button
+                console.log('User cancelled login or did not fully authorize.');
+
+            }
+
+        }, {
+            scope: 'public_profile,email'
         });
 
     };

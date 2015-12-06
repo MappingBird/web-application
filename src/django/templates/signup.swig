@@ -9,7 +9,11 @@
 <link href="/static/prototype_assets/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 <link href="/static/prototype_assets/css/style.css" rel="stylesheet" media="screen">
 <link href="/static/css/account.css" rel="stylesheet" media="screen">
-
+<style type="text/css">
+    footer {
+        position: relative;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -24,6 +28,11 @@
             <div class="span8">
                 <h1>{% trans "AccountSignup" %}</h1>
                 <hr>
+                <div class="myButton" ng-click="attemptFBLogin();">
+                    <i class="fa fa-facebook"></i>
+                    <span>Sign up with Facebook</span>
+                </div>
+                <hr class="or-style">
                 <!--p class="title">Sign up</p-->
                 <form ng-submit="checkInput()">
                     <div class="control-group">
@@ -44,7 +53,9 @@
                     </div> -->
                     <div class="action-button">
                         <input class="btn btn-giant btn-primary pingismo-btn" type="submit" value="{% trans "AccountSignupCreateBtn" %}">
+                        <p class="button-option">Already an MappingBird account? <a href="/login">Log In </a></p>
                     </div>
+
                 </form>
             </div>
             <div class="span2"></div>

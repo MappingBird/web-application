@@ -9,6 +9,11 @@
 <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 <link href="/static/prototype_assets/css/style.css" rel="stylesheet" media="screen">
 <link href="/static/css/account.css" rel="stylesheet" media="screen">
+<style type="text/css">
+    footer {
+        position: relative;
+    }
+</style>
 
 {% endblock %}
 
@@ -21,9 +26,14 @@
         <div class="row-fluid">
             <div class="span2"></div>
             <div class="span8">
-                <h1>MappingBird</h1>
+                <h1>Log In</h1>
                 <hr>
                 <p class="title">{% trans "AccountLogin" %}</p>
+                <div class="myButton" ng-click="attemptFBLogin();">
+                    <i class="fa fa-facebook"></i>
+                    <span>Log in with Facebook</span>
+                </div>
+                <hr class="or-style">
                 <form ng-submit="checkInput()">
                     <div class="control-group">
                         <input type="text" placeholder="Email" ng-model="email" autofocus />
@@ -41,6 +51,10 @@
                         <button class="btn btn-giant btn-primary pingismo-btn" type="submit" id="login-button"> {% trans "AccountLoginBtn" %}</button>
                         <p class="button-option">{% trans "AccountNotMember" %} <a href="/signup">{% trans "AccountSignupnow" %}</a></p>
                     </div>
+
+                    {# <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button> #}
+                    {# <div id="status"></div> #}
+
                 </form>
             </div>
             <div class="span2"></div>

@@ -49,7 +49,7 @@ mappingbird.SettingsApp.controller('mainController', ['$scope', '$timeout', 'Pre
                 password: $scope.old_password
             };
 
-            UserLogin.save(userCredentials, function(data, headers) {
+            UserLogin.local.save(userCredentials, function(data, headers) {
 
                 /**
                  * IMPORTANT NOTE

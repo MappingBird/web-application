@@ -17,6 +17,7 @@
     <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/static/favicon.ico" />
     <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ipjijcfmgfehpiiigjgjdgkldeligkfo">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     {% block css %}{% endblock %}
 
 </head>
@@ -26,6 +27,27 @@
 {% block prejs %}{% endblock %}
 {% include "share/_js.swig" %}
 {% block postjs %}{% endblock %}
+
+<script>
+window.fbAsyncInit = function() {
+    FB.init({
+        appId      : '990855437627828',
+        cookie     : true,  // enable cookies to allow the server to access
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v2.2' // use version 2.2
+    });
+};
+
+// Load the SDK asynchronously
+(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 
 </body>
 </html>
