@@ -1131,7 +1131,9 @@ ul.types > li{
 .collection-list-wrapper .collection-header{
 	position: relative;
 	margin-bottom: 15px;
-	z-index: 1000; /* no one can cover this header */
+	/* no one can cover this header */
+	/* but it cover on account drowdown, so comment out by wilson 2015/12/06  */
+	/*z-index: 1000; */
 }
 .collection-header .collection-name{
 	line-height: 20px;
@@ -1650,6 +1652,14 @@ ul.types > li{
 	}
 }
 
+.collection-search {
+	display: none;
+}
+
+.collection-search-show {
+	display: block !important;
+}
+
 .collection-search input {
     width: 250px;
     height: 20px;
@@ -1712,4 +1722,22 @@ ul.types > li{
     padding: 8px 1px;
     width: 23px;
     font-size: 22px;
+}
+.close-search-wrapper {
+	display: inline-block;
+}
+.close-search {
+	display: inline-block;
+    background-color: #fff;
+    padding: .1em .2em;
+    font-size: 1.5em;
+    margin-right: .5em;
+    cursor: pointer;
+}
+.close-search:hover {
+    background-color: #F5F5F5;
+}
+
+header .pingismo-navbar {
+	display: none;
 }

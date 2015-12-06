@@ -23,7 +23,7 @@
 
     <header ng-controller="userController" class="float-top">
         <a href="/?stay=1" class="logo"></a>
-        <div class="navbar pingismo-navbar" ng-show="isLoggedIn">
+        <div class="navbar pingismo-navbar" ng-class="{'collection-search-show': isLoggedIn}">
             <ul class="nav">
                 <li class="ver-divider"><span></span></li>
                 <li class="dropdown">
@@ -39,17 +39,18 @@
                 </li>
             </ul>
         </div>
-        <div class="navbar pingismo-navbar pull-right" ng-show="!isLoggedIn">
+        <div class="navbar pingismo-navbar pull-right" ng-class="{'collection-search-show': !isLoggedIn}">
             <ul class="nav">
                 <li class="signup-button"><button class="btn btn-large btn-primary pingismo-btn" type="button" ng-click="goToSignUpPage()">{% trans "userPanelSignup" %}</button></li>
                 <li class="ver-divider"><span></span></li>
                 <li><a href="/login">{% trans "userPanelLogin" %}</a></li>
             </ul>
         </div>
-        <div class="collection-search pull-right" ng-show="isLoggedIn">
-            <input type="text" class="form-control" ng-model="searchContent" placeholder="Search for..." ng-focus="focusSearch($event);" >
+
+        <div class="collection-search pull-right" ng-class="{'collection-search-show': isLoggedIn}">
+            <input type="text" class="form-control" ng-model="searchContent" placeholder="Search for..." ng-focus="focusSearch($event);" ng-keypress="searchKeypress($event);" >
             <div class="search-icons">
-                <span class="search-icon mb-search" ng-show="!focus"><i class="fa fa-search"></i></span>           
+                <span class="search-icon mb-search" ng-show="!focus"><i class="fa fa-search" ng-click="goSearch($event);"></i></span>           
                 <span class="search-icon mb-close" ng-show="focus" ng-click="cleanSearch($event);"><i class="fa fa-close"></i></span>
                 <span class="search-icon mb-arrow-right" ng-show="focus" ng-click="goSearch($event);"><i class="fa fa-arrow-right"></i></span>
             </div>

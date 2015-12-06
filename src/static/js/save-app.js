@@ -236,4 +236,5 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
     // fallback
     $urlRouterProvider.otherwise("/");
 
+
 }]);

@@ -1,5 +1,9 @@
 mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http', '$resource', '$window', 'User', 'UserResource', 'Presets', 'BroadcastService', 'CurrentUser', 'UserLogin', 'UserLogout', 'Token', 'TagResource', 'Analytics', 'Utility', '$state', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token, TagResource, Analytics, Utility, $state) {
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> newui
     $scope.user = CurrentUser.get(function(data) {
 
         console.log('user data');
@@ -158,17 +162,28 @@ mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http',
 
     };
     $scope.focus = false;
+
     $scope.cleanSearch = function ($event) {
         $scope.focus = false;
         $scope.searchContent = "";
         console.log($scope.focus)
     };
+
+    $scope.searchKeypress = function ($event) {
+        console.log("keypress")
+        if ($event.which === 13) {
+            // console.log("你案 enter")
+            $scope.goSearch($event);
+        }
+    };
+
     $scope.goSearch = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
 
         $scope.focus = false;
         console.log($scope.searchContent)
+
 
         // BroadcastService.prepForBroadcast({
         //     type: 'closeCollectionListView',
@@ -179,12 +194,28 @@ mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http',
         // google analytics
         // Analytics.registerEvent('Search', 'Search Collection', 'Collection List');
     };
-    $scope.focusSearch = function () {
+    $scope.focusSearch = function ($event) {
         $scope.focus = true;
         console.log($scope.focus)
+
+
     };
     $scope.blurSearch = function () {
         $scope.focus = false;
         console.log($scope.focus)
     };
+
+    $scope.$on('stateChange', function() {
+        console.log('[[[stateChange in savePageController]]]');
+        console.log(BroadcastService.message.type);
+        data = BroadcastService.message.data;
+        console.log(data);
+        switch(BroadcastService.message.type) {
+
+            case 'viewingPointSearchResults':
+                $scope.searchContent = data.searchInput;
+                break;
+
+        }
+    });
 }]);

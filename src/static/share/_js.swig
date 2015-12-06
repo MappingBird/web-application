@@ -48,6 +48,7 @@
 <script src="../js/resources/resource.user-login.js"></script>
 <script src="../js/resources/resource.user-logout.js"></script>
 <script src="../js/resources/resource.scraper.js"></script>
+<script src="../js/resources/resource.search.js"></script>
 <script src="../js/resources/resource.collection.js"></script>
 <script src="../js/resources/resource.collections-by-user-resource.js"></script>
 <script src="../js/resources/resource.point-resource.js"></script>
@@ -59,6 +60,7 @@
 <script src="../js/directives/directive.collection-list.js"></script>
 <script src="../js/directives/directive.collection-list-view.js"></script>
 <script src="../js/directives/directive.height-to-bottom.js"></script>
+<script src="../js/directives/directive.keypress.js"></script>
 <script src="../js/directives/directive.left-outer-height.js"></script>
 <script src="../js/directives/directive.map-alert.js"></script>
 <script src="../js/directives/directive.map-dialog.js"></script>
