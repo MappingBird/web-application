@@ -1,9 +1,5 @@
 mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http', '$resource', '$window', 'User', 'UserResource', 'Presets', 'BroadcastService', 'CurrentUser', 'UserLogin', 'UserLogout', 'Token', 'TagResource', 'Analytics', 'Utility', '$state', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token, TagResource, Analytics, Utility, $state) {
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> newui
     $scope.user = CurrentUser.get(function(data) {
 
         console.log('user data');

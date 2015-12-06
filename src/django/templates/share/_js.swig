@@ -14,6 +14,8 @@
 <script src="/static/bower_components/ng-tags-input/ng-tags-input.min.js"></script>
 <script src="/static/bower_components/moment/min/moment.min.js"></script>
 <script src="/static/bower_components/angular-moment/angular-moment.min.js"></script>
+<script src="/static/bower_components/moment/locale/zh-tw.js"></script>
+<script src="/static/js/gettext.js"></script>
 <script src="/static/js/mappingbird.js"></script>
 <script src="/static/js/helpers/mod.noconsole.js"></script>
 <script src="/static/js/helpers/mod.prototype.js"></script>
@@ -54,6 +56,7 @@
 <script src="/static/js/resources/resource.current-user.js"></script>
 <script src="/static/js/resources/resource.user-resource.js"></script>
 <script src="/static/js/resources/resource.tag-resource.js"></script>
+<script src="/static/js/directives/directive.change-language.js"></script>
 <script src="/static/js/directives/directive.collection-list.js"></script>
 <script src="/static/js/directives/directive.collection-list-view.js"></script>
 <script src="/static/js/directives/directive.height-to-bottom.js"></script>
