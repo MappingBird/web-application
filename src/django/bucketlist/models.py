@@ -66,7 +66,7 @@ class Point(models.Model):
     collection = models.ForeignKey(Collection, related_name='points')
     location = models.ForeignKey(Location, related_name='points', null=True, blank=True)
     tags = models.ManyToManyField(Tag)
-    business_hours = models.ForeignKey(Business_Hour, related_name='points', null=True, blank=True)
+#    business_hours = models.ForeignKey(Business_Hour, related_name='points', null=True, blank=True)
 
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
