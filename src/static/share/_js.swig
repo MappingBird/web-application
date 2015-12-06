@@ -8,6 +8,7 @@
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="../bower_components/angular-ui-sortable/sortable.js"></script>
 <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
 <script src="../bower_components/angular-cookies/angular-cookies.min.js"></script>
 <script src="../bower_components/ng-tags-input/ng-tags-input.min.js"></script>

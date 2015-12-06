@@ -36,23 +36,23 @@ mappingbird.directives.directive('collectionListView', function() {
 			// 	theme:"light-2"
 			// });
 							
-			$("#sortable ul").sortable({
-				axis:"y",
-				cursor:"move",
-				tolerance:"intersect",
-				change:function(e,ui){
-					var h=ui.helper.outerHeight(true),
-						elem=$("#sortable .mCustomScrollBox"),
-						elemHeight=elem.height(),
-						moveBy=$("#sortable li").outerHeight(true)*3,
-						mouseCoordsY=e.pageY-elem.offset().top;
-					if(mouseCoordsY<h){
-						$("#sortable").mCustomScrollbar("scrollTo","+="+moveBy);
-					}else if(mouseCoordsY>elemHeight-h){
-						$("#sortable").mCustomScrollbar("scrollTo","-="+moveBy);
-					}
-				}
-			});
+			// $("#sortable ul").sortable({
+			// 	axis:"y",
+			// 	cursor:"move",
+			// 	tolerance:"intersect",
+			// 	change:function(e,ui){
+			// 		var h=ui.helper.outerHeight(true),
+			// 			elem=$("#sortable .mCustomScrollBox"),
+			// 			elemHeight=elem.height(),
+			// 			moveBy=$("#sortable li").outerHeight(true)*3,
+			// 			mouseCoordsY=e.pageY-elem.offset().top;
+			// 		if(mouseCoordsY<h){
+			// 			$("#sortable").mCustomScrollbar("scrollTo","+="+moveBy);
+			// 		}else if(mouseCoordsY>elemHeight-h){
+			// 			$("#sortable").mCustomScrollbar("scrollTo","-="+moveBy);
+			// 		}
+			// 	}
+			// });
 			$scope.sortableOptions = {
 				axis:"y",
 				cursor:"move",

@@ -248,6 +248,11 @@ mappingbird.SaveApp.controller('savePageController',['$scope', '$timeout', 'Pres
                     reloadCollections(true);
                 }
                 break;
+            case 'viewingPointSearchResults':
+                // if (Collections.collections && Collections.collections.length == 0) {
+                //     reloadCollections(true);
+                // }
+                break;
             case 'collectionUpdate':
                 reloadCollections();
                 break;

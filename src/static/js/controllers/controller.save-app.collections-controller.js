@@ -19,6 +19,8 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     $scope.deleteCollectionName = null;
     $scope.showDeleteCollectionDialog = false;
 
+    // search use
+    $scope.showSearchResult = false;
 
     // watchers
     $scope.$watch(function(){return Collections.activeCollectionId;}, function(activeCollectionId, oldActiveCollectionId) {
@@ -258,6 +260,13 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
     //     console.log('unselect delete collection: ' + $scope.deleteCollectionId);
     // };
 
+    $scope.closeSearchResult = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation(); 
+        console.log('close search result');       
+        $scope.showSearchResult = false;
+    }
+
     $scope.showCollections = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -451,6 +460,16 @@ mappingbird.SaveApp.controller('collectionsController', ['$scope', 'Collection',
                     });
                 });
                 break;
+            case 'searchPoint':
+                Collection.delete({id: BroadcastService.message.data.id}, function(data, headers){
+                    BroadcastService.prepForBroadcast({
+                        type: 'collectionUpdate',
+                        data: {}
+                    });
+                    // $scope.user = CurrentUser.get(function(data) {
+                });
+                break;
+
         }
     });
 

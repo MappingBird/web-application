@@ -1644,6 +1644,12 @@ ul.types > li{
 
 
 /* collection search */
+@media screen and (max-width: 768px) {
+	.collection-search {
+		display: none;
+	}
+}
+
 .collection-search input {
     width: 250px;
     height: 20px;
@@ -1658,11 +1664,8 @@ ul.types > li{
 }
 .collection-search .search-icons {
 	color: #ffffff;
-	display: block;
 }
-.search-icons .mb-close, .search-icons .mb-arrow-right {
-	display: none;
-}
+
 .collection-search input:focus ~ div .mb-search {
 	display: none;
 }

@@ -82,6 +82,40 @@ mappingbird.SaveApp.config(['$stateProvider', '$urlRouterProvider', function($st
 
             }]
         })
+        .state('viewPointSearchResults', {
+            url: '/search/:searchInput',
+            template: '<span></span>',
+            controller: ['BroadcastService', 'User', '$stateParams', '$scope', function(BroadcastService, User, $stateParams, $scope) {
+
+                var killHandler;
+
+                function b () {
+                    BroadcastService.prepForBroadcast({
+                        type: 'viewingPointSearchResults',
+                        data: {
+                            searchInput: $stateParams.searchInput
+                        }
+                    });
+
+                    if (typeof killHandler === 'function') {
+                        killHandler();
+                    }
+                }
+
+                if (User.data.isLoggedIn == true) {
+                    b();
+                } else {
+                    killHandler = $scope.$on('stateChange', function() {
+                        if (BroadcastService.message.type == 'collectionsLoaded' &&
+                            BroadcastService.message.data.hasCollectionsSaved) {
+                            b();
+                        }
+                    });
+                }
+
+
+            }]
+        })
         .state('viewCollectionSimple', {
             url: '/collection/:collectionId',
             template: '<span></span>',

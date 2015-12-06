@@ -1,12 +1,11 @@
-mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http', '$resource', '$window', 'User', 'UserResource', 'Presets', 'BroadcastService', 'CurrentUser', 'UserLogin', 'UserLogout', 'Token', 'TagResource', 'Analytics', 'Utility', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token, TagResource, Analytics, Utility) {
+mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http', '$resource', '$window', 'User', 'UserResource', 'Presets', 'BroadcastService', 'CurrentUser', 'UserLogin', 'UserLogout', 'Token', 'TagResource', 'Analytics', 'Utility', '$state', function($scope, $cookies, $http, $resource, $window, User, UserResource, Presets, BroadcastService, CurrentUser, UserLogin, UserLogout, Token, TagResource, Analytics, Utility, $state) {
 
     $scope.user = CurrentUser.get(function(data) {
 
         console.log('user data');
         console.log(data);
 
-        if(typeof data.id !== 'undefined'
-            && typeof data.email !== 'undefined') {
+        if(typeof data.id !== 'undefined' && typeof data.email !== 'undefined') {
 
             console.log('user logged in');
 
@@ -158,5 +157,34 @@ mappingbird.SaveApp.controller('userController', ['$scope', '$cookies', '$http',
         });
 
     };
+    $scope.focus = false;
+    $scope.cleanSearch = function ($event) {
+        $scope.focus = false;
+        $scope.searchContent = "";
+        console.log($scope.focus)
+    };
+    $scope.goSearch = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
 
+        $scope.focus = false;
+        console.log($scope.searchContent)
+
+        // BroadcastService.prepForBroadcast({
+        //     type: 'closeCollectionListView',
+        //     data: {}
+        // });
+        $state.go('viewPointSearchResults', { searchInput: $scope.searchContent});
+
+        // google analytics
+        // Analytics.registerEvent('Search', 'Search Collection', 'Collection List');
+    };
+    $scope.focusSearch = function () {
+        $scope.focus = true;
+        console.log($scope.focus)
+    };
+    $scope.blurSearch = function () {
+        $scope.focus = false;
+        console.log($scope.focus)
+    };
 }]);

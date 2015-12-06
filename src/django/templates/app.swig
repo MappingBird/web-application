@@ -46,11 +46,11 @@
             </ul>
         </div>
         <div class="collection-search pull-right" ng-show="isLoggedIn">
-            <input type="text" class="form-control" placeholder="Search for...">
+            <input type="text" class="form-control" ng-model="searchContent" placeholder="Search for..." ng-focus="focusSearch($event);" >
             <div class="search-icons">
-                <span class="search-icon mb-search"><i class="fa fa-search"></i></span>           
-                <span class="search-icon mb-close"><i class="fa fa-close"></i></span>
-                <span class="search-icon mb-arrow-right"><i class="fa fa-arrow-right"></i></span>
+                <span class="search-icon mb-search" ng-show="!focus"><i class="fa fa-search"></i></span>           
+                <span class="search-icon mb-close" ng-show="focus" ng-click="cleanSearch($event);"><i class="fa fa-close"></i></span>
+                <span class="search-icon mb-arrow-right" ng-show="focus" ng-click="goSearch($event);"><i class="fa fa-arrow-right"></i></span>
             </div>
         </div><!-- /input-group -->
     </header>
