@@ -88,11 +88,12 @@ class PointSerializer(serializers.HyperlinkedModelSerializer):
     location = LocationSerializer(read_only=True)
     images = ImageSerializer(many=True, read_only=True)
     tags = TagSerializer(many=True, read_only=True)
-    business_hours = BHSerializer(read_only=True)
+##    business_hours = BHSerializer(read_only=True)
     
     class Meta:
         model = Point
-        fields = ('id', 'title', 'url', 'description', 'place_name', 'place_address', 'place_phone', 'coordinates', 'type', 'images', 'tags', 'collection', 'location', 'business_hours', 'create_time', 'update_time', )
+        fields = ('id', 'title', 'url', 'description', 'place_name', 'place_address', 'place_phone', 'coordinates', 'type', 'images', 'tags', 'collection', 'location', 'create_time', 'update_time', )
+##        fields = ('id', 'title', 'url', 'description', 'place_name', 'place_address', 'place_phone', 'coordinates', 'type', 'images', 'tags', 'collection', 'location', 'business_hours', 'create_time', 'update_time', )
 
 
 class PointShortSerializer(serializers.HyperlinkedModelSerializer):
@@ -112,11 +113,12 @@ class PointWriteSerializer(serializers.HyperlinkedModelSerializer):
     location = serializers.PrimaryKeyRelatedField(required=False)
     images = ImageSerializer(many=True, read_only=True)
     tags = TagSerializer(many=True, read_only=True)
-    business_hours = serializers.PrimaryKeyRelatedField(required=False)
+##    business_hours = serializers.PrimaryKeyRelatedField(required=False)
     
     class Meta:
         model = Point
-        fields = ('id', 'title', 'url', 'description', 'place_name', 'place_address', 'place_phone', 'coordinates', 'type', 'images', 'tags', 'collection', 'location', 'business_hours', 'create_time', 'update_time', )
+        fields = ('id', 'title', 'url', 'description', 'place_name', 'place_address', 'place_phone', 'coordinates', 'type', 'images', 'tags', 'collection', 'location', 'create_time', 'update_time', )
+##        fields = ('id', 'title', 'url', 'description', 'place_name', 'place_address', 'place_phone', 'coordinates', 'type', 'images', 'tags', 'collection', 'location', 'business_hours', 'create_time', 'update_time', )
 
 
 class CollectionSerializer(serializers.HyperlinkedModelSerializer):
