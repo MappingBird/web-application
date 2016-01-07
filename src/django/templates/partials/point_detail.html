@@ -1,10 +1,8 @@
 {% load i18n %}
 <a ng-class="{dbclickCollectionCross: dbclickCollection}" ng-show="showPointDetailPanel" href="#" ng-click="closePoint($event)" class="pingismo-proceed"><i class="fa fa-times"></i></a>
 <div class="pin-content-wrapper" ng-show="showPointDetailPanel" ng-class="{ editable: pointEditMode, dbclickCollection: dbclickCollection}">
-    <a href="#" ng-click="closePoint($event)" class="pingismo-proceed"><img src="/static/img/icon-proceed.png" /></a>
     <div class="pin-content">
         <div class="pin-details pull-left" height-to-bottom m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
-            {% trans "mapAdded" %} <span ng-bind="activeViewPoint.date_created"></span>
             <img class="thumbnail" ng-src="[[point.images[0].url || '/static/img/apple-touch-icon.png']]"/>
             <h4 ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.title" class="editable"></h4>
             <input type="text" ng-model="activeViewPoint.title" class="content-title" />
