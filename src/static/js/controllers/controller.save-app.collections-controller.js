@@ -279,13 +279,13 @@ mappingbird.SaveApp.controller('collectionsController', ['$rootScope', '$scope',
         $scope.searchContent = searchInput;
         if (searchInput) {
             // 改成 call search api
-            Collection.get({id: 4}, function(data, headers){
-                renderCollection(data);
-            });
-
-            // Search.get({ q: searchInput }, function(data, headers){
+            // Collection.get({id: 4}, function(data, headers){
             //     renderCollection(data);
             // });
+
+            Search.get({ q: searchInput }, function(data, headers){
+                renderCollection(data);
+            });
 
         }
 

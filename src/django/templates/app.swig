@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 {% endblock %}
 
-{% block prejs %}<script src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>{% endblock %}
+{% block prejs %}<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>{% endblock %}
 
 {% block content %}
 <section ng-controller="savePageController" class="map-section">
