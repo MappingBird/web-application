@@ -669,6 +669,7 @@ def places(request):
             business_hours = None
             if 'opening_hours' in place.details:
                 business_hours = place.details['opening_hours']
+                del business_hours['weekday_text']
 
             entry = {
                 'place_id': place.place_id,
