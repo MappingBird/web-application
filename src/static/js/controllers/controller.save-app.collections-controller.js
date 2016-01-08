@@ -283,7 +283,8 @@ mappingbird.SaveApp.controller('collectionsController', ['$rootScope', '$scope',
             //     renderCollection(data);
             // });
             // searchInput = '1';
-            Search.get({ q: searchInput, cid: 4 }, function(data, headers){
+            // cid 在 ui 上該怎麼設計？一般搜尋指得是跨 collection 的搜尋，所以 cid 還沒加上去。
+            Search.get({ q: searchInput, cid: 4}, function(data, headers){
                 renderCollection(data);
             });
 
