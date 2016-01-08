@@ -1307,7 +1307,7 @@ ul.types > li{
 	top: 0;
 	width: 440px;
 	overflow: hidden;
-	margin: 95px 0 30px;
+	margin: 95px 0 0px;
 	background-color: #ffffff;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -1315,7 +1315,7 @@ ul.types > li{
     box-shadow: -4px 0px 10px rgba(20%,20%,40%,0.5);
 }
 .pin-content-wrapper{
-	height: 88%;
+	height: -webkit-calc(100% - 125px);
     width: 360px;
 }
 .thumbnail {
