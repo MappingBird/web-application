@@ -1,4 +1,4 @@
-mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoints', 'BroadcastService', '$state', '$timeout', function($scope, Presets, MapPoints, BroadcastService, $state, $timeout) {
+mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoints', 'BroadcastService', '$state', '$timeout', 'Analytics', function($scope, Presets, MapPoints, BroadcastService, $state, $timeout, Analytics) {
 
     $scope.$watch(function() { return MapPoints.activeViewPoints; }, function(activeViewPoints) {
 
@@ -54,7 +54,12 @@ mappingbird.SaveApp.controller('listController', ['$scope', 'Presets', 'MapPoint
       console.log('popupDbPin', id, clickId);
       // console.log($scope.activeViewPoints[0].collection)
       e.preventDefault();
-      $state.go('viewPoint', { pointId: id, collectionId: $scope.activeViewPoints[0].collection, dbc: true});
+      $scope.$emit("changeActiveViewPoint", id, $scope.activeViewPoints[0].collection);
+      // $state.go('viewPoint', { pointId: id, collectionId: $scope.activeViewPoints[0].collection, dbc: true});
+      // $state.go('viewPoint', { pointId: point.id, collectionId: point.collection});
+
+      // google analytics
+      Analytics.registerEvent('Point', 'View point detail', 'Map');
       // dbclickCollection = true;
       // if (clickId && id == clickId) {
       //   console.log('repeated click');

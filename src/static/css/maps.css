@@ -1320,7 +1320,7 @@ ul.types > li{
 }
 .thumbnail {
 	width: 310px;
-    height: 180px;
+    /*height: 180px;*/
 }
 .pin-content-wrapper .pin-content{
 	padding: 5px 0 60px 55px;
@@ -1331,9 +1331,9 @@ ul.types > li{
 }
 .pin-content-wrapper .pin-content .pin-details{
     /*height: 752px;*/
-    left: 20px;
+    left: 10px;
     position: absolute;
-    width: 320px;
+    width: 350px;
     top: 20px;
 }
 .pin-content-wrapper .pin-content .ref-address{
@@ -1346,7 +1346,11 @@ ul.types > li{
 	color: #707070;
 }
 .pin-content-wrapper h4 {
-	margin: 25px 0;
+	/*margin: 25px 0;*/
+	text-align: justify;
+}
+.pin-content-wrapper .ref-context {
+	text-align: justify;
 }
 .pin-content-wrapper .pin-content .ref-url{
 	font-size: 12px;
@@ -1416,9 +1420,8 @@ ul.types > li{
 }
 .pin-content-wrapper hr,
 .delete-pin-wrapper hr{
-	margin: 0 0 10px -20px;
-	border-bottom: solid 1px #373737;
-	border-top: solid 1px #222;
+	margin: 0 0 13px 0px;
+	border-top: solid 1px #E0DEDE;
 }
 
 #done-edit-pin-content-btn, #del-pin-content-btn,
@@ -1641,7 +1644,8 @@ ul.types > li{
 	background-color: #008ABD !important;
 }
 .editModeTime {
-    margin-left: 1em;
+	float: right;
+    margin: 0.4em;
 }
 
 
@@ -1740,4 +1744,9 @@ ul.types > li{
 
 header .pingismo-navbar {
 	display: none;
+}
+
+.pin-content .content {
+	padding: 1em;
+    margin: 0 0 2em 0;
 }

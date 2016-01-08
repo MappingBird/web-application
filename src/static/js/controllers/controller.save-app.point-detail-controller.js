@@ -1,4 +1,4 @@
-mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'MapPoints', 'Collections', 'BroadcastService', '$state', 'PointResource', 'PointImage', 'User', 'Collection', '$http', 'Analytics', function($scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage, User, Collection, $http, Analytics) {
+mappingbird.SaveApp.controller('pointDetailController', ['$rootScope', '$scope', 'Presets', 'MapPoints', 'Collections', 'BroadcastService', '$state', 'PointResource', 'PointImage', 'User', 'Collection', '$http', 'Analytics', function($rootScope, $scope, Presets, MapPoints, Collections, BroadcastService, $state, PointResource, PointImage, User, Collection, $http, Analytics) {
 
     $scope.pointImages = [];
     $scope.selectedPointImages = [];
@@ -91,6 +91,26 @@ mappingbird.SaveApp.controller('pointDetailController', ['$scope', 'Presets', 'M
          }]
         }
     };
+
+    $rootScope.$on("changeActiveViewPoint", function(event, id, collectionId){
+        $state.go('viewPoint', { pointId: id, collectionId: collectionId, dbc: true});
+        searchActiveViewPoint(id);
+    });
+
+    function searchActiveViewPoint (activeViewPointId) {
+
+        var x = MapPoints.activeViewPoints,
+            len = x.length
+
+        if (len > 0) {
+            while (len--) {
+                if (x[len].id == activeViewPointId) {
+                    $scope.activeViewPoint = x[len];
+                    break;
+                }
+            }
+        }
+    }
 
     function fillActiveViewPoint (activeViewPointId) {
 

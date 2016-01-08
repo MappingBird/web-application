@@ -4,35 +4,41 @@
     <div class="pin-content">
         <div class="pin-details pull-left" height-to-bottom m-custom-scrollbar="{scrollInertia: 0, triggerEvent: 'placeImagesLoaded'}">
             <img class="thumbnail" ng-src="[[point.images[0].url || '/static/img/apple-touch-icon.png']]"/>
-            <h4 ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.title" class="editable"></h4>
-            <input type="text" ng-model="activeViewPoint.title" class="content-title" />
-            <li class="btn-group pingismo-btn-group">
-                <a class="btn exist" href="javascript:void(0);" ng-click="showSelectCollection = true" ng-show="!showSelectCollection"><span ng-bind="changeCollectionName"></span> <span class="caret"></span></a>
-                <ul ng-show="showSelectCollection" class="collections-newCollection">
-                  <li class="input-append">
-                      <input type="text" class="span2" id="appendedInputButton" ng-model="newCollectionName" placeholder="Create a new collection" />
-                      <button class="btn" type="button" ng-click="saveNewCollection($event)">{% trans "mapAddCollectionBtn" %}</button>
-                  </li>
+            <div class="content">
+                <h4 ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.title" class="editable"></h4>
+                <input type="text" ng-model="activeViewPoint.title" class="content-title" />
+                <li class="btn-group pingismo-btn-group">
+                    <a class="btn exist" href="javascript:void(0);" ng-click="showSelectCollection = true" ng-show="!showSelectCollection"><span ng-bind="changeCollectionName"></span> <span class="caret"></span></a>
+                    <ul ng-show="showSelectCollection" class="collections-newCollection">
+                      <li class="input-append">
+                          <input type="text" class="span2" id="appendedInputButton" ng-model="newCollectionName" placeholder="Create a new collection" />
+                          <button class="btn" type="button" ng-click="saveNewCollection($event)">{% trans "mapAddCollectionBtn" %}</button>
+                      </li>
+                    </ul>
+                    <ul class="collections-menu thin-menu" ng-show="showSelectCollection" scrollbar-height-to-bottom>
+                        <li ng-repeat="collection in collections" ng-class="{'selected': changeCollectionName == collection.name }"><a href="#" ng-click="selectPointCollection($event, collection.id)" title="[[collection.name]]" ng-bind="collection.name"></a></li>
+                    </ul>
+                </li>
+                <ul class="types">
+                    <li ng-class="{active : activeViewPoint.type == 'scenicspot'}"><a href="#" class="types-scenicspot" ng-click="setPointType($event, 'scenicspot')"></a></li>
+                    <li ng-class="{active : activeViewPoint.type == 'hotel'}"><a href="#" class="types-hotel" ng-click="setPointType($event, 'hotel')"></a></li>
+                    <li ng-class="{active : activeViewPoint.type == 'mall'}"><a href="#" class="types-mall" ng-click="setPointType($event, 'mall')"></a></li>
+                    <li ng-class="{active : activeViewPoint.type == 'restaurant'}"><a href="#" class="types-restaurant" ng-click="setPointType($event, 'restaurant')"></a></li>
+                    <li ng-class="{active : activeViewPoint.type == 'bar'}"><a href="#" class="types-bar" ng-click="setPointType($event, 'bar')"></a></li>
+                    <li ng-class="{active : activeViewPoint.type == 'misc'}"><a href="#" class="types-misc" ng-click="setPointType($event, 'misc')"></a></li>
+                    <li class="collectionName">{% trans "mapUnder" %} <span class="collection" ng-bind="activeCollectionName"></span></li>
                 </ul>
-                <ul class="collections-menu thin-menu" ng-show="showSelectCollection" scrollbar-height-to-bottom>
-                    <li ng-repeat="collection in collections" ng-class="{'selected': changeCollectionName == collection.name }"><a href="#" ng-click="selectPointCollection($event, collection.id)" title="[[collection.name]]" ng-bind="collection.name"></a></li>
-                </ul>
-            </li>
-            <ul class="types">
-                <li ng-class="{active : activeViewPoint.type == 'scenicspot'}"><a href="#" class="types-scenicspot" ng-click="setPointType($event, 'scenicspot')"></a></li>
-                <li ng-class="{active : activeViewPoint.type == 'hotel'}"><a href="#" class="types-hotel" ng-click="setPointType($event, 'hotel')"></a></li>
-                <li ng-class="{active : activeViewPoint.type == 'mall'}"><a href="#" class="types-mall" ng-click="setPointType($event, 'mall')"></a></li>
-                <li ng-class="{active : activeViewPoint.type == 'restaurant'}"><a href="#" class="types-restaurant" ng-click="setPointType($event, 'restaurant')"></a></li>
-                <li ng-class="{active : activeViewPoint.type == 'bar'}"><a href="#" class="types-bar" ng-click="setPointType($event, 'bar')"></a></li>
-                <li ng-class="{active : activeViewPoint.type == 'misc'}"><a href="#" class="types-misc" ng-click="setPointType($event, 'misc')"></a></li>
-                <li class="collectionName">{% trans "mapUnder" %} <span class="collection" ng-bind="activeCollectionName"></span></li>
-            </ul>
-            <p class="ref-context editable" ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.description"></p>
-            <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
-            <p class="ref-address ng-binding" ng-bind="activeViewPoint.location.place_address"></p>
-            <a ng-href="[[activeViewPoint.url]]" class="ref-url ellipsis" title="[[activeViewPoint.url]]" new-window ng-bind="activeViewPoint.url"></a>
-            <div>
-                <div class="ref-context-img" thumb-alignment="{displayArray: 'pointImages', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages', enableLightbox: true, editMode: pointEditMode, onlyFirstSelected: false, whiteBackground: false}"></div>
+                <p class="ref-context editable" ng-click="togglePointEditMode($event)" ng-bind="activeViewPoint.description"></p>
+                <textarea rows="8" ng-model="activeViewPoint.description"></textarea>
+                <p class="ref-address ng-binding" ng-bind="activeViewPoint.location.place_address"></p>
+                <a ng-href="[[activeViewPoint.url]]" class="ref-url ellipsis" title="[[activeViewPoint.url]]" new-window ng-bind="activeViewPoint.url"></a>
+
+                <a ng-href="tel:[[activeViewPoint.location.place_phone]]" class="ref-tel ellipsis" title="[[activeViewPoint.location.place_phone]]" new-window ng-bind="activeViewPoint.location.place_phone"></a>
+                <div open-day></div>
+
+                <div>
+                    <div class="ref-context-img" thumb-alignment="{displayArray: 'pointImages', selectArray: 'selectedPointImages', deselectArray: 'deselectedPointImages', enableLightbox: true, editMode: pointEditMode, onlyFirstSelected: false, whiteBackground: false}"></div>
+                </div>
             </div>
         </div>
         <!--
