@@ -4,6 +4,6 @@
  */
 mappingbird.resources.factory('Search', ['$resource', function($resource) {
 
-    return $resource('/api/search_point', { q: '@query', cid: '@' });
+    return $resource('/api/search_point', { q: '@q', cid: '@cid' });
 
 }]);

@@ -282,8 +282,8 @@ mappingbird.SaveApp.controller('collectionsController', ['$rootScope', '$scope',
             // Collection.get({id: 4}, function(data, headers){
             //     renderCollection(data);
             // });
-
-            Search.get({ q: searchInput }, function(data, headers){
+            // searchInput = '1';
+            Search.get({ q: searchInput, cid: 4 }, function(data, headers){
                 renderCollection(data);
             });
 
